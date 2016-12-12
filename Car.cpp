@@ -14,7 +14,7 @@ Car::Car() {
 
 
 //return the id of the car
-long Car::getId() const {
+int Car::getId() const {
     return 0;
 }
 

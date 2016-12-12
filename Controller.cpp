@@ -46,7 +46,7 @@ void Controller::getCommend() {
                 success=CommendThre();
                 break;
             case 4:
-                cout<<CommendFour()<<end;
+                success=CommendFour();
                 break;
             case 6:
                 success=CommendSix();
@@ -81,8 +81,15 @@ bool Controller::CommendTwo(){
 bool Controller::CommendThre(){
 
 }
-string Controller::CommendFour(){
-
+bool Controller::CommendFour(){
+    int id;
+    cin>>id>>end;
+    Point* p=center->getLocation(id);
+    if (p==NULL){
+        return false;
+    }
+std::cout<<*p;
+    return true;
 }
 
 bool  Controller::CommendSix(){

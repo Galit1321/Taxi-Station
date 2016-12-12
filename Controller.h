@@ -5,6 +5,7 @@
 #ifndef ADVPRO01_CONTROLLER_H
 #define ADVPRO01_CONTROLLER_H
 
+#include "Point.h"
 #include "TaxiCenter.h"
 using namespace std;
 
@@ -17,7 +18,8 @@ protected:
     bool CommendOne();
     bool CommendTwo();
     bool CommendThre();
-    string CommendFour();
+
+    bool CommendFour();
     bool CommendSix();
     void exit();
 

@@ -9,9 +9,13 @@ using namespace std;
 
 #include "string"
 #include "Car.h"
-class CreateCar {
+#include "Create.h"
+#include "TaxiCab.h"
+#include "Luxury.h"
+class CreateCar: public Create {
 Car* car;
-    
+public:
+    CreateCar(string &input);
 
 
 };

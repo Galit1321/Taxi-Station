@@ -9,7 +9,7 @@ enum  Color{RED = 0, BLUE =1, GREEN =2, PINK =3, WHITE =4};
 
 class Car {
 protected:
-    long id ;
+    int id ;
     int mileage;
     Color color;
     Manufacturer manufacturer;
@@ -17,14 +17,14 @@ public:
     //defult constructor
     Car();
     //set the id of the car
-    void setId(long id);
+    void setId(int id);
     // return the mileage that have passed
     void setMileage(int mileage);
     void setColor(Color color);
     // set the manufacture of the car
     void setManufacturer(Manufacturer manufacturer);
     //return the id of the car
-    long getId() const;
+    int getId() const;
     // get the mileage of the car
     int getMileage() const;
     // get the color of the car
