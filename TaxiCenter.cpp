@@ -1,7 +1,7 @@
 
 #include "TaxiCenter.h"
 
- map<long, Driver *> &TaxiCenter::getDrivers() {
+ map<int, Driver *> &TaxiCenter::getDrivers() {
     return drivers;
 }
 
@@ -18,12 +18,12 @@ TaxiCenter::~TaxiCenter() {
  * @return
  */
 TaxiCenter::TaxiCenter() {
-    drivers = map<long, Driver *>();
+    drivers = map<int, Driver *>();
     locations = map<Point, Driver *>();
-    free_drivers = vector<long>();
-    all_passngers = map<long, Passenger *>();
+    free_drivers = vector<int >();
+    all_passngers = map<int , Passenger *>();
     layout = NULL;
-    cars = map<long, TaxiCab*>();
+    cars = map<int, TaxiCab*>();
 }
 
 /**
@@ -40,12 +40,12 @@ TaxiCenter::TaxiCenter(MatrixLayout *layout) : layout(layout) {
 }
 
 //create a vector of free drivers
- vector<long> &TaxiCenter::getFree_drivers() {
+ vector<int > &TaxiCenter::getFree_drivers() {
     return free_drivers;
 }
 
 //return all the passengers
-map<long, Passenger *> &TaxiCenter::getAll_passngers() {
+map<int , Passenger *> &TaxiCenter::getAll_passngers() {
     return all_passngers;
 }
 
@@ -54,7 +54,7 @@ ILayout* TaxiCenter::getLayout() {
 }
 
 //return cabs
-map<long, TaxiCab*> &TaxiCenter::getCars() {
+map<int , TaxiCab*> &TaxiCenter::getCars() {
     return cars;
 }
 
@@ -74,27 +74,27 @@ void TaxiCenter::createTaxi(string parms) {
 }
 
 //conect taxi to driver
-void TaxiCenter::setTaxiToDriver(long driver_id, long taxi_id) {
+void TaxiCenter::setTaxiToDriver(int driver_id, int taxi_id) {
 
 }
 
 //print location
-string TaxiCenter::printLocation(long id) {
+string TaxiCenter::printLocation(int id) {
     return "";
 }
 
 //make one move
-void TaxiCenter::move(long id) {
+void TaxiCenter::move(int id) {
 
 }
 
 //return location
-Point* TaxiCenter::getLocation(long id) {
+Point* TaxiCenter::getLocation(int id) {
     return NULL;
 }
 
 //create a trip
-SearchableTrip* createTrip(long id) {
+SearchableTrip* createTrip(int id) {
     return NULL;
 }
 
@@ -104,12 +104,12 @@ Driver* TaxiCenter::findCloser(Point *orign) {
 }
 
 //return a driver
-Driver* TaxiCenter::getDriver(long id){
+Driver* TaxiCenter::getDriver(int id){
     return NULL;
 }
 
 //return taxi
-TaxiCab* TaxiCenter::getTaxi(long id) {
+TaxiCab* TaxiCenter::getTaxi(int id) {
     return NULL;
 }
 

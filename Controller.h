@@ -18,7 +18,7 @@ protected:
     bool CommendTwo();
     bool CommendThre();
     string CommendFour();
-    void  CommendSix();
+    bool CommendSix();
     void exit();
 
 };

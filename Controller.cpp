@@ -32,9 +32,45 @@ Controller::Controller()  {
 void Controller::getCommend() {
    int commend;
     cin>>commend>>end;
-    while (commend!=7){
-        switch (commend);
-        
+    bool success;
+    while ((commend!=7)&&(success)){
+        switch (commend){
+            case 1:
+                success=CommendOne();
+                break;
+            case 2:
+                success=CommendTwo();
+                break;
+            case 3:
+                success=CommendThre();
+                break;
+            case 4:
+                cout<<CommendFour()<<end;
+                break;
+            case 6:
+                success=CommendSix();
+                break;
+
+       }
+        cin>>commend>>endl;
+
         }
+
+}
+
+bool Controller::CommendOne(){
+
+}
+bool Controller::CommendTwo(){
+
+}
+bool Controller::CommendThre(){
+
+}
+string Controller::CommendFour(){
+
+}
+
+bool  Controller::CommendSix(){
 
 }

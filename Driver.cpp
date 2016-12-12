@@ -20,7 +20,7 @@ Driver ::Driver(Driver &object) {
 
 }
 //constructor
-Driver ::Driver(long id, int age, int experience, status stat) {
+Driver ::Driver(int id, int age, int experience, string stat) {
     id = id;
     age = age;
     experience =experience;
@@ -44,7 +44,7 @@ Solution* Driver ::doBFS(Point psEnd) {
 }
 
 //return the driver id
-long Driver::getId() const {
+int Driver::getId() const {
     return 0;
 }
 

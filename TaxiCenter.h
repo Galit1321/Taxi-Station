@@ -12,12 +12,12 @@
 #include "SearchableTrip.h"
 class TaxiCenter {
 protected:
-map<long,Driver*> drivers;
+map<int,Driver*> drivers;
     map<Point,Driver*> locations;
-    vector<long> free_drivers;
-    map<long,Passenger*> all_passngers;
+    vector<int > free_drivers;
+    map<int,Passenger*> all_passngers;
     ILayout* layout;
-    map<long ,TaxiCab*> cars;
+    map<int ,TaxiCab*> cars;
 public:
     TaxiCenter(MatrixLayout* layout);//constructor
     TaxiCenter();//defult constructor
@@ -31,32 +31,32 @@ public:
     //create taxi
     void createTaxi(string parms);
     //conect taxi to driver
-    void setTaxiToDriver(long driver_id,long taxi_id);
+    void setTaxiToDriver(int driver_id, int taxi_id);
     //print location
-    string printLocation(long id);
+    string printLocation(int id);
     //make one move
-    void move(long id);
+    void move(int id);
     //return a driver
-    Driver* getDriver(long id);
+    Driver* getDriver(int id);
     //return taxi
-    TaxiCab* getTaxi(long id);
+    TaxiCab* getTaxi(int id);
     //return location
-    Point* getLocation(long id);
+    Point* getLocation(int id);
     //create a trip
-    SearchableTrip* createTrip(long id);
+    SearchableTrip* createTrip(int id);
     //find closer driver
     Driver* findCloser(Point* orign);
     //return the drivers
-     map<long, Driver*> &getDrivers() ;
+     map<int , Driver*> &getDrivers() ;
     //return location
     map<Point, Driver*> &getLocations() ;
     //create a vector of free drivers
-     vector<long> &getFree_drivers() ;
+     vector<int > &getFree_drivers() ;
     //return all the passengers
-     map<long, Passenger*> &getAll_passngers() ;
+     map<int , Passenger*> &getAll_passngers() ;
     ILayout* getLayout() ;
     //return cabs
-    map<long, TaxiCab*> &getCars() ;
+    map<int, TaxiCab*> &getCars() ;
     virtual ~TaxiCenter();//deconstructor
 
 };

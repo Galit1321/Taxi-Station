@@ -15,7 +15,7 @@
 
 class Driver :public Person{
 private:
-    long id;
+   int id;
     int age;
 
 private:
@@ -26,9 +26,9 @@ public:
     TaxiCab *car;
     Driver();//default constructor
     Driver(Driver &object);//copy constructor
-    Driver(long id ,int age , int experience ,status stat );//constructor
+    Driver(int id ,int age , int experience ,string stat );//constructor
     //set the driver id
-    void setId(long id);
+    void setId(int id);
     //set the driver age
     void setAge(int age);
     //set the status of the driver
@@ -44,7 +44,7 @@ public:
     //return the car of the driver
     TaxiCab *getCar() const;
     //return the driver id
-    long getId() const;
+    int getId() const;
     //return the driver age
     int getAge() const;
     //return the years of experience of the driver
