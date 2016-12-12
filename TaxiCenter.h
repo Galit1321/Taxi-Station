@@ -23,6 +23,9 @@ public:
     TaxiCenter();//defult constructor
     //return commend from the user
     void getCommend(int num_commend,string s);
+
+    void setLayout(ILayout *layout);
+
     //add driver
     void addDriver(Driver* driver);
     //create taxi

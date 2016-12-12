@@ -112,3 +112,7 @@ Driver* TaxiCenter::getDriver(long id){
 TaxiCab* TaxiCenter::getTaxi(long id) {
     return NULL;
 }
+
+void TaxiCenter::setLayout(ILayout *layout) {
+    TaxiCenter::layout = layout;
+}

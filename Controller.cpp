@@ -10,6 +10,11 @@ Controller::~Controller() {
 }
 
 Controller::Controller()  {
+
+    center=new TaxiCenter();
+}
+
+void Controller::getCommend() {
     string i;
     cin>>i>>endl;
     CreateGrid* size=new CreateGrid(i);
@@ -17,5 +22,5 @@ Controller::Controller()  {
     vector<int >::iterator it=size->getInput().begin();
     it++;
     MatrixLayout *mt=new MatrixLayout(size->getInput().front(),*it);
-    center=new TaxiCenter(mt);
+    center->setLayout(mt);
 }
