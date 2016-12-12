@@ -15,7 +15,6 @@ Create::~Create() {
  */
 Create::Create(string &input){
     size_t pos = 0;
-
     while ((pos = input.find(",")) != string::npos) {
         tokens.push_back(input.substr(0, pos));
         input.erase(0, pos +1);

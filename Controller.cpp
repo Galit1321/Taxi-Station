@@ -12,15 +12,29 @@ Controller::~Controller() {
 Controller::Controller()  {
 
     center=new TaxiCenter();
+    int h ;
+    int w;
+    cin>>h>>w>>endl;
+    int numOfObs;
+    cin>>numOfObs>>endl;
+    string obsVector;
+    MatrixLayout *mt;
+    if (numOfObs){
+        cin>>obsVector>>end;
+        CreateGrid* size=new CreateGrid(obsVector);
+        mt=new MatrixLayout(h,w,size->getInput());
+    } else{
+        mt=new MatrixLayout(h,w);
+    }
+    center->setLayout(mt);
 }
 
 void Controller::getCommend() {
-    string i;
-    cin>>i>>endl;
-    CreateGrid* size=new CreateGrid(i);
-    int h=size->getInput().front();
-    vector<int >::iterator it=size->getInput().begin();
-    it++;
-    MatrixLayout *mt=new MatrixLayout(size->getInput().front(),*it);
-    center->setLayout(mt);
+   int commend;
+    cin>>commend>>end;
+    while (commend!=7){
+        switch (commend);
+        
+        }
+
 }

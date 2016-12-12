@@ -21,7 +21,7 @@ CreateGrid::CreateGrid(string &input) : Create(input) {
 }
 //divide the input
 void CreateGrid::phase(string s) {
-    int pos=s.find("_");
+    int pos=s.find(",");
     char tmp[100];
     try{
         int h=atoi(strcpy(tmp,s.substr(0,pos).c_str()));
@@ -39,7 +39,9 @@ void CreateGrid::phase(string s) {
 
 
 }
+CreateGrid::CreateGrid(string &string1,string &obs){
 
+}
 //return the params from theinput in a vector
 vector<int> &CreateGrid::getInput() {
     return input;

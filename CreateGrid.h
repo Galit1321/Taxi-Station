@@ -24,6 +24,7 @@ vector<int> input;
     void phase(string s);
     //return the params from theinput in a vector
      vector<int> &getInput() ;
+  //  CreateGrid(string &string1,string &obs);
 
 };
 
