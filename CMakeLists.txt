@@ -10,3 +10,5 @@ add_executable(AdvPro01 ${SOURCE_FILES})
 add_subdirectory(lib/googletest-master)
 include_directories(lib/googletest-master/googletest/include)
 include_directories(lib/googletest-master/googlemock/include)
+
+target_link_libraries(AdvPro01 gtest gtest_main)
