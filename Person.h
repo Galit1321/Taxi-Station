@@ -1,0 +1,31 @@
+//
+// Created by michal on 12/1/16.
+//
+
+#ifndef EX2_PERSON_H
+#define EX2_PERSON_H
+
+#include "Point.h"
+
+class Person {
+public:
+    Person();//constructor
+    float satisfaction;//the satisfaction of the passenger
+    Point *curr_pos;//the curr pose of the passenger
+    //return the satisfaction of the passenger
+    float getSatisfaction() const;
+    //get the curr pose of the passenger
+    Point *getCurr_pos() const;
+    //set the satisfaction of the passenger
+    void setSatisfaction(float satisfaction);
+    //set the curr pose of the passenger
+    void setCurr_pos(Point *curr_pos);
+    virtual ~ Person();//deconstructor
+
+protected:
+    Point* getPose();
+
+};
+
+
+#endif //EX2_PERSON_H
