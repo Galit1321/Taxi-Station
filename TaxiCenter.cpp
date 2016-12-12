@@ -30,7 +30,7 @@ TaxiCenter::TaxiCenter() {
  *  constructor
  * @return
  */
-TaxiCenter::TaxiCenter(ILayout *layout) : layout(layout) {
+TaxiCenter::TaxiCenter(MatrixLayout *layout) : layout(layout) {
 
 }
 

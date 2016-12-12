@@ -3,3 +3,19 @@
 //
 
 #include "Controller.h"
+#include "CreateGrid.h"
+#include "MatrixLayout.h"
+Controller::~Controller() {
+ delete center;
+}
+
+Controller::Controller()  {
+    string i;
+    cin>>i>>endl;
+    CreateGrid* size=new CreateGrid(i);
+    int h=size->getInput().front();
+    vector<int >::iterator it=size->getInput().begin();
+    it++;
+    MatrixLayout *mt=new MatrixLayout(size->getInput().front(),*it);
+    center=new TaxiCenter(mt);
+}

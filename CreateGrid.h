@@ -23,7 +23,7 @@ vector<int> input;
     //divide the input
     void phase(string s);
     //return the params from theinput in a vector
-    const vector<int> &getInput() const;
+     vector<int> &getInput() ;
 
 };
 

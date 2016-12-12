@@ -6,10 +6,21 @@
 #define ADVPRO01_CONTROLLER_H
 
 #include "TaxiCenter.h"
+using namespace std;
 
 class Controller {
 protected:
-    TaxiCab
+    TaxiCenter* center;
+    virtual ~Controller();
+    Controller();
+    void getCommend();
+    bool CommendOne();
+    bool CommendTwo();
+    bool CommendThre();
+    string CommendFour();
+    void  CommendSix();
+    void exit();
+
 };
 
 

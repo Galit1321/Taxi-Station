@@ -7,6 +7,7 @@
 #include "TaxiCab.h"
 #include "Driver.h"
 #include "ILayout.h"
+#include "MatrixLayout.h"
 #include "Passenger.h"
 #include "SearchableTrip.h"
 class TaxiCenter {
@@ -18,7 +19,7 @@ map<long,Driver*> drivers;
     ILayout* layout;
     map<long ,TaxiCab*> cars;
 public:
-    TaxiCenter(ILayout *layout);//constructor
+    TaxiCenter(MatrixLayout* layout);//constructor
     TaxiCenter();//defult constructor
     //return commend from the user
     void getCommend(int num_commend,string s);

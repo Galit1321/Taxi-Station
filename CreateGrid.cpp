@@ -41,6 +41,6 @@ void CreateGrid::phase(string s) {
 }
 
 //return the params from theinput in a vector
-const vector<int> &CreateGrid::getInput() const {
+vector<int> &CreateGrid::getInput() {
     return input;
 }
