@@ -9,7 +9,7 @@ CreateDriver::CreateDriver(string &input) : Create(input) {
     int age;
     string stat;
     int exp;
-    int vehicle_id;
+
     if (this->tokens.size()!=5){
         return ;
     }
@@ -24,4 +24,12 @@ CreateDriver::CreateDriver(string &input) : Create(input) {
     iterator1++;
     vehicle_id=atoi(*iterator1);
     driver=new Driver(id,age,exp,stat);
+}
+
+Driver *CreateDriver::getDriver() const {
+    return driver;
+}
+
+int CreateDriver::getVehicle_id() const {
+    return vehicle_id;
 }

@@ -10,8 +10,13 @@
 class CreateDriver: public  Create{
 private:
     Driver* driver;
+    int vehicle_id;
 public:
     CreateDriver(string &input);
+
+    Driver *getDriver() const;
+
+    int getVehicle_id() const;
 };
 
 

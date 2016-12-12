@@ -5,6 +5,7 @@
 #include "Controller.h"
 #include "CreateGrid.h"
 #include "MatrixLayout.h"
+#include "CreateDriver.h"
 Controller::~Controller() {
  delete center;
 }
@@ -59,7 +60,15 @@ void Controller::getCommend() {
 }
 
 bool Controller::CommendOne(){
-
+    string parm;
+    cin>>parm>>endl;
+  try{  CreateDriver* cd=new  CreateDriver(parm);
+    center->addDriver(cd->getDriver());
+    center->setTaxiToDriver(cd->getDriver()->getId(),cd->getVehicle_id());
+}catch(std::exception exception1) {
+      return false;
+  }
+    return true;
 }
 bool Controller::CommendTwo(){
 
