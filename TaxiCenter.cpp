@@ -12,7 +12,9 @@
 TaxiCenter::~TaxiCenter() {
 
 }
+void TaxiCenter::addCar(Car *c) {
 
+}
 /**
  * default constructor
  * @return

@@ -17,7 +17,7 @@ protected:
     void getCommend();
     bool CommendOne();
     bool CommendTwo();
-    bool CommendThre();
+    bool CommendThree();
 
     bool CommendFour();
     bool CommendSix();

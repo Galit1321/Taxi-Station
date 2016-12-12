@@ -6,6 +6,7 @@
 #include "CreateGrid.h"
 #include "MatrixLayout.h"
 #include "CreateDriver.h"
+#include "CreateCar.h"
 Controller::~Controller() {
  delete center;
 }
@@ -43,7 +44,7 @@ void Controller::getCommend() {
                 success=CommendTwo();
                 break;
             case 3:
-                success=CommendThre();
+                success=CommendThree();
                 break;
             case 4:
                 success=CommendFour();
@@ -78,7 +79,15 @@ bool Controller::CommendOne(){
 bool Controller::CommendTwo(){
 
 }
-bool Controller::CommendThre(){
+bool Controller::CommendThree(){
+    string parm;
+ cin>>parm;
+    try{CreateCar* cc=new CreateCar(parm);
+        center->addCar(cc->getCar());}
+    catch (std::exception e){
+        return false;
+    }
+    return true;
 
 }
 bool Controller::CommendFour(){

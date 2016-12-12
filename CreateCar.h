@@ -13,11 +13,11 @@ using namespace std;
 #include "TaxiCab.h"
 #include "Luxury.h"
 class CreateCar: public Create {
-Car* car;
+
 public:
     CreateCar(string &input);
 
-
+    Car* getCar();
 };
 
 

@@ -5,13 +5,17 @@
 #include "CreateDriver.h"
 
 CreateDriver::CreateDriver(string &input) : Create(input) {
+
+}
+
+Driver *CreateDriver::getDriver()  {
     int id;
     int age;
     string stat;
     int exp;
 
     if (this->tokens.size()!=5){
-        return ;
+        return NULL;
     }
     list<string>::iterator iterator1=this->tokens.begin();
     id=atoi(*iterator1);
@@ -23,11 +27,8 @@ CreateDriver::CreateDriver(string &input) : Create(input) {
     exp=atoi(*iterator1);
     iterator1++;
     vehicle_id=atoi(*iterator1);
-    driver=new Driver(id,age,exp,stat);
-}
+    return  new Driver(id,age,exp,stat);
 
-Driver *CreateDriver::getDriver() const {
-    return driver;
 }
 
 int CreateDriver::getVehicle_id() const {
