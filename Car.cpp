@@ -34,7 +34,7 @@ Manufacturer Car::getManufacturer() const {
 }
 
 //set the id of the car
-void Car::setId(long id) {
+void Car::setId(int id) {
     Car::id = id;
 }
 

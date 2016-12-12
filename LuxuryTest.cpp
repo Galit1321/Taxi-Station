@@ -32,10 +32,12 @@ public:
 /**
  * check to see that the tariff of the
  * cabs is not equal
- */
+ *
+ * /
+ *
 TEST_F(LuxuryTest , Checktariff){
     ASSERT_NE(l->getCost() , t->getCost());
-}
+}*/
 
 /**
  * check to see that the move of luxury is

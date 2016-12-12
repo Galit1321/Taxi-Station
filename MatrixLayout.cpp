@@ -14,7 +14,7 @@ MatrixLayout::~MatrixLayout() {
 
 }
 
-MatrixLayout::MatrixLayout(int h,int w, vector<int> obs){
+MatrixLayout::MatrixLayout(int h,int w, vector<int>* obs){
     height=h;
     width=w;
     matrix = new int*[height];
@@ -32,7 +32,7 @@ MatrixLayout::MatrixLayout(int h,int w, vector<int> obs){
             }
         }
 
-    for (vector<int>::iterator iterator1=obs.begin();iterator1!=obs.end();iterator1++){
+    for (vector<int>::iterator iterator1=obs->begin();iterator1!=obs->end();iterator1++){
         int i=*iterator1;
         iterator1++;
         int j=*iterator1;

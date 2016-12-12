@@ -28,7 +28,7 @@ public:
     bool canGo(Point* n, char d);//the implamention of the inteface
     MatrixLayout(int h, int w);//constuctor of sizes
     Point* getNode(int i,int j);
-    MatrixLayout(int h,int w, vector<int> obs);
+    MatrixLayout(int h,int w, vector<int>* obs);
 };
 
 

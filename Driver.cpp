@@ -64,7 +64,7 @@ int Driver::getNumOfUser() const {
 }
 
 //set the driver id
-void Driver::setId(long id) {
+void Driver::setId(int id) {
     Driver::id = id;
 }
 

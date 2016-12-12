@@ -17,13 +17,13 @@ using namespace std;
 class CreateGrid:public Create{
 
 public:
-vector<int> input;
+vector<int>* input;
     CreateGrid(string &input);//constructor
     virtual ~CreateGrid();//deconstructor
     //divide the input
     void phase(string s);
     //return the params from theinput in a vector
-     vector<int> &getInput() ;
+     vector<int>* &getInput() ;
   //  CreateGrid(string &string1,string &obs);
 
 };

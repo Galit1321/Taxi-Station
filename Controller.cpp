@@ -16,13 +16,14 @@ Controller::Controller()  {
     center=new TaxiCenter();
     int h ;
     int w;
-    cin>>h>>w>>endl;
+    cin>>h;
+    cin>>w;
     int numOfObs;
-    cin>>numOfObs>>endl;
+    cin>>numOfObs;
     string obsVector;
     MatrixLayout *mt;
     if (numOfObs){
-        cin>>obsVector>>end;
+        cin>>obsVector;
         CreateGrid* size=new CreateGrid(obsVector);
         mt=new MatrixLayout(h,w,size->getInput());
     } else{
@@ -33,7 +34,7 @@ Controller::Controller()  {
 
 void Controller::getCommend() {
    int commend;
-    cin>>commend>>end;
+    cin>>commend;
     bool success;
     while ((commend!=7)&&(success)){
         switch (commend){
@@ -54,7 +55,7 @@ void Controller::getCommend() {
                 break;
 
        }
-        cin>>commend>>endl;
+        cin>>commend;
 
         }
     exit();
@@ -67,7 +68,7 @@ void Controller::getCommend() {
  */
 bool Controller::CommendOne(){
     string parm;
-    cin>>parm>>endl;
+    cin>>parm;
   try{  CreateDriver* cd=new  CreateDriver(parm);
     center->addDriver(cd->getDriver());
     center->setTaxiToDriver(cd->getDriver()->getId(),cd->getVehicle_id());
@@ -92,7 +93,7 @@ bool Controller::CommendThree(){
 }
 bool Controller::CommendFour(){
     int id;
-    cin>>id>>end;
+    cin>>id;
     Point* p=center->getLocation(id);
     if (p==NULL){
         return false;
@@ -102,5 +103,9 @@ std::cout<<*p;
 }
 
 bool  Controller::CommendSix(){
+
+}
+
+void Controller::exit() {
 
 }

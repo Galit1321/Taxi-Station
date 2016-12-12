@@ -21,6 +21,6 @@ public:
     Create();//constructor
     list<string> getTokens() const;//getter to tokens
     Create(string &input);//constructor with the input to divide
-    virtual void  phase(string s)=0;
+    virtual void  phase(string s);
 };
 #endif //ADVPRO1_ABSCREATABLE_H

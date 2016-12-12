@@ -23,7 +23,7 @@ public:
  */
 TEST_F(CreateTest,Valid){
     ASSERT_NO_FATAL_FAILURE(cg->getTokens().size());
-    ASSERT_GT(cg->getInput().size(),0);
+    ASSERT_GT(cg->getInput()->size(),0);
 
 }
 
@@ -45,8 +45,8 @@ TEST_F(CreateTest,CreateTest_FormatError_Test){
  * greater or eq  to 0
  */
 TEST_F(CreateTest,InputPostive){
-    vector<int> tmp=cg->getInput();
-    for (vector<int>::iterator iter=tmp.begin();iter!=tmp.end();iter++){
+    vector<int>* tmp=cg->getInput();
+    for (vector<int>::iterator iter=tmp->begin();iter!=tmp->end();iter++){
         ASSERT_GT(*iter,-1);
     }
 }

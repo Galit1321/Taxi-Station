@@ -70,7 +70,7 @@ TEST_F(TaxiCTest, getLoc_test) {
 
 TEST_F(TaxiCTest, TaxiCTest_Closer_Test) {
     Driver *driver = center->findCloser(new Point(0, 0));
-    vector<long>::iterator it;
+    vector<int>::iterator it;
     it = std::find(center->getFree_drivers().begin(), center->getFree_drivers().end(), driver->getId());
     ASSERT_TRUE(it != center->getFree_drivers().end());
     delete driver;

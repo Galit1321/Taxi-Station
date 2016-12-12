@@ -18,15 +18,15 @@ Driver *CreateDriver::getDriver()  {
         return NULL;
     }
     list<string>::iterator iterator1=this->tokens.begin();
-    id=atoi(*iterator1);
+    id=std::stoi(*iterator1);
     iterator1++;
-    age=atoi(*iterator1);
+    age=std::stoi(*iterator1);
     iterator1++;
     stat=*(iterator1);
     iterator1++;
-    exp=atoi(*iterator1);
+    exp=std::stoi(*iterator1);
     iterator1++;
-    vehicle_id=atoi(*iterator1);
+    vehicle_id=std::stoi(*iterator1);
     return  new Driver(id,age,exp,stat);
 
 }

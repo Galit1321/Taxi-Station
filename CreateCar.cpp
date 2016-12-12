@@ -17,9 +17,9 @@ Car* CreateCar::getCar() {
         return NULL;
     }
     list<string>::iterator iterator1=this->tokens.begin();
-    id=atoi(*iterator1);
+    id=std::stoi(*iterator1);
     iterator1++;
-    kind=atoi(*iterator1);
+    kind=std::stoi(*iterator1);
     iterator1++;
 
     manufactor=*iterator1;

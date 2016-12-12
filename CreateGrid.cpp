@@ -29,9 +29,9 @@ void CreateGrid::phase(string s) {
 
             throw 'g';
         }
-        this->input.push_back(h);
+        this->input->push_back(h);
         s.erase(0, pos+1);
-        this->input.push_back(atoi(strcpy(tmp,s.c_str())));;
+        this->input->push_back(atoi(strcpy(tmp,s.c_str())));;
     }catch (char e){
         cout<<"input numbers only between the _"<<endl;
         throw e;
@@ -39,10 +39,8 @@ void CreateGrid::phase(string s) {
 
 
 }
-CreateGrid::CreateGrid(string &string1,string &obs){
 
-}
 //return the params from theinput in a vector
-vector<int> &CreateGrid::getInput() {
+vector<int>* &CreateGrid::getInput() {
     return input;
 }
