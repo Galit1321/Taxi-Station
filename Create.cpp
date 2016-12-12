@@ -37,4 +37,8 @@ list<string>  Create::getTokens() const {
     return tokens;
 }
 
+void Create::phase(string s) {
+    
+}
+
 
