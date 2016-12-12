@@ -56,9 +56,14 @@ void Controller::getCommend() {
         cin>>commend>>endl;
 
         }
+    exit();
 
 }
-
+/**
+ * commend one meaning create a driver
+ * will call the class that phase the input and create driver
+ * @return true is creation succes false if we got exception
+ */
 bool Controller::CommendOne(){
     string parm;
     cin>>parm>>endl;
