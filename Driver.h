@@ -10,6 +10,7 @@
 #include "Point.h"
 #include "Solution.h"
 #include "Person.h"
+#include "SearchableTrip.h"
 
  enum class status{MARRIED = 0, SINGLE =1, DIVORCED =2, WIDOWED =3};
 
@@ -17,10 +18,9 @@ class Driver :public Person{
 private:
    int id;
     int age;
-
-private:
     int experience;
     int numOfUser;
+SearchableTrip* trip;
 public:
     status stat;
     TaxiCab *car;

@@ -84,7 +84,7 @@ void SearchableTrip::addPass() {
 }
 
 //return ride id
-long SearchableTrip::getRideId() const {
+int SearchableTrip::getRideId() const {
     return rideId;
 }
 
