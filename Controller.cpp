@@ -88,7 +88,7 @@ bool Controller::CommendTwo(){
        ILayout* m=center->getLayout();
         SearchableTrip* searchableTrip=new SearchableTrip(m,cd->start_x,cd->star_y,cd->end_x,cd->end_y,cd->id,cd->tariff);
         Driver* d=center->findCloser(searchableTrip->getInitialState());
-        
+
     }catch(std::exception exception1) {
         return false;
     }

@@ -14,7 +14,7 @@ public:
     //defult constructor
     Luxury();
     //Taxi cab constructor
-    Luxury(long id, int mileage, Manufacturer manufacturer2, Color color2, int tariff2) ;
+    Luxury(int id, int mileage, Manufacturer manufacturer2, Color color2, double tariff2) ;
 };
 
 

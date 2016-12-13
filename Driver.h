@@ -12,7 +12,7 @@
 #include "Person.h"
 #include "SearchableTrip.h"
 
- enum class status{S, M, D, W};
+ enum class status{MARRIED = 0, SINGLE =1, DIVORCED =2, WIDOWED =3};
 
 class Driver :public Person{
 private:
@@ -22,14 +22,11 @@ private:
     int numOfUser;
 SearchableTrip* trip;
 public:
-    int vehicleId;
     status stat;
-    TaxiCab *car;
-
-
+   Car *car;
     Driver();//default constructor
     Driver(Driver &object);//copy constructor
-    Driver(int id, int age, string stat, int experience,int vehicleId );//constructor
+    Driver(int id ,int age , int experience ,string stat );//constructor
     //set the driver id
     void setId(int id);
     //set the driver age
@@ -37,7 +34,7 @@ public:
     //set the status of the driver
     void setStat(status stat);
     //set the car of the driver
-    void setCar(TaxiCab *car);
+    void setCar(Car *car);
     //set the years of experience of the driver
     void setExperience(int experience);
     //set the num of the users
