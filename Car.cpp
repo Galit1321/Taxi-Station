@@ -3,13 +3,24 @@
 //
 
 #include "Car.h"
-
+#include "string"
 /**
  * default constructor
  * @return
  */
+
+using namespace std;
+
 Car::Car() {
 
+}
+
+Car ::Car(int id,string carType ,string manufacturer,string color){
+    id = id;
+    carType = carType;
+    manufacturer = manufacturer;
+    color= color;
+    mileage =0;
 }
 
 
@@ -24,13 +35,13 @@ int Car::getMileage() const {
 }
 
 // set the color of the car
-Color Car::getColor() const {
-    return Color ::RED;
+string Car::getColor() const {
+    return color;
 }
 
 // get the manufacture of the car
-Manufacturer Car::getManufacturer() const {
-    return Manufacturer::HONDA;
+string Car::getManufacturer() const {
+    return manufacturer;
 }
 
 //set the id of the car
@@ -54,7 +65,8 @@ void Car::setManufacturer(Manufacturer manufacturer) {
 }
 //compare between to cars
 bool Car::operator==(const Car &car) const {
-    return false;
+    return ((id == getId())&&(carType == getCarType())&&
+            (manufacturer == getManufacturer())&& (color == getColor()));
 }
 
 double Car::getTariff() const {
@@ -63,4 +75,12 @@ double Car::getTariff() const {
 
 void Car::setTariff(double tariff) {
     Car::tariff = tariff;
+}
+
+string Car::getCarType() const {
+    return carType;
+}
+
+void Car::setCarType(CarType carType) {
+    Car::carType = carType;
 }

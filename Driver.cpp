@@ -16,7 +16,8 @@ Driver ::Driver() {}
  * @return copy of the given object
  */
 Driver ::Driver(Driver &object) {
-    this->id = object.
+    this->id = object.getId();
+    
 
 }
 //constructor

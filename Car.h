@@ -2,27 +2,29 @@
 // Created by michal on 12/1/16.
 //
 
+#include "string"
 #ifndef EX2_CAR_H
 #define EX2_CAR_H
-enum  Color{RED = 0, BLUE =1, GREEN =2, PINK =3, WHITE =4};
- enum   Manufacturer{HONDA = 0, SUBARO =1, TESLA =2, FIAT =3};
+enum  Color{R,B,G,P,W};
+enum  Manufacturer{H,S,T,F};
+enum  CarType{TAXI=1 ,LUXURY =2};
 
+using namespace std;
 class Car {
 protected:
     int id ;
     int mileage;
-    Color color;
-
-
-double tariff;
+    string color;
+    string carType;
+    double tariff;
+    string manufacturer;
 public:
+    void setCarType(CarType carType);
     double getTariff() const;
-
     void setTariff(double tariff);
+    string getCarType() const;
+    Car(int id,string carType ,string manufacturer,string color);
 
-protected:
-    Manufacturer manufacturer;
-public:
     //defult constructor
     Car();
     //set the id of the car
@@ -37,9 +39,9 @@ public:
     // get the mileage of the car
     int getMileage() const;
     // get the color of the car
-    Color getColor() const;
+    string getColor() const;
     // get the manufacture of the car
-    Manufacturer getManufacturer() const;
+    string getManufacturer() const;
     //make one move
    virtual  void  move()=0;
     //compare between two cars
