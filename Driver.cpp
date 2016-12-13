@@ -27,11 +27,6 @@ Driver ::Driver(int id ,int age , int experience ,string stat ) {
     stat =stat;
 }
 
-//find the distance from the driver curr pose
-//to the given point
-int Driver ::getDistance(Point point) {
-    return 0;
-}
 
 //compare between 2 drivers
 bool Driver ::operator==(const Driver &driver1) const {
@@ -41,7 +36,7 @@ bool Driver ::operator==(const Driver &driver1) const {
 }
 
 //run the bfs algoritm
-Solution* Driver ::doBFS(Point psEnd) {
+Solution* Driver ::doBFS(Point* psEnd) {
     return NULL;
 }
 

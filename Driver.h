@@ -55,7 +55,7 @@ public:
     bool operator==(const Driver &driver1)const ;
     //find the distance from the driver curr pose
     //to the given point
-    int getDistance(Point point);
+
     //run the bfs algoritm
     Solution* doBFS(Point* pEnd);
 };
