@@ -11,7 +11,7 @@
 #include "Solution.h"
 #include "Person.h"
 
- enum class status{MARRIED = 0, SINGLE =1, DIVORCED =2, WIDOWED =3};
+ enum class status{S, M, D, W};
 
 class Driver :public Person{
 private:
@@ -22,11 +22,14 @@ private:
     int experience;
     int numOfUser;
 public:
+    int vehicleId;
     status stat;
     TaxiCab *car;
+
+
     Driver();//default constructor
     Driver(Driver &object);//copy constructor
-    Driver(int id ,int age , int experience ,string stat );//constructor
+    Driver(int id, int age, string stat, int experience,int vehicleId );//constructor
     //set the driver id
     void setId(int id);
     //set the driver age
