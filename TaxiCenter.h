@@ -51,7 +51,7 @@ public:
     map<int, Car*> &getCars() ;
     virtual ~TaxiCenter();//deconstructor
     void finishAllTrip();
-    }
+
 };
 
 
