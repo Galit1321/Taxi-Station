@@ -21,6 +21,7 @@ Create::Create(string &input){
 
     }
     tokens.push_back(input.substr(0, pos));
+    tokens.push_back(input);
 }
 /**
  * default constructor
@@ -37,8 +38,6 @@ list<string>  Create::getTokens() const {
     return tokens;
 }
 
-void Create::phase(string s) {
 
-}
 
 

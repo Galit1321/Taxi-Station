@@ -100,17 +100,17 @@ Point* TaxiCenter::getLocation(int id) {
 }
 
 //find closer driver
-Driver* TaxiCenter::findCloser(SearchableTrip* orign) {
+Driver* TaxiCenter::findCloser(Point* orign) {
 Solution* solution_end;
     Solution* solution_tmp;
     vector<int >::iterator iterator1=getFree_drivers().begin();
     Driver* driver=getDriver(*iterator1);
     iterator1++;
     Driver* driver1;
-    solution_end=driver->doBFS(orign->getInitialState());
+    solution_end=driver->doBFS(orign);
 while(iterator1!=getFree_drivers().end()){
     driver1=getDriver(*iterator1);
-    solution_tmp=driver1->doBFS(orign->getInitialState());
+    solution_tmp=driver1->doBFS(orign);
     if (solution_tmp->sol.size()<solution_end->sol.size()){
         driver=driver1;
     }iterator1++;
@@ -130,4 +130,13 @@ Car* TaxiCenter::getTaxi(int id) {
 
 void TaxiCenter::setLayout(ILayout *layout) {
     TaxiCenter::layout = layout;
+}
+/**
+ * finish all trip of drivers that we have in the taxicenter
+ */
+void TaxiCenter::finishAllTrip() {
+    for(map<int,Driver*>::iterator it = getDrivers().begin(); it != getDrivers().end(); ++it) {
+        it->second->finishTrip();
+    }
+
 }

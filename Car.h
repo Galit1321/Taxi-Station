@@ -18,13 +18,9 @@ protected:
     string carType;
     double tariff;
     string manufacturer;
-    Solution *solution;
 public:
-    Solution *getSolution() const;
 
-    void setSolution(Solution *solution);
 
-public:
     void setCarType(CarType carType);
     double getTariff() const;
     void setTariff(double tariff);

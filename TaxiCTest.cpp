@@ -52,23 +52,10 @@ TEST_F(TaxiCTest, TaxiCTest_CreateTaxi_Test) {
     ASSERT_EQ(before + 1, center->getCars().size());
 }
 
-/**
- * check the priting of the location
- */
-TEST_F(TaxiCTest, printLocation_test) {
-    ASSERT_GT(center->printLocation(0).size(), 0);
-}
-
-/**
- * check the get location test
- */
-TEST_F(TaxiCTest, getLoc_test) {
-    Point *point = center->getLocation(0);
-    ASSERT_FALSE(point == NULL);
-
-}
 
 
+
+/*
 TEST_F(TaxiCTest, TaxiCTest_Closer_Test) {
     Driver *driver = center->findCloser(new Point(0, 0));
     vector<int>::iterator it;
@@ -76,3 +63,4 @@ TEST_F(TaxiCTest, TaxiCTest_Closer_Test) {
     ASSERT_TRUE(it != center->getFree_drivers().end());
     delete driver;
 }
+*/

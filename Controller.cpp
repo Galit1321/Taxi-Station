@@ -87,7 +87,7 @@ bool Controller::CommendTwo(){
         CreateRide* cd=new  CreateRide(parm);
        ILayout* m=center->getLayout();
         SearchableTrip* searchableTrip=new SearchableTrip(m,cd->start_x,cd->star_y,cd->end_x,cd->end_y,cd->id,cd->tariff);
-        Driver* d=center->findCloser(searchableTrip);
+        Driver* d=center->findCloser(searchableTrip->getInitialState());
 
     }catch(std::exception exception1) {
         return false;
@@ -123,9 +123,9 @@ bool Controller::CommendFour(){
 }
 
 bool  Controller::CommendSix(){
-
+center->finishAllTrip();
 }
 
 void Controller::exit() {
-
+delete center;
 }

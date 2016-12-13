@@ -105,11 +105,23 @@ Car *Driver::getCar() const {
 SearchableTrip *Driver::getTrip() const {
     return trip;
 }
+void Driver::finishTrip() {
+    int cont=this->solution->sol.size();
+    for (int i=0;i<cont;i++){
+        move();
+    }
+
+}
 
 
+/************************************************************************************/
 void Driver::setTrip(SearchableTrip *trip) {
     Driver::trip = trip;
 }
+void Driver::move() {
+}
+
+/********************************************************NEED TO CHANGE****/
 
 
 
