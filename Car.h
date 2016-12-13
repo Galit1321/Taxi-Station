@@ -2,44 +2,52 @@
 // Created by michal on 12/1/16.
 //
 
+#include "string"
+#include "Solution.h"
 #ifndef EX2_CAR_H
 #define EX2_CAR_H
-enum  Color{RED = 0, BLUE =1, GREEN =2, PINK =3, WHITE =4};
- enum   Manufacturer{HONDA = 0, SUBARO =1, TESLA =2, FIAT =3};
 
+enum  CarType{TAXI=1 ,LUXURY =2};
+
+using namespace std;
 class Car {
 protected:
     int id ;
     int mileage;
-    Color color;
-
-
-double tariff;
+    string color;
+    string carType;
+    double tariff;
+    string manufacturer;
+    Solution *solution;
 public:
+    Solution *getSolution() const;
+
+    void setSolution(Solution *solution);
+
+public:
+    void setCarType(CarType carType);
     double getTariff() const;
-
     void setTariff(double tariff);
+    string getCarType() const;
+    Car(int id,string carType ,string manufacturer,string color);
 
-protected:
-    Manufacturer manufacturer;
-public:
     //defult constructor
     Car();
     //set the id of the car
     void setId(int id);
     // return the mileage that have passed
     void setMileage(int mileage);
-    void setColor(Color color);
+    void setColor(string color);
     // set the manufacture of the car
-    void setManufacturer(Manufacturer manufacturer);
+    void setManufacturer(string manufacturer);
     //return the id of the car
     int getId() const;
     // get the mileage of the car
     int getMileage() const;
     // get the color of the car
-    Color getColor() const;
+    string getColor() const;
     // get the manufacture of the car
-    Manufacturer getManufacturer() const;
+    string getManufacturer() const;
     //make one move
    virtual  void  move()=0;
     //compare between two cars

@@ -5,7 +5,7 @@
 #include "Luxury.h"
 
 //constructor
-Luxury ::Luxury(int id, int mileage, Manufacturer manufacturer2, Color color2, double tariff2) {
+Luxury ::Luxury(int id, int mileage, string manufacturer2, string color2, double tariff2) {
     id = id;
     mileage = mileage;
     manufacturer = manufacturer2;

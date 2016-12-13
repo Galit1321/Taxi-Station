@@ -12,27 +12,26 @@
 #include "Person.h"
 #include "SearchableTrip.h"
 
- enum class status{M = 0, S =1, D =2, W =3};
-
 class Driver :public Person{
 private:
    int id;
     int age;
     int experience;
     int numOfUser;
-SearchableTrip* trip;
+    SearchableTrip* trip;
 public:
-    status stat;
-   Car *car;
+    string stat;
+    Car *car;
+
     Driver();//default constructor
     Driver(Driver &object);//copy constructor
-    Driver(int id ,int age , int experience ,string stat );//constructor
+    Driver(int id ,int age,string stat , int experience);//constructor
     //set the driver id
     void setId(int id);
     //set the driver age
     void setAge(int age);
     //set the status of the driver
-    void setStat(status stat);
+    void setStat(string stat);
     //set the car of the driver
     void setCar(Car *car);
     //set the years of experience of the driver
@@ -40,9 +39,9 @@ public:
     //set the num of the users
     void setNumOfUser(int numOfUser);
     //return the status of the driver
-    status getStat() const;
+    string getStat() const;
     //return the car of the driver
-   Car *getCar() const;
+    Car *getCar() const;
     //return the driver id
     int getId() const;
     //return the driver age
@@ -57,6 +56,11 @@ public:
     //to the given point
 
     //run the bfs algoritm
+
+
+    SearchableTrip *getTrip() const;
+
+    void setTrip(SearchableTrip *trip);
     Solution* doBFS(Point* pEnd);
 };
 
