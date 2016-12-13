@@ -16,7 +16,7 @@ using namespace std;
 class SearchableTrip : public ISearchable{
 private:
     int numOfPass;
-    long rideId;
+    int rideId;
     int total_dis;
 public:
     //return the num of the passengers
@@ -24,7 +24,7 @@ public:
     //add new passenger
     void addPass();
     //return ride id
-    long getRideId() const;
+    int getRideId() const;
     //return the total distance
     int getTotal_dis() const;
     //set the total distance
@@ -42,7 +42,7 @@ private:
 public:
     SearchableTrip();
     SearchableTrip(ILayout* layout1,int start_i,int start_j,int end_i,int end_j);//constructor
-    SearchableTrip(ILayout* layout1,int start_i,int start_j,int end_i,int end_j,long rid,int tff);
+    SearchableTrip(ILayout* layout1,int start_i,int start_j,int end_i,int end_j, int rid, double tff);
     Point* getInitialState();//implantation of interface
     Point* getGoalState();//implantation of interface
     queue<Point*> getAllPossibleStates(Point* s);//implamention of interface

@@ -56,3 +56,11 @@ void Car::setManufacturer(Manufacturer manufacturer) {
 bool Car::operator==(const Car &car) const {
     return false;
 }
+
+double Car::getTariff() const {
+    return tariff;
+}
+
+void Car::setTariff(double tariff) {
+    Car::tariff = tariff;
+}

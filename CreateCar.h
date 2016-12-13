@@ -16,7 +16,6 @@ class CreateCar: public Create {
 
 public:
     CreateCar(string &input);
-
     Car* getCar();
 };
 

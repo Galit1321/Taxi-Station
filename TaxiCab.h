@@ -13,7 +13,10 @@ using namespace std;
 class TaxiCab : public Car{
 public:
     // the cost of the drive
-    int tariff;
+
+
+
+
     TaxiCab();//defult conatructor
     //Taxi cab constructor
     TaxiCab(int id ,int mileage ,string manufacturer1 ,string color1 ,int tariff1);

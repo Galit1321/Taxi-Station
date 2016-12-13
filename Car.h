@@ -12,6 +12,15 @@ protected:
     int id ;
     int mileage;
     Color color;
+
+
+double tariff;
+public:
+    double getTariff() const;
+
+    void setTariff(double tariff);
+
+protected:
     Manufacturer manufacturer;
 public:
     //defult constructor
