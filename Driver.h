@@ -57,7 +57,7 @@ public:
     //to the given point
     int getDistance(Point point);
     //run the bfs algoritm
-    Solution* doBFS(Point pEnd);
+    Solution* doBFS(Point* pEnd);
 };
 
 

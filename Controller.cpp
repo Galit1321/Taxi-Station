@@ -87,7 +87,7 @@ bool Controller::CommendTwo(){
         CreateRide* cd=new  CreateRide(parm);
        ILayout* m=center->getLayout();
         SearchableTrip* searchableTrip=new SearchableTrip(m,cd->start_x,cd->star_y,cd->end_x,cd->end_y,cd->id,cd->tariff);
-        Driver* d=center->findCloser(searchableTrip->getInitialState());
+        Driver* d=center->findCloser(searchableTrip);
 
     }catch(std::exception exception1) {
         return false;
