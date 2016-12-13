@@ -16,7 +16,7 @@ Driver ::Driver() {}
  * @return copy of the given object
  */
 Driver ::Driver(Driver &object) {
-    this->id = object.
+//    this->id = object.
 
 }
 //constructor
@@ -91,7 +91,7 @@ void Driver::setStat(status stat) {
 }
 
 //set the car of the driver
-void Driver::setCar(TaxiCab *car) {
+void Driver::setCar(Car *car) {
     Driver::car = car;
 }
 
@@ -101,7 +101,7 @@ status Driver::getStat() const {
 }
 
 ////return the car of the driver
-TaxiCab *Driver::getCar() const {
+Car *Driver::getCar() const {
     return car;
 }
 

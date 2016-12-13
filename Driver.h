@@ -12,7 +12,7 @@
 #include "Person.h"
 #include "SearchableTrip.h"
 
- enum class status{MARRIED = 0, SINGLE =1, DIVORCED =2, WIDOWED =3};
+ enum class status{M = 0, S =1, D =2, W =3};
 
 class Driver :public Person{
 private:
@@ -42,7 +42,7 @@ public:
     //return the status of the driver
     status getStat() const;
     //return the car of the driver
-    TaxiCab *getCar() const;
+   Car *getCar() const;
     //return the driver id
     int getId() const;
     //return the driver age
