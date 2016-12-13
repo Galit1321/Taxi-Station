@@ -21,7 +21,6 @@ void TaxiCenter::addCar(Car *c) {
  */
 TaxiCenter::TaxiCenter() {
     drivers = map<int, Driver *>();
-    locations = map<Point, Driver *>();
     free_drivers = vector<int >();
     all_passngers = map<int , Passenger *>();
     layout = NULL;
@@ -36,10 +35,6 @@ TaxiCenter::TaxiCenter(MatrixLayout *layout) : layout(layout) {
 
 }
 
-//return location
- map<Point, Driver *> &TaxiCenter::getLocations()  {
-    return locations;
-}
 
 //create a vector of free drivers
  vector<int > &TaxiCenter::getFree_drivers() {
@@ -52,7 +47,7 @@ map<int , Passenger *> &TaxiCenter::getAll_passngers() {
 }
 
 ILayout* TaxiCenter::getLayout() {
-    return NULL;
+    return this->layout;
 }
 
 //return cabs
@@ -60,24 +55,21 @@ map<int , TaxiCab*> &TaxiCenter::getCars() {
     return cars;
 }
 
-//return commend from the user
-void TaxiCenter::getCommend(int num_commend, string s) {
-
-}
-
 //add driver
 void TaxiCenter::addDriver(Driver *driver) {
-
+    free_drivers.push_back(driver->getId());
+    drivers.insert( std::pair<int,Driver*>(driver->getId(),driver));
 }
 
-//create taxi
-void TaxiCenter::createTaxi(string parms) {
-
-}
 
 //conect taxi to driver
 void TaxiCenter::setTaxiToDriver(int driver_id, int taxi_id) {
+    Car* car=getCars()[taxi_id];
+   Driver* driver=getDrivers()[driver_id];
 
+    if((driver==NULL)||(car==NULL)){
+        return;
+    }driver->setCar(car);
 }
 
 //print location

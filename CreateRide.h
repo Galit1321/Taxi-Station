@@ -13,7 +13,6 @@ public:
     CreateRide(string &input);
     SearchableTrip* getTrip();
 
-void
     virtual ~CreateRide();
     void phase(string s);
     int id;

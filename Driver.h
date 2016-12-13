@@ -23,7 +23,7 @@ private:
 SearchableTrip* trip;
 public:
     status stat;
-    TaxiCab *car;
+   Car *car;
     Driver();//default constructor
     Driver(Driver &object);//copy constructor
     Driver(int id ,int age , int experience ,string stat );//constructor
@@ -34,7 +34,7 @@ public:
     //set the status of the driver
     void setStat(status stat);
     //set the car of the driver
-    void setCar(TaxiCab *car);
+    void setCar(Car *car);
     //set the years of experience of the driver
     void setExperience(int experience);
     //set the num of the users

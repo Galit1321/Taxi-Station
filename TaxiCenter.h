@@ -13,7 +13,6 @@
 class TaxiCenter {
 protected:
 map<int,Driver*> drivers;
-    map<Point,Driver*> locations;
     vector<int > free_drivers;
     map<int,Passenger*> all_passngers;
     ILayout* layout;
@@ -21,17 +20,14 @@ map<int,Driver*> drivers;
 public:
     TaxiCenter(MatrixLayout* layout);//constructor
     TaxiCenter();//defult constructor
-    //return commend from the user
-    void getCommend(int num_commend,string s);
+
     /***********************************/
     void addCar(Car* c);
-    /**********************************************************************/
+
     void setLayout(ILayout *layout);
 
     //add driver
     void addDriver(Driver* driver);
-    //create taxi
-    void createTaxi(string parms);
     //conect taxi to driver
     void setTaxiToDriver(int driver_id, int taxi_id);
     //print location
@@ -44,8 +40,7 @@ public:
     TaxiCab* getTaxi(int id);
     //return location
     Point* getLocation(int id);
-    //create a trip
-    SearchableTrip* createTrip(int id);
+
     //find closer driver
     Driver* findCloser(Point* orign);
     //return the drivers

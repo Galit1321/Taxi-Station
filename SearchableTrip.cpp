@@ -18,6 +18,11 @@ SearchableTrip::SearchableTrip(ILayout *layout1, int start_i, int start_j, int e
     this->numOfPass=0;
 
 }
+
+
+SearchableTrip::SearchableTrip(ILayout* layout1,int start_i,int start_j,int end_i,int end_j, int rid, double tff){
+
+}
 SearchableTrip::SearchableTrip() {
 
 }
