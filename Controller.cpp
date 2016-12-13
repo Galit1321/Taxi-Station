@@ -118,12 +118,7 @@ bool Controller::CommendThree(){
 bool Controller::CommendFour(){
     int id;
     cin>>id;
-    Point* p=center->getLocation(id);
-    if (p==NULL){
-        return false;
-    }
-std::cout<<*p;
-
+    center->printLocation(id);
     return true;
 }
 
