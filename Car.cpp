@@ -55,12 +55,12 @@ void Car::setMileage(int mileage) {
 }
 
 // set the color of the car
-void Car::setColor(Color color) {
+void Car::setColor(string color) {
     Car::color = color;
 }
 
 // set the manufacture of the car
-void Car::setManufacturer(Manufacturer manufacturer) {
+void Car::setManufacturer(string manufacturer) {
     Car::manufacturer = manufacturer;
 }
 //compare between to cars
@@ -83,4 +83,12 @@ string Car::getCarType() const {
 
 void Car::setCarType(CarType carType) {
     Car::carType = carType;
+}
+
+Solution *Car::getSolution() const {
+    return solution;
+}
+
+void Car::setSolution(Solution *solution) {
+    Car::solution = solution;
 }

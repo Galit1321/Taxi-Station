@@ -3,10 +3,10 @@
 //
 
 #include "string"
+#include "Solution.h"
 #ifndef EX2_CAR_H
 #define EX2_CAR_H
-enum  Color{R,B,G,P,W};
-enum  Manufacturer{H,S,T,F};
+
 enum  CarType{TAXI=1 ,LUXURY =2};
 
 using namespace std;
@@ -18,6 +18,12 @@ protected:
     string carType;
     double tariff;
     string manufacturer;
+    Solution *solution;
+public:
+    Solution *getSolution() const;
+
+    void setSolution(Solution *solution);
+
 public:
     void setCarType(CarType carType);
     double getTariff() const;
@@ -31,9 +37,9 @@ public:
     void setId(int id);
     // return the mileage that have passed
     void setMileage(int mileage);
-    void setColor(Color color);
+    void setColor(string color);
     // set the manufacture of the car
-    void setManufacturer(Manufacturer manufacturer);
+    void setManufacturer(string manufacturer);
     //return the id of the car
     int getId() const;
     // get the mileage of the car

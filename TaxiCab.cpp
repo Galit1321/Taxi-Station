@@ -10,12 +10,14 @@
  */
 TaxiCab ::TaxiCab() {
     tariff=0;
+    mileage = 0;
 }
+
 TaxiCab::TaxiCab(int id ,string manufacturer1 ,string color1){
     this->id = id;
     mileage = 0;
-    //manufacturer  manufacturer1; NEED TO BE IF CLUSE
-    //color = color1; NEED IF CLUSE
+    manufacturer =  manufacturer1;
+    color = color1;
     tariff = 0;
 }
 /**
@@ -25,8 +27,8 @@ TaxiCab::TaxiCab(int id ,string manufacturer1 ,string color1){
 TaxiCab ::TaxiCab(int id, int mileage,string manufacturer1, string color1, int tariff1) {
     id = id;
     mileage = mileage;
-    //manufacturer = manufacturer1;
-    //color = color1;
+    manufacturer = manufacturer1;
+    color = color1;
     tariff = tariff1;
 }
 
@@ -37,5 +39,6 @@ int TaxiCab ::getCost() {
 
 //make one move
 void TaxiCab ::move() {
+
 
 }

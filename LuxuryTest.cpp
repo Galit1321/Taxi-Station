@@ -2,11 +2,13 @@
 // Created by michal on 12/3/16.
 //
 
+#include "string"
 #include "gtest/gtest.h"
 #include "Luxury.h"
 #include "Car.h"
 #include "TaxiCab.h"
 
+using namespace std;
 class LuxuryTest :public  ::testing::Test{
 /**
  * test class to check LuxuryTest
@@ -15,7 +17,7 @@ public:
     Luxury* l;
     TaxiCab* t;
     virtual void SetUp(){
-        l =new Luxury(0,0,HONDA,RED,0);
+        l =new Luxury(0,0,"HONDA","RED",0);
         t = new TaxiCab();
     }
 

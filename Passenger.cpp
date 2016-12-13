@@ -15,15 +15,15 @@ Passenger ::Passenger(){
 
 //set the satisfication of the passenger
 void Passenger ::setSat(int sat) {
-
+    Passenger::satisfaction = sat;
 }
 // return the start point
 Point *Passenger::getPStart() const {
-    return NULL;
+    return pStart;
 }
 // return the end point
 Point *Passenger::getPEnd() const {
-    return NULL;
+    return pEnd;
 }
 
 // set the start point

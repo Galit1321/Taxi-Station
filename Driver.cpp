@@ -21,11 +21,11 @@ Driver ::Driver(Driver &object) {
 
 }
 //constructor
-Driver ::Driver(int id ,int age , int experience ,string stat ) {
+Driver ::Driver(int id ,int age ,string stat , int experience) {
     id = id;
     age = age;
+    stat = stat;
     experience =experience;
-    stat =stat;
 }
 
 //find the distance from the driver curr pose
@@ -36,8 +36,8 @@ int Driver ::getDistance(Point point) {
 
 //compare between 2 drivers
 bool Driver ::operator==(const Driver &driver1) const {
-    //return ((id == driver1.getId())&&(numOfUser == driver1.getNumOfUser())
-   // &&(age == driver1.getAge())&&());
+    return ((id == driver1.getId())&&(stat == driver1.getStat())
+    &&(age == driver1.getAge())&&(experience == driver1.getExperience()));
     return  0;
 }
 
@@ -87,24 +87,36 @@ void Driver::setNumOfUser(int numOfUser) {
 }
 
 //set the status of the driver
-void Driver::setStat(status stat) {
+void Driver::setStat(string stat) {
     Driver::stat = stat;
 }
 
 //set the car of the driver
-void Driver::setCar(TaxiCab *car) {
+void Driver::setCar(Car *car) {
     Driver::car = car;
 }
 
 //return the status of the driver
-status Driver::getStat() const {
-    return status ::D;
+string Driver::getStat() const {
+    return stat;
 }
 
 ////return the car of the driver
-TaxiCab *Driver::getCar() const {
+Car *Driver::getCar() const {
     return car;
 }
+
+
+SearchableTrip *Driver::getTrip() const {
+    return trip;
+}
+
+
+void Driver::setTrip(SearchableTrip *trip) {
+    Driver::trip = trip;
+}
+
+
 
 
 
