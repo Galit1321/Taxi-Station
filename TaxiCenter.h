@@ -16,44 +16,39 @@ map<int,Driver*> drivers;
     vector<int > free_drivers;
     map<int,Passenger*> all_passngers;
     ILayout* layout;
-    map<int ,TaxiCab*> cars;
+    map<int ,Car*> cars;
 public:
     TaxiCenter(MatrixLayout* layout);//constructor
     TaxiCenter();//defult constructor
-
-    /***********************************/
     void addCar(Car* c);
-
     void setLayout(ILayout *layout);
-
     //add driver
     void addDriver(Driver* driver);
     //conect taxi to driver
     void setTaxiToDriver(int driver_id, int taxi_id);
     //print location
-    string printLocation(int id);
+   void printLocation(int id);
     //make one move
     void move(int id);
     //return a driver
     Driver* getDriver(int id);
     //return taxi
-    TaxiCab* getTaxi(int id);
+    Car* getTaxi(int id);
     //return location
     Point* getLocation(int id);
 
     //find closer driver
-    Driver* findCloser(Point* orign);
+    Driver* findCloser(SearchableTrip* orign);
     //return the drivers
      map<int , Driver*> &getDrivers() ;
-    //return location
-    map<Point, Driver*> &getLocations() ;
+
     //create a vector of free drivers
      vector<int > &getFree_drivers() ;
     //return all the passengers
      map<int , Passenger*> &getAll_passngers() ;
     ILayout* getLayout() ;
     //return cabs
-    map<int, TaxiCab*> &getCars() ;
+    map<int, Car*> &getCars() ;
     virtual ~TaxiCenter();//deconstructor
 
 };

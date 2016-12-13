@@ -56,11 +56,12 @@ public:
     //to the given point
     int getDistance(Point point);
     //run the bfs algoritm
-    Solution* doBFS(Point pEnd);
+
 
     SearchableTrip *getTrip() const;
 
     void setTrip(SearchableTrip *trip);
+    Solution* doBFS(Point* pEnd);
 };
 
 
