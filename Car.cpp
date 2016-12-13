@@ -15,12 +15,12 @@ Car::Car() {
 
 //return the id of the car
 int Car::getId() const {
-    return 0;
+    return id;
 }
 
 // return the mileage that have passed
 int Car::getMileage() const {
-    return 0;
+    return mileage;
 }
 
 // set the color of the car

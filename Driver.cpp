@@ -16,11 +16,11 @@ Driver ::Driver() {}
  * @return copy of the given object
  */
 Driver ::Driver(Driver &object) {
-   // this->id = object.
+    this->id = object.
 
 }
 //constructor
-Driver ::Driver(int id, int age, int experience, string stat) {
+Driver ::Driver(int id, int age, string stat, int experience,int vehicleId) {
     id = id;
     age = age;
     experience =experience;
@@ -35,7 +35,9 @@ int Driver ::getDistance(Point point) {
 
 //compare between 2 drivers
 bool Driver ::operator==(const Driver &driver1) const {
-    return 0;
+    //return ((id == driver1.getId())&&(numOfUser == driver1.getNumOfUser())
+   // &&(age == driver1.getAge())&&());
+    return  0;
 }
 
 //run the bfs algoritm
@@ -45,22 +47,22 @@ Solution* Driver ::doBFS(Point psEnd) {
 
 //return the driver id
 int Driver::getId() const {
-    return 0;
+    return id;
 }
 
 //return the driver age
 int Driver::getAge() const {
-    return 0;
+    return age;
 }
 
 //return the years of experience of the driver
 int Driver::getExperience() const {
-    return 0;
+    return experience;
 }
 
 //return the num of the users
 int Driver::getNumOfUser() const {
-    return 0;
+    return numOfUser;
 }
 
 //set the driver id
@@ -95,10 +97,13 @@ void Driver::setCar(TaxiCab *car) {
 
 //return the status of the driver
 status Driver::getStat() const {
-    return status ::DIVORCED;
+    return status ::D;
 }
 
-//return the car of the driver
-TaxiCab* Driver::getCar() const {
-    return NULL;
+////return the car of the driver
+TaxiCab *Driver::getCar() const {
+    return car;
 }
+
+
+

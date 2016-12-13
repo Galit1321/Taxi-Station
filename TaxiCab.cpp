@@ -32,7 +32,7 @@ TaxiCab ::TaxiCab(int id, int mileage,string manufacturer1, string color1, int t
 
 //get the tariff of the trip
 int TaxiCab ::getCost() {
-    return 0;
+    return tariff;
 }
 
 //make one move
