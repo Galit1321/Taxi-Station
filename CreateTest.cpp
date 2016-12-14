@@ -5,8 +5,7 @@ class CreateTest :public  ::testing::Test{
 public:
     CreateGrid* cg;
     virtual void SetUp(){
-        string g="9,9,0,8,7,0";
-        cg=new CreateGrid(g);
+
 
     }
 
@@ -15,6 +14,8 @@ public:
     }
 
     CreateTest(){
+        string g="9,9,0,8,7,0";
+        cg=new CreateGrid(g);
     }
 };
 /**
@@ -23,7 +24,7 @@ public:
  */
 TEST_F(CreateTest,Valid){
     ASSERT_NO_FATAL_FAILURE(cg->getTokens().size());
-    ASSERT_GT(cg->getInput()->size(),0);
+
 
 }
 

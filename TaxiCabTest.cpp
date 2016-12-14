@@ -30,9 +30,9 @@ TEST_F(TaxiCabTest , ValidMembers){
     ASSERT_NO_FATAL_FAILURE(c->getColor());
     ASSERT_NO_FATAL_FAILURE(c->getManufacturer());
     ASSERT_NO_FATAL_FAILURE(c->move());
-    ASSERT_GT(c->getId(),0);
-    ASSERT_GT(c->getMileage(),0);
-    ASSERT_GT(c->getCost(),0);
+    ASSERT_GT(c->getId(),-1);
+    ASSERT_GT(c->getMileage(),-1);
+    ASSERT_GT(c->getCost(),-1);
 }
 
 

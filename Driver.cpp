@@ -3,9 +3,6 @@
 //
 
 #include "Driver.h"
-#include "BFS.h"
-#include "MatrixLayout.h"
-#include "Person.h"
 
 /**
  * default constructor
@@ -19,17 +16,12 @@ Driver ::Driver() {}
  * @return copy of the given object
  */
 Driver ::Driver(Driver &object) {
-    Point *p= new Point(0,0);
     this->id = object.getId();
-    this->age = object.getAge();
-    this->stat = object.getStat();
-    this->experience = object.getExperience();
-    object.setCurr_pos(p);
+
+
 }
 //constructor
 Driver ::Driver(int id ,int age ,string stat , int experience) {
-    Point *p= new Point(0,0);
-    this->setCurr_pos(p);
     id = id;
     age = age;
     stat = stat;
@@ -50,11 +42,8 @@ bool Driver ::operator==(const Driver &driver1) const {
 }
 
 //run the bfs algoritm
-Solution* Driver ::doBFS(Point *psEnd) {
-//    BFS bfs;
-//    SearchableTrip *searchableTrip;
-//    searchableTrip=new SearchableTrip();
-//    return bfs.search(searchableTrip);
+Solution* Driver ::doBFS(Point psEnd) {
+    return NULL;
 }
 
 //return the driver id
@@ -127,24 +116,7 @@ void Driver::setTrip(SearchableTrip *trip) {
     Driver::trip = trip;
 }
 
-Solution *Driver::getSolution() const {
-    return solution;
-}
 
-void Driver::setSolution(Solution *solution) {
-    Driver::solution = solution;
-}
-
-void Driver::move() {
-    if (car->getKind() == 1) {
-        curr_pos = solution->getSol().front();
-    }
-    if (car->getKind()==2 ){
-        solution->getSol().pop_front();
-        curr_pos = solution->getSol().front();
-
-    }
-}
 
 
 

@@ -35,12 +35,12 @@ public:
 TEST_F(DriverTest , Valid){
     ASSERT_NO_FATAL_FAILURE(d1->getCurr_pos());
     ASSERT_NO_FATAL_FAILURE(d1->getCar());
-    ASSERT_NO_FATAL_FAILURE(d1->doBFS(*p));
-    ASSERT_GE(d1->getDistance(*p),0);
-    ASSERT_GT(d1->getId(),0);
-    ASSERT_GE(d1->getSatisfaction(),0);
-    ASSERT_GT(d1->getExperience(),0);
-    ASSERT_GE(d1->getNumOfUser(),0);
+    ASSERT_NO_FATAL_FAILURE(d1->doBFS(p));
+
+    ASSERT_GT(d1->getId(),-1);
+    ASSERT_GE(d1->getSatisfaction(),-1);
+    ASSERT_GT(d1->getExperience(),-1);
+    ASSERT_GE(d1->getNumOfUser(),-1);
 
 }
 

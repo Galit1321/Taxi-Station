@@ -38,7 +38,7 @@ public:
     Point* getLocation(int id);
 
     //find closer driver
-    Driver* findCloser(SearchableTrip* orign);
+    Driver* findCloser(Point* orign);
     //return the drivers
      map<int , Driver*> &getDrivers() ;
 
@@ -50,6 +50,7 @@ public:
     //return cabs
     map<int, Car*> &getCars() ;
     virtual ~TaxiCenter();//deconstructor
+    void finishAllTrip();
 
 };
 
