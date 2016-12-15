@@ -85,3 +85,10 @@ void Car::setCarType(CarType carType) {
     Car::carType = carType;
 }
 
+Solution *Car::getSolution() const {
+    return solution;
+}
+
+void Car::setSolution(Solution *solution) {
+    Car::solution = solution;
+}

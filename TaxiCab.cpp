@@ -38,8 +38,4 @@ int TaxiCab ::getCost() {
     return tariff;
 }
 
-//make one move
-void TaxiCab ::move() {
 
-
-}

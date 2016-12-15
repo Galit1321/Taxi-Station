@@ -20,11 +20,13 @@ Car* CreateCar::getCar() {
     iterator1++;
     kind=std::stoi(*iterator1);
     iterator1++;
-
     manufactor=*iterator1;
     iterator1++;
     color =*(iterator1);
     iterator1++;
+
+
+
     if (kind==1){
         return new TaxiCab(id,manufactor,color);
     }else if (kind==2) {

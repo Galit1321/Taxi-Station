@@ -10,7 +10,7 @@
 
 Person ::Person() {
     satisfaction =0;
-    curr_pos =NULL;
+
 }
 /**
  * deconstructor
