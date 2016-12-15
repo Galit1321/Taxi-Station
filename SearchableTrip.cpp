@@ -128,3 +128,7 @@ int SearchableTrip::getTraiff() const {
 void SearchableTrip::setTraiff(int traiff) {
     traiff = traiff;
 }
+
+ILayout *SearchableTrip::getLayout() const {
+    return layout;
+}

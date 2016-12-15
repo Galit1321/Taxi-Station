@@ -112,7 +112,8 @@ Point* TaxiCenter::getLocation(int id) {
 }
 
 //find closer driver
-Driver* TaxiCenter::findCloser(Point* orign) {
+Driver* TaxiCenter::findCloser(SearchableTrip* orign) {
+    /*
 Solution* solution_end;
     Solution* solution_tmp;
     vector<int >::iterator iterator1=getFree_drivers().begin();
@@ -129,7 +130,9 @@ while(iterator1!=getFree_drivers().end()){
     if (solution_tmp->sol.size()<solution_end->sol.size()){
         driver=driver1;
     }iterator1++;
-}
+}*/
+    Driver* driver=getDriver(getFree_drivers()[0]);
+free_drivers.erase(getFree_drivers().begin());
     return driver;
 }
 

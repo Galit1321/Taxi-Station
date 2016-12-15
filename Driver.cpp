@@ -44,8 +44,10 @@ bool Driver ::operator==(const Driver &driver1) const {
 }
 
 //run the bfs algoritm
-Solution* Driver ::doBFS(Point* psEnd) {
-    return NULL;
+Solution* Driver ::doBFS(SearchableTrip* psEnd) {
+   BFS* bfs=new BFS();
+    SearchableTrip* trip1=new SearchableTrip(psEnd->getLayout(),curr_pos,psEnd->getInitialState());
+    return bfs->search(trip1);
 }
 
 //return the driver id
