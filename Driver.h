@@ -11,20 +11,18 @@
 #include "Solution.h"
 #include "Person.h"
 #include "SearchableTrip.h"
-
+#include "BFS.h"
 
 class Driver :public Person{
 private:
-    int id;
+   int id;
     int age;
     int experience;
     int numOfUser;
     SearchableTrip* trip;
-    Solution *solution;
-public:
-    Solution *getSolution() const;
-    void setSolution(Solution *solution);
+    Solution* solution;
 
+public:
     string stat;
     Car *car;
 
@@ -55,16 +53,22 @@ public:
     int getExperience() const;
     //return the num of the users
     int getNumOfUser() const;
+
     //compare between 2 drivers
     bool operator==(const Driver &driver1)const ;
     //find the distance from the driver curr pose
     //to the given point
-    int getDistance(Point point);
-    //run the bfs algoritm
-    void move ();
+void finishTrip();
+
     SearchableTrip *getTrip() const;
+/**************************need to do****/
     void setTrip(SearchableTrip *trip);
+    void move();
+    float getSatisfaction();
+    void setSatisfaction(float satisfaction);
     Solution* doBFS(Point* pEnd);
+
+    virtual ~Driver();
 };
 
 

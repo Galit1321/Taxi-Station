@@ -12,7 +12,7 @@
 using namespace std;
 
 Car::Car() {
-
+id=0;
 }
 
 Car ::Car(int id,string carType ,string manufacturer,string color){

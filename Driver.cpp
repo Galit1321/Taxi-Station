@@ -8,7 +8,9 @@
  * default constructor
  * @return
  */
-Driver ::Driver() {}
+Driver ::Driver() :Person(){
+id=0;
+}
 
 /**
  * copy constructor
@@ -22,27 +24,27 @@ Driver ::Driver(Driver &object) {
 }
 //constructor
 Driver ::Driver(int id ,int age ,string stat , int experience) {
-    id = id;
-    age = age;
-    stat = stat;
-    experience =experience;
+    this->id = id;
+    this->age = age;
+    this->stat = stat;
+    this->experience =experience;
+    this->curr_pos=new Point(0,0);
 }
 
-//find the distance from the driver curr pose
-//to the given point
-int Driver ::getDistance(Point point) {
-    return 0;
+Driver::~Driver() {
+delete curr_pos;
 }
+
 
 //compare between 2 drivers
 bool Driver ::operator==(const Driver &driver1) const {
     return ((id == driver1.getId())&&(stat == driver1.getStat())
     &&(age == driver1.getAge())&&(experience == driver1.getExperience()));
-    return  0;
+
 }
 
 //run the bfs algoritm
-Solution* Driver ::doBFS(Point psEnd) {
+Solution* Driver ::doBFS(Point* psEnd) {
     return NULL;
 }
 
@@ -111,10 +113,37 @@ SearchableTrip *Driver::getTrip() const {
     return trip;
 }
 
+void Driver::finishTrip() {
+    int cont=this->solution->sol.size();
+    for (int i=0;i<cont;i++){
+        move();
+    }
 
-void Driver::setTrip(SearchableTrip *trip) {
-    Driver::trip = trip;
 }
+
+
+/************************************************************************************/
+void Driver::setTrip(SearchableTrip *trip) {
+    BFS* bfs=new BFS();
+    this->solution=bfs->search(trip);
+    this->numOfUser+=trip->getNumOfPass();
+    curr_pos=trip->getInitialState();
+    delete bfs;
+
+}
+void Driver::move() {
+    solution->sol.pop_front();
+    if (!solution->sol.empty()){
+        curr_pos=solution->getSol().front();
+    }
+}
+void Driver::setSatisfaction(float satisfaction) {
+    this->satisfaction=(this->satisfaction*(numOfUser-trip->getNumOfPass())+satisfaction)/(float)this->numOfUser;
+}
+float Driver::getSatisfaction() {
+    return  this->satisfaction;
+}
+/********************************************************NEED TO CHANGE****/
 
 
 

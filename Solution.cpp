@@ -8,7 +8,7 @@
  */
 Solution::Solution()
 {
-    deque<Point> g;
+    deque<Point*> g;
     this->sol = g;
 }
 /**
@@ -22,7 +22,7 @@ Solution::~Solution() {
  * @param qlist
  * @return
  */
-Solution::Solution(std::deque<Point> qlist)
+Solution::Solution(std::deque<Point*> qlist)
 {
     this->sol = qlist;
 }
@@ -32,7 +32,7 @@ Solution::Solution(std::deque<Point> qlist)
  * getter to solition
  * @return
  */
-deque<Point> Solution::getSol()
+deque<Point*> Solution::getSol()
 {
     return this->sol;
 }
@@ -42,7 +42,7 @@ deque<Point> Solution::getSol()
  */
 void Solution::addNode(Point* node)
 {
-    this->sol.push_front(*node);
+    this->sol.push_front(node);
 }
 /** `
  * print the solutiom

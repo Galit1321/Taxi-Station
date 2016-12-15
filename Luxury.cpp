@@ -15,5 +15,9 @@ Luxury ::Luxury(int id, int mileage, string manufacturer2, string color2, double
 //constructor
 Luxury ::Luxury() {}
 
-//make one move
-
+Luxury::Luxury(int id, string manufacturer2, string color2) {
+    this->id = id;
+    this->mileage = 0;
+    manufacturer = manufacturer2;
+    color = color2;
+}

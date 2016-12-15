@@ -20,8 +20,8 @@ Create::Create(string &input){
         input.erase(0, pos +1);
 
     }
-    tokens.push_back(input.substr(0, pos));
     tokens.push_back(input);
+
 }
 /**
  * default constructor

@@ -15,13 +15,13 @@ protected:
 map<int,Driver*> drivers;
     vector<int > free_drivers;
     map<int,Passenger*> all_passngers;
-    ILayout* layout;
+    MatrixLayout* layout;
     map<int ,Car*> cars;
 public:
     TaxiCenter(MatrixLayout* layout);//constructor
     TaxiCenter();//defult constructor
     void addCar(Car* c);
-    void setLayout(ILayout *layout);
+    void setLayout(MatrixLayout *layout);
     //add driver
     void addDriver(Driver* driver);
     //conect taxi to driver
@@ -46,12 +46,11 @@ public:
      vector<int > &getFree_drivers() ;
     //return all the passengers
      map<int , Passenger*> &getAll_passngers() ;
-    ILayout* getLayout() ;
+    MatrixLayout* getLayout() ;
     //return cabs
     map<int, Car*> &getCars() ;
     virtual ~TaxiCenter();//deconstructor
     void finishAllTrip();
-
 };
 
 

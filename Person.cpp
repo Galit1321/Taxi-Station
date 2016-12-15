@@ -20,10 +20,6 @@ Person ::~Person() {
 
 }
 
-//get the satisfaction of the passenger
-float Person::getSatisfaction() const {
-    return satisfaction;
-}
 //get the curr pose of the passenger
 Point *Person::getCurr_pos() const {
     return curr_pos;

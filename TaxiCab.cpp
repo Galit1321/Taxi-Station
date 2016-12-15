@@ -11,6 +11,7 @@
 TaxiCab ::TaxiCab() {
     tariff=0;
     mileage = 0;
+    id=0;
 }
 
 TaxiCab::TaxiCab(int id ,string manufacturer1 ,string color1){

@@ -73,9 +73,9 @@ TEST_F(BFSTest,UniqeTest) {
     int size = s->getSol().size();
     list<Point> g;
     while (!s->sol.empty()) {
-        Point p = s->getSol().front();
-        if (std::find(g.begin(),g.end(),p)==g.end())
-        g.push_back(p);
+        Point* p = s->getSol().front();
+        if (std::find(g.begin(),g.end(),*p)==g.end())
+        g.push_back(*p);
         s->sol.pop_front();
     }
    ASSERT_EQ(g.size(), size);

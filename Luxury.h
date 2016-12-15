@@ -10,7 +10,8 @@
 class Luxury :public  TaxiCab{
 public:
 
-    //defult constructor
+    //defult
+    Luxury(int id, string manufacturer2, string color2) ;
     Luxury();
     //Taxi cab constructor
     Luxury(int id, int mileage, string manufacturer2, string color2, double tariff2) ;

@@ -41,15 +41,6 @@ TEST_F(LuxuryTest , Checktariff){
     ASSERT_NE(l->getCost() , t->getCost());
 }*/
 
-/**
- * check to see that the move of luxury is
- * bigger in one step every move
- */
-TEST_F(LuxuryTest , CheckSpeed){
-    l->move();
-    t->move();
-    ASSERT_EQ(t->getMileage()+1, l->getMileage());
-}
 
 /**
  * check to see dm call are not failure
@@ -58,9 +49,9 @@ TEST_F(LuxuryTest , ValidMembers){
     ASSERT_NO_FATAL_FAILURE(l->getColor());
     ASSERT_NO_FATAL_FAILURE(l->getManufacturer());
     ASSERT_NO_FATAL_FAILURE(l->move());
-    ASSERT_GT(0, l->getId());
-    ASSERT_GT(0, l->getMileage());
-    ASSERT_GT(0, l->getCost());
+    ASSERT_GT(l->getId(),-1);
+    ASSERT_GT( l->getMileage(),-1);
+    ASSERT_GT( l->getCost(),-1);
 }
 
 

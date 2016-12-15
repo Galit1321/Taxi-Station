@@ -17,7 +17,6 @@ Car* CreateCar::getCar() {
         return NULL;
     }
     list<string>::iterator iterator1=this->tokens.begin();
-    id=std::stoi(*iterator1);
     iterator1++;
     kind=std::stoi(*iterator1);
     iterator1++;
@@ -31,7 +30,7 @@ Car* CreateCar::getCar() {
     if (kind==1){
         return new TaxiCab(id,manufactor,color);
     }else if (kind==2) {
-        return  new Luxury();///need to work on tommarow
+        return  new Luxury(id,manufactor,color);///need to work on tommarow
     }
     return NULL;
 }
