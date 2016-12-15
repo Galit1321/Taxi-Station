@@ -102,7 +102,7 @@ bool Controller::CommendTwo(){
         Driver* d=center->findCloser(searchableTrip);
         d->setTrip(searchableTrip);
     }catch(std::exception exception1) {
-        return false;
+       throw exception1;
     }
     return true;
 }

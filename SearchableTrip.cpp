@@ -78,6 +78,12 @@ queue<Point *> SearchableTrip::getAllPossibleStates(Point *s) {
 
 }
 
+void SearchableTrip::clean(list <Point> closed) {
+    for(std::list<Point>::iterator it =closed.begin(); it != closed.end(); it++){
+        this->layout->getNode(it->getI(),it->getJ())->setParent(NULL);
+    }
+}
+
 /**
  * getter og goal
  * @return this.goal
