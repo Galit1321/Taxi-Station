@@ -23,6 +23,11 @@ public:
     //set the satisfication of the passenger
  void setSatisfaction(float satisfaction);
     float  getSatisfaction();
+
+    virtual ~Passenger();
+
+    Passenger(Point *pStart, Point *pEnd);
+
     //constructor
     Passenger();
 };

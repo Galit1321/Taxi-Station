@@ -32,6 +32,7 @@ TaxiCenter::TaxiCenter() {
     all_passngers = map<int , Passenger *>();
     layout = NULL;
     cars = map<int, Car*>();
+
 }
 
 /**
@@ -57,7 +58,7 @@ void TaxiCenter::addCar(Car *c) {
 getCars().insert(std::pair<int,Car*>(c->getId(),c));
 }
 
-ILayout* TaxiCenter::getLayout() {
+MatrixLayout* TaxiCenter::getLayout() {
     return this->layout;
 }
 
@@ -120,6 +121,9 @@ Solution* solution_end;
     Driver* driver1;
     solution_end=driver->doBFS(orign);
 while(iterator1!=getFree_drivers().end()){
+    if (solution_end->getSol().size()==1){//meaning the driver is in the sqr of the trip already
+        return driver;
+    }
     driver1=getDriver(*iterator1);
     solution_tmp=driver1->doBFS(orign);
     if (solution_tmp->sol.size()<solution_end->sol.size()){
@@ -139,7 +143,7 @@ Car* TaxiCenter::getTaxi(int id) {
     return getCars()[id];
 }
 
-void TaxiCenter::setLayout(ILayout *layout) {
+void TaxiCenter::setLayout(MatrixLayout *layout) {
     TaxiCenter::layout = layout;
 }
 /**

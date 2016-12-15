@@ -8,8 +8,8 @@
  * default constructor
  * @return
  */
-Driver ::Driver() {
-
+Driver ::Driver() :Person(){
+id=0;
 }
 
 /**
@@ -24,10 +24,15 @@ Driver ::Driver(Driver &object) {
 }
 //constructor
 Driver ::Driver(int id ,int age ,string stat , int experience) {
-    id = id;
-    age = age;
-    stat = stat;
-    experience =experience;
+    this->id = id;
+    this->age = age;
+    this->stat = stat;
+    this->experience =experience;
+    this->curr_pos=new Point(0,0);
+}
+
+Driver::~Driver() {
+delete curr_pos;
 }
 
 
@@ -35,7 +40,7 @@ Driver ::Driver(int id ,int age ,string stat , int experience) {
 bool Driver ::operator==(const Driver &driver1) const {
     return ((id == driver1.getId())&&(stat == driver1.getStat())
     &&(age == driver1.getAge())&&(experience == driver1.getExperience()));
-    return  0;
+
 }
 
 //run the bfs algoritm
@@ -121,13 +126,19 @@ void Driver::finishTrip() {
 void Driver::setTrip(SearchableTrip *trip) {
     BFS* bfs=new BFS();
     this->solution=bfs->search(trip);
+    this->numOfUser+=trip->getNumOfPass();
+    curr_pos=trip->getInitialState();
     delete bfs;
 
 }
 void Driver::move() {
+    solution->sol.pop_front();
+    if (!solution->sol.empty()){
+        curr_pos=solution->getSol().front();
+    }
 }
 void Driver::setSatisfaction(float satisfaction) {
-    this->satisfaction=(this->satisfaction*(numOfUser-1)+satisfaction)/(float)this->numOfUser;
+    this->satisfaction=(this->satisfaction*(numOfUser-trip->getNumOfPass())+satisfaction)/(float)this->numOfUser;
 }
 float Driver::getSatisfaction() {
     return  this->satisfaction;

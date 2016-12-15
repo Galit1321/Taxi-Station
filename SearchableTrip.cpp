@@ -29,7 +29,15 @@ SearchableTrip::SearchableTrip(ILayout* layout1,Point* start,Point* end){
     this->numOfPass=0;
 }
 SearchableTrip::SearchableTrip(ILayout* layout1,int start_i,int start_j,int end_i,int end_j, int rid, double tff){
-
+    this->layout = layout1;
+    this->init = this->layout->getNode(start_i, start_j);
+    this->goal = this->layout->getNode(end_i, end_j);
+    this->rideId=0;
+    this->total_dis=0;
+    this->traiff=0;
+    this->numOfPass=0;
+    this->traiff=tff;
+    this->rideId=rid;
 }
 SearchableTrip::SearchableTrip() {
 

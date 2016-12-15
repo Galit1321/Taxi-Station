@@ -10,11 +10,12 @@
 using namespace std;
 
 class Controller {
-protected:
+public:
     TaxiCenter* center;
     virtual ~Controller();
     Controller();
     void getCommend();
+protected:
     bool CommendOne();
     bool CommendTwo();
     bool CommendThree();

@@ -20,7 +20,7 @@ public:
     }
 
     PassengerTest(){
-        pass=new Passenger();
+        pass=new Passenger(new Point(0,0), new Point(1,1));
     }
 
 
@@ -31,5 +31,5 @@ public:
  */
 TEST_F(PassengerTest ,valid){
     ASSERT_NO_FATAL_FAILURE(pass->getCurr_pos());
-    ASSERT_GE(pass->getSatisfaction(),0);
+    ASSERT_GE(pass->getSatisfaction(),-1.0);
 }

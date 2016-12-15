@@ -8,9 +8,10 @@
  * constructor
  * @return
  */
-Passenger ::Passenger(){
+Passenger ::Passenger():Person(){
     pStart =NULL;
     pEnd = NULL;
+
 }
 
 // return the start point
@@ -35,8 +36,14 @@ void Passenger::setPEnd(Point *pEnd) {
  * @return the passenger satisfaction
  */
 float Passenger::getSatisfaction() {
-   this->satisfaction=static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/5));
+   this->satisfaction=rand()%5;
 }
 void Passenger::setSatisfaction(float satisfaction) {
+
+}
+
+Passenger::Passenger(Point *pStart, Point *pEnd) : pStart(pStart), pEnd(pEnd) {}
+
+Passenger::~Passenger() {
 
 }

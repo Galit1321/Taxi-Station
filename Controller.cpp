@@ -14,6 +14,7 @@ Controller::~Controller() {
 Controller::Controller()  {
 
     center=new TaxiCenter();
+    cout<<"enter height and width"<<endl;
     int h ;
     int w;
     cin>>h;
@@ -37,7 +38,7 @@ Controller::Controller()  {
 void Controller::getCommend() {
    int commend;
     cin>>commend;
-    bool success;
+    bool success= true;
     while ((commend!=7)&&(success)){
         switch (commend){
             case 1:

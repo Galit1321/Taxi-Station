@@ -67,6 +67,8 @@ void finishTrip();
     float getSatisfaction();
     void setSatisfaction(float satisfaction);
     Solution* doBFS(Point* pEnd);
+
+    virtual ~Driver();
 };
 
 
