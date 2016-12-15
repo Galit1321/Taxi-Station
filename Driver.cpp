@@ -9,7 +9,12 @@
  * @return
  */
 Driver ::Driver() :Person(){
-id=0;
+    id=0;
+    age =0;
+    experience =0;
+    stat = " ";
+    curr_pos=new Point(0,0);
+    car = NULL;
 
 }
 

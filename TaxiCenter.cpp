@@ -155,6 +155,7 @@ void TaxiCenter::setLayout(MatrixLayout *layout) {
 void TaxiCenter::finishAllTrip() {
     for(map<int,Driver*>::iterator it = getDrivers().begin(); it != getDrivers().end(); ++it) {
         it->second->finishTrip();
+        free_drivers.push_back(it->second->getId());
     }
 
 }
