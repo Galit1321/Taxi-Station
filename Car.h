@@ -18,15 +18,24 @@ protected:
     string carType;
     double tariff;
     string manufacturer;
+    int kind;
 public:
+    int getKind() const;
 
+    void setKind(int kind);
+
+protected:
+    int speed;
+
+
+public:
 
     void setCarType(CarType carType);
     double getTariff() const;
     void setTariff(double tariff);
     string getCarType() const;
     Car(int id,string carType ,string manufacturer,string color);
-
+    Car(int id,string carType ,string manufacturer,string color,int kind);
     //defult constructor
     Car();
     //set the id of the car
@@ -44,8 +53,7 @@ public:
     string getColor() const;
     // get the manufacture of the car
     string getManufacturer() const;
-    //make one move
-   virtual  void  move()=0;
+
     //compare between two cars
     bool operator==(const Car &car) const;
 };

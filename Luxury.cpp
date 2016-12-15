@@ -16,6 +16,4 @@ Luxury ::Luxury(int id, int mileage, string manufacturer2, string color2, double
 Luxury ::Luxury() {}
 
 //make one move
-void Luxury ::move() {
 
-}

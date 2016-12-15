@@ -20,7 +20,7 @@ public:
     //get the tariff of the trip
     int getCost();
     //make one move
-    virtual void move();
+
 
 };
 

@@ -9,8 +9,7 @@
 
 class Luxury :public  TaxiCab{
 public:
-    //make one move
-    void move();
+
     //defult constructor
     Luxury();
     //Taxi cab constructor
