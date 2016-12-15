@@ -48,7 +48,7 @@ TEST_F(LuxuryTest , Checktariff){
 TEST_F(LuxuryTest , ValidMembers){
     ASSERT_NO_FATAL_FAILURE(l->getColor());
     ASSERT_NO_FATAL_FAILURE(l->getManufacturer());
-    ASSERT_NO_FATAL_FAILURE(l->move());
+//    ASSERT_NO_FATAL_FAILURE(l->move());
     ASSERT_GT(l->getId(),-1);
     ASSERT_GT( l->getMileage(),-1);
     ASSERT_GT( l->getCost(),-1);
