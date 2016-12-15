@@ -89,8 +89,8 @@ bool Controller::CommendOne(){
     cin>>parm;
   try{
       CreateDriver* cd=new  CreateDriver(parm);
-    center->addDriver(cd->getDriver());
-    center->setTaxiToDriver(cd->getDriver()->getId(),cd->getVehicle_id());
+    center->addDriver(cd->getId(),cd->getAge(),cd->getStat(),cd->getExp());
+    center->setTaxiToDriver(cd->getId(),cd->getVehicle_id());
       delete cd;
 }catch(std::exception exception1) {
       return false;

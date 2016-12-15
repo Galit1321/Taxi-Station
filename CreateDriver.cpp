@@ -5,17 +5,8 @@
 #include "CreateDriver.h"
 
 CreateDriver::CreateDriver(string &input) : Create(input) {
-
-}
-
-Driver *CreateDriver::getDriver()  {
-    int id;
-    int age;
-    string stat;
-    int exp;
-
     if (this->tokens.size()!=5){
-        return NULL;
+        return;
     }
     list<string>::iterator iterator1=this->tokens.begin();
     id=std::stoi(*iterator1);
@@ -27,9 +18,9 @@ Driver *CreateDriver::getDriver()  {
     exp=std::stoi(*iterator1);
     iterator1++;
     vehicle_id=std::stoi(*iterator1);
-    return  new Driver(id ,age,stat,exp);
-
 }
+
+
 
 int CreateDriver::getVehicle_id() const {
     return vehicle_id;
@@ -37,4 +28,20 @@ int CreateDriver::getVehicle_id() const {
 
 CreateDriver::~CreateDriver() {
 
+}
+
+int CreateDriver::getId() const {
+    return id;
+}
+
+int CreateDriver::getAge() const {
+    return age;
+}
+
+const string &CreateDriver::getStat() const {
+    return stat;
+}
+
+int CreateDriver::getExp() const {
+    return exp;
 }

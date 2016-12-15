@@ -10,12 +10,20 @@
 #include "Driver.h"
 class CreateDriver: public  Create{
 private:
-    Driver* driver;
+    int id;
+    int age;
+    string stat;
+    int exp;
     int vehicle_id;
 public:
     CreateDriver(string &input);
+    int getId() const;
 
-    Driver *getDriver() ;
+    int getAge() const;
+
+    const string &getStat() const;
+
+    int getExp() const;
 
     int getVehicle_id() const;
 
