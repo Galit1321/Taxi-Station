@@ -9,8 +9,12 @@
  * @return
  */
 Driver ::Driver() :Person(){
-id=0;
-
+    id=0;
+    age =0;
+    experience =0;
+    stat = " ";
+    curr_pos=new Point(0,0);
+    car = NULL;
 }
 
 /**
@@ -20,7 +24,10 @@ id=0;
  */
 Driver ::Driver(Driver &object) {
     this->id = object.getId();
-
+    this->experience = object.getExperience();
+    this->age = object.getAge();
+    this->stat = object.getStat();
+    this->curr_pos = object.getCurr_pos();
 
 }
 //constructor
@@ -30,6 +37,7 @@ Driver ::Driver(int id ,int age ,string stat , int experience) {
     this->stat = stat;
     this->experience =experience;
     this->curr_pos=new Point(0,0);
+    car = NULL;
 }
 
 Driver::~Driver() {
