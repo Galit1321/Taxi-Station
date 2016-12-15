@@ -7,15 +7,21 @@
 
 #include "Create.h"
 #include "Driver.h"
+
+/**
+ * class CreateDriver
+ * a class that create a driver
+ */
+
 class CreateDriver: public  Create{
 private:
     Driver* driver;
     int vehicle_id;
 public:
     CreateDriver(string &input);
-
+    //create a driver
     Driver *getDriver() ;
-
+    //get the vehicle id
     int getVehicle_id() const;
 };
 

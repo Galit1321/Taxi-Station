@@ -4,6 +4,11 @@
 
 #include "CreateDriver.h"
 
+/**
+ * class CreateDriver
+ * a class that create a driver
+ */
+
 CreateDriver::CreateDriver(string &input) : Create(input) {
 
 }
@@ -17,6 +22,7 @@ Driver *CreateDriver::getDriver()  {
     if (this->tokens.size()!=5){
         return NULL;
     }
+    //set all the car parameter according to the input
     list<string>::iterator iterator1=this->tokens.begin();
     id=std::stoi(*iterator1);
     iterator1++;
@@ -27,10 +33,12 @@ Driver *CreateDriver::getDriver()  {
     exp=std::stoi(*iterator1);
     iterator1++;
     vehicle_id=std::stoi(*iterator1);
+    //create a driver according to the parameters
     return  new Driver(id ,age,stat,exp);
 
 }
 
+//get the vehicle id
 int CreateDriver::getVehicle_id() const {
     return vehicle_id;
 }

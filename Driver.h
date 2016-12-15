@@ -58,14 +58,18 @@ public:
     bool operator==(const Driver &driver1)const ;
     //find the distance from the driver curr pose
     //to the given point
-void finishTrip();
-
+    void finishTrip();
+    //return the trip
     SearchableTrip *getTrip() const;
-/**************************need to do****/
+    //set the trip
     void setTrip(SearchableTrip *trip);
+    //make a move
     void move();
+    //get the satisfaction of the passenger
     float getSatisfaction();
+    //set the satisfaction of the passenger
     void setSatisfaction(float satisfaction);
+    //do the bfs algoritem
     Solution* doBFS(SearchableTrip* pEnd);
 
     virtual ~Driver();

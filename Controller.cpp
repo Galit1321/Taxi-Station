@@ -11,10 +11,15 @@ Controller::~Controller() {
  delete center;
 }
 
+/**
+ * class controller
+ * a class that works ith the main and get the commands
+ * from the user
+ */
 Controller::Controller()  {
 
     center=new TaxiCenter();
-    cout<<"enter height and width"<<endl;
+
     int h;
     int w;
  //   char dummy;
@@ -29,6 +34,7 @@ Controller::Controller()  {
     MatrixLayout *mt;
     vector<int> v;
     CreateGrid* size;
+    //set the obstecals on the board
    if  (numOfObs){
        while(numOfObs){
            cin>>obsVector;
@@ -46,6 +52,8 @@ v.insert(v.end(),size->getInput().begin(),size->getInput().end());
     center->setLayout(mt);
 }
 
+
+// logic of the commends
 void Controller::getCommend() {
    int commend;
     cin>>commend;
@@ -92,6 +100,12 @@ bool Controller::CommendOne(){
   }
     return true;
 }
+
+/**
+ * commend two meaning create a ride
+ * will call the class that phase the input and create driver
+ * @return true is creation succes false if we got exception
+ */
 bool Controller::CommendTwo(){
     string parm;
     cin>>parm;
@@ -134,6 +148,10 @@ bool Controller::CommendFour(){
     return true;
 }
 
+/**
+ * commend 6 is to finish the trip
+ * @return true if we finish the trip
+ */
 bool  Controller::CommendSix(){
 center->finishAllTrip();
     return true;

@@ -40,12 +40,13 @@ private:
     Point* goal;//the goal of the trip
     Point* init;//the start of the trip
 public:
-    SearchableTrip();
+    SearchableTrip();//defult constructor
 
-    ILayout *getLayout() const;
+    ILayout *getLayout() const;//get a layout
 void clean(list<Point> closed);
-    SearchableTrip(ILayout* layout1,Point* start,Point* end);
+    SearchableTrip(ILayout* layout1,Point* start,Point* end);//constructor
     SearchableTrip(ILayout* layout1,int start_i,int start_j,int end_i,int end_j);//constructor
+    //constructor
     SearchableTrip(ILayout* layout1,int start_i,int start_j,int end_i,int end_j, int rid, double tff);
     Point* getInitialState();//implantation of interface
     Point* getGoalState();//implantation of interface

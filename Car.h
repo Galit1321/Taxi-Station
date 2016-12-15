@@ -29,12 +29,17 @@ protected:
 
 
 public:
-
+    //set the car type
     void setCarType(CarType carType);
+    //get the tariff of the trip
     double getTariff() const;
+    //set the tariff of the trip
     void setTariff(double tariff);
+    //get the car type
     string getCarType() const;
+    //constructor
     Car(int id,string carType ,string manufacturer,string color);
+    //constructor
     Car(int id,string carType ,string manufacturer,string color,int kind);
     //defult constructor
     Car();

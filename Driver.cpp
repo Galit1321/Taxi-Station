@@ -113,16 +113,17 @@ string Driver::getStat() const {
     return stat;
 }
 
-////return the car of the driver
+//return the car of the driver
 Car *Driver::getCar() const {
     return car;
 }
 
-
+//return the trip
 SearchableTrip *Driver::getTrip() const {
     return trip;
 }
 
+//finish the trip
 void Driver::finishTrip() {
     int cont=this->solution->sol.size();
     for (int i=0;i<cont;i++){
@@ -132,7 +133,7 @@ void Driver::finishTrip() {
 }
 
 
-
+//set the trip
 void Driver::setTrip(SearchableTrip *trip) {
     BFS* bfs=new BFS();
     this->solution=bfs->search(trip);
@@ -141,15 +142,21 @@ void Driver::setTrip(SearchableTrip *trip) {
     delete bfs;
 
 }
+
+//make a move
 void Driver::move() {
     solution->sol.pop_front();
     if (!solution->sol.empty()){
         curr_pos=solution->getSol().front();
     }
 }
+
+//set the satisfaction of the passenger
 void Driver::setSatisfaction(float satisfaction) {
     this->satisfaction=(this->satisfaction*(numOfUser-trip->getNumOfPass())+satisfaction)/(float)this->numOfUser;
 }
+
+//get the satisfaction of the passenger
 float Driver::getSatisfaction() {
     return  this->satisfaction;
 }

@@ -16,6 +16,7 @@ public:
     TaxiCab();//defult conatructor
     //Taxi cab constructor
     TaxiCab(int id ,int mileage ,string manufacturer1 ,string color1 ,int tariff1);
+    //Taxi cab constructor
     TaxiCab(int id ,string manufacturer1 ,string color1);
     //get the tariff of the trip
     int getCost();

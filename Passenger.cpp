@@ -38,10 +38,16 @@ void Passenger::setPEnd(Point *pEnd) {
 float Passenger::getSatisfaction() {
    this->satisfaction=rand()%5;
 }
+
+
 void Passenger::setSatisfaction(float satisfaction) {
 
 }
 
+/**
+ * constructor
+ * @return
+ */
 Passenger::Passenger(Point *pStart, Point *pEnd) : pStart(pStart), pEnd(pEnd) {}
 
 Passenger::~Passenger() {

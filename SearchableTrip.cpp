@@ -2,10 +2,12 @@
 #include "SearchableTrip.h"
 
 /**
- *
+ * constructor
  * @param layout1 the layout we working on
- * @param start -string of the start
- * @param end - string of the end
+ * @param start_i -string of the start
+ * @param start_j -starting of the start
+ * @param end_i - string of the end
+ * @param end_j - string of the end
  * @return
  */
 SearchableTrip::SearchableTrip(ILayout *layout1, int start_i, int start_j, int end_i, int end_j) {
@@ -19,6 +21,13 @@ SearchableTrip::SearchableTrip(ILayout *layout1, int start_i, int start_j, int e
 
 }
 
+/**
+ * constructor
+ * @param layout1 the layout we working on
+ * @param start -string of the start
+ * @param end - string of the end
+ * @return
+ */
 SearchableTrip::SearchableTrip(ILayout* layout1,Point* start,Point* end){
     this->layout = layout1;
     this->init = start;
@@ -28,6 +37,16 @@ SearchableTrip::SearchableTrip(ILayout* layout1,Point* start,Point* end){
     this->traiff=0;
     this->numOfPass=0;
 }
+
+/**
+ * constructor
+ * @param layout1 the layout we working on
+ * @param start -string of the start
+ * @param end - string of the end
+ * @param rid -ride id
+ * @param tff - the tariff of the ride
+ * @return
+ */
 SearchableTrip::SearchableTrip(ILayout* layout1,int start_i,int start_j,int end_i,int end_j, int rid, double tff){
     this->layout = layout1;
     this->init = this->layout->getNode(start_i, start_j);
@@ -135,6 +154,7 @@ void SearchableTrip::setTraiff(int traiff) {
     traiff = traiff;
 }
 
+//get a layout
 ILayout *SearchableTrip::getLayout() const {
     return layout;
 }

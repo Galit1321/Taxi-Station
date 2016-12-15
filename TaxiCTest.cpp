@@ -55,12 +55,12 @@ TEST_F(TaxiCTest, TaxiCTest_CreateTaxi_Test) {
 
 
 
-/*
+
 TEST_F(TaxiCTest, TaxiCTest_Closer_Test) {
-    Driver *driver = center->findCloser(new Point(0, 0));
+    SearchableTrip *s = new SearchableTrip();
+    Driver *driver = center->findCloser(s);
     vector<int>::iterator it;
     it = std::find(center->getFree_drivers().begin(), center->getFree_drivers().end(), driver->getId());
     ASSERT_TRUE(it != center->getFree_drivers().end());
     delete driver;
 }
-*/

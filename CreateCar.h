@@ -12,10 +12,17 @@ using namespace std;
 #include "Create.h"
 #include "TaxiCab.h"
 #include "Luxury.h"
+
+/**
+ * class CreateCar
+ * a class that create a car
+ */
 class CreateCar: public Create {
 
 public:
+    //create a car
     CreateCar(string &input);
+    //set the car parameters by the input and create the car
     Car* getCar();
 };
 
