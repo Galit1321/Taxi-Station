@@ -102,7 +102,7 @@ void TaxiCenter::move(int id) {
     if (driver==NULL){
         std::cout<<"driver not found";
     }else {
-        driver->getCar()->move();
+        driver->move();
     }
 }
 

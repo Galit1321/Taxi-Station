@@ -45,6 +45,6 @@ TEST_F(DriverTest , Valid){
 }
 
 TEST_F(DriverTest, CheckEqual){
-   // ASSERT_EQ(1. d1->operator==());
+    //ASSERT_EQ(1. d1->operator==());
 }
 
