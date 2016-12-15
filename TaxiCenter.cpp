@@ -68,7 +68,8 @@ map<int , Car*> &TaxiCenter::getCars() {
 }
 
 //add driver
-void TaxiCenter::addDriver(Driver *driver) {
+void TaxiCenter::addDriver(int id ,int age,string stat,int exp) {
+    Driver* driver=new Driver(id,age,stat,exp);
     driver->setCurr_pos(layout->getNode(0,0));
     free_drivers.push_back(driver->getId());
     drivers.insert( std::pair<int,Driver*>(driver->getId(),driver));

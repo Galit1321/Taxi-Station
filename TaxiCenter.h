@@ -23,7 +23,7 @@ public:
     void addCar(Car* c);
     void setLayout(MatrixLayout *layout);
     //add driver
-    void addDriver(Driver* driver);
+    void addDriver(int id ,int age,string stat,int exp);
     //conect taxi to driver
     void setTaxiToDriver(int driver_id, int taxi_id);
     //print location

@@ -7,6 +7,8 @@
 #include "CreateDriver.h"
 #include "CreateCar.h"
 #include "CreateRide.h"
+#include <cstring>
+using namespace std;
 Controller::~Controller() {
  delete center;
 }
@@ -20,14 +22,16 @@ Controller::Controller()  {
 
     center=new TaxiCenter();
 
-    int h;
+    string sizeGride;
+    getline(cin,sizeGride);
+    char tmp[10];
+    int h ;
     int w;
- //   char dummy;
-    cin>>h;
-   // cin>>dummy;
-    cin>>w;
-
-
+  //  cin>>h;
+    int pos=sizeGride.find(" ");
+    h = atoi(strcpy(tmp,sizeGride.substr(0,pos).c_str()));
+    sizeGride.erase(0, pos+1);
+    w = atoi(sizeGride.c_str());
     int numOfObs;
     cin>>numOfObs;
     string obsVector;
@@ -93,8 +97,9 @@ bool Controller::CommendOne(){
     cin>>parm;
   try{
       CreateDriver* cd=new  CreateDriver(parm);
-    center->addDriver(cd->getDriver());
-    center->setTaxiToDriver(cd->getDriver()->getId(),cd->getVehicle_id());
+    center->addDriver(cd->getId(),cd->getAge(),cd->getStat(),cd->getExp());
+    center->setTaxiToDriver(cd->getId(),cd->getVehicle_id());
+      delete cd;
 }catch(std::exception exception1) {
       return false;
   }
@@ -116,7 +121,7 @@ bool Controller::CommendTwo(){
         Driver* d=center->findCloser(searchableTrip);
         d->setTrip(searchableTrip);
     }catch(std::exception exception1) {
-       throw exception1;
+        return false;
     }
     return true;
 }

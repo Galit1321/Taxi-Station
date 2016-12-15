@@ -15,14 +15,24 @@
 
 class CreateDriver: public  Create{
 private:
-    Driver* driver;
+    int id;
+    int age;
+    string stat;
+    int exp;
     int vehicle_id;
 public:
     CreateDriver(string &input);
-    //create a driver
-    Driver *getDriver() ;
-    //get the vehicle id
+    int getId() const;
+
+    int getAge() const;
+
+    const string &getStat() const;
+
+    int getExp() const;
+
     int getVehicle_id() const;
+
+    virtual ~CreateDriver();
 };
 
 
