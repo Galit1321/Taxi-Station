@@ -27,7 +27,6 @@ Controller::Controller()  {
     h = atoi(strcpy(tmp,sizeGride.substr(0,pos).c_str()));
     sizeGride.erase(0, pos+1);
     w = atoi(sizeGride.c_str());
-    //cin>>w;
     int numOfObs;
     cin>>numOfObs;
     string obsVector;
@@ -92,9 +91,11 @@ bool Controller::CommendOne(){
       CreateDriver* cd=new  CreateDriver(parm);
     center->addDriver(cd->getDriver());
     center->setTaxiToDriver(cd->getDriver()->getId(),cd->getVehicle_id());
+      delete cd;
 }catch(std::exception exception1) {
       return false;
   }
+
     return true;
 }
 bool Controller::CommendTwo(){

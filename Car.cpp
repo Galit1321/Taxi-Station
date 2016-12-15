@@ -69,18 +69,22 @@ bool Car::operator==(const Car &car) const {
             (manufacturer == getManufacturer())&& (color == getColor()));
 }
 
+//get the tariff of the trip
 double Car::getTariff() const {
     return tariff;
 }
 
+//set the tariff of the trip
 void Car::setTariff(double tariff) {
     Car::tariff = tariff;
 }
 
+//get the type of the car
 string Car::getCarType() const {
     return carType;
 }
 
+//set the type of the car
 void Car::setCarType(CarType carType) {
     Car::carType = carType;
 }

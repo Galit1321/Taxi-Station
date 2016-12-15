@@ -1,7 +1,6 @@
 //
 // Created by michal on 12/1/16.
 //
-
 #include "Driver.h"
 
 /**
@@ -40,7 +39,7 @@ Driver ::Driver(int id ,int age ,string stat , int experience) {
 }
 
 Driver::~Driver() {
-delete curr_pos;
+
 }
 
 

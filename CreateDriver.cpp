@@ -34,3 +34,7 @@ Driver *CreateDriver::getDriver()  {
 int CreateDriver::getVehicle_id() const {
     return vehicle_id;
 }
+
+CreateDriver::~CreateDriver() {
+
+}

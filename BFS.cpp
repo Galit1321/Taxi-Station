@@ -73,6 +73,7 @@ Solution *BFS::search(ISearchable *searchable) {
 
     }
   searchable->clean(closed);
+    open.clear();
     return s;
 }
 

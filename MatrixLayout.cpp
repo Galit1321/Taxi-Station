@@ -11,7 +11,8 @@ MatrixLayout::~MatrixLayout() {
         delete [] matrix[i];
         delete [] pNode[i];
     }
-
+delete[] matrix;
+    delete[] pNode;
 }
 
 MatrixLayout::MatrixLayout(int h,int w, vector<int>* obs){

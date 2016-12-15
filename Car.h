@@ -29,10 +29,13 @@ protected:
 
 
 public:
-
+    //get the type of the car
     void setCarType(CarType carType);
+    //get the tariff of the trip
     double getTariff() const;
+    //get the tariff of the trip
     void setTariff(double tariff);
+    //get the type of the car
     string getCarType() const;
     Car(int id,string carType ,string manufacturer,string color);
     Car(int id,string carType ,string manufacturer,string color,int kind);
@@ -53,7 +56,6 @@ public:
     string getColor() const;
     // get the manufacture of the car
     string getManufacturer() const;
-
     //compare between two cars
     bool operator==(const Car &car) const;
 };

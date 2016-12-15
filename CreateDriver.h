@@ -1,3 +1,4 @@
+
 //
 // Created by galit on 12/12/16.
 //
@@ -17,6 +18,8 @@ public:
     Driver *getDriver() ;
 
     int getVehicle_id() const;
+
+    virtual ~CreateDriver();
 };
 
 

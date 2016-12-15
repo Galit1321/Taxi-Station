@@ -16,9 +16,10 @@ using namespace std;
 class BFS : public ISearcher {
 
 public:
+
     BFS();//constructor
     virtual ~BFS();//deconstructor
-    Solution* search(ISearchable* searchable);
+    Solution* search(ISearchable* searchable);//the search algoritm
 
 
 
