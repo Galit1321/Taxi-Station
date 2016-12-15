@@ -41,6 +41,9 @@ private:
     Point* init;//the start of the trip
 public:
     SearchableTrip();
+
+    ILayout *getLayout() const;
+
     SearchableTrip(ILayout* layout1,Point* start,Point* end);
     SearchableTrip(ILayout* layout1,int start_i,int start_j,int end_i,int end_j);//constructor
     SearchableTrip(ILayout* layout1,int start_i,int start_j,int end_i,int end_j, int rid, double tff);

@@ -38,7 +38,7 @@ public:
     Point* getLocation(int id);
 
     //find closer driver
-    Driver* findCloser(Point* orign);
+    Driver* findCloser(SearchableTrip* orign);
     //return the drivers
      map<int , Driver*> &getDrivers() ;
 

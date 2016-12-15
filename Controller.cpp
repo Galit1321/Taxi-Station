@@ -26,7 +26,7 @@ Controller::Controller()  {
     if (numOfObs){
         cin>>obsVector;
         CreateGrid* size=new CreateGrid(obsVector);
-        mt=new MatrixLayout(h,w,size->getInput());
+        mt=new MatrixLayout(h,w,&size->getInput());
         delete size;
     } else{
         mt=new MatrixLayout(h,w);
@@ -61,7 +61,7 @@ void Controller::getCommend() {
         cin>>commend;
 
         }
-    exit();
+
 
 }
 /**
@@ -88,7 +88,7 @@ bool Controller::CommendTwo(){
         CreateRide* cd=new  CreateRide(parm);
        ILayout* m=center->getLayout();
         SearchableTrip* searchableTrip=new SearchableTrip(m,cd->start_x,cd->star_y,cd->end_x,cd->end_y,cd->id,cd->tariff);
-        Driver* d=center->findCloser(searchableTrip->getInitialState());
+        Driver* d=center->findCloser(searchableTrip);
         d->setTrip(searchableTrip);
     }catch(std::exception exception1) {
         return false;
@@ -125,8 +125,6 @@ bool Controller::CommendFour(){
 
 bool  Controller::CommendSix(){
 center->finishAllTrip();
+    return true;
 }
 
-void Controller::exit() {
-delete center;
-}
