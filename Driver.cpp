@@ -124,7 +124,7 @@ void Driver::finishTrip() {
 }
 
 
-/************************************************************************************/
+
 void Driver::setTrip(SearchableTrip *trip) {
     BFS* bfs=new BFS();
     this->solution=bfs->search(trip);
@@ -145,7 +145,7 @@ void Driver::setSatisfaction(float satisfaction) {
 float Driver::getSatisfaction() {
     return  this->satisfaction;
 }
-/********************************************************NEED TO CHANGE****/
+
 
 
 

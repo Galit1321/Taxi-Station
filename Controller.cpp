@@ -26,7 +26,7 @@ Controller::Controller()  {
     if (numOfObs){
         cin>>obsVector;
         CreateGrid* size=new CreateGrid(obsVector);
-        mt=new MatrixLayout(h,w,size->getInput());
+        mt=new MatrixLayout(h,w,&size->getInput());
         delete size;
     } else{
         mt=new MatrixLayout(h,w);
