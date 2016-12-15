@@ -11,6 +11,7 @@
 #include "Solution.h"
 #include "Person.h"
 #include "SearchableTrip.h"
+#include "BFS.h"
 
 class Driver :public Person{
 private:
@@ -20,6 +21,7 @@ private:
     int numOfUser;
     SearchableTrip* trip;
     Solution* solution;
+
 public:
     string stat;
     Car *car;
@@ -62,8 +64,8 @@ void finishTrip();
 /**************************need to do****/
     void setTrip(SearchableTrip *trip);
     void move();
-
-
+    float getSatisfaction();
+    void setSatisfaction(float satisfaction);
     Solution* doBFS(Point* pEnd);
 };
 

@@ -10,14 +10,14 @@
 class Person {
 public:
     Person();//constructor
-    float satisfaction;//the satisfaction of the passenger
+    double satisfaction;//the satisfaction of the passenger
     Point *curr_pos;//the curr pose of the passenger
     //return the satisfaction of the passenger
-    float getSatisfaction() const;
+    virtual float getSatisfaction()=0;
     //get the curr pose of the passenger
     Point *getCurr_pos() const;
     //set the satisfaction of the passenger
-    void setSatisfaction(float satisfaction);
+    virtual void setSatisfaction(float satisfaction)=0;
     //set the curr pose of the passenger
     void setCurr_pos(Point *curr_pos);
     virtual ~ Person();//deconstructor

@@ -21,7 +21,8 @@ public:
     // return the end point
     Point *getPEnd() const;
     //set the satisfication of the passenger
-    void setSat(int sat);
+ void setSatisfaction(float satisfaction);
+    float  getSatisfaction();
     //constructor
     Passenger();
 };

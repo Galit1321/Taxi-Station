@@ -8,7 +8,9 @@
  * default constructor
  * @return
  */
-Driver ::Driver() {}
+Driver ::Driver() {
+
+}
 
 /**
  * copy constructor
@@ -105,6 +107,7 @@ Car *Driver::getCar() const {
 SearchableTrip *Driver::getTrip() const {
     return trip;
 }
+
 void Driver::finishTrip() {
     int cont=this->solution->sol.size();
     for (int i=0;i<cont;i++){
@@ -116,11 +119,19 @@ void Driver::finishTrip() {
 
 /************************************************************************************/
 void Driver::setTrip(SearchableTrip *trip) {
-    Driver::trip = trip;
+    BFS* bfs=new BFS();
+    this->solution=bfs->search(trip);
+    delete bfs;
+
 }
 void Driver::move() {
 }
-
+void Driver::setSatisfaction(float satisfaction) {
+    this->satisfaction=(this->satisfaction*(numOfUser-1)+satisfaction)/(float)this->numOfUser;
+}
+float Driver::getSatisfaction() {
+    return  this->satisfaction;
+}
 /********************************************************NEED TO CHANGE****/
 
 

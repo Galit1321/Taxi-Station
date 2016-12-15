@@ -1,7 +1,7 @@
 //
 // Created by michal on 12/1/16.
 //
-
+#include <stdlib.h>
 #include "Passenger.h"
 
 /**
@@ -13,10 +13,6 @@ Passenger ::Passenger(){
     pEnd = NULL;
 }
 
-//set the satisfication of the passenger
-void Passenger ::setSat(int sat) {
-    Passenger::satisfaction = sat;
-}
 // return the start point
 Point *Passenger::getPStart() const {
     return pStart;
@@ -34,4 +30,13 @@ void Passenger::setPStart(Point *pStart) {
 void Passenger::setPEnd(Point *pEnd) {
     Passenger::pEnd = pEnd;
 }
+/***
+ * generate a random float point betwwen 0 to 5
+ * @return the passenger satisfaction
+ */
+float Passenger::getSatisfaction() {
+   this->satisfaction=static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/5));
+}
+void Passenger::setSatisfaction(float satisfaction) {
 
+}
