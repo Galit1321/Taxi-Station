@@ -69,10 +69,14 @@ map<int , Car*> &TaxiCenter::getCars() {
 
 //add driver
 void TaxiCenter::addDriver(Driver *driver) {
+    driver->setCurr_pos(layout->getNode(0,0));
     free_drivers.push_back(driver->getId());
     drivers.insert( std::pair<int,Driver*>(driver->getId(),driver));
 }
-
+/**
+ * getter of map nme Drivers
+ * @return
+ */
 map<int, Driver *> &TaxiCenter::getDrivers() {
     return drivers;
 }
@@ -111,26 +115,12 @@ Point* TaxiCenter::getLocation(int id) {
     return getDriver(id)->getCurr_pos();
 }
 
-//find closer driver
+/**
+ * find closer driver
+ */
+
 Driver* TaxiCenter::findCloser(SearchableTrip* orign) {
-    /*
-Solution* solution_end;
-    Solution* solution_tmp;
-    vector<int >::iterator iterator1=getFree_drivers().begin();
-    Driver* driver=getDriver(*iterator1);
-    iterator1++;
-    Driver* driver1;
-    solution_end=driver->doBFS(orign);
-while(iterator1!=getFree_drivers().end()){
-    if (solution_end->getSol().size()==1){//meaning the driver is in the sqr of the trip already
-        return driver;
-    }
-    driver1=getDriver(*iterator1);
-    solution_tmp=driver1->doBFS(orign);
-    if (solution_tmp->sol.size()<solution_end->sol.size()){
-        driver=driver1;
-    }iterator1++;
-}*/
+
     Driver* driver=getDriver(getFree_drivers()[0]);
 free_drivers.erase(getFree_drivers().begin());
     return driver;
@@ -145,7 +135,10 @@ Driver* TaxiCenter::getDriver(int id){
 Car* TaxiCenter::getTaxi(int id) {
     return getCars()[id];
 }
-
+/**
+ * set the layout of taxicenter
+ * @param layout
+ */
 void TaxiCenter::setLayout(MatrixLayout *layout) {
     TaxiCenter::layout = layout;
 }
