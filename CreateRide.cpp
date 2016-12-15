@@ -7,11 +7,6 @@ CreateRide::~CreateRide() {
 }
 
 CreateRide::CreateRide(string &input) : Create(input) {
-
-}
-
-void CreateRide::phase(string s) {
-
     if (this->tokens.size()!=7){
         return ;
     }
@@ -29,6 +24,11 @@ void CreateRide::phase(string s) {
     numOfPass=std::stoi(*iterator1);
     iterator1++;
     tariff=std::stod(*iterator1);
+
+}
+
+void CreateRide::phase(string s) {
+
 
 }
 
