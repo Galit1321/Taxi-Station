@@ -7,6 +7,8 @@
 #include "CreateDriver.h"
 #include "CreateCar.h"
 #include "CreateRide.h"
+#include <cstring>
+using namespace std;
 Controller::~Controller() {
  delete center;
 }
@@ -15,10 +17,17 @@ Controller::Controller()  {
 
     center=new TaxiCenter();
     cout<<"enter height and width"<<endl;
+    string sizeGride;
+    getline(cin,sizeGride);
+    char tmp[10];
     int h ;
     int w;
-    cin>>h;
-    cin>>w;
+  //  cin>>h;
+    int pos=sizeGride.find(" ");
+    h = atoi(strcpy(tmp,sizeGride.substr(0,pos).c_str()));
+    sizeGride.erase(0, pos+1);
+    w = atoi(sizeGride.c_str());
+    //cin>>w;
     int numOfObs;
     cin>>numOfObs;
     string obsVector;
