@@ -15,6 +15,7 @@ Driver ::Driver() :Person(){
     stat = " ";
     curr_pos=new Point(0,0);
     car = NULL;
+
 }
 
 /**

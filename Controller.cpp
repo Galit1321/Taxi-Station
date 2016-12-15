@@ -27,11 +27,18 @@ Controller::Controller()  {
     cin>>numOfObs;
     string obsVector;
     MatrixLayout *mt;
-    if (numOfObs){
-        cin>>obsVector;
-        CreateGrid* size=new CreateGrid(obsVector);
-        mt=new MatrixLayout(h,w,&size->getInput());
-        delete size;
+    vector<int> v;
+    CreateGrid* size;
+   if  (numOfObs){
+       while(numOfObs){
+           cin>>obsVector;
+            size=new CreateGrid(obsVector);
+v.insert(v.end(),size->getInput().begin(),size->getInput().end());
+           delete size;
+           numOfObs--;
+       }
+       mt=new MatrixLayout(h,w,&v);
+
     } else{
         mt=new MatrixLayout(h,w);
     }
