@@ -15,10 +15,14 @@ Controller::Controller()  {
 
     center=new TaxiCenter();
     cout<<"enter height and width"<<endl;
-    int h ;
+    int h;
     int w;
+ //   char dummy;
     cin>>h;
+   // cin>>dummy;
     cin>>w;
+
+
     int numOfObs;
     cin>>numOfObs;
     string obsVector;
