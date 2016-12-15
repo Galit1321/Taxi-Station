@@ -13,7 +13,6 @@ Driver ::Driver() :Person(){
     age =0;
     experience =0;
     stat = " ";
-    curr_pos=new Point(0,0);
     car = NULL;
 
 }
@@ -37,7 +36,6 @@ Driver ::Driver(int id ,int age ,string stat , int experience) {
     this->age = age;
     this->stat = stat;
     this->experience =experience;
-    this->curr_pos=new Point(0,0);
     car = NULL;
 }
 

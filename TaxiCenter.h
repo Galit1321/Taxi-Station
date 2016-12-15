@@ -50,6 +50,7 @@ public:
     //return cabs
     map<int, Car*> &getCars() ;
     virtual ~TaxiCenter();//deconstructor
+
     void finishAllTrip();
 };
 

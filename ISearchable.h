@@ -8,6 +8,7 @@
 #include <queue>
 #include "Point.h"
 #include "list"
+#include "ILayout.h"
 using namespace std;
 /*********
  * Interface to searchable objects
@@ -17,10 +18,11 @@ using namespace std;
  */
 class ISearchable {
 public:
+
     virtual Point* getInitialState()=0;//get the state of the begining from
     virtual Point* getGoalState()=0;//where we want to get
     virtual queue<Point*> getAllPossibleStates(Point *s)=0;// receive where we can go from it
-
+ virtual void clean(list<Point> closed)=0;
 };
 
 

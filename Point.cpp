@@ -11,7 +11,8 @@ Point::Point(int row, int col) {
     this->parent= NULL;
 }
 Point::Point() {
-
+    this->cost=std::numeric_limits<int>::max();
+    this->parent= NULL;
 }
 Point::~Point() {
 //the class that hold the point object will delet it
