@@ -21,11 +21,11 @@ public:
     // return the end point
     Point *getPEnd() const;
     //set the satisfication of the passenger
- void setSatisfaction(float satisfaction);
+    void setSatisfaction(float satisfaction);
     float  getSatisfaction();
 
     virtual ~Passenger();
-
+    //constructor
     Passenger(Point *pStart, Point *pEnd);
 
     //constructor

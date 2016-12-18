@@ -23,15 +23,17 @@ public:
     int getKind() const;
 
 public:
-    //get the type of the car
+    //set the car type
     void setCarType(CarType carType);
     //get the tariff of the trip
     double getTariff() const;
-    //get the tariff of the trip
+    //set the tariff of the trip
     void setTariff(double tariff);
-    //get the type of the car
+    //get the car type
     string getCarType() const;
+    //constructor
     Car(int id,string carType ,string manufacturer,string color);
+    //constructor
     Car(int id,string carType ,string manufacturer,string color,int kind);
     //defult constructor
     Car();
@@ -50,6 +52,7 @@ public:
     string getColor() const;
     // get the manufacture of the car
     string getManufacturer() const;
+
     //compare between two cars
     bool operator==(const Car &car) const;
 };

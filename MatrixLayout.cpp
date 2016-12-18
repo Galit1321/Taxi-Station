@@ -18,6 +18,12 @@ delete[] matrix;
     delete[] pNode;
 }
 
+/**
+ * constructor
+ * @param sizes string of the sizes, and
+ * a vector of obstecals
+ * @return
+ */
 MatrixLayout::MatrixLayout(int h,int w, vector<int>* obs){
     height=h;
     width=w;
@@ -88,7 +94,10 @@ bool MatrixLayout::canGo(Point* n, char d) {
     return false;
 }
 
-
+/**
+ * getter of node by index
+ * @return node
+ */
 Point* MatrixLayout::getNode(int i,int j){
         if((i>height)||(j>width)||(i<0)||(j<0)){
             return NULL;
@@ -119,6 +128,10 @@ int MatrixLayout::getWidth() const {
     return width;
 }
 
+/**
+ * getter of node
+ * @return this->pNode
+ */
 Point* **MatrixLayout::getPNode() const {
     return pNode;
 }

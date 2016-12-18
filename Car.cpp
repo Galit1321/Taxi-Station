@@ -86,12 +86,12 @@ void Car::setTariff(double tariff) {
     Car::tariff = tariff;
 }
 
-//get the type of the car
+//get the car type
 string Car::getCarType() const {
     return carType;
 }
 
-//set the type of the car
+//set the car type
 void Car::setCarType(CarType carType) {
     Car::carType = carType;
 }

@@ -14,6 +14,12 @@ TaxiCab ::TaxiCab() {
     id=0;
 }
 
+/**
+ * constructor
+ * @param manufacturer1 - the manufacturer of the car
+ * @param color1 - the color of the car
+ * @return
+ */
 TaxiCab::TaxiCab(int id ,string manufacturer1 ,string color1){
     this->id = id;
     mileage = 0;
@@ -24,6 +30,11 @@ TaxiCab::TaxiCab(int id ,string manufacturer1 ,string color1){
 }
 /**
  * constructor
+ * @param id -  the id of the car
+ * @param mileage - the mile that passed
+ * @param manufacturer1 - the manufacturer of the car
+ * @param color1 - the color of the car
+ * @param tariff1 - the tariff of the ride
  * @return
  */
 TaxiCab ::TaxiCab(int id, int mileage,string manufacturer1, string color1, int tariff1) {

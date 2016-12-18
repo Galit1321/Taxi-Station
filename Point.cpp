@@ -88,6 +88,12 @@ void Point::setCost(int cost) {
     Point::cost = cost;
 }
 
+/**
+ * operator overloading to < that will
+ * check to see if point are smmaler
+ * @param node the point want to comper with this
+ * @return true if node smaller to this
+ */
 bool Point::operator<(const Point &node1) const {
     return (node1.getJ()<j)||(node1.getI()<i);
 }

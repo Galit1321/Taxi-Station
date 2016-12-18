@@ -6,6 +6,7 @@ CreateRide::~CreateRide() {
 
 }
 
+//set the parameters of the ride
 CreateRide::CreateRide(string &input) : Create(input) {
     if (this->tokens.size()!=7){
         return ;
