@@ -138,3 +138,11 @@ void SearchableTrip::setTraiff(int traiff) {
 ILayout *SearchableTrip::getLayout() const {
     return layout;
 }
+
+void SearchableTrip::setNumOfPass(int numOfPass) {
+    SearchableTrip::numOfPass = numOfPass;
+}
+
+SearchableTrip::~SearchableTrip() {
+
+}

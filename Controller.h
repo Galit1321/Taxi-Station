@@ -10,11 +10,15 @@
 using namespace std;
 
 class Controller {
+    /**
+     * class to controller the input in front
+     * of the main function
+     */
 public:
     TaxiCenter* center;
-    virtual ~Controller();
-    Controller();
-    void getCommend();
+    virtual ~Controller();//desrectir
+    Controller();//consterctor
+    void getCommend();//busy wating method to get num of commend
 protected:
     bool CommendOne();
     bool CommendTwo();

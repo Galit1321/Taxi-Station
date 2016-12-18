@@ -9,7 +9,7 @@
 using namespace std;
 #include <algorithm>
 #include "Point.h"
-#include "queue"
+#include "deque"
 #include "list"
 #include "ISearcher.h"
 #include "vector"
@@ -19,7 +19,7 @@ public:
 
     BFS();//constructor
     virtual ~BFS();//deconstructor
-    Solution* search(ISearchable* searchable);//the search algoritm
+   deque<Point*> search(ISearchable* searchable);//the search algoritm
 
 
 

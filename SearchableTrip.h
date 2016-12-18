@@ -47,6 +47,11 @@ void clean(list<Point> closed);
     SearchableTrip(ILayout* layout1,Point* start,Point* end);
     SearchableTrip(ILayout* layout1,int start_i,int start_j,int end_i,int end_j);//constructor
     SearchableTrip(ILayout* layout1,int start_i,int start_j,int end_i,int end_j, int rid, double tff);
+
+    virtual ~SearchableTrip();
+
+    void setNumOfPass(int numOfPass);
+
     Point* getInitialState();//implantation of interface
     Point* getGoalState();//implantation of interface
     queue<Point*> getAllPossibleStates(Point* s);//implamention of interface

@@ -3,7 +3,7 @@
 //
 
 #include "string"
-#include "Solution.h"
+
 #ifndef EX2_CAR_H
 #define EX2_CAR_H
 
@@ -21,12 +21,6 @@ protected:
     int kind;
 public:
     int getKind() const;
-
-    void setKind(int kind);
-
-protected:
-    int speed;
-
 
 public:
     //get the type of the car

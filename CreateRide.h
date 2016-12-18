@@ -6,15 +6,16 @@
 #define ADVPRO01_CREATERIDE_H
 
 #include "Create.h"
-#include "SearchableTrip.h"
-class CreateRide :public  Create{
 
+class CreateRide :public  Create{
+/**
+ * phase the creation of a new ride
+ */
 public:
     CreateRide(string &input);
-    SearchableTrip* getTrip();
 
     virtual ~CreateRide();
-    void phase(string s);
+
     int id;
     int start_x;
     int star_y;

@@ -32,16 +32,16 @@ TEST_F(CreateTest,Valid){
  * check to see if format error accure
  * meaning that
  */
-/*
+
 TEST_F(CreateTest,CreateTest_FormatError_Test){
     list<string> h;
     cg->getTokens().swap(h);
     ASSERT_NO_FATAL_FAILURE(cg->getTokens().begin());//s
     for (std::list<string>::const_iterator it=h.begin(); it !=h.end(); ++it){
         string s=*it;
-        ASSERT_TRUE(s.find(",") != std::string::npos);
+        ASSERT_TRUE(s.find(",") == std::string::npos);
     }
-}*/
+}
 /**
  * check to see if all point given to us are
  * greater or eq  to 0

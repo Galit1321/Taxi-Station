@@ -9,14 +9,19 @@
 #include "CreateRide.h"
 #include <cstring>
 using namespace std;
+/**
+ * destructor
+ */
 Controller::~Controller() {
  delete center;
 }
-
+/**
+ * constructor
+ * @return
+ */
 Controller::Controller()  {
 
     center=new TaxiCenter();
-    cout<<"enter height and width"<<endl;
     string sizeGride;
     getline(cin,sizeGride);
     char tmp[10];
@@ -30,26 +35,26 @@ Controller::Controller()  {
     int numOfObs;
     cin>>numOfObs;
     string obsVector;
-    MatrixLayout *mt;
     vector<int> v;
-    CreateGrid* size;
    if  (numOfObs){
        while(numOfObs){
            cin>>obsVector;
+           CreateGrid* size;
             size=new CreateGrid(obsVector);
 v.insert(v.end(),size->getInput().begin(),size->getInput().end());
            delete size;
            numOfObs--;
        }
-       mt=new MatrixLayout(h,w,&v);
+       center->setLayout(h,w,&v);
 
     } else{
-        mt=new MatrixLayout(h,w);
+        center->setLayout(h,w);
     }
-
-    center->setLayout(mt);
 }
-
+/**
+ * busy waiting function to get commend from user
+ * destion to run on diff thred
+ */
 void Controller::getCommend() {
    int commend;
     cin>>commend;
@@ -98,15 +103,17 @@ bool Controller::CommendOne(){
 
     return true;
 }
+/**
+ * commend two that create a new ride
+ * @return true if action sucessful otherwise false
+ */
 bool Controller::CommendTwo(){
     string parm;
     cin>>parm;
     try{
         CreateRide* cd=new  CreateRide(parm);
-       ILayout* m=center->getLayout();
-        SearchableTrip* searchableTrip=new SearchableTrip(m,cd->start_x,cd->star_y,cd->end_x,cd->end_y,cd->id,cd->tariff);
-        Driver* d=center->findCloser(searchableTrip);
-        d->setTrip(searchableTrip);
+        center->getDriver(center->findCloser())->setTrip(center->getLayout(),cd->start_x,cd->star_y,cd->end_x,cd->end_y,cd->id,cd->tariff,cd->numOfPass);
+       delete cd;
     }catch(std::exception exception1) {
         return false;
     }
@@ -121,7 +128,9 @@ bool Controller::CommendThree(){
     string parm;
  cin>>parm;
     try{CreateCar* cc=new CreateCar(parm);
-        center->addCar(cc->getCar());}
+        center->addCar(cc->getId(),cc->getManufactor(),cc->getColor(),cc->getKind());
+    delete cc;
+    }
     catch (std::exception e){
         return false;
     }
@@ -139,7 +148,10 @@ bool Controller::CommendFour(){
     center->printLocation(id);
     return true;
 }
-
+/**
+ * run all current driver that have a trip to finish point
+ * @return
+ */
 bool  Controller::CommendSix(){
 center->finishAllTrip();
     return true;

@@ -5,16 +5,8 @@
 #include "CreateCar.h"
 
 CreateCar::CreateCar(string &input) : Create(input) {
-
-}
-Car* CreateCar::getCar() {
-    int id;
-    int kind;
-    string color;
-    string manufactor;
-
     if (this->tokens.size()!=4){
-        return NULL;
+        return ;
     }
     list<string>::iterator iterator1=this->tokens.begin();
     iterator1++;
@@ -27,11 +19,38 @@ Car* CreateCar::getCar() {
 
 
 
-    if (kind==1){
-        return new TaxiCab(id,manufactor,color);
-    }else if (kind==2) {
-        return  new Luxury(id,manufactor,color);///need to work on tommarow
-    }
-    return NULL;
+
 }
+/**
+ * getter of id
+ * @return
+ */
+int CreateCar::getId() const {
+    return id;
+}
+/**
+ * getter of kind of car
+ * @return
+ */
+int CreateCar::getKind() const {
+    return kind;
+}
+/**
+ * getter of color
+ * @return
+ */
+const string &CreateCar::getColor() const {
+    return color;
+}
+/*-*
+ * getter of manufactor
+ */
+const string &CreateCar::getManufactor() const {
+    return manufactor;
+}
+
+
+
+
+
 

@@ -5,9 +5,13 @@
 #ifndef EX2_LUXURY_H
 #define EX2_LUXURY_H
 
-#include "TaxiCab.h"
+#include "Car.h"
 
-class Luxury :public  TaxiCab{
+class Luxury :public  Car{
+    /*
+     *
+     *class of luxury car that will move twice as fast and will cost twice as much
+     */
 public:
 
     //defult

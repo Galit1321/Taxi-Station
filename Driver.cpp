@@ -13,6 +13,8 @@ Driver ::Driver() :Person(){
     experience =0;
     stat = " ";
     car = NULL;
+   trip=NULL;
+    satisfaction=0.0;
 
 }
 
@@ -27,7 +29,7 @@ Driver ::Driver(Driver &object) {
     this->age = object.getAge();
     this->stat = object.getStat();
     this->curr_pos = object.getCurr_pos();
-
+    trip=object.getTrip();
 }
 //constructor
 Driver ::Driver(int id ,int age ,string stat , int experience) {
@@ -36,10 +38,14 @@ Driver ::Driver(int id ,int age ,string stat , int experience) {
     this->stat = stat;
     this->experience =experience;
     car = NULL;
+    solution=  deque<Point*>();
+    trip=NULL;
 }
 
 Driver::~Driver() {
 
+    if (trip!=NULL)
+    delete trip;
 }
 
 
@@ -51,10 +57,13 @@ bool Driver ::operator==(const Driver &driver1) const {
 }
 
 //run the bfs algoritm
-Solution* Driver ::doBFS(SearchableTrip* psEnd) {
+deque<Point*> Driver ::doBFS(SearchableTrip* psEnd) {
    BFS* bfs=new BFS();
-    SearchableTrip* trip1=new SearchableTrip(psEnd->getLayout(),curr_pos,psEnd->getInitialState());
-    return bfs->search(trip1);
+   SearchableTrip* trip1=new SearchableTrip(psEnd->getLayout(),curr_pos,psEnd->getInitialState());
+    deque<Point*> sol=bfs->search(trip1);
+    delete trip1;
+    delete bfs;
+   return sol;
 }
 
 //return the driver id
@@ -121,18 +130,35 @@ Car *Driver::getCar() const {
 SearchableTrip *Driver::getTrip() const {
     return trip;
 }
-
+/**
+ * finish the driver trip
+ */
 void Driver::finishTrip() {
-    int cont=this->solution->sol.size();
+    int cont=this->solution.size();
     for (int i=0;i<cont;i++){
         move();
     }
 
 }
 
+/**
+ *
+ * @param layout1
+ * @param start_i
+ * @param start_j
+ * @param end_i
+ * @param end_j
+ * @param rid
+ * @param tff
+ * @param nop
+ */
 
-
-void Driver::setTrip(SearchableTrip *trip) {
+void Driver::setTrip(ILayout* layout1,int start_i,int start_j,int end_i,int end_j, int rid, double tff,int nop) {
+    if (this->trip!=NULL){
+        delete trip;
+    }
+    this->trip=new SearchableTrip(layout1,start_i,start_j,end_i,end_j,rid,tff);
+    trip->setNumOfPass(nop);
     BFS* bfs=new BFS();
     this->solution=bfs->search(trip);
     this->numOfUser+=trip->getNumOfPass();
@@ -140,15 +166,40 @@ void Driver::setTrip(SearchableTrip *trip) {
     delete bfs;
 
 }
+/**
+ * driver move a qeure accoding to kind of car
+ */
 void Driver::move() {
-    solution->sol.pop_front();
-    if (!solution->sol.empty()){
-        curr_pos=solution->getSol().front();
+    solution.pop_front();
+    if (!solution.empty()){
+        if (car->getKind()==1){
+            curr_pos=solution.front();
+            this->car->setMileage(this->car->getMileage()+1);
+        }
+       else{
+            curr_pos=solution.front();
+            solution.pop_front();
+            this->car->setMileage(this->car->getMileage()+1);
+            if (!solution.empty()){
+                curr_pos=solution.front();
+                solution.pop_front();
+                this->car->setMileage(this->car->getMileage()+1);
+            }
+
+        }
     }
 }
+/**
+ * add the satisfaction to total of that we have
+ * @param satisfaction
+ */
 void Driver::setSatisfaction(float satisfaction) {
     this->satisfaction=(this->satisfaction*(numOfUser-trip->getNumOfPass())+satisfaction)/(float)this->numOfUser;
-}
+}\
+/**
+ * get setsatfaction
+ * @return
+ */
 float Driver::getSatisfaction() {
     return  this->satisfaction;
 }

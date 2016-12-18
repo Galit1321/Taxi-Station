@@ -20,8 +20,10 @@ map<int,Driver*> drivers;
 public:
     TaxiCenter(MatrixLayout* layout);//constructor
     TaxiCenter();//defult constructor
-    void addCar(Car* c);
+    void addCar(int id ,string manufacturer,string color,int kind);
     void setLayout(MatrixLayout *layout);
+    void setLayout(int h,int w);
+    void setLayout(int h,int w, vector<int>* obs);
     //add driver
     void addDriver(int id ,int age,string stat,int exp);
     //conect taxi to driver
@@ -38,7 +40,7 @@ public:
     Point* getLocation(int id);
 
     //find closer driver
-    Driver* findCloser(SearchableTrip* orign);
+    int findCloser();
     //return the drivers
      map<int , Driver*> &getDrivers() ;
 

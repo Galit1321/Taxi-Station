@@ -14,9 +14,16 @@ using namespace std;
 Car::Car() {
 id=0;
 }
-
+/**
+ * constructor
+ * @param id
+ * @param carType
+ * @param manufacturer
+ * @param color
+ * @return
+ */
 Car ::Car(int id,string carType ,string manufacturer,string color){
-    id = id;
+    this->id = id;
     carType = carType;
     manufacturer = manufacturer;
     color= color;
@@ -87,4 +94,8 @@ string Car::getCarType() const {
 //set the type of the car
 void Car::setCarType(CarType carType) {
     Car::carType = carType;
+}
+
+int Car::getKind() const {
+    return kind;
 }

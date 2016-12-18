@@ -6,21 +6,23 @@
 #define EX2_DRIVER_H
 
 #include "string"
-#include "TaxiCab.h"
+#include "Car.h"
 #include "Point.h"
-#include "Solution.h"
 #include "Person.h"
 #include "SearchableTrip.h"
 #include "BFS.h"
 
 class Driver :public Person{
+    /**
+     * class of driver of the cab
+     */
 private:
    int id;
     int age;
     int experience;
     int numOfUser;
     SearchableTrip* trip;
-    Solution* solution;
+    deque<Point*> solution;
 
 public:
     string stat;
@@ -62,11 +64,11 @@ void finishTrip();
 
     SearchableTrip *getTrip() const;
 /**************************need to do****/
-    void setTrip(SearchableTrip *trip);
+    void setTrip(ILayout* layout1,int start_i,int start_j,int end_i,int end_j, int rid, double tff,int numOfPass);
     void move();
     float getSatisfaction();
     void setSatisfaction(float satisfaction);
-    Solution* doBFS(SearchableTrip* pEnd);
+    deque<Point*> doBFS(SearchableTrip* pEnd);
 
     virtual ~Driver();
 };

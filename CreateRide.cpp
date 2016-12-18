@@ -27,9 +27,5 @@ CreateRide::CreateRide(string &input) : Create(input) {
 
 }
 
-void CreateRide::phase(string s) {
-
-
-}
 
 
