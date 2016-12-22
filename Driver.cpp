@@ -170,11 +170,12 @@ void Driver::setTrip(ILayout* layout1,int start_i,int start_j,int end_i,int end_
  * driver move a qeure accoding to kind of car
  */
 void Driver::move() {
-    solution.pop_front();
+
     if (!solution.empty()){
         if (car->getKind()==1){
             curr_pos=solution.front();
             this->car->setMileage(this->car->getMileage()+1);
+            solution.pop_front();
         }
        else{
             curr_pos=solution.front();

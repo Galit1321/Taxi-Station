@@ -31,6 +31,7 @@ void CreateGrid::phase(string s) {
         this->input.push_back(h);
         s.erase(0, pos+1);
         this->input.push_back(atoi(strcpy(tmp,s.c_str())));;
+
     }catch (char e){
         cout<<"input numbers only between the _"<<endl;
         throw e;

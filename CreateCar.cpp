@@ -9,6 +9,7 @@ CreateCar::CreateCar(string &input) : Create(input) {
         return ;
     }
     list<string>::iterator iterator1=this->tokens.begin();
+    id=std::stoi(*iterator1);
     iterator1++;
     kind=std::stoi(*iterator1);
     iterator1++;

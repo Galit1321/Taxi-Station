@@ -41,7 +41,7 @@ Controller::Controller()  {
            cin>>obsVector;
            CreateGrid* size;
             size=new CreateGrid(obsVector);
-v.insert(v.end(),size->getInput().begin(),size->getInput().end());
+            v.insert(v.end(),size->getInput().begin(),size->getInput().end());
            delete size;
            numOfObs--;
        }
