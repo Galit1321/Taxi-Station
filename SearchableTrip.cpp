@@ -20,7 +20,10 @@ SearchableTrip::SearchableTrip(ILayout *layout1, int start_i, int start_j, int e
     this->numOfPass=0;
 
 }
-
+template <class Archive>
+void SearchableTrip::serialize(Archive &ar, const unsigned int version) {
+ar&BOOST_SERIALIZATION_NVP()
+}
 /**
  * constructor
  * @param layout1 the layout we working on
@@ -165,4 +168,12 @@ void SearchableTrip::setNumOfPass(int numOfPass) {
 
 SearchableTrip::~SearchableTrip() {
 
+}
+
+const deque<Point *> &SearchableTrip::getSolution() const {
+    return solution;
+}
+
+void SearchableTrip::setSolution(const deque<Point *> &solution) {
+    SearchableTrip::solution = solution;
 }

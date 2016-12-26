@@ -1,6 +1,7 @@
 //
 // Created by michal on 12/1/16.
 //
+#include <boost/serialization/nvp.hpp>
 #include "Driver.h"
 
 /**
@@ -140,7 +141,14 @@ void Driver::finishTrip() {
     }
 
 }
+template <class Archive>
+void Driver::serialize(Archive &ar, const unsigned int version) {
+    ar&BOOST_SERIALIZATION_NVP(this->id);
+    ar&BOOST_SERIALIZATION_NVP(this->age);
+    ar&BOOST_SERIALIZATION_NVP(this->experience);
+    ar&BOOST_SERIALIZATION_NVP(this->stat);
 
+}
 /**
  *
  * @param layout1
@@ -171,7 +179,7 @@ void Driver::setTrip(ILayout* layout1,int start_i,int start_j,int end_i,int end_
  */
 void Driver::move() {
 
-    if (!solution.empty()){
+    if (!trip->solution.empty()){
         if (car->getKind()==1){
             curr_pos=solution.front();
             this->car->setMileage(this->car->getMileage()+1);

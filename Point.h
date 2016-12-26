@@ -40,6 +40,8 @@ public:
     Point *getParent() const;
     //setter to parents
     void setParent(Point *parent);
+    template<class Archive>
+    void serialize(Archive &ar, const unsigned int version);
     friend ostream &operator<<( ostream &output,
                                 const Point &p) {
         output << "(" << p.getI() << "," << p.getJ()<<")"<<endl;

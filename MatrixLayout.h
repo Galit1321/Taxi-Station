@@ -12,14 +12,12 @@ private:
     int** matrix;//2-d array of int
     int height;//height of the matrix
     int width;//width of matrix
-public:
-    Point* **getPNode() const;
-
-
-private:
     Point** *pNode;
 
 public:
+    template<class Archive>
+    void serialize(Archive &ar, const unsigned int version);
+    Point* **getPNode() const;
     virtual ~MatrixLayout();//deconstuctor
     MatrixLayout();//default constructor
     int **getMatrix() const;//getter of matric

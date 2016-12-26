@@ -21,8 +21,10 @@ public:
     //set the curr pose of the passenger
     void setCurr_pos(Point *curr_pos);
     virtual ~ Person();//deconstructor
-
+    template<class Archive>
+    void serialize(Archive &ar, const unsigned int version);
 protected:
+
     Point* getPose();
 
 };

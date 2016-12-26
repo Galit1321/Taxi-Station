@@ -15,7 +15,7 @@ protected:
     int id ;
     int mileage;
     string color;
-    string carType;
+    //string carType;
     double tariff;
     string manufacturer;
     int kind;
@@ -55,6 +55,9 @@ public:
 
     //compare between two cars
     bool operator==(const Car &car) const;
+    //selize the object
+    template<class Archive>
+    void serialize(Archive &ar, const unsigned int version);
 };
 
 

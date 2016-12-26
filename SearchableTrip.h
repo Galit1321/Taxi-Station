@@ -16,9 +16,22 @@ using namespace std;
 class SearchableTrip : public ISearchable{
 private:
     int numOfPass;
+    int traiff;
+    ILayout* layout;//the layout we do the trip on
+    Point* goal;//the goal of the trip
+    Point* init;//the start of the trip
     int rideId;
     int total_dis;
+
+    deque<Point*> solution;
 public:
+    const deque<Point *> &getSolution() const;
+
+    void setSolution(const deque<Point *> &solution);
+
+public:
+    template<class Archive>
+    void serialize(Archive &ar, const unsigned int version);
     //return the num of the passengers
     int getNumOfPass() const;
     //add new passenger
@@ -34,11 +47,7 @@ public:
     //set the tariff
     void setTraiff(int traiff);
 
-private:
-    int traiff;
-    ILayout* layout;//the layout we do the trip on
-    Point* goal;//the goal of the trip
-    Point* init;//the start of the trip
+
 public:
     SearchableTrip();//defult constructor
 

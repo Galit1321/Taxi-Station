@@ -18,6 +18,13 @@ Point::~Point() {
 //the class that hold the point object will delet it
     //alone with the parent if necessary
 }
+
+template<class Archive>
+void Point::serialize(Archive &ar, const unsigned int version)
+{
+    ar & i;
+    ar & j;
+}
 /**
  * copy constructor
  * @param obj

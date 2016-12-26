@@ -2,6 +2,7 @@
 // Created by michal on 12/1/16.
 //
 
+#include <boost/serialization/nvp.hpp>
 #include "Car.h"
 #include "string"
 /**
@@ -72,7 +73,7 @@ void Car::setManufacturer(string manufacturer) {
 }
 //compare between to cars
 bool Car::operator==(const Car &car) const {
-    return ((id == getId())&&(carType == getCarType())&&
+    return ((id == getId())&&(kind == getKind())&&
             (manufacturer == getManufacturer())&& (color == getColor()));
 }
 
@@ -86,16 +87,19 @@ void Car::setTariff(double tariff) {
     Car::tariff = tariff;
 }
 
-//get the car type
-string Car::getCarType() const {
-    return carType;
-}
 
-//set the car type
-void Car::setCarType(CarType carType) {
-    Car::carType = carType;
-}
 
 int Car::getKind() const {
     return kind;
+}
+/*
+selize*/
+template<class Archive>
+void Car::serialize(Archive &ar, const unsigned int version) {
+    ar& BOOST_SERIALIZATION_NVP(this->id);
+    ar&BOOST_SERIALIZATION_NVP(this->kind);
+    ar&BOOST_SERIALIZATION_NVP(this->mileage);
+    ar&BOOST_SERIALIZATION_NVP(this->color);
+    ar&BOOST_SERIALIZATION_NVP(this->tariff);
+    ar&BOOST_SERIALIZATION_NVP(this->manufacturer);
 }

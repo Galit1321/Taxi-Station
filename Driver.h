@@ -27,7 +27,8 @@ private:
 public:
     string stat;
     Car *car;
-
+    template <class Archive>
+    void Driver::serialize(Archive &ar, const unsigned int version
     Driver();//default constructor
     Driver(Driver &object);//copy constructor
     Driver(int id ,int age,string stat , int experience);//constructor
