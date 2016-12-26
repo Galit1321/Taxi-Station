@@ -29,7 +29,6 @@ BFS::~BFS() {
  * @return solution object
  * that will hold the solution of the searc
  */
-
 deque<Point*> BFS::search(ISearchable *searchable) {
     deque<Point*> s;
     vector<Point*> open;

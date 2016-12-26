@@ -10,7 +10,7 @@ set(SOURCE_FILES LuxuryTest.cpp CreateTest.cpp PointTest.cpp
         Luxury.cpp Luxury.h  main.cpp MatrixLayout.cpp MatrixLayout.h Passenger.cpp Passenger.h Person.cpp
         Person.h Point.cpp Point.h SearchableTrip.h SearchableTrip.cpp TaxiCab.cpp TaxiCab.h TaxiCenter.h TaxiCenter.cpp
         main.cpp Controller.cpp Controller.h CreateDriver.cpp CreateDriver.h CreateCar.cpp CreateCar.h CreateRide.cpp
-        CreateRide.h)
+        CreateRide.h UDP.cpp UDP.h Connection.cpp Connection.h)
 set(BOOST_ROOT CACHE PATH "/usr/include/boost/")
 find_package(Boost 1.58.0 COMPONENTS serialization system)
 include_directories(${Boost_INCLUDE_DIR})

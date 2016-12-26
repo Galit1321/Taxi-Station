@@ -1,4 +1,5 @@
 
+#include <boost/serialization/nvp.hpp>
 #include "SearchableTrip.h"
 
 /**
@@ -22,7 +23,8 @@ SearchableTrip::SearchableTrip(ILayout *layout1, int start_i, int start_j, int e
 }
 template <class Archive>
 void SearchableTrip::serialize(Archive &ar, const unsigned int version) {
-ar&BOOST_SERIALIZATION_NVP()
+ar&BOOST_SERIALIZATION_NVP(this->rideId);
+
 }
 /**
  * constructor

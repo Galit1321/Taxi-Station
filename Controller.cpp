@@ -15,6 +15,18 @@ using namespace std;
 Controller::~Controller() {
  delete center;
 }
+
+Controller::Controller(const short unsigned int &port) {
+/*    memset(&sin, 0, sizeof(sin));
+    sin.sin_family = AF_INET;
+    sin.sin_addr.s_addr = INADDR_ANY;
+    sin.sin_port = htons(this->port);
+
+    if (bind(this->socketnum, (struct sockaddr *) &sin, sizeof(sin)) < 0) {
+        perror("error binding socket");
+    }
+*/
+}
 /**
  * constructor
  * @return

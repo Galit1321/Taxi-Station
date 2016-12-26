@@ -23,10 +23,10 @@ private:
     int rideId;
     int total_dis;
 
-    deque<Point*> solution;
+
 public:
     const deque<Point *> &getSolution() const;
-
+    deque<Point*> solution;
     void setSolution(const deque<Point *> &solution);
 
 public:
