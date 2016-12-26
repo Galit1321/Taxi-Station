@@ -24,6 +24,7 @@ void Point::serialize(Archive &ar, const unsigned int version)
 {
     ar & i;
     ar & j;
+    ar & this->cost;
 }
 /**
  * copy constructor

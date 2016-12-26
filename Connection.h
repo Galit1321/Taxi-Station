@@ -34,6 +34,7 @@ public:
      */
     virtual ~Connection();
 
+
     /*
      * the function send the message.
      * it get the string message to send and send it.

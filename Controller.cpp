@@ -1,6 +1,3 @@
-//
-// Created by galit on 12/12/16.
-//
 
 #include "Controller.h"
 #include "CreateGrid.h"
@@ -17,6 +14,7 @@ using namespace std;
  */
 Controller::~Controller() {
  delete center;
+    for ()
 }
 
 Controller::Controller(const short unsigned int &port):UDP(port) {
@@ -24,10 +22,11 @@ Controller::Controller(const short unsigned int &port):UDP(port) {
     sin.sin_family = AF_INET;
     sin.sin_addr.s_addr = INADDR_ANY;
     sin.sin_port = htons(this->port);
-
     if (bind(this->socketnum, (struct sockaddr *) &sin, sizeof(sin)) < 0) {
         perror("error binding socket");
     }
+
+    client_socket=list<int>();
 
 }
 void Controller::sendMessage(std::string &str, int sock) {
@@ -43,12 +42,12 @@ int Controller::getNewClient() {
 void Controller::setClientSocketNum(int sockNum) {
 
 }
+
 /**
  * constructor
  * @return
  */
 Controller::Controller():UDP()  {
-
     center=new TaxiCenter();
     string sizeGride;
     getline(cin,sizeGride);
