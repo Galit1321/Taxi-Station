@@ -14,7 +14,9 @@ using namespace std;
  */
 Controller::~Controller() {
  delete center;
-    for ()
+    for (vector<int>::iterator iterator1=client_socket.begin();iterator1!=client_socket.end();iterator1++){
+        close(*(iterator1));
+    }
 }
 
 Controller::Controller(const short unsigned int &port):UDP(port) {
@@ -25,22 +27,45 @@ Controller::Controller(const short unsigned int &port):UDP(port) {
     if (bind(this->socketnum, (struct sockaddr *) &sin, sizeof(sin)) < 0) {
         perror("error binding socket");
     }
-
-    client_socket=list<int>();
-
-}
-void Controller::sendMessage(std::string &str, int sock) {
+    client_socket=vector<int>();
 
 }
-
-std::string Controller::getMessage(int sock) {
+void Controller::sendMessage(std::string &str, int id) {
+    int sent_bytes = send(client_socket[id], str.c_str(), str.length(), 0);
+    if (sent_bytes < 0) {
+        perror("error sending to client");
+    }
 
 }
-int Controller::getNewClient() {
+
+std::string Controller::getMessage(int id) {
+    char buffer[4096] = {0};
+    int expected_data_len = sizeof(buffer);
+    int read_bytes = recv(client_socket[id], buffer, expected_data_len, 0);
+    if (read_bytes == 0) {
+        perror("connection is closed");
+    }
+    else if (read_bytes < 0) {
+        perror("error");
+    }
+    return buffer;
+}
+
+void Controller::getNewClient() {
+    this->time=0;
+    if (listen(this->socketnum, 5) < 0) {
+        perror("error listening to a socket");
+    }
+    unsigned int addr_len = sizeof(client_socket);
+    client_socket.push_back(accept(this->socketnum,  (struct sockaddr *) &this->client_socket,  &addr_len));
+
+    if (client_socket.front() < 0) {
+        perror("error accepting client");
+    }
 
 }
 void Controller::setClientSocketNum(int sockNum) {
-
+    this->client_socket.push_back(sockNum);
 }
 
 /**
@@ -86,10 +111,11 @@ void Controller::getCommend() {
    int commend;
     cin>>commend;
     bool success= true;
-    while ((commend!=7)&&(success)){
+    while ((time!=5)&&(success)){
         switch (commend){
             case 1:
                 success=CommendOne();
+                time++;
                 break;
             case 2:
                 success=CommendTwo();

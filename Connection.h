@@ -55,7 +55,7 @@ public:
     /*
      * the function get new client and accept it
      */
-    virtual int getNewClient()=0;
+    virtual void getNewClient()=0;
 
     /*
      * the function get socket number for the client and change it

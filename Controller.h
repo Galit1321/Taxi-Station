@@ -17,8 +17,9 @@ class Controller: public UDP {
      * of the main function
      */
 public:
-    list<int> client_socket;
+    vector<int> client_socket;
     TaxiCenter* center;
+    int time;
     Controller(const short unsigned int  &port);
    /*
     * the function send message for the client.
@@ -35,7 +36,7 @@ public:
     /*
      * the function get new client and accept it
      */
-    int getNewClient();
+    void getNewClient();
 
     /*
      * the function get socket number for the client and change it
