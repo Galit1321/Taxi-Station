@@ -8,6 +8,9 @@
 #include "CreateCar.h"
 #include "CreateRide.h"
 #include <cstring>
+#include <bits/socket.h>
+#include <netinet/in.h>
+
 using namespace std;
 /**
  * destructor
@@ -16,8 +19,8 @@ Controller::~Controller() {
  delete center;
 }
 
-Controller::Controller(const short unsigned int &port) {
-/*    memset(&sin, 0, sizeof(sin));
+Controller::Controller(const short unsigned int &port):UDP(port) {
+   memset(&sin, 0, sizeof(sin));
     sin.sin_family = AF_INET;
     sin.sin_addr.s_addr = INADDR_ANY;
     sin.sin_port = htons(this->port);
@@ -25,13 +28,26 @@ Controller::Controller(const short unsigned int &port) {
     if (bind(this->socketnum, (struct sockaddr *) &sin, sizeof(sin)) < 0) {
         perror("error binding socket");
     }
-*/
+
+}
+void Controller::sendMessage(std::string &str, int sock) {
+
+}
+
+std::string Controller::getMessage(int sock) {
+
+}
+int Controller::getNewClient() {
+
+}
+void Controller::setClientSocketNum(int sockNum) {
+
 }
 /**
  * constructor
  * @return
  */
-Controller::Controller()  {
+Controller::Controller():UDP()  {
 
     center=new TaxiCenter();
     string sizeGride;

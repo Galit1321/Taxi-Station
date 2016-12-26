@@ -23,3 +23,6 @@ Connection::~Connection() {
 void Connection::closefunc() {
     close(socketnum);
 }
+Connection::Connection() {
+
+}

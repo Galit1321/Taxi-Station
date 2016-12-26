@@ -13,3 +13,7 @@ UDP::UDP(const short unsigned int  &port):Connection(port) {
  */
 UDP::~UDP() {
 }
+
+UDP::UDP():Connection() {
+
+}

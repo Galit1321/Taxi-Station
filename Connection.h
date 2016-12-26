@@ -27,6 +27,8 @@ public:
      */
     Connection(const short unsigned int &port);
 
+    Connection();
+
     /*
      * destructor
      */
@@ -61,3 +63,4 @@ public:
 };
 
 #endif /* CONNECTION_H_ */
+

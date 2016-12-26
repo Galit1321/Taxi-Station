@@ -8,8 +8,12 @@ protected:
     struct sockaddr_in sin;
 public:
     UDP(const short unsigned int  &port);
+
+    UDP();
+
     virtual ~UDP();
 
 };
 
 #endif /* SRC1_UDP_H_ */
+

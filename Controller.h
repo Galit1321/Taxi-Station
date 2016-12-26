@@ -7,9 +7,11 @@
 
 #include "Point.h"
 #include "TaxiCenter.h"
+#include "UDP.h"
+
 using namespace std;
 
-class Controller {
+class Controller: public UDP {
     /**
      * class to controller the input in front
      * of the main function
