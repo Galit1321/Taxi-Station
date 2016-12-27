@@ -1,6 +1,7 @@
 
 #include <boost/serialization/nvp.hpp>
 #include "SearchableTrip.h"
+#include "BFS.h"
 
 /**
  * constructor
@@ -19,13 +20,11 @@ SearchableTrip::SearchableTrip(ILayout *layout1, int start_i, int start_j, int e
     this->total_dis=0;
     this->traiff=0;
     this->numOfPass=0;
-
+    BFS* bfs=new BFS();
+    this->solution=bfs->search(this);
+    delete bfs;
 }
-template <class Archive>
-void SearchableTrip::serialize(Archive &ar, const unsigned int version) {
-ar&BOOST_SERIALIZATION_NVP(this->rideId);
 
-}
 /**
  * constructor
  * @param layout1 the layout we working on
@@ -40,6 +39,9 @@ SearchableTrip::SearchableTrip(ILayout* layout1,Point* start,Point* end){
     this->rideId=0;
     this->total_dis=0;
     this->traiff=0;
+    BFS* bfs=new BFS();
+    this->solution=bfs->search(this);
+    delete bfs;
     this->numOfPass=0;
 }
 
@@ -62,6 +64,10 @@ SearchableTrip::SearchableTrip(ILayout* layout1,int start_i,int start_j,int end_
     this->numOfPass=nop;
     this->traiff=tff;
     this->rideId=rid;
+    BFS* bfs=new BFS();
+    this->solution=bfs->search(this);
+    delete bfs;
+
 }
 SearchableTrip::SearchableTrip() {
 
@@ -169,7 +175,7 @@ void SearchableTrip::setNumOfPass(int numOfPass) {
 }
 
 SearchableTrip::~SearchableTrip() {
-
+solution.clear();
 }
 
 const deque<Point *> &SearchableTrip::getSolution() const {

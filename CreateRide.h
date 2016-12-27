@@ -21,7 +21,7 @@ public:
     CreateRide(string &input);
 
     virtual ~CreateRide();
-
+int time;
     int id;
     // the x val of the strat point
     int start_x;

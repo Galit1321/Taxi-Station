@@ -39,7 +39,7 @@ Driver ::Driver(int id ,int age ,string stat , int experience) {
     this->stat = stat;
     this->experience =experience;
     car = NULL;
-    solution=  deque<Point*>();
+
     trip=NULL;
 }
 
@@ -87,30 +87,6 @@ int Driver::getNumOfUser() const {
     return numOfUser;
 }
 
-//set the driver id
-void Driver::setId(int id) {
-    Driver::id = id;
-}
-
-//set the driver age
-void Driver::setAge(int age) {
-    Driver::age = age;
-}
-
-//set the years of experience of the driver
-void Driver::setExperience(int experience) {
-    Driver::experience = experience;
-}
-
-//set the num of the users
-void Driver::setNumOfUser(int numOfUser) {
-    Driver::numOfUser = numOfUser;
-}
-
-//set the status of the driver
-void Driver::setStat(string stat) {
-    Driver::stat = stat;
-}
 
 //set the car of the driver
 void Driver::setCar(Car *car) {
@@ -135,7 +111,7 @@ SearchableTrip *Driver::getTrip() const {
  * finish the driver trip
  */
 void Driver::finishTrip() {
-    int cont=this->solution.size();
+    int cont=this->trip->solution.size();
     for (int i=0;i<cont;i++){
         move();
     }
@@ -154,18 +130,13 @@ void Driver::finishTrip() {
  * @param nop
  */
 
-void Driver::setTrip(ILayout* layout1,int start_i,int start_j,int end_i,int end_j, int rid, double tff,int nop) {
+void Driver::setTrip(SearchableTrip* trip1) {
     if (this->trip!=NULL){
         delete trip;
     }
-    this->trip=new SearchableTrip(layout1,start_i,start_j,end_i,end_j,rid,tff,nop);
-    trip->setNumOfPass(nop);
-    BFS* bfs=new BFS();
-    this->solution=bfs->search(trip);
+    this->trip=trip1;
     this->numOfUser+=trip->getNumOfPass();
     curr_pos=trip->getInitialState();
-    delete bfs;
-
 }
 /**
  * driver move a qeure accoding to kind of car
@@ -174,17 +145,17 @@ void Driver::move() {
 
     if (!trip->solution.empty()){
         if (car->getKind()==1){
-            curr_pos=solution.front();
+            curr_pos=trip->solution.front();
             this->car->setMileage(this->car->getMileage()+1);
-            solution.pop_front();
+            trip->solution.pop_front();
         }
        else{
-            curr_pos=solution.front();
-            solution.pop_front();
+            curr_pos=trip->solution.front();
+            trip->solution.pop_front();
             this->car->setMileage(this->car->getMileage()+1);
-            if (!solution.empty()){
-                curr_pos=solution.front();
-                solution.pop_front();
+            if (!trip->solution.empty()){
+                curr_pos=trip->solution.front();
+                trip->solution.pop_front();
                 this->car->setMileage(this->car->getMileage()+1);
             }
 

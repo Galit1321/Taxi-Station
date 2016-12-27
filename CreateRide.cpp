@@ -25,6 +25,8 @@ CreateRide::CreateRide(string &input) : Create(input) {
     numOfPass=std::stoi(*iterator1);
     iterator1++;
     tariff=std::stod(*iterator1);
+    iterator1++;
+    time=std::stoi(*iterator1);
 
 }
 

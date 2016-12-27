@@ -76,9 +76,9 @@ TEST_F(TaxiCTest, TaxiCTest_TaxiCTestMove_Test_Test){
     center->addCar(1,"F","R",2);
     center->addDriver(1,0,"M",0);
     center->setTaxiToDriver(1,1);
-    center->getDriver(0)->setTrip(center->getLayout(),0,0,2,2,0,1.0,5);
+    //center->getDriver(0)->setTrip(center->getLayout(),0,0,2,2,0,1.0,5);
     center->move(0);
-    center->getDriver(1)->setTrip(center->getLayout(),0,0,2,2,2,1.0,5);
+   // center->getDriver(1)->setTrip(center->getLayout(),0,0,2,2,2,1.0,5);
     center->move(1);
     ASSERT_GT(center->getCars()[1]->getMileage(),center->getCars()[0]->getMileage());
 }
@@ -89,7 +89,7 @@ TEST_F(TaxiCTest, TaxiCTest_TaxiCenterFinishTrip_Test){
     center->addCar(0,"F","R",1);
     center->addDriver(0,0,"M",0);
     center->setTaxiToDriver(0,0);
-    center->getDriver(0)->setTrip(center->getLayout(),0,0,2,2,0,1.0,5);
+  //  center->getDriver(0)->setTrip(center->getLayout(),0,0,2,2,0,1.0,5);
     center->finishAllTrip();
     ASSERT_EQ(center->getDriver(0)->getTrip()->getGoalState()->getI(),2);
     ASSERT_EQ(center->getDriver(0)->getTrip()->getGoalState()->getJ(),2);

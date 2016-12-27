@@ -92,14 +92,3 @@ void Car::setTariff(double tariff) {
 int Car::getKind() const {
     return kind;
 }
-/*
-selize*/
-template<class Archive>
-void Car::serialize(Archive &ar, const unsigned int version) {
-    ar& BOOST_SERIALIZATION_NVP(this->id);
-    ar&BOOST_SERIALIZATION_NVP(this->kind);
-    ar&BOOST_SERIALIZATION_NVP(this->mileage);
-    ar&BOOST_SERIALIZATION_NVP(this->color);
-    ar&BOOST_SERIALIZATION_NVP(this->tariff);
-    ar&BOOST_SERIALIZATION_NVP(this->manufacturer);
-}
