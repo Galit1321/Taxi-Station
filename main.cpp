@@ -19,6 +19,5 @@ int main(int argc,char **argv) {
     Controller* controller=new Controller();
     controller->getCommend();
     delete controller;
-    ::testing::InitGoogleTest(&argc,argv);
-    return RUN_ALL_TESTS();
+    return 0;
 }

@@ -37,14 +37,14 @@ public:
      * the function get new client and accept it
      */
     void getNewClient();
-
+    static void* staticForChose(void* parameters);
     /*
      * the function get socket number for the client and change it
      */
     void setClientSocketNum(int sockNum);
     virtual ~Controller();//desrectir
     Controller();//consterctor
-    void getCommend();//busy wating method to get num of commend
+    void* getCommend();//busy wating method to get num of commend
 protected:
     bool CommendOne();
     bool CommendTwo();
@@ -53,5 +53,12 @@ protected:
     bool CommendSix();
 };
 
+/*
+ * struct to hold the menu and the socket number for the client.
+ */
+struct parameters {
+    Controller* m;
+
+};
 
 #endif //ADVPRO01_CONTROLLER_H

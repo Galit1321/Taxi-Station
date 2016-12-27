@@ -5,8 +5,7 @@
 #include "CreateCar.h"
 #include "CreateRide.h"
 #include <cstring>
-#include <bits/socket.h>
-#include <netinet/in.h>
+
 
 using namespace std;
 /**
@@ -28,6 +27,11 @@ Controller::Controller(const short unsigned int &port):UDP(port) {
         perror("error binding socket");
     }
     client_socket=vector<int>();
+    getCommend();///to build one time at least
+   pthread_t id;
+    struct parameters* p = new struct parameters();
+    p->m = this;
+    pthread_create(&id, NULL,this->staticForChose ,(void*)p);
 
 }
 void Controller::sendMessage(std::string &str, int id) {
@@ -107,16 +111,12 @@ Controller::Controller():UDP()  {
  * busy waiting function to get commend from user
  * destion to run on diff thred
  */
-void Controller::getCommend() {
+void* Controller::getCommend() {
    int commend;
     cin>>commend;
     bool success= true;
-    while ((time!=5)&&(success)){
+    while ((commend!=1)&&(success)&&(commend!=7)){
         switch (commend){
-            case 1:
-                success=CommendOne();
-                time++;
-                break;
             case 2:
                 success=CommendTwo();
                 break;
@@ -134,8 +134,17 @@ void Controller::getCommend() {
         cin>>commend;
 
         }
+    pthread_exit(0);
+
+    return 0;
+
+}
 
 
+void* Controller::staticForChose(void *parameters) {
+    struct parameters* par = (struct parameters*)parameters;
+    par->m->getCommend();
+    return NULL;
 }
 /**
  * commend one meaning create a driver
