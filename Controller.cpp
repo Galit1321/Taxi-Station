@@ -71,15 +71,19 @@ Controller::Controller(const short unsigned int &port) : UDP(port) {
     if (bind(this->socketnum, (struct sockaddr *) &sin, sizeof(sin)) < 0) {
         perror("error binding socket");
     }
-  /*  client_socket = vector<int>();
+    client_socket = vector<int>();
     getCommend();///to build one time at least
     pthread_t id;
     struct parameters *p = new struct parameters();
     p->m = this;
-    pthread_create(&id, NULL, this->staticForChose, (void *) p);*/
+    pthread_create(&id, NULL, this->staticForChose, (void *) p);
 
 }
-
+/**
+ * send msg in sock with given id
+ * @param str what we want to send
+ * @param id socket id -more relavent to tcp
+ */
 void Controller::sendMessage(std::string &str, int id) {
     int sent_bytes = send(socketnum, str.c_str(), str.length(), 0);
     if (sent_bytes < 0) {
@@ -87,7 +91,12 @@ void Controller::sendMessage(std::string &str, int id) {
     }
 
 }
-
+/**'
+ *
+ * wait to get messege from socket
+ * @param id socket id
+ * @return the string of want we got
+ */
 std::string Controller::getMessage(int id) {
     char buffer[4096] = {0};
     int expected_data_len = sizeof(buffer);
@@ -99,12 +108,15 @@ std::string Controller::getMessage(int id) {
     }
     return buffer;
 }
-
+/**
+ * with tcp we will get new client and give him socket id uniqe to him
+ */
 void Controller::getNewClient() {
-    this->time = 0;
-    unsigned int addr_len = sizeof(int);
-int i=accept(this->socketnum, (struct sockaddr *) &this->client_socket, &addr_len);
-    client_socket.push_back(i);
+    if (listen(this->socketnum, 5) < 0) {//we can get max of 5 client
+        perror("error listening to a socket");
+    }
+    unsigned int addr_len = sizeof(client_socket);
+    client_socket.push_back(accept(this->socketnum,  (struct sockaddr *) &this->client_socket,  &addr_len));
 
     if (client_socket.front() < 0) {
         perror("error accepting client");
@@ -186,7 +198,7 @@ void *Controller::getCommend() {
         cin >> commend;
 
     }
-  //  pthread_exit(0);
+    pthread_exit(0);
 }
 /**
  * run the loop and get number of drivers and give each driver the nessercy data
