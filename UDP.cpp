@@ -12,6 +12,7 @@ UDP::UDP(const short unsigned int  &port):Connection(port) {
  * destructor
  */
 UDP::~UDP() {
+    close(socketnum);
 }
 
 UDP::UDP():Connection() {

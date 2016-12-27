@@ -71,17 +71,17 @@ Controller::Controller(const short unsigned int &port) : UDP(port) {
     if (bind(this->socketnum, (struct sockaddr *) &sin, sizeof(sin)) < 0) {
         perror("error binding socket");
     }
-    client_socket = vector<int>();
+  /*  client_socket = vector<int>();
     getCommend();///to build one time at least
     pthread_t id;
     struct parameters *p = new struct parameters();
     p->m = this;
-    pthread_create(&id, NULL, this->staticForChose, (void *) p);
+    pthread_create(&id, NULL, this->staticForChose, (void *) p);*/
 
 }
 
 void Controller::sendMessage(std::string &str, int id) {
-    int sent_bytes = send(client_socket[id], str.c_str(), str.length(), 0);
+    int sent_bytes = send(socketnum, str.c_str(), str.length(), 0);
     if (sent_bytes < 0) {
         perror("error sending to client");
     }
@@ -91,7 +91,7 @@ void Controller::sendMessage(std::string &str, int id) {
 std::string Controller::getMessage(int id) {
     char buffer[4096] = {0};
     int expected_data_len = sizeof(buffer);
-    int read_bytes = recv(client_socket[id], buffer, expected_data_len, 0);
+    int read_bytes = recv(socketnum, buffer, expected_data_len, 0);
     if (read_bytes == 0) {
         perror("connection is closed");
     } else if (read_bytes < 0) {
@@ -102,11 +102,9 @@ std::string Controller::getMessage(int id) {
 
 void Controller::getNewClient() {
     this->time = 0;
-    if (listen(this->socketnum, 5) < 0) {
-        perror("error listening to a socket");
-    }
-    unsigned int addr_len = sizeof(client_socket);
-    client_socket.push_back(accept(this->socketnum, (struct sockaddr *) &this->client_socket, &addr_len));
+    unsigned int addr_len = sizeof(int);
+int i=accept(this->socketnum, (struct sockaddr *) &this->client_socket, &addr_len);
+    client_socket.push_back(i);
 
     if (client_socket.front() < 0) {
         perror("error accepting client");
@@ -166,6 +164,7 @@ void *Controller::getCommend() {
         switch (commend) {
             case 1:
                 runDriver();
+                break;
             case 2:
                 success = CommendTwo();
                 break;
@@ -187,25 +186,32 @@ void *Controller::getCommend() {
         cin >> commend;
 
     }
-    pthread_exit(0);
+  //  pthread_exit(0);
 }
 
 bool Controller::runDriver() {
-
     int i;
     cin >> i;
     while (i) {
-        getNewClient();
-        std::string serial_str=getMessage(this->client_socket[0]);
+        Driver *gp = new Driver(0,0,"m",0)  ;
+
+        std::string serial_str;
+        boost::iostreams::back_insert_device<std::string> inserter(serial_str);
+        boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > s(inserter);
+        boost::archive::binary_oarchive oa(s);
+        oa << gp;
+        s.flush();
+        cout << serial_str << endl;
+      //  getNewClient();
+        // serial_str=getMessage(this->socketnum);
         Driver *gp2;
         boost::iostreams::basic_array_source<char> device(serial_str.c_str(), serial_str.size());
         boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s2(device);
         boost::archive::binary_iarchive ia(s2);
         ia >> gp2;
-
-
-
+i--;
     }
+    return true;
 }
 
 void *Controller::staticForChose(void *parameters) {
