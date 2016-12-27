@@ -13,10 +13,10 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include "Controller.h"
-#include "CreateGrid.h"
-#include "CreateDriver.h"
-#include "CreateCar.h"
-#include "CreateRide.h"
+#include "Creation/CreateGrid.h"
+#include "Creation/CreateDriver.h"
+#include "Creation/CreateCar.h"
+#include "Creation/CreateRide.h"
 #include <cstring>
 #include <boost/iostreams/device/array.hpp>
 #include <boost/archive/binary_iarchive.hpp>
@@ -278,7 +278,11 @@ bool Controller::CommendTwo() {
     try {
         CreateRide *cd = new CreateRide(parm);
         time=cd->time;
-        center->getTrip().insert(std::pair<int,SearchableTrip*>(center->getTrip().size(),new SearchableTrip(center->getLayout(), cd->start_x, cd->star_y, cd->end_x, cd->end_y, cd->id, cd->tariff,cd->numOfPass)));
+        SearchableTrip* trip;
+        trip=new SearchableTrip(center->getLayout(),cd->start_x,
+                                cd->star_y, cd->end_x,cd->end_y,cd->id, cd->tariff,cd->numOfPass);
+        center->getTrip().insert(std::pair<int,SearchableTrip*>(center->getTrip().size(),trip));
+        trip->setTime(cd->time);
         delete cd;
     } catch (std::exception exception1) {
         return false;

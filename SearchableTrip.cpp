@@ -185,3 +185,11 @@ const deque<Point *> &SearchableTrip::getSolution() const {
 void SearchableTrip::setSolution(const deque<Point *> &solution) {
     SearchableTrip::solution = solution;
 }
+
+int SearchableTrip::getTime() const {
+    return time;
+}
+
+void SearchableTrip::setTime(int time) {
+    SearchableTrip::time = time;
+}

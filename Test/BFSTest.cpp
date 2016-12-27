@@ -1,9 +1,9 @@
 
 
 #include "gtest/gtest.h"
-#include "BFS.h"
-#include "SearchableTrip.h"
-#include "MatrixLayout.h"
+#include "../BFS.h"
+#include "../SearchableTrip.h"
+#include "../MatrixLayout.h"
 
 using namespace std;
 class BFSTest :public ::testing::Test{

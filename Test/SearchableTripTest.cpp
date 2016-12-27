@@ -1,8 +1,8 @@
 
 
 #include "gtest/gtest.h"
-#include "SearchableTrip.h"
-#include "MatrixLayout.h"
+#include "../SearchableTrip.h"
+#include "../MatrixLayout.h"
 
 class SearchableTripTest : public ::testing::Test {
     /**

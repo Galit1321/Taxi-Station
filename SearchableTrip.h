@@ -37,6 +37,11 @@ private:
     Point* init;//the start of the trip
     int rideId;
     int total_dis;
+    int time;
+public:
+    int getTime() const;
+
+    void setTime(int time);
 
 
 public:

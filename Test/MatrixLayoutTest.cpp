@@ -1,7 +1,7 @@
 using namespace std;
 
 #include "gtest/gtest.h"
-#include "MatrixLayout.h"
+#include "../MatrixLayout.h"
 
 
  class MatrixLayoutTest:public ::testing::Test{

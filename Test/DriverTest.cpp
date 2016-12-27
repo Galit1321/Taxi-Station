@@ -3,9 +3,9 @@
 //
 
 #include "gtest/gtest.h"
-#include "Driver.h"
-#include "Luxury.h"
-#include "TaxiCab.h"
+#include "../Driver.h"
+#include "../Luxury.h"
+#include "../TaxiCab.h"
 class DriverTest :public ::testing::Test{
 /**
   * test class to check DriverTest

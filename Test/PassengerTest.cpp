@@ -3,7 +3,7 @@
 //
 
 #include "gtest/gtest.h"
-#include "Passenger.h"
+#include "../Passenger.h"
 
 class PassengerTest :public  ::testing::Test{
 /**

@@ -4,9 +4,9 @@
 
 #include "string"
 #include "gtest/gtest.h"
-#include "Luxury.h"
-#include "Car.h"
-#include "TaxiCab.h"
+#include "../Luxury.h"
+#include "../Car.h"
+#include "../TaxiCab.h"
 
 using namespace std;
 class LuxuryTest :public  ::testing::Test{
