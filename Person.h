@@ -6,6 +6,7 @@
 #define EX2_PERSON_H
 
 #include "Point.h"
+#include <boost/serialization/access.hpp>
 
 class Person {
 public:
@@ -21,12 +22,17 @@ public:
     //set the curr pose of the passenger
     void setCurr_pos(Point *curr_pos);
     virtual ~ Person();//deconstructor
-    template<class Archive>
-    void serialize(Archive &ar, const unsigned int version);
+
+
 protected:
 
     Point* getPose();
-
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive &ar, const unsigned int version){
+        ar & satisfaction;
+        ar & curr_pos;
+    }
 };
 
 

@@ -172,3 +172,11 @@ void TaxiCenter::finishAllTrip() {
     }
 
 }
+
+ map<int, SearchableTrip *> &TaxiCenter::getTrip()  {
+    return trip;
+}
+
+void TaxiCenter::setTrip(const map<int, SearchableTrip *> &trip) {
+    TaxiCenter::trip = trip;
+}

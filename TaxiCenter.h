@@ -13,6 +13,13 @@
 class TaxiCenter {
 protected:
 map<int,Driver*> drivers;
+    map<int,SearchableTrip*> trip;
+public:
+ map<int, SearchableTrip *> &getTrip() ;
+
+    void setTrip(const map<int, SearchableTrip *> &trip);
+
+protected:
     vector<int > free_drivers;
     map<int,Passenger*> all_passngers;
     MatrixLayout* layout;

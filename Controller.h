@@ -31,7 +31,7 @@ public:
      * the function get message from the client.
      * it get the message,change it to string and return it
      */
-    std::string getMessage (int sock);
+    string getMessage (int sock);
 
     /*
      * the function get new client and accept it
@@ -51,6 +51,7 @@ protected:
     bool CommendThree();
     bool CommendFour();
     bool CommendSix();
+    bool runDriver();
 };
 
 /*
@@ -58,7 +59,6 @@ protected:
  */
 struct parameters {
     Controller* m;
-
 };
 
 #endif //ADVPRO01_CONTROLLER_H

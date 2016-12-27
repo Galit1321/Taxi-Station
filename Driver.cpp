@@ -141,14 +141,7 @@ void Driver::finishTrip() {
     }
 
 }
-template <class Archive>
-void Driver::serialize(Archive &ar, const unsigned int version) {
-    ar&BOOST_SERIALIZATION_NVP(this->id);
-    ar&BOOST_SERIALIZATION_NVP(this->age);
-    ar&BOOST_SERIALIZATION_NVP(this->experience);
-    ar&BOOST_SERIALIZATION_NVP(this->stat);
 
-}
 /**
  *
  * @param layout1
@@ -165,7 +158,7 @@ void Driver::setTrip(ILayout* layout1,int start_i,int start_j,int end_i,int end_
     if (this->trip!=NULL){
         delete trip;
     }
-    this->trip=new SearchableTrip(layout1,start_i,start_j,end_i,end_j,rid,tff);
+    this->trip=new SearchableTrip(layout1,start_i,start_j,end_i,end_j,rid,tff,nop);
     trip->setNumOfPass(nop);
     BFS* bfs=new BFS();
     this->solution=bfs->search(trip);

@@ -5,12 +5,14 @@
 #ifndef EX2_DRIVER_H
 #define EX2_DRIVER_H
 
+
 #include "string"
 #include "Car.h"
 #include "Point.h"
 #include "Person.h"
 #include "SearchableTrip.h"
 #include "BFS.h"
+#include <boost/serialization/access.hpp>
 
 class Driver :public Person{
     /**
@@ -27,8 +29,8 @@ private:
 public:
     string stat;
     Car *car;
-    template <class Archive>
-    void serialize(Archive &ar, const unsigned int version);
+
+
     Driver();//default constructor
     Driver(Driver &object);//copy constructor
     Driver(int id ,int age,string stat , int experience);//constructor
@@ -70,7 +72,21 @@ void finishTrip();
     float getSatisfaction();
     void setSatisfaction(float satisfaction);
     deque<Point*> doBFS(SearchableTrip* pEnd);
-
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive &ar, const unsigned int version){
+//        ar & boost::serialization::base_object<Person>(*this);
+        ar & stat;
+       // ar & car;
+        ar & satisfaction;
+        ar & curr_pos;
+        ar & id;
+        ar & age;
+        ar & experience;
+        ar & numOfUser;
+        //ar & trip;
+        //ar & solution;
+    }
     virtual ~Driver();
 };
 
