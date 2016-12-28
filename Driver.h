@@ -63,20 +63,19 @@ void finishTrip();
     float getSatisfaction();
     void setSatisfaction(float satisfaction);
     deque<Point*> doBFS(SearchableTrip* pEnd);
+//serlize the driver
+
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive &ar, const unsigned int version){
-//        ar & boost::serialization::base_object<Person>(*this);
+///       ar & boost::serialization::base_object<Person>(*this);
         ar & stat;
-       // ar & car;
         ar & satisfaction;
         ar & curr_pos;
         ar & id;
         ar & age;
         ar & experience;
         ar & numOfUser;
-        //ar & trip;
-        //ar & solution;
     }
     virtual ~Driver();
 };

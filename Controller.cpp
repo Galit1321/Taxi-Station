@@ -34,6 +34,11 @@ Controller::~Controller() {
     }
 }
 
+/**
+ * constructor that create connetion with socket
+ * @param port
+ * @return
+ */
 Controller::Controller(const short unsigned int &port) : UDP(port) {
     center = new TaxiCenter();
     string sizeGride;
@@ -79,6 +84,7 @@ Controller::Controller(const short unsigned int &port) : UDP(port) {
     pthread_create(&id, NULL, this->staticForChose, (void *) p);
 
 }
+
 /**
  * send msg in sock with given id
  * @param str what we want to send
@@ -91,6 +97,7 @@ void Controller::sendMessage(std::string &str, int id) {
     }
 
 }
+
 /**'
  *
  * wait to get messege from socket
@@ -108,6 +115,7 @@ std::string Controller::getMessage(int id) {
     }
     return buffer;
 }
+
 /**
  * with tcp we will get new client and give him socket id uniqe to him
  */
@@ -116,7 +124,7 @@ void Controller::getNewClient() {
         perror("error listening to a socket");
     }
     unsigned int addr_len = sizeof(client_socket);
-    client_socket.push_back(accept(this->socketnum,  (struct sockaddr *) &this->client_socket,  &addr_len));
+    client_socket.push_back(accept(this->socketnum, (struct sockaddr *) &this->client_socket, &addr_len));
 
     if (client_socket.front() < 0) {
         perror("error accepting client");
@@ -124,9 +132,6 @@ void Controller::getNewClient() {
 
 }
 
-void Controller::setClientSocketNum(int sockNum) {
-    this->client_socket.push_back(sockNum);
-}
 
 /**
  * constructor
@@ -175,7 +180,7 @@ void *Controller::getCommend() {
     while ((commend != 7) && (success)) {
         switch (commend) {
             case 1:
-                success=runDriver();
+                success = runDriver();
                 break;
             case 2:
                 success = CommendTwo();
@@ -200,6 +205,7 @@ void *Controller::getCommend() {
     }
     pthread_exit(0);
 }
+
 /**
  * run the loop and get number of drivers and give each driver the nessercy data
  * @return true if works
@@ -208,47 +214,48 @@ bool Controller::runDriver() {
     int i;
     cin >> i;
     while (i) {
-        Driver *gp = new Driver(0,0,"m",0)  ;
+        Driver *gp = new Driver(0, 0, "m", 0);
         std::string serial_str;
         boost::iostreams::back_insert_device<std::string> inserter(serial_str);
         boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > s(inserter);
         boost::archive::binary_oarchive oa(s);
-        oa <<gp;
+        oa << gp;
         s.flush();
         cout << serial_str << endl;
-      //  getNewClient();
+        //  getNewClient();
         // serial_str=getMessage(this->socketnum);
         Driver *gp2;
         boost::iostreams::basic_array_source<char> device(serial_str.c_str(), serial_str.size());
         boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s2(device);
         boost::archive::binary_iarchive ia(s2);
         ia >> gp2;
-i--;
-         center->setTaxiToDriver(0,0);
-        Car* car=center->getCars()[gp2->getId()];
+        i--;
+        center->setTaxiToDriver(0, 0);
+        Car *car = center->getCars()[gp2->getId()];
         //std::string serial_str;
         boost::iostreams::back_insert_device<std::string> inserter2(serial_str);
         boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > s3(inserter2);
         boost::archive::binary_oarchive a2(s3);
-        a2 <<car;
+        a2 << car;
         s.flush();
-        sendMessage(serial_str,socketnum);//se
+        sendMessage(serial_str, socketnum);//se
         // nd the serilze car to driver
-        if (!center->getTrip().empty()){
-            SearchableTrip* trip=center->getTrip()[0];
+        if (!center->getTrip().empty()) {
+            SearchableTrip *trip = center->getTrip()[0];
             center->getTrip().erase(center->getTrip().begin());//erase the trip
             center->getDriver(gp2->getId())->setTrip(trip);
             boost::iostreams::back_insert_device<std::string> inserter_trip(serial_str);
             boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > s_trip(inserter_trip);
             boost::archive::binary_oarchive a_trip(s_trip);
-            a_trip <<trip;
+            a_trip << trip;
             s.flush();
-            sendMessage(serial_str,socketnum);//se
+            sendMessage(serial_str, socketnum);//se
         }
 
     }
     return true;
 }
+
 /***
  * for use in seprate thred we need static method
  * @param parameters
@@ -289,11 +296,11 @@ bool Controller::CommendTwo() {
     cin >> parm;
     try {
         CreateRide *cd = new CreateRide(parm);
-        time=cd->time;
-        SearchableTrip* trip;
-        trip=new SearchableTrip(center->getLayout(),cd->start_x,
-                                cd->star_y, cd->end_x,cd->end_y,cd->id, cd->tariff,cd->numOfPass);
-        center->getTrip().insert(std::pair<int,SearchableTrip*>(center->getTrip().size(),trip));
+        time = cd->time;
+        SearchableTrip *trip;
+        trip = new SearchableTrip(center->getLayout(), cd->start_x,
+                                  cd->star_y, cd->end_x, cd->end_y, cd->id, cd->tariff, cd->numOfPass);
+        center->getTrip().insert(std::pair<int, SearchableTrip *>(center->getTrip().size(), trip));
         trip->setTime(cd->time);
         delete cd;
     } catch (std::exception exception1) {

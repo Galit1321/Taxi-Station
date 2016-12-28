@@ -12,7 +12,7 @@ TaxiCenter::~TaxiCenter() {
         delete it->second;
     }
     cars.clear();
-    ///delete all driver
+    //delete all driver
     for (map<int, Driver *>::iterator it = getDrivers().begin(); it != getDrivers().end(); ++it) {
         delete it->second;
     }
@@ -20,6 +20,9 @@ TaxiCenter::~TaxiCenter() {
     for (map<int, Passenger *>::iterator it = getAll_passngers().begin(); it != getAll_passngers().end(); ++it) {
         delete it->second;
     }
+    for (map<int, SearchableTrip*>::iterator it = getTrip().begin(); it != getTrip().end(); ++it) {
+        delete it->second;
+    }trip.clear();
     all_passngers.clear();
     delete layout;
 }

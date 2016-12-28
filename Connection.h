@@ -57,10 +57,6 @@ public:
      */
     virtual void getNewClient()=0;
 
-    /*
-     * the function get socket number for the client and change it
-     */
-    virtual void setClientSocketNum(int clientSock) = 0;
 };
 
 #endif /* CONNECTION_H_ */

@@ -38,10 +38,7 @@ public:
      */
     void getNewClient();
     static void* staticForChose(void* parameters);
-    /*
-     * the function get socket number for the client and change it
-     */
-    void setClientSocketNum(int sockNum);
+
     virtual ~Controller();//desrectir
     Controller();//consterctor
     void* getCommend();//busy wating method to get num of commend
