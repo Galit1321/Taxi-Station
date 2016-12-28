@@ -17,9 +17,6 @@
 #include "Creation/CreateDriver.h"
 #include "Creation/CreateCar.h"
 #include "Creation/CreateRide.h"
-#include <cstring>
-#include <boost/iostreams/device/array.hpp>
-#include <boost/archive/binary_iarchive.hpp>
 
 
 using namespace std;
@@ -46,7 +43,6 @@ Controller::Controller(const short unsigned int &port) : UDP(port) {
     char tmp[10];
     int h;
     int w;
-    //  cin>>h;
     int pos = sizeGride.find(" ");
     h = atoi(strcpy(tmp, sizeGride.substr(0, pos).c_str()));
     sizeGride.erase(0, pos + 1);
@@ -69,20 +65,22 @@ Controller::Controller(const short unsigned int &port) : UDP(port) {
     } else {
         center->setLayout(h, w);
     }
+    struct sockaddr_in sin;
     memset(&sin, 0, sizeof(sin));
     sin.sin_family = AF_INET;
     sin.sin_addr.s_addr = INADDR_ANY;
     sin.sin_port = htons(this->port);
-    if (bind(this->socketnum, (struct sockaddr *) &sin, sizeof(sin)) < 0) {
-        perror("error binding socket");
+    if (bind(socketnum, (struct sockaddr *) &sin, sizeof(sin)) < 0) {
+        perror("error binding to socket");
     }
+/*
     client_socket = vector<int>();
     getCommend();///to build one time at least
     pthread_t id;
     struct parameters *p = new struct parameters();
     p->m = this;
     pthread_create(&id, NULL, this->staticForChose, (void *) p);
-
+*/
 }
 
 /**
@@ -91,11 +89,21 @@ Controller::Controller(const short unsigned int &port) : UDP(port) {
  * @param id socket id -more relavent to tcp
  */
 void Controller::sendMessage(std::string &str, int id) {
-    int sent_bytes = send(socketnum, str.c_str(), str.length(), 0);
+    struct sockaddr_in sin;
+    memset(&sin, 0, sizeof(sin));
+    sin.sin_family = AF_INET;
+    string ip_address="127.0.0.1";
+    sin.sin_addr.s_addr = inet_addr(ip_address.c_str());
+    sin.sin_port = htons(this->port);
+    const char * datas = str.c_str();
+    int data_len = str.length() + 1;
+    //send
+    int sent_bytes = sendto(this->socketnum,datas, data_len, 0, (struct sockaddr *) &sin, sizeof(sin));
+//	cout << sent_bytes << endl;
+    //check if send successfully
     if (sent_bytes < 0) {
-        perror("error sending to client");
+            return perror("client error ");
     }
-
 }
 
 /**'
@@ -105,22 +113,22 @@ void Controller::sendMessage(std::string &str, int id) {
  * @return the string of want we got
  */
 std::string Controller::getMessage(int id) {
-    char buffer[4096] = {0};
-    int expected_data_len = sizeof(buffer);
-    int read_bytes = recv(socketnum, buffer, expected_data_len, 0);
-    if (read_bytes == 0) {
-        perror("connection is closed");
-    } else if (read_bytes < 0) {
-        perror("error");
+    struct sockaddr_in from;
+    unsigned int from_len = sizeof(struct sockaddr_in);
+    char buffer[4096];
+    int bytes = recvfrom(socketnum, buffer, sizeof(buffer), 0, (struct sockaddr *) &from, &from_len);
+    if (bytes < 0) {
+        perror("error reading from socket");
     }
-    return buffer;
+    string str(buffer, sizeof(buffer));
+    return str;
 }
 
 /**
  * with tcp we will get new client and give him socket id uniqe to him
  */
 void Controller::getNewClient() {
-    if (listen(this->socketnum, 5) < 0) {//we can get max of 5 client
+   /* if (listen(this->socketnum, 5) < 0) {//we can get max of 5 client
         perror("error listening to a socket");
     }
     unsigned int addr_len = sizeof(client_socket);
@@ -128,7 +136,7 @@ void Controller::getNewClient() {
 
     if (client_socket.front() < 0) {
         perror("error accepting client");
-    }
+    }*/
 
 }
 
@@ -144,7 +152,6 @@ Controller::Controller() : UDP() {
     char tmp[10];
     int h;
     int w;
-    //  cin>>h;
     int pos = sizeGride.find(" ");
     h = atoi(strcpy(tmp, sizeGride.substr(0, pos).c_str()));
     sizeGride.erase(0, pos + 1);
@@ -203,7 +210,6 @@ void *Controller::getCommend() {
         cin >> commend;
 
     }
-    pthread_exit(0);
 }
 
 /**
@@ -214,16 +220,7 @@ bool Controller::runDriver() {
     int i;
     cin >> i;
     while (i) {
-        Driver *gp = new Driver(0, 0, "m", 0);
-        std::string serial_str;
-        boost::iostreams::back_insert_device<std::string> inserter(serial_str);
-        boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > s(inserter);
-        boost::archive::binary_oarchive oa(s);
-        oa << gp;
-        s.flush();
-        cout << serial_str << endl;
-        //  getNewClient();
-        // serial_str=getMessage(this->socketnum);
+        string serial_str=getMessage(this->socketnum);
         Driver *gp2;
         boost::iostreams::basic_array_source<char> device(serial_str.c_str(), serial_str.size());
         boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s2(device);
@@ -232,14 +229,14 @@ bool Controller::runDriver() {
         i--;
         center->setTaxiToDriver(0, 0);
         Car *car = center->getCars()[gp2->getId()];
-        //std::string serial_str;
+
         boost::iostreams::back_insert_device<std::string> inserter2(serial_str);
         boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > s3(inserter2);
         boost::archive::binary_oarchive a2(s3);
         a2 << car;
-        s.flush();
-        sendMessage(serial_str, socketnum);//se
-        // nd the serilze car to driver
+        s3.flush();
+        sendMessage(serial_str, socketnum);//serlize the car and send to driver
+        getMessage(socketnum);
         if (!center->getTrip().empty()) {
             SearchableTrip *trip = center->getTrip()[0];
             center->getTrip().erase(center->getTrip().begin());//erase the trip
@@ -248,8 +245,8 @@ bool Controller::runDriver() {
             boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > s_trip(inserter_trip);
             boost::archive::binary_oarchive a_trip(s_trip);
             a_trip << trip;
-            s.flush();
-            sendMessage(serial_str, socketnum);//se
+            s_trip.flush();
+            sendMessage(serial_str, socketnum);//serlize the trip and send to driver
         }
 
     }
