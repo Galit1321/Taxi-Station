@@ -24,6 +24,7 @@ public:
     Point *getPEnd() const;
     //set the satisfication of the passenger
     void setSatisfaction(float satisfaction);
+    //return the satisfication of the passenger
     float  getSatisfaction();
 
     virtual ~Passenger();
