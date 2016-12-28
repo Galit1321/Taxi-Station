@@ -209,8 +209,7 @@ void *Controller::getCommend() {
                 success = CommendSix();
                 break;
             case 9:
-                center->getDrivers()[0]->move();
-                this->time++;
+
                 break;
 
         }
@@ -236,24 +235,25 @@ bool Controller::runDriver() {
         i--;
         center->setTaxiToDriver(0, 0);
         Car *car = center->getCars()[gp2->getId()];
-
-        boost::iostreams::back_insert_device<std::string> inserter2(serial_str);
+        string car_string;
+        boost::iostreams::back_insert_device<std::string> inserter2(car_string);
         boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > s3(inserter2);
         boost::archive::binary_oarchive a2(s3);
         a2 << car;
         s3.flush();
-        sendMessage(serial_str, socketnum);//serlize the car and send to driver
+        sendMessage(car_string, socketnum);//serlize the car and send to driver
         getMessage(socketnum);
+        string trip_string;
         if (!center->getTrip().empty()) {
             SearchableTrip *trip = center->getTrip()[0];
             center->getTrip().erase(center->getTrip().begin());//erase the trip
-            center->getDriver(gp2->getId())->setTrip(trip);
-            boost::iostreams::back_insert_device<std::string> inserter_trip(serial_str);
+            gp2->setTrip(trip);
+            boost::iostreams::back_insert_device<std::string> inserter_trip(trip_string);
             boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > s_trip(inserter_trip);
             boost::archive::binary_oarchive a_trip(s_trip);
             a_trip << trip;
             s_trip.flush();
-            sendMessage(serial_str, socketnum);//serlize the trip and send to driver
+            sendMessage(trip_string, socketnum);//serlize the trip and send to driver
         }
 
     }
