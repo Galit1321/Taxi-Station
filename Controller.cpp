@@ -113,12 +113,19 @@ void Controller::sendMessage(std::string &str, int id) {
  * @return the string of want we got
  */
 std::string Controller::getMessage(int id) {
-    struct sockaddr_in from;
-    unsigned int from_len = sizeof(struct sockaddr_in);
-    char buffer[4096];
-    int bytes = recvfrom(socketnum, buffer, sizeof(buffer), 0, (struct sockaddr *) &from, &from_len);
+    struct sockaddr_in to;
+    char buffer[4050];
+    unsigned int to_len = sizeof(struct sockaddr_in);
+    //receive
+    int bytes = recvfrom(this->socketnum,
+                         buffer, sizeof(buffer) , 0, (struct sockaddr *) &to, &to_len);
+    //set the port number to the new one which we get with the data
+    this->port = ntohs(to.sin_port);
+    //check if receive successfully
+
+//    cout << bytes << endl;
     if (bytes < 0) {
-        perror("error reading from socket");
+        perror("fail to rec data");
     }
     string str(buffer, sizeof(buffer));
     return str;
