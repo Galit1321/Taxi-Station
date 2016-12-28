@@ -8,8 +8,11 @@
  */
 MatrixLayout::~MatrixLayout() {
     for(int i = 0; i < height; ++i){
-        delete [] matrix[i];
+        for (int j=0; j<width; j++){
+            delete  pNode[i][j];
+        }
         delete [] pNode[i];
+    delete[] matrix[i];
     }
 delete[] matrix;
     delete[] pNode;

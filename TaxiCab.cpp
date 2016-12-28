@@ -26,6 +26,7 @@ TaxiCab::TaxiCab(int id ,string manufacturer1 ,string color1){
     manufacturer =  manufacturer1;
     color = color1;
     tariff = 0;
+    kind=1;
 }
 /**
  * constructor

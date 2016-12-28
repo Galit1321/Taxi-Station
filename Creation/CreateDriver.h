@@ -1,3 +1,4 @@
+
 //
 // Created by galit on 12/12/16.
 //
@@ -6,14 +7,11 @@
 #define ADVPRO01_CREATEDRIVER_H
 
 #include "Create.h"
-#include "Driver.h"
-
-/**
- * class CreateDriver
- * a class that create a driver
- */
 
 class CreateDriver: public  Create{
+    /**
+     * class to pahse the creation of driver
+     */
 private:
     int id;
     int age;

@@ -11,16 +11,17 @@
  */
 
 #include "Create.h"
-#include "SearchableTrip.h"
-class CreateRide :public  Create{
 
+class CreateRide :public  Create{
+/**
+ * phase the creation of a new ride
+ */
 public:
     //set the parameters of the ride
     CreateRide(string &input);
-    SearchableTrip* getTrip();
 
     virtual ~CreateRide();
-    void phase(string s);
+int time;
     int id;
     // the x val of the strat point
     int start_x;

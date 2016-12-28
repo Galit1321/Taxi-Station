@@ -6,7 +6,7 @@
 #ifndef ADVPRO1_ISEARCHER_H
 #define ADVPRO1_ISEARCHER_H
 
-#include "Solution.h"
+
 #include "ISearchable.h"
 
 /**
@@ -19,7 +19,7 @@ class ISearcher
 
 protected:
     //the method that will do the search by what ISearchable given
-    virtual Solution* search(ISearchable* searchable)=0;
+    virtual deque<Point*>  search(ISearchable* searchable)=0;
 };
 
 #endif //ADVPRO1_ISEARCHER_H

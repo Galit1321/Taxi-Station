@@ -7,31 +7,55 @@
 
 #include "Point.h"
 #include "TaxiCenter.h"
+#include "UDP.h"
+
 using namespace std;
-/**
- * class controller
- * a class that works ith the main and get the commands
- * from the user
- */
-class Controller {
+
+class Controller: public UDP {
+    /**
+     * class to controller the input in front
+     * of the main function
+     */
 public:
+    vector<int> client_socket;
     TaxiCenter* center;
-    virtual ~Controller();
-    Controller();
-    //get a commend from the user
-    void getCommend();
+    int time;
+    Controller(const short unsigned int  &port);
+   /*
+    * the function send message for the client.
+    * it get the string message to send and send it.
+    */
+    void sendMessage (std::string &str, int sock);
+
+    /*
+     * the function get message from the client.
+     * it get the message,change it to string and return it
+     */
+    string getMessage (int sock);
+
+    /*
+     * the function get new client and accept it
+     */
+    void getNewClient();
+    static void* staticForChose(void* parameters);
+
+    virtual ~Controller();//desrectir
+    Controller();//consterctor
+    void* getCommend();//busy wating method to get num of commend
 protected:
-    //create a driver and return true if the creation succes
     bool CommendOne();
-    //create a ride and return true if the creation succes
     bool CommendTwo();
-    //create a car and return true if the creation succes
     bool CommendThree();
-    //print the current position of the driver
     bool CommendFour();
-    //finish the trip
     bool CommendSix();
+    bool runDriver();
 };
 
+/*
+ * struct to hold the menu and the socket number for the client.
+ */
+struct parameters {
+    Controller* m;
+};
 
 #endif //ADVPRO01_CONTROLLER_H

@@ -5,42 +5,39 @@
 #ifndef EX2_DRIVER_H
 #define EX2_DRIVER_H
 
+
 #include "string"
-#include "TaxiCab.h"
+#include "Car.h"
 #include "Point.h"
-#include "Solution.h"
 #include "Person.h"
 #include "SearchableTrip.h"
 #include "BFS.h"
+#include <boost/serialization/access.hpp>
 
 class Driver :public Person{
+    /**
+     * class of driver of the cab
+     */
 private:
    int id;
     int age;
     int experience;
     int numOfUser;
     SearchableTrip* trip;
-    Solution* solution;
+
 
 public:
     string stat;
     Car *car;
 
+
     Driver();//default constructor
     Driver(Driver &object);//copy constructor
     Driver(int id ,int age,string stat , int experience);//constructor
-    //set the driver id
-    void setId(int id);
-    //set the driver age
-    void setAge(int age);
-    //set the status of the driver
-    void setStat(string stat);
+
     //set the car of the driver
     void setCar(Car *car);
-    //set the years of experience of the driver
-    void setExperience(int experience);
-    //set the num of the users
-    void setNumOfUser(int numOfUser);
+
     //return the status of the driver
     string getStat() const;
     //return the car of the driver
@@ -58,20 +55,28 @@ public:
     bool operator==(const Driver &driver1)const ;
     //find the distance from the driver curr pose
     //to the given point
-    void finishTrip();
-    //return the trip
-    SearchableTrip *getTrip() const;
-    //set the trip
-    void setTrip(SearchableTrip *trip);
-    //make a move
-    void move();
-    //get the satisfaction of the passenger
-    float getSatisfaction();
-    //set the satisfaction of the passenger
-    void setSatisfaction(float satisfaction);
-    //do the bfs algoritem
-    Solution* doBFS(SearchableTrip* pEnd);
+void finishTrip();
 
+    SearchableTrip *getTrip() const;
+    void setTrip(SearchableTrip* trip1);
+    void move();
+    float getSatisfaction();
+    void setSatisfaction(float satisfaction);
+    deque<Point*> doBFS(SearchableTrip* pEnd);
+//serlize the driver
+
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive &ar, const unsigned int version){
+///       ar & boost::serialization::base_object<Person>(*this);
+        ar & stat;
+        ar & satisfaction;
+        ar & curr_pos;
+        ar & id;
+        ar & age;
+        ar & experience;
+        ar & numOfUser;
+    }
     virtual ~Driver();
 };
 

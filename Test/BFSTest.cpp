@@ -1,9 +1,9 @@
 
 
 #include "gtest/gtest.h"
-#include "BFS.h"
-#include "SearchableTrip.h"
-#include "MatrixLayout.h"
+#include "../BFS.h"
+#include "../SearchableTrip.h"
+#include "../MatrixLayout.h"
 
 using namespace std;
 class BFSTest :public ::testing::Test{
@@ -43,8 +43,8 @@ public:
  */
 
 TEST_F(BFSTest,SearchSize){
-    Solution* s=bfs.search(searchableTrip);
-    ASSERT_GT(s->getSol().size(),0);
+   deque<Point*> s=bfs.search(searchableTrip);
+   ASSERT_GT(s.size(),0);
 }
 
 /**
@@ -53,11 +53,11 @@ TEST_F(BFSTest,SearchSize){
  */
 
 TEST_F(BFSTest,SolNull){
-   Solution* s=bfs.search(searchableTrip);
+   deque<Point*> s=bfs.search(searchableTrip);
     ASSERT_NO_FATAL_FAILURE(searchableTrip->getGoalState());
     ASSERT_NO_FATAL_FAILURE(searchableTrip->getInitialState());
-   ASSERT_NO_FATAL_FAILURE(s->getSol().size());
-    delete s;
+    ASSERT_NO_FATAL_FAILURE(s.size());
+
 
 }
 
@@ -69,17 +69,17 @@ TEST_F(BFSTest,SolNull){
  */
 
 TEST_F(BFSTest,UniqeTest) {
-    Solution* s=bfs.search(searchableTrip);
-    int size = s->getSol().size();
+   deque<Point*> s=bfs.search(searchableTrip);
+    int size = s.size();
     list<Point> g;
-    while (!s->sol.empty()) {
-        Point* p = s->getSol().front();
+    while (!s.empty()) {
+        Point* p = s.front();
         if (std::find(g.begin(),g.end(),*p)==g.end())
         g.push_back(*p);
-        s->sol.pop_front();
+        s.pop_front();
     }
    ASSERT_EQ(g.size(), size);
-    delete s;
+    s.clear();
 }
 /**
  * check to see that even with obstacles we can still search
@@ -90,7 +90,10 @@ TEST_F(BFSTest,BFSTest_SearchWithOb_Test){
     vector<int> obs(s, s + sizeof(s) / sizeof(int));//we have (0,0) is a deadend
     MatrixLayout *matrix = new MatrixLayout(3, 3, &obs);
     SearchableTrip *st = new SearchableTrip(matrix, 0, 0, 2, 2);
-    Solution* solution=bfs.search(st);
-    ASSERT_GT(solution->getSol().size(),0);
+    deque<Point*> solution=bfs.search(st);
+    ASSERT_GT(solution.size(),0);
+    solution.clear();
+    delete  matrix;
+    delete st;
 }
 

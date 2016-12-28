@@ -9,16 +9,17 @@
 using namespace std;
 #include <algorithm>
 #include "Point.h"
-#include "queue"
+#include "deque"
 #include "list"
 #include "ISearcher.h"
 #include "vector"
 class BFS : public ISearcher {
 
 public:
+
     BFS();//constructor
     virtual ~BFS();//deconstructor
-    Solution* search(ISearchable* searchable);
+   deque<Point*> search(ISearchable* searchable);//the search algoritm
 
 
 

@@ -12,6 +12,8 @@
 class Passenger : public Person{
 public:
     Point *pStart ,*pEnd;
+    template<class Archive>
+    void serialize(Archive &ar, const unsigned int version);
     // set the start point
     void setPStart(Point *pStart);
     // set the end point

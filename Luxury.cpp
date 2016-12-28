@@ -10,15 +10,21 @@ Luxury ::Luxury(int id, int mileage, string manufacturer2, string color2, double
     mileage = mileage;
     manufacturer = manufacturer2;
     color = color2;
-    tariff = tariff2;
+    tariff = 2*tariff2;
 }
-//defult constructor
-Luxury ::Luxury() {}
-
 //constructor
+Luxury ::Luxury() {}
+/**
+ * construcrote
+ * @param id
+ * @param manufacturer2
+ * @param color2
+ * @return
+ */
 Luxury::Luxury(int id, string manufacturer2, string color2) {
     this->id = id;
     this->mileage = 0;
     manufacturer = manufacturer2;
     color = color2;
+    kind=2;
 }

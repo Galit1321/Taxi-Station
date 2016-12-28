@@ -10,15 +10,47 @@ using namespace std;
 #include "list"
 #include "Point.h"
 #include "ISearchable.h"
+#include <boost/graph/graph_traits.hpp>
+#include <boost/graph/adjacency_list.hpp>
+#include <boost/graph/adj_list_serialize.hpp>
+#include <boost/graph/filtered_graph.hpp>
+#include <boost/multi_index_container.hpp>
+#include <boost/multi_index/ordered_index.hpp>
+#include <boost/multi_index/identity.hpp>
+#include <boost/multi_index/member.hpp>
+#include <boost/multi_index/composite_key.hpp>
+#include <boost/serialization/map.hpp>
+#include <boost/serialization/deque.hpp>
+#include <boost/serialization/variant.hpp>
+#include <boost/variant.hpp>
+#include <boost/ref.hpp>
+
 /**
  * searchable trip on the matrix
  */
 class SearchableTrip : public ISearchable{
 private:
     int numOfPass;
+    int traiff;
+    ILayout* layout;//the layout we do the trip on
+    Point* goal;//the goal of the trip
+    Point* init;//the start of the trip
     int rideId;
     int total_dis;
+    int time;
 public:
+    int getTime() const;
+
+    void setTime(int time);
+
+
+public:
+    const deque<Point *> &getSolution() const;
+    deque<Point*> solution;
+    void setSolution(const deque<Point *> &solution);
+
+public:
+
     //return the num of the passengers
     int getNumOfPass() const;
     //add new passenger
@@ -34,11 +66,7 @@ public:
     //set the tariff
     void setTraiff(int traiff);
 
-private:
-    int traiff;
-    ILayout* layout;//the layout we do the trip on
-    Point* goal;//the goal of the trip
-    Point* init;//the start of the trip
+
 public:
     SearchableTrip();//defult constructor
 
@@ -47,11 +75,27 @@ void clean(list<Point> closed);
     SearchableTrip(ILayout* layout1,Point* start,Point* end);//constructor
     SearchableTrip(ILayout* layout1,int start_i,int start_j,int end_i,int end_j);//constructor
     //constructor
-    SearchableTrip(ILayout* layout1,int start_i,int start_j,int end_i,int end_j, int rid, double tff);
+    SearchableTrip(ILayout* layout1,int start_i,int start_j,int end_i,int end_j, int rid, double tff,int nop);
+
+    virtual ~SearchableTrip();
+
+    void setNumOfPass(int numOfPass);
+
     Point* getInitialState();//implantation of interface
     Point* getGoalState();//implantation of interface
     queue<Point*> getAllPossibleStates(Point* s);//implamention of interface
-
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive &ar, const unsigned int version){
+        /*
+selize*/
+        ar& (this->rideId);
+        ar&(this->init);
+        ar&(this->goal);
+        ar&(this->numOfPass);
+        ar&(this->layout);
+        ar&(this->solution);
+    }
 };
 
 

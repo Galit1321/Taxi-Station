@@ -1,8 +1,8 @@
 
 
 #include "gtest/gtest.h"
-#include "SearchableTrip.h"
-#include "MatrixLayout.h"
+#include "../SearchableTrip.h"
+#include "../MatrixLayout.h"
 
 class SearchableTripTest : public ::testing::Test {
     /**
@@ -43,6 +43,7 @@ TEST_F(SearchableTripTest, SearchableTripTest_CheckOutOfBond_Test) {
     SearchableTrip *st2 = new SearchableTrip(new MatrixLayout(3, 3), 0, 0, 20, 2);
     ASSERT_TRUE(st2->getGoalState() == NULL);
     delete st2;
+
 }
 /**
  * check to see that in given correct input the goal and init

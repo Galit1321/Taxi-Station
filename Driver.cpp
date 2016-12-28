@@ -1,6 +1,7 @@
 //
 // Created by michal on 12/1/16.
 //
+#include <boost/serialization/nvp.hpp>
 #include "Driver.h"
 
 /**
@@ -13,6 +14,8 @@ Driver ::Driver() :Person(){
     experience =0;
     stat = " ";
     car = NULL;
+   trip=NULL;
+    satisfaction=0.0;
 
 }
 
@@ -27,7 +30,7 @@ Driver ::Driver(Driver &object) {
     this->age = object.getAge();
     this->stat = object.getStat();
     this->curr_pos = object.getCurr_pos();
-
+    trip=object.getTrip();
 }
 //constructor
 Driver ::Driver(int id ,int age ,string stat , int experience) {
@@ -36,10 +39,14 @@ Driver ::Driver(int id ,int age ,string stat , int experience) {
     this->stat = stat;
     this->experience =experience;
     car = NULL;
+
+    trip=NULL;
 }
 
 Driver::~Driver() {
 
+    if (trip!=NULL)
+    delete trip;
 }
 
 
@@ -51,10 +58,13 @@ bool Driver ::operator==(const Driver &driver1) const {
 }
 
 //run the bfs algoritm
-Solution* Driver ::doBFS(SearchableTrip* psEnd) {
+deque<Point*> Driver ::doBFS(SearchableTrip* psEnd) {
    BFS* bfs=new BFS();
-    SearchableTrip* trip1=new SearchableTrip(psEnd->getLayout(),curr_pos,psEnd->getInitialState());
-    return bfs->search(trip1);
+   SearchableTrip* trip1=new SearchableTrip(psEnd->getLayout(),curr_pos,psEnd->getInitialState());
+    deque<Point*> sol=bfs->search(trip1);
+    delete trip1;
+    delete bfs;
+   return sol;
 }
 
 //return the driver id
@@ -77,30 +87,6 @@ int Driver::getNumOfUser() const {
     return numOfUser;
 }
 
-//set the driver id
-void Driver::setId(int id) {
-    Driver::id = id;
-}
-
-//set the driver age
-void Driver::setAge(int age) {
-    Driver::age = age;
-}
-
-//set the years of experience of the driver
-void Driver::setExperience(int experience) {
-    Driver::experience = experience;
-}
-
-//set the num of the users
-void Driver::setNumOfUser(int numOfUser) {
-    Driver::numOfUser = numOfUser;
-}
-
-//set the status of the driver
-void Driver::setStat(string stat) {
-    Driver::stat = stat;
-}
 
 //set the car of the driver
 void Driver::setCar(Car *car) {
@@ -112,50 +98,81 @@ string Driver::getStat() const {
     return stat;
 }
 
-//return the car of the driver
+////return the car of the driver
 Car *Driver::getCar() const {
     return car;
 }
 
-//return the trip
+
 SearchableTrip *Driver::getTrip() const {
     return trip;
 }
-
-//finish the trip
+/**
+ * finish the driver trip
+ */
 void Driver::finishTrip() {
-    int cont=this->solution->sol.size();
+    int cont=this->trip->solution.size();
     for (int i=0;i<cont;i++){
         move();
     }
 
 }
 
+/**
+ *
+ * @param layout1
+ * @param start_i
+ * @param start_j
+ * @param end_i
+ * @param end_j
+ * @param rid
+ * @param tff
+ * @param nop
+ */
 
-//set the trip
-void Driver::setTrip(SearchableTrip *trip) {
-    BFS* bfs=new BFS();
-    this->solution=bfs->search(trip);
+void Driver::setTrip(SearchableTrip* trip1) {
+    if (this->trip!=NULL){
+        delete trip;
+    }
+    this->trip=trip1;
     this->numOfUser+=trip->getNumOfPass();
     curr_pos=trip->getInitialState();
-    delete bfs;
-
 }
-
-//make a move
+/**
+ * driver move a qeure accoding to kind of car
+ */
 void Driver::move() {
-    solution->sol.pop_front();
-    if (!solution->sol.empty()){
-        curr_pos=solution->getSol().front();
+
+    if (!trip->solution.empty()){
+        if (car->getKind()==1){
+            curr_pos=trip->solution.front();
+            this->car->setMileage(this->car->getMileage()+1);
+            trip->solution.pop_front();
+        }
+       else{
+            curr_pos=trip->solution.front();
+            trip->solution.pop_front();
+            this->car->setMileage(this->car->getMileage()+1);
+            if (!trip->solution.empty()){
+                curr_pos=trip->solution.front();
+                trip->solution.pop_front();
+                this->car->setMileage(this->car->getMileage()+1);
+            }
+
+        }
     }
 }
-
-//set the satisfaction of the passenger
+/**
+ * add the satisfaction to total of that we have
+ * @param satisfaction
+ */
 void Driver::setSatisfaction(float satisfaction) {
     this->satisfaction=(this->satisfaction*(numOfUser-trip->getNumOfPass())+satisfaction)/(float)this->numOfUser;
-}
-
-//get the satisfaction of the passenger
+}\
+/**
+ * get setsatfaction
+ * @return
+ */
 float Driver::getSatisfaction() {
     return  this->satisfaction;
 }

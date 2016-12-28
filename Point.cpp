@@ -18,6 +18,8 @@ Point::~Point() {
 //the class that hold the point object will delet it
     //alone with the parent if necessary
 }
+
+
 /**
  * copy constructor
  * @param obj

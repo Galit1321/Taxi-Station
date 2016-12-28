@@ -3,7 +3,7 @@
 //
 
 #include "string"
-#include "Solution.h"
+#include <boost/serialization/access.hpp>
 #ifndef EX2_CAR_H
 #define EX2_CAR_H
 
@@ -15,18 +15,12 @@ protected:
     int id ;
     int mileage;
     string color;
-    string carType;
+    //string carType;
     double tariff;
     string manufacturer;
     int kind;
 public:
     int getKind() const;
-
-    void setKind(int kind);
-
-protected:
-    int speed;
-
 
 public:
     //set the car type
@@ -61,6 +55,21 @@ public:
 
     //compare between two cars
     bool operator==(const Car &car) const;
+    //selize the object
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive &ar, const unsigned int version){
+        /*
+selize*/
+            ar& (this->id);
+            ar&(this->kind);
+            ar&(this->mileage);
+            ar&(this->color);
+            ar&(this->tariff);
+            ar&(this->manufacturer);
+        }
+
+
 };
 
 

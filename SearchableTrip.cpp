@@ -1,5 +1,7 @@
 
+#include <boost/serialization/nvp.hpp>
 #include "SearchableTrip.h"
+#include "BFS.h"
 
 /**
  * constructor
@@ -18,7 +20,9 @@ SearchableTrip::SearchableTrip(ILayout *layout1, int start_i, int start_j, int e
     this->total_dis=0;
     this->traiff=0;
     this->numOfPass=0;
-
+    BFS* bfs=new BFS();
+    this->solution=bfs->search(this);
+    delete bfs;
 }
 
 /**
@@ -35,6 +39,9 @@ SearchableTrip::SearchableTrip(ILayout* layout1,Point* start,Point* end){
     this->rideId=0;
     this->total_dis=0;
     this->traiff=0;
+    BFS* bfs=new BFS();
+    this->solution=bfs->search(this);
+    delete bfs;
     this->numOfPass=0;
 }
 
@@ -47,16 +54,20 @@ SearchableTrip::SearchableTrip(ILayout* layout1,Point* start,Point* end){
  * @param tff - the tariff of the ride
  * @return
  */
-SearchableTrip::SearchableTrip(ILayout* layout1,int start_i,int start_j,int end_i,int end_j, int rid, double tff){
+SearchableTrip::SearchableTrip(ILayout* layout1,int start_i,int start_j,int end_i,int end_j, int rid, double tff, int nop){
     this->layout = layout1;
     this->init = this->layout->getNode(start_i, start_j);
     this->goal = this->layout->getNode(end_i, end_j);
     this->rideId=0;
     this->total_dis=0;
     this->traiff=0;
-    this->numOfPass=0;
+    this->numOfPass=nop;
     this->traiff=tff;
     this->rideId=rid;
+    BFS* bfs=new BFS();
+    this->solution=bfs->search(this);
+    delete bfs;
+
 }
 SearchableTrip::SearchableTrip() {
 
@@ -157,4 +168,28 @@ void SearchableTrip::setTraiff(int traiff) {
 //get a layout
 ILayout *SearchableTrip::getLayout() const {
     return layout;
+}
+
+void SearchableTrip::setNumOfPass(int numOfPass) {
+    SearchableTrip::numOfPass = numOfPass;
+}
+
+SearchableTrip::~SearchableTrip() {
+solution.clear();
+}
+
+const deque<Point *> &SearchableTrip::getSolution() const {
+    return solution;
+}
+
+void SearchableTrip::setSolution(const deque<Point *> &solution) {
+    SearchableTrip::solution = solution;
+}
+
+int SearchableTrip::getTime() const {
+    return time;
+}
+
+void SearchableTrip::setTime(int time) {
+    SearchableTrip::time = time;
 }

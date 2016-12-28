@@ -29,9 +29,8 @@ BFS::~BFS() {
  * @return solution object
  * that will hold the solution of the searc
  */
-
-Solution *BFS::search(ISearchable *searchable) {
-    Solution *s = new Solution();
+deque<Point*> BFS::search(ISearchable *searchable) {
+    deque<Point*> s;
     vector<Point*> open;
     list<Point> closed;//
     Point* n;
@@ -46,7 +45,7 @@ Solution *BFS::search(ISearchable *searchable) {
         if ((n!= NULL)&&(n ==node)){
             while (n!= NULL)//we didnt reach the root of tree
             {
-                s->addNode(n);
+                s.push_front(n);
                 n = n->getParent();
             }
             break;
@@ -70,7 +69,6 @@ Solution *BFS::search(ISearchable *searchable) {
             l.pop();
         }
         n = open.front();
-
     }
   searchable->clean(closed);
     open.clear();

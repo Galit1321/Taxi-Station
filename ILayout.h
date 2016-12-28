@@ -20,8 +20,7 @@ class ILayout {
 public:
     virtual bool canGo(Point* n, char d)=0;//method to see on the
     // layout if we can go to d direction
-    ILayout();//defult construcror
-    virtual  ~ILayout();//deconstructor
+
     //get point in index
     virtual Point* getNode(int i,int j)=0;
 };
