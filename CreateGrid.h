@@ -17,7 +17,7 @@ using namespace std;
 class CreateGrid:public Create{
 
 public:
-vector<int> input;
+    vector<int> input;
     CreateGrid(string &input);//constructor
     virtual ~CreateGrid();//deconstructor
     //divide the input
