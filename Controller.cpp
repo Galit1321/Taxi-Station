@@ -13,13 +13,10 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include "Controller.h"
-#include "Creation/CreateGrid.h"
-#include "Creation/CreateDriver.h"
-#include "Creation/CreateCar.h"
-#include "Creation/CreateRide.h"
-#include <cstring>
-#include <boost/iostreams/device/array.hpp>
-#include <boost/archive/binary_iarchive.hpp>
+#include "CreateGrid.h"
+#include "CreateDriver.h"
+#include "CreateCar.h"
+#include "CreateRide.h"
 
 
 using namespace std;
@@ -46,7 +43,6 @@ Controller::Controller(const short unsigned int &port) : UDP(port) {
     char tmp[10];
     int h;
     int w;
-    //  cin>>h;
     int pos = sizeGride.find(" ");
     h = atoi(strcpy(tmp, sizeGride.substr(0, pos).c_str()));
     sizeGride.erase(0, pos + 1);
@@ -69,20 +65,22 @@ Controller::Controller(const short unsigned int &port) : UDP(port) {
     } else {
         center->setLayout(h, w);
     }
+    struct sockaddr_in sin;
     memset(&sin, 0, sizeof(sin));
     sin.sin_family = AF_INET;
     sin.sin_addr.s_addr = INADDR_ANY;
     sin.sin_port = htons(this->port);
-    if (bind(this->socketnum, (struct sockaddr *) &sin, sizeof(sin)) < 0) {
-        perror("error binding socket");
+    if (bind(socketnum, (struct sockaddr *) &sin, sizeof(sin)) < 0) {
+        perror("error binding to socket");
     }
+/*
     client_socket = vector<int>();
     getCommend();///to build one time at least
     pthread_t id;
     struct parameters *p = new struct parameters();
     p->m = this;
     pthread_create(&id, NULL, this->staticForChose, (void *) p);
-
+*/
 }
 
 /**
@@ -91,11 +89,21 @@ Controller::Controller(const short unsigned int &port) : UDP(port) {
  * @param id socket id -more relavent to tcp
  */
 void Controller::sendMessage(std::string &str, int id) {
-    int sent_bytes = send(socketnum, str.c_str(), str.length(), 0);
+    struct sockaddr_in sin;
+    memset(&sin, 0, sizeof(sin));
+    sin.sin_family = AF_INET;
+    string ip_address="127.0.0.1";
+    sin.sin_addr.s_addr = inet_addr(ip_address.c_str());
+    sin.sin_port = htons(this->port);
+    const char * datas = str.c_str();
+    int data_len = str.length() + 1;
+    //send
+    int sent_bytes = sendto(this->socketnum,datas, data_len, 0, (struct sockaddr *) &sin, sizeof(sin));
+//	cout << sent_bytes << endl;
+    //check if send successfully
     if (sent_bytes < 0) {
-        perror("error sending to client");
+            return perror("client error ");
     }
-
 }
 
 /**'
@@ -105,22 +113,29 @@ void Controller::sendMessage(std::string &str, int id) {
  * @return the string of want we got
  */
 std::string Controller::getMessage(int id) {
-    char buffer[4096] = {0};
-    int expected_data_len = sizeof(buffer);
-    int read_bytes = recv(socketnum, buffer, expected_data_len, 0);
-    if (read_bytes == 0) {
-        perror("connection is closed");
-    } else if (read_bytes < 0) {
-        perror("error");
+    struct sockaddr_in to;
+    char buffer[4050];
+    unsigned int to_len = sizeof(struct sockaddr_in);
+    //receive
+    int bytes = recvfrom(this->socketnum,
+                         buffer, sizeof(buffer) , 0, (struct sockaddr *) &to, &to_len);
+    //set the port number to the new one which we get with the data
+    this->port = ntohs(to.sin_port);
+    //check if receive successfully
+
+//    cout << bytes << endl;
+    if (bytes < 0) {
+        perror("fail to rec data");
     }
-    return buffer;
+    string str(buffer, sizeof(buffer));
+    return str;
 }
 
 /**
  * with tcp we will get new client and give him socket id uniqe to him
  */
 void Controller::getNewClient() {
-    if (listen(this->socketnum, 5) < 0) {//we can get max of 5 client
+   /* if (listen(this->socketnum, 5) < 0) {//we can get max of 5 client
         perror("error listening to a socket");
     }
     unsigned int addr_len = sizeof(client_socket);
@@ -128,7 +143,7 @@ void Controller::getNewClient() {
 
     if (client_socket.front() < 0) {
         perror("error accepting client");
-    }
+    }*/
 
 }
 
@@ -144,7 +159,6 @@ Controller::Controller() : UDP() {
     char tmp[10];
     int h;
     int w;
-    //  cin>>h;
     int pos = sizeGride.find(" ");
     h = atoi(strcpy(tmp, sizeGride.substr(0, pos).c_str()));
     sizeGride.erase(0, pos + 1);
@@ -195,15 +209,13 @@ void *Controller::getCommend() {
                 success = CommendSix();
                 break;
             case 9:
-                success = CommendNine();
-
+                success=CommendNine();
                 break;
 
         }
         cin >> commend;
 
     }
-    pthread_exit(0);
 }
 
 /**
@@ -220,33 +232,37 @@ bool Controller::runDriver() {
         boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s2(device);
         boost::archive::binary_iarchive ia(s2);
         ia >> gp2;
+        center->addDriver(gp2);
         i--;
         center->setTaxiToDriver(0, 0);
         Car *car = center->getCars()[gp2->getId()];
-        //std::string serial_str;
-        boost::iostreams::back_insert_device<std::string> inserter2(serial_str);
+        string car_string;
+        boost::iostreams::back_insert_device<std::string> inserter2(car_string);
         boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > s3(inserter2);
         boost::archive::binary_oarchive a2(s3);
         a2 << car;
-        s.flush();
-        sendMessage(serial_str, socketnum);//se
-        // nd the serilze car to driver
-        if (!center->getTrip().empty()) {
-            SearchableTrip *trip = center->getTrip()[0];
-            center->getTrip().erase(center->getTrip().begin());//erase the trip
-            center->getDriver(gp2->getId())->setTrip(trip);
-            boost::iostreams::back_insert_device<std::string> inserter_trip(serial_str);
-            boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > s_trip(inserter_trip);
-            boost::archive::binary_oarchive a_trip(s_trip);
-            a_trip << trip;
-            s.flush();
-            sendMessage(serial_str, socketnum);//se
-        }
+        s3.flush();
+        sendMessage(car_string, socketnum);//serlize the car and send to driver
+        getMessage(socketnum);
+getNewTrip();
 
     }
     return true;
 }
-
+void Controller::getNewTrip(){
+    string trip_string;
+    if (!center->getTrip().empty()) {
+        SearchableTrip *trip = center->getTrip()[0];
+        center->getTrip().erase(center->getTrip().begin());//erase the trip
+        center->getDrivers()[center->getFree_drivers().front()]->setTrip(trip);
+        boost::iostreams::back_insert_device<std::string> inserter_trip(trip_string);
+        boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > s_trip(inserter_trip);
+        boost::archive::binary_oarchive a_trip(s_trip);
+        a_trip << trip;
+        s_trip.flush();
+        sendMessage(trip_string, socketnum);//serlize the trip and send to driver
+    }
+}
 /***
  * for use in seprate thred we need static method
  * @param parameters
@@ -258,25 +274,7 @@ void *Controller::staticForChose(void *parameters) {
     return NULL;
 }
 
-/**
- * commend one meaning create a driver
- * will call the class that phase the input and create driver
- * @return true is creation succes false if we got exception
- */
-bool Controller::CommendOne() {
-    string parm;
-    cin >> parm;
-    try {
-        CreateDriver *cd = new CreateDriver(parm);
-        center->addDriver(cd->getId(), cd->getAge(), cd->getStat(), cd->getExp());
-        center->setTaxiToDriver(cd->getId(), cd->getVehicle_id());
-        delete cd;
-    } catch (std::exception exception1) {
-        return false;
-    }
 
-    return true;
-}
 
 /**
  * commend two that create a new ride
@@ -293,6 +291,9 @@ bool Controller::CommendTwo() {
                                   cd->star_y, cd->end_x, cd->end_y, cd->id, cd->tariff, cd->numOfPass);
         center->getTrip().insert(std::pair<int, SearchableTrip *>(center->getTrip().size(), trip));
         trip->setTime(cd->time);
+        if(!center->getFree_drivers().empty()){
+            getNewTrip();
+        }
         delete cd;
     } catch (std::exception exception1) {
         return false;
@@ -341,7 +342,6 @@ bool Controller::CommendSix() {
     return true;
 }
 
-
 bool Controller::CommendNine() {
     if(this->time < center->getDrivers()[0]->getTrip()->getTime()){
         this->time++;
@@ -355,7 +355,8 @@ bool Controller::CommendNine() {
         arr << center->getDrivers()[0]->curr_pos;
         se.flush();
         this->time++;
-
+    sendMessage(str,socketnum);
     }
-   return true;
+    return true;
 }
+

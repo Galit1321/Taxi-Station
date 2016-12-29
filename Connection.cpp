@@ -15,13 +15,14 @@ Connection::Connection(const short unsigned int& port) {
  * destructor
  */
 Connection::~Connection() {
+    close(socketnum);
 }
 
 /*
  * the function close the socket
  */
 void Connection::closefunc() {
-    close(socketnum);
+
 }
 Connection::Connection() {
 

@@ -89,12 +89,13 @@ void clean(list<Point> closed);
     void serialize(Archive &ar, const unsigned int version){
         /*
 selize*/
+        ar & boost::serialization::base_object<ISearchable>(*this);
         ar& (this->rideId);
         ar&(this->init);
         ar&(this->goal);
         ar&(this->numOfPass);
-        ar&(this->layout);
-        ar&(this->solution);
+
+       ar&(this->solution);
     }
 };
 

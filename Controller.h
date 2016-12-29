@@ -43,13 +43,13 @@ public:
     Controller();//consterctor
     void* getCommend();//busy wating method to get num of commend
 protected:
-    bool CommendOne();
+    bool CommendNine();
     bool CommendTwo();
     bool CommendThree();
     bool CommendFour();
     bool CommendSix();
     bool runDriver();
-    bool CommendNine();
+    void getNewTrip();
 };
 
 /*

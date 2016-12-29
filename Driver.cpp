@@ -39,7 +39,6 @@ Driver ::Driver(int id ,int age ,string stat , int experience) {
     this->stat = stat;
     this->experience =experience;
     car = NULL;
-
     trip=NULL;
 }
 

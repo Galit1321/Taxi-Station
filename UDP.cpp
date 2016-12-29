@@ -6,6 +6,7 @@ UDP::UDP(const short unsigned int  &port):Connection(port) {
     if (socketnum < 0) {
         perror("error creating socket");
     }
+
 }
 
 /*
