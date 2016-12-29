@@ -32,7 +32,8 @@ public:
     void setLayout(int h,int w);
     void setLayout(int h,int w, vector<int>* obs);
     //add driver
-    void addDriver(int id ,int age,string stat,int exp);
+    void addDriver(Driver *driver);
+    //void addDriver(int id ,int age,string stat,int exp);
     //conect taxi to driver
     void setTaxiToDriver(int driver_id, int taxi_id);
     //print location

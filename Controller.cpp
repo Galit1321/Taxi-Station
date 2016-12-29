@@ -13,10 +13,10 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include "Controller.h"
-#include "Creation/CreateGrid.h"
-#include "Creation/CreateDriver.h"
-#include "Creation/CreateCar.h"
-#include "Creation/CreateRide.h"
+#include "CreateGrid.h"
+#include "CreateDriver.h"
+#include "CreateCar.h"
+#include "CreateRide.h"
 
 
 using namespace std;
@@ -209,7 +209,7 @@ void *Controller::getCommend() {
                 success = CommendSix();
                 break;
             case 9:
-
+                success=CommendNine();
                 break;
 
         }
@@ -232,6 +232,7 @@ bool Controller::runDriver() {
         boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s2(device);
         boost::archive::binary_iarchive ia(s2);
         ia >> gp2;
+        center->addDriver(gp2);
         i--;
         center->setTaxiToDriver(0, 0);
         Car *car = center->getCars()[gp2->getId()];
@@ -243,23 +244,25 @@ bool Controller::runDriver() {
         s3.flush();
         sendMessage(car_string, socketnum);//serlize the car and send to driver
         getMessage(socketnum);
-        string trip_string;
-        if (!center->getTrip().empty()) {
-            SearchableTrip *trip = center->getTrip()[0];
-            center->getTrip().erase(center->getTrip().begin());//erase the trip
-            gp2->setTrip(trip);
-            boost::iostreams::back_insert_device<std::string> inserter_trip(trip_string);
-            boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > s_trip(inserter_trip);
-            boost::archive::binary_oarchive a_trip(s_trip);
-            a_trip << trip;
-            s_trip.flush();
-            sendMessage(trip_string, socketnum);//serlize the trip and send to driver
-        }
+getNewTrip();
 
     }
     return true;
 }
-
+void Controller::getNewTrip(){
+    string trip_string;
+    if (!center->getTrip().empty()) {
+        SearchableTrip *trip = center->getTrip()[0];
+        center->getTrip().erase(center->getTrip().begin());//erase the trip
+        center->getDrivers()[center->getFree_drivers().front()]->setTrip(trip);
+        boost::iostreams::back_insert_device<std::string> inserter_trip(trip_string);
+        boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > s_trip(inserter_trip);
+        boost::archive::binary_oarchive a_trip(s_trip);
+        a_trip << trip;
+        s_trip.flush();
+        sendMessage(trip_string, socketnum);//serlize the trip and send to driver
+    }
+}
 /***
  * for use in seprate thred we need static method
  * @param parameters
@@ -271,25 +274,7 @@ void *Controller::staticForChose(void *parameters) {
     return NULL;
 }
 
-/**
- * commend one meaning create a driver
- * will call the class that phase the input and create driver
- * @return true is creation succes false if we got exception
- */
-bool Controller::CommendOne() {
-    string parm;
-    cin >> parm;
-    try {
-        CreateDriver *cd = new CreateDriver(parm);
-        center->addDriver(cd->getId(), cd->getAge(), cd->getStat(), cd->getExp());
-        center->setTaxiToDriver(cd->getId(), cd->getVehicle_id());
-        delete cd;
-    } catch (std::exception exception1) {
-        return false;
-    }
 
-    return true;
-}
 
 /**
  * commend two that create a new ride
@@ -306,6 +291,9 @@ bool Controller::CommendTwo() {
                                   cd->star_y, cd->end_x, cd->end_y, cd->id, cd->tariff, cd->numOfPass);
         center->getTrip().insert(std::pair<int, SearchableTrip *>(center->getTrip().size(), trip));
         trip->setTime(cd->time);
+        if(!center->getFree_drivers().empty()){
+            getNewTrip();
+        }
         delete cd;
     } catch (std::exception exception1) {
         return false;
@@ -351,6 +339,24 @@ bool Controller::CommendFour() {
  */
 bool Controller::CommendSix() {
     center->finishAllTrip();
+    return true;
+}
+
+bool Controller::CommendNine() {
+    if(this->time < center->getDrivers()[0]->getTrip()->getTime()){
+        this->time++;
+    }
+    else if(this->time >= center->getDrivers()[0]->getTrip()->getTime()){
+        string str;
+        center->getDrivers()[0]->move();
+        boost::iostreams::back_insert_device<std::string> inserter2(str);
+        boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > se(inserter2);
+        boost::archive::binary_oarchive arr(se);
+        arr << center->getDrivers()[0]->curr_pos;
+        se.flush();
+        this->time++;
+    sendMessage(str,socketnum);
+    }
     return true;
 }
 
