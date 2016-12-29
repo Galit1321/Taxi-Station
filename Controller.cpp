@@ -135,7 +135,7 @@ std::string Controller::getMessage(int id) {
  * with tcp we will get new client and give him socket id uniqe to him
  */
 void Controller::getNewClient() {
-   /* if (listen(this->socketnum, 5) < 0) {//we can get max of 5 client
+    if (listen(this->socketnum, 5) < 0) {//we can get max of 5 client
         perror("error listening to a socket");
     }
     unsigned int addr_len = sizeof(client_socket);
@@ -143,7 +143,7 @@ void Controller::getNewClient() {
 
     if (client_socket.front() < 0) {
         perror("error accepting client");
-    }*/
+    }
 
 }
 
