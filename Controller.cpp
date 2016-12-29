@@ -195,8 +195,8 @@ void *Controller::getCommend() {
                 success = CommendSix();
                 break;
             case 9:
-                center->getDrivers()[0]->move();
-                this->time++;
+                success = CommendNine();
+
                 break;
 
         }
@@ -214,16 +214,7 @@ bool Controller::runDriver() {
     int i;
     cin >> i;
     while (i) {
-        Driver *gp = new Driver(0, 0, "m", 0);
-        std::string serial_str;
-        boost::iostreams::back_insert_device<std::string> inserter(serial_str);
-        boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > s(inserter);
-        boost::archive::binary_oarchive oa(s);
-        oa << gp;
-        s.flush();
-        cout << serial_str << endl;
-        //  getNewClient();
-        // serial_str=getMessage(this->socketnum);
+        string serial_str=getMessage(this->socketnum);
         Driver *gp2;
         boost::iostreams::basic_array_source<char> device(serial_str.c_str(), serial_str.size());
         boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s2(device);
@@ -350,3 +341,21 @@ bool Controller::CommendSix() {
     return true;
 }
 
+
+bool Controller::CommendNine() {
+    if(this->time < center->getDrivers()[0]->getTrip()->getTime()){
+        this->time++;
+    }
+    else if(this->time >= center->getDrivers()[0]->getTrip()->getTime()){
+        string str;
+        center->getDrivers()[0]->move();
+        boost::iostreams::back_insert_device<std::string> inserter2(str);
+        boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > se(inserter2);
+        boost::archive::binary_oarchive arr(se);
+        arr << center->getDrivers()[0]->curr_pos;
+        se.flush();
+        this->time++;
+
+    }
+   return true;
+}

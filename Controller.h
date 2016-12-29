@@ -49,6 +49,7 @@ protected:
     bool CommendFour();
     bool CommendSix();
     bool runDriver();
+    bool CommendNine();
 };
 
 /*
