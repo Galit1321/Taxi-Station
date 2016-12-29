@@ -89,7 +89,6 @@ map<int, Car *> &TaxiCenter::getCars() {
 //add driver
 void TaxiCenter::addDriver(Driver *driver) {
    getDrivers().insert(std::pair<int, Driver *>(driver->getId(), driver));
-    free_drivers.push_back(driver->getId());
 
 }
 

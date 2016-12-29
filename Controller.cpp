@@ -3,7 +3,7 @@
 #include <sstream>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
-#include <boost/tokenizer.hpp>
+#include <string.h>
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/assign/list_of.hpp>
@@ -243,8 +243,12 @@ bool Controller::runDriver() {
         a2 << car;
         s3.flush();
         sendMessage(car_string, socketnum);//serlize the car and send to driver
-        getMessage(socketnum);
-getNewTrip();
+        string s =getMessage(socketnum);
+        if ( s.compare("Wait for trip")) {
+            std :: cout << "Wrong massege\n";
+            return false;
+        }
+        getNewTrip();
 
     }
     return true;
@@ -261,6 +265,11 @@ void Controller::getNewTrip(){
         a_trip << trip;
         s_trip.flush();
         sendMessage(trip_string, socketnum);//serlize the trip and send to driver
+    }
+    string st = getMessage(socketnum);
+    if (st.compare("Wait for advance")){
+        std :: cout << "Wrong massege\n";
+        return ;
     }
 }
 /***
@@ -355,7 +364,17 @@ bool Controller::CommendNine() {
         arr << center->getDrivers()[0]->curr_pos;
         se.flush();
         this->time++;
-    sendMessage(str,socketnum);
+        sendMessage(str,socketnum);
+        string string1 =getMessage(socketnum);
+
+        if (string1.compare("Finished trip")) {
+            if (!center->getTrip().empty()){
+                center->setTrip(center->getTrip());
+            }
+            else{
+                center->getFree_drivers().push_back(center->getDrivers()[0]->getId());
+            }
+        }
     }
     return true;
 }
