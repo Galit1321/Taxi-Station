@@ -140,7 +140,6 @@ void Driver::setTrip(SearchableTrip* trip1) {
  * driver move a qeure accoding to kind of car
  */
 void Driver::move() {
-
     if (!trip->solution.empty()){
         if (car->getKind()==1){
             curr_pos=trip->solution.front();
