@@ -145,7 +145,7 @@ void Controller::getNewClient() {
  * constructor
  * @return
  */
-Controller::Controller() : UDP() {
+Controller::Controller() {
     center = new TaxiCenter();
     string sizeGride;
     getline(cin, sizeGride);
