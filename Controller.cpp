@@ -34,8 +34,6 @@ Controller::~Controller() {
  * @return
  */
 Controller::Controller(const short unsigned int &port) : UDP(port) {
-
-
     center = new TaxiCenter();
     string sizeGride;
     getline(cin, sizeGride);
@@ -75,19 +73,21 @@ Controller::Controller(const short unsigned int &port) : UDP(port) {
     }
 /*
     client_socket = vector<int>();
-
+*/
     time_t start_time;
     time_t now_time;
     pthread_t id;
-    struct parameters *p = new struct parameters();
+    struct parameters* p = new struct parameters();
     p->m = this;
-    pthread_create(&id, NULL, this->staticForChose, (void *) p);
+    //  p->sockNum = sockNum;
+    int status = pthread_create(&id, NULL,this->staticForChose ,(void*)p);
     while (1){
         time(&start_time);
         time(&now_time);
         if (difftime(now_time, start_time) >= 5) {
+            pthread_exit(0);
             break;
-        }}*/
+        }}
 }
 
 /**

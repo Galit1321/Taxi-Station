@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.5.1)
 project(AdvPro01)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  -std=c++0x")
 
 set(SOURCE_FILES
         BFS.cpp BFS.h Car.cpp Car.h Create.cpp
@@ -14,8 +14,10 @@ set(SOURCE_FILES
 set(BOOST_ROOT CACHE PATH "/usr/include/boost/")
 find_package(Boost 1.58.0 COMPONENTS serialization system)
 include_directories(${Boost_INCLUDE_DIR})
+find_package (Threads)
 
 add_executable(AdvPro01 ${SOURCE_FILES})
 
 target_link_libraries(AdvPro01 ${Boost_LIBRARIES})
 
+target_link_libraries (AdvPro01 ${CMAKE_THREAD_LIBS_INIT})
