@@ -136,6 +136,7 @@ void Driver::setTrip(SearchableTrip* trip1) {
 
     this->trip=trip1;
     this->numOfUser+=trip->getNumOfPass();
+    curr_pos=trip->getInitialState();
 }
 /**
  * driver move a qeure accoding to kind of car
