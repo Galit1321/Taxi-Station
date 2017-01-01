@@ -42,6 +42,7 @@ SearchableTrip::SearchableTrip(ILayout* layout1,Point* start,Point* end){
     this->traiff=0;
     BFS* bfs=new BFS();
     this->solution=bfs->search(this);
+    this->solution.pop_front();
     delete bfs;
     time=0;
     this->numOfPass=0;
@@ -68,6 +69,7 @@ SearchableTrip::SearchableTrip(ILayout* layout1,int start_i,int start_j,int end_
     this->rideId=rid;
     BFS* bfs=new BFS();
     this->solution=bfs->search(this);
+    this->solution.pop_front();
     delete bfs;
     time=0;
 
@@ -173,26 +175,32 @@ ILayout *SearchableTrip::getLayout() const {
     return layout;
 }
 
+//set the number of passengers
 void SearchableTrip::setNumOfPass(int numOfPass) {
     SearchableTrip::numOfPass = numOfPass;
 }
 
+//deconstructor
 SearchableTrip::~SearchableTrip() {
 solution.clear();
 }
 
+//return the solution of the trip
 const deque<Point *> &SearchableTrip::getSolution() const {
     return solution;
 }
 
+//set the olution of the trip
 void SearchableTrip::setSolution(const deque<Point *> &solution) {
     SearchableTrip::solution = solution;
 }
 
+//return the time of the trip
 int SearchableTrip::getTime() const {
     return time;
 }
 
+//set the time of the trip
 void SearchableTrip::setTime(int time) {
     SearchableTrip::time = time;
 }

@@ -3,7 +3,9 @@
 //
 
 #include "CreateCar.h"
-
+/*
+ * constructor
+ */
 CreateCar::CreateCar(string &input) : Create(input) {
     if (this->tokens.size()!=4){
         return ;

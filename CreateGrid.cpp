@@ -10,7 +10,7 @@ CreateGrid::~CreateGrid() {
 
 }
 /**
- * constrctout
+ * constructor
  * @param input
  * @return
  */
@@ -19,6 +19,12 @@ CreateGrid::CreateGrid(string &input) : Create(input) {
         phase(*it);
 
 }
+
+/**
+ * divide the input
+ * @param s string
+ * @return
+ */
 void CreateGrid::phase(string s) {
     int pos=s.find(",");
     char tmp[100];
