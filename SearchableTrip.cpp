@@ -23,6 +23,7 @@ SearchableTrip::SearchableTrip(ILayout *layout1, int start_i, int start_j, int e
     BFS* bfs=new BFS();
     this->solution=bfs->search(this);
     delete bfs;
+    time=0;
 }
 
 /**
@@ -42,6 +43,7 @@ SearchableTrip::SearchableTrip(ILayout* layout1,Point* start,Point* end){
     BFS* bfs=new BFS();
     this->solution=bfs->search(this);
     delete bfs;
+    time=0;
     this->numOfPass=0;
 }
 
@@ -67,6 +69,7 @@ SearchableTrip::SearchableTrip(ILayout* layout1,int start_i,int start_j,int end_
     BFS* bfs=new BFS();
     this->solution=bfs->search(this);
     delete bfs;
+    time=0;
 
 }
 SearchableTrip::SearchableTrip() {

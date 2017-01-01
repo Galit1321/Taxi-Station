@@ -68,10 +68,8 @@ void finishTrip();
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive &ar, const unsigned int version){
-///       ar & boost::serialization::base_object<Person>(*this);
+        ar & boost::serialization::base_object<Person>(*this);
         ar & stat;
-        ar & satisfaction;
-        ar & curr_pos;
         ar & id;
         ar & age;
         ar & experience;

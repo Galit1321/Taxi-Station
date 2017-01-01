@@ -3,7 +3,6 @@
 #include <sstream>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
-#include <string.h>
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/assign/list_of.hpp>
@@ -14,12 +13,10 @@
 #include <boost/archive/binary_iarchive.hpp>
 #include "Controller.h"
 #include "CreateGrid.h"
-#include "CreateDriver.h"
 #include "CreateCar.h"
 #include "CreateRide.h"
 
-
-using namespace std;
+#include <iostream>
 
 /**
  * destructor
@@ -37,6 +34,8 @@ Controller::~Controller() {
  * @return
  */
 Controller::Controller(const short unsigned int &port) : UDP(port) {
+
+
     center = new TaxiCenter();
     string sizeGride;
     getline(cin, sizeGride);
@@ -70,17 +69,25 @@ Controller::Controller(const short unsigned int &port) : UDP(port) {
     sin.sin_family = AF_INET;
     sin.sin_addr.s_addr = INADDR_ANY;
     sin.sin_port = htons(this->port);
-    if (bind(socketnum, (struct sockaddr *) &sin, sizeof(sin)) < 0) {
+    //bind
+    if (::bind(socketnum, (struct sockaddr *) &sin, sizeof(sin)) < 0) {
         perror("error binding to socket");
     }
 /*
     client_socket = vector<int>();
-    getCommend();///to build one time at least
+
+    time_t start_time;
+    time_t now_time;
     pthread_t id;
     struct parameters *p = new struct parameters();
     p->m = this;
     pthread_create(&id, NULL, this->staticForChose, (void *) p);
-*/
+    while (1){
+        time(&start_time);
+        time(&now_time);
+        if (difftime(now_time, start_time) >= 5) {
+            break;
+        }}*/
 }
 
 /**
@@ -88,7 +95,7 @@ Controller::Controller(const short unsigned int &port) : UDP(port) {
  * @param str what we want to send
  * @param id socket id -more relavent to tcp
  */
-void Controller::sendMessage(std::string &str, int id) {
+void Controller::sendMessage(std::string &str, int size) {
     struct sockaddr_in sin;
     memset(&sin, 0, sizeof(sin));
     sin.sin_family = AF_INET;
@@ -112,7 +119,7 @@ void Controller::sendMessage(std::string &str, int id) {
  * @param id socket id
  * @return the string of want we got
  */
-std::string Controller::getMessage(int id) {
+std::string Controller::getMessage(int s) {
     struct sockaddr_in to;
     char buffer[4050];
     unsigned int to_len = sizeof(struct sockaddr_in);
@@ -234,7 +241,7 @@ bool Controller::runDriver() {
         ia >> gp2;
         center->addDriver(gp2);
         i--;
-        center->setTaxiToDriver(0, 0);
+        center->setTaxiToDriver(gp2->getId(), gp2->getId());
         Car *car = center->getCars()[gp2->getId()];
         string car_string;
         boost::iostreams::back_insert_device<std::string> inserter2(car_string);
@@ -243,11 +250,6 @@ bool Controller::runDriver() {
         a2 << car;
         s3.flush();
         sendMessage(car_string, socketnum);//serlize the car and send to driver
-        string s =getMessage(socketnum);
-        if ( s.compare("Wait for trip")) {
-            std :: cout << "Wrong massege\n";
-            return false;
-        }
         getNewTrip();
 
     }
@@ -258,7 +260,7 @@ void Controller::getNewTrip(){
     if (!center->getTrip().empty()) {
         SearchableTrip *trip = center->getTrip()[0];
         center->getTrip().erase(center->getTrip().begin());//erase the trip
-        center->getDrivers()[center->getFree_drivers().front()]->setTrip(trip);
+        center->getDrivers()[0]->setTrip(trip);
         boost::iostreams::back_insert_device<std::string> inserter_trip(trip_string);
         boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > s_trip(inserter_trip);
         boost::archive::binary_oarchive a_trip(s_trip);
@@ -266,11 +268,7 @@ void Controller::getNewTrip(){
         s_trip.flush();
         sendMessage(trip_string, socketnum);//serlize the trip and send to driver
     }
-    string st = getMessage(socketnum);
-    if (st.compare("Wait for advance")){
-        std :: cout << "Wrong massege\n";
-        return ;
-    }
+
 }
 /***
  * for use in seprate thred we need static method
@@ -294,7 +292,7 @@ bool Controller::CommendTwo() {
     cin >> parm;
     try {
         CreateRide *cd = new CreateRide(parm);
-        time = cd->time;
+       // time = cd->time;
         SearchableTrip *trip;
         trip = new SearchableTrip(center->getLayout(), cd->start_x,
                                   cd->star_y, cd->end_x, cd->end_y, cd->id, cd->tariff, cd->numOfPass);
@@ -352,10 +350,10 @@ bool Controller::CommendSix() {
 }
 
 bool Controller::CommendNine() {
-    if(this->time < center->getDrivers()[0]->getTrip()->getTime()){
-        this->time++;
+    if(this->servertime < center->getDrivers()[0]->getTrip()->getTime()){
+        this->servertime++;
     }
-    else if(this->time >= center->getDrivers()[0]->getTrip()->getTime()){
+    else if(this->servertime >= center->getDrivers()[0]->getTrip()->getTime()){
         string str;
         center->getDrivers()[0]->move();
         boost::iostreams::back_insert_device<std::string> inserter2(str);
@@ -363,13 +361,11 @@ bool Controller::CommendNine() {
         boost::archive::binary_oarchive arr(se);
         arr << center->getDrivers()[0]->curr_pos;
         se.flush();
-        this->time++;
+        this->servertime++;
         sendMessage(str,socketnum);
-        string string1 =getMessage(socketnum);
-
-        if (string1.compare("Finished trip")) {
+        if (center->getDrivers()[0]->getCurr_pos()==center->getDrivers()[0]->getTrip()->getGoalState()) {
             if (!center->getTrip().empty()){
-                center->setTrip(center->getTrip());
+               getNewTrip();
             }
             else{
                 center->getFree_drivers().push_back(center->getDrivers()[0]->getId());

@@ -13,7 +13,7 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <string.h>
-using  namespace std;
+
 class Connection {
 
 protected:
@@ -45,7 +45,7 @@ public:
      * the function get the message.
      * it get the message,change it to string and return it
      */
-    virtual string getMessage (int sock)=0;
+    virtual std::string getMessage (int sock)=0;
 
     /*
      * the function close the socket

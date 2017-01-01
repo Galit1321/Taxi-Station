@@ -10,20 +10,10 @@ using namespace std;
 #include "list"
 #include "Point.h"
 #include "ISearchable.h"
-#include <boost/graph/graph_traits.hpp>
-#include <boost/graph/adjacency_list.hpp>
-#include <boost/graph/adj_list_serialize.hpp>
-#include <boost/graph/filtered_graph.hpp>
-#include <boost/multi_index_container.hpp>
-#include <boost/multi_index/ordered_index.hpp>
-#include <boost/multi_index/identity.hpp>
-#include <boost/multi_index/member.hpp>
-#include <boost/multi_index/composite_key.hpp>
 #include <boost/serialization/map.hpp>
 #include <boost/serialization/deque.hpp>
-#include <boost/serialization/variant.hpp>
-#include <boost/variant.hpp>
 #include <boost/ref.hpp>
+
 
 /**
  * searchable trip on the matrix

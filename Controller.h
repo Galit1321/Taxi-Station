@@ -9,7 +9,7 @@
 #include "TaxiCenter.h"
 #include "UDP.h"
 
-using namespace std;
+
 
 class Controller: public UDP {
     /**
@@ -19,7 +19,8 @@ class Controller: public UDP {
 public:
     vector<int> client_socket;
     TaxiCenter* center;
-    int time;
+    int servertime;
+
     Controller(const short unsigned int  &port);
    /*
     * the function send message for the client.
