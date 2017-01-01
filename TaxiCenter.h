@@ -15,8 +15,9 @@ protected:
 map<int,Driver*> drivers;
     map<int,SearchableTrip*> trip;
 public:
+    //return map of trips
  map<int, SearchableTrip *> &getTrip() ;
-
+    //set a trip
     void setTrip(const map<int, SearchableTrip *> &trip);
 
 protected:
@@ -27,9 +28,13 @@ protected:
 public:
     TaxiCenter(MatrixLayout* layout);//constructor
     TaxiCenter();//defult constructor
+    //add a car
     void addCar(int id ,string manufacturer,string color,int kind);
+    //set the layout
     void setLayout(MatrixLayout *layout);
+    //set the layout
     void setLayout(int h,int w);
+    //set the layout
     void setLayout(int h,int w, vector<int>* obs);
     //add driver
     void addDriver(Driver *driver);

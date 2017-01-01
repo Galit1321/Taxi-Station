@@ -25,7 +25,7 @@ public:
      * it get the message,change it to string and return it
      */
     std::string getMessage (int sock);
-
+    //deconstructor
     virtual ~UDP();
 
 };
