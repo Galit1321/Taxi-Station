@@ -59,6 +59,7 @@ map<int, Passenger *> &TaxiCenter::getAll_passngers() {
     return all_passngers;
 }
 
+//add a car
 void TaxiCenter::addCar(int id, string manufacturer, string color, int kind) {
     Car *c;
     if (kind == 1) {
@@ -69,14 +70,17 @@ void TaxiCenter::addCar(int id, string manufacturer, string color, int kind) {
     getCars().insert(std::pair<int, Car *>(c->getId(), c));
 }
 
+//return the layout
 MatrixLayout *TaxiCenter::getLayout() {
     return this->layout;
 }
 
+//set the layout
 void TaxiCenter::setLayout(int h, int w) {
     this->layout = new MatrixLayout(h, w);
 }
 
+//set the layout
 void TaxiCenter::setLayout(int h, int w, vector<int> *obs) {
     this->layout = new MatrixLayout(h, w, obs);
 }
@@ -173,11 +177,12 @@ void TaxiCenter::finishAllTrip() {
     }
 
 }
-
+//return map of trips
  map<int, SearchableTrip *> &TaxiCenter::getTrip()  {
     return trip;
 }
 
+//set a trip
 void TaxiCenter::setTrip(const map<int, SearchableTrip *> &trip) {
     TaxiCenter::trip = trip;
 }

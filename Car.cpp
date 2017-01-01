@@ -88,7 +88,7 @@ void Car::setTariff(double tariff) {
 }
 
 
-
+//return the kind of the car
 int Car::getKind() const {
     return kind;
 }

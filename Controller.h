@@ -22,17 +22,7 @@ public:
     int servertime;
 
     Controller(const short unsigned int  &port);
-   /*
-    * the function send message for the client.
-    * it get the string message to send and send it.
-    */
-    void sendMessage (std::string &str, int sock);
 
-    /*
-     * the function get message from the client.
-     * it get the message,change it to string and return it
-     */
-    string getMessage (int sock);
 
     /*
      * the function get new client and accept it
@@ -44,11 +34,19 @@ public:
     Controller();//consterctor
     void* getCommend();//busy wating method to get num of commend
 protected:
+    //commend 9 wait for the right time and make move
+    //when the right time comes
     bool CommendNine();
+    //commend two that create a new ride
     bool CommendTwo();
+    // commend 3 to create a new car with agrument
     bool CommendThree();
+    //commend 4 is to get the current position of driver with
+    //id given in cin>>id and print it to screen
     bool CommendFour();
+    //run all current driver that have a trip to finish point
     bool CommendSix();
+
     bool runDriver();
     void getNewTrip();
 };

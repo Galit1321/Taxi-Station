@@ -21,14 +21,14 @@ class CreateCar: public Create {
     string color;
     string manufactor;
 public:
-    CreateCar(string &input);
-
+    CreateCar(string &input);//constructor
+    //return the id of the car
     int getId() const;
-
+    //return the kind of the car
     int getKind() const;
-
+    //return the color of the car
     const string &getColor() const;
-
+    //return the manufactor of the car
     const string &getManufactor() const;
 };
 

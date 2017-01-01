@@ -20,23 +20,26 @@ using namespace std;
  */
 class SearchableTrip : public ISearchable{
 private:
-    int numOfPass;
-    int traiff;
+    int numOfPass;// the number of passengers
+    int traiff;//the taarif of the trip
     ILayout* layout;//the layout we do the trip on
     Point* goal;//the goal of the trip
     Point* init;//the start of the trip
-    int rideId;
-    int total_dis;
-    int time;
+    int rideId;//the id of the trip
+    int total_dis;//the distance of the trip
+    int time;// the time of the trip
 public:
+    //return the time of the trip
     int getTime() const;
-
+    //set the time of the trip
     void setTime(int time);
 
 
 public:
+    //return the solution of the trip
     const deque<Point *> &getSolution() const;
     deque<Point*> solution;
+    //set the olution of the trip
     void setSolution(const deque<Point *> &solution);
 
 public:
@@ -68,7 +71,7 @@ void clean(list<Point> closed);
     SearchableTrip(ILayout* layout1,int start_i,int start_j,int end_i,int end_j, int rid, double tff,int nop);
 
     virtual ~SearchableTrip();
-
+    //set the number of passengers
     void setNumOfPass(int numOfPass);
 
     Point* getInitialState();//implantation of interface

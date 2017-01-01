@@ -24,6 +24,10 @@ Connection::~Connection() {
 void Connection::closefunc() {
 
 }
+
+/*
+* defult constructor
+*/
 Connection::Connection() {
 
 }

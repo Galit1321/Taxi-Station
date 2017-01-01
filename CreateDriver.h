@@ -19,18 +19,18 @@ private:
     int exp;
     int vehicle_id;
 public:
-    CreateDriver(string &input);
-    int getId() const;
+    CreateDriver(string &input);//conatructor
+    int getId() const;//return the id of the driver
 
-    int getAge() const;
+    int getAge() const;//return the age of the driver
 
-    const string &getStat() const;
+    const string &getStat() const;//return the status of the driver
 
-    int getExp() const;
+    int getExp() const;//return the expirience of the driver
 
-    int getVehicle_id() const;
+    int getVehicle_id() const;//return the vechile id of the driver
 
-    virtual ~CreateDriver();
+    virtual ~CreateDriver();//deconstructor
 };
 
 
