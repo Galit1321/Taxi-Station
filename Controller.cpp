@@ -74,20 +74,7 @@ Controller::Controller(const short unsigned int &port) : UDP(port) {
 /*
     client_socket = vector<int>();
 */
-    time_t start_time;
-    time_t now_time;
-    pthread_t id;
-    struct parameters* p = new struct parameters();
-    p->m = this;
-    //  p->sockNum = sockNum;
-    int status = pthread_create(&id, NULL,this->staticForChose ,(void*)p);
-    while (1){
-        time(&start_time);
-        time(&now_time);
-        if (difftime(now_time, start_time) >= 5) {
-            pthread_exit(0);
-            break;
-        }}
+
 }
 
 /**
@@ -151,7 +138,6 @@ void Controller::getNewClient() {
     if (client_socket.front() < 0) {
         perror("error accepting client");
     }
-
 }
 
 
@@ -221,8 +207,8 @@ void *Controller::getCommend() {
 
         }
         cin >> commend;
-
-    }
+    }string s="STOP";
+    sendMessage(s,this->socketnum);
 }
 
 /**
