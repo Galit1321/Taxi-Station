@@ -199,6 +199,8 @@ void Controller::getNewTrip(){
         a_trip << trip;
         s_trip.flush();
         sendMessage(trip_string, socketnum);//serlize the trip and send to driver
+    }else{
+
     }
 
 }

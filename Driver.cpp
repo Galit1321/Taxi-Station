@@ -56,15 +56,6 @@ bool Driver ::operator==(const Driver &driver1) const {
 
 }
 
-//run the bfs algoritm
-deque<Point*> Driver ::doBFS(SearchableTrip* psEnd) {
-   BFS* bfs=new BFS();
-   SearchableTrip* trip1=new SearchableTrip(psEnd->getLayout(),curr_pos,psEnd->getInitialState());
-    deque<Point*> sol=bfs->search(trip1);
-    delete trip1;
-    delete bfs;
-   return sol;
-}
 
 //return the driver id
 int Driver::getId() const {

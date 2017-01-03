@@ -62,7 +62,7 @@ void finishTrip();
     void move();
     float getSatisfaction();
     void setSatisfaction(float satisfaction);
-    deque<Point*> doBFS(SearchableTrip* pEnd);
+
 //serlize the driver
 
     friend class boost::serialization::access;

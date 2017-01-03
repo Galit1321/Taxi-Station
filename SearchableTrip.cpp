@@ -42,7 +42,7 @@ SearchableTrip::SearchableTrip(ILayout* layout1,Point* start,Point* end){
     this->traiff=0;
     BFS* bfs=new BFS();
     this->solution=bfs->search(this);
-    this->solution.pop_front();
+   this->solution.pop_front();
     delete bfs;
     time=0;
     this->numOfPass=0;
