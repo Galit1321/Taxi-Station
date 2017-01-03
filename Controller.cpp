@@ -202,16 +202,7 @@ void Controller::getNewTrip(){
     }
 
 }
-/***
- * for use in seprate thred we need static method
- * @param parameters
- * @return
- */
-void *Controller::staticForChose(void *parameters) {
-    struct parameters *par = (struct parameters *) parameters;
-    par->m->getCommend();
-    return NULL;
-}
+
 
 
 
@@ -291,6 +282,7 @@ bool Controller::CommendNine() {
     if(this->servertime < center->getDrivers()[0]->getTrip()->getTime()){
         this->servertime++;
     }
+
     else if(this->servertime >= center->getDrivers()[0]->getTrip()->getTime()){
         string str;
         center->getDrivers()[0]->move();

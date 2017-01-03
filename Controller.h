@@ -28,7 +28,6 @@ public:
      * the function get new client and accept it
      */
     void getNewClient();
-    static void* staticForChose(void* parameters);
 
     virtual ~Controller();//desrectir
     Controller();//consterctor
