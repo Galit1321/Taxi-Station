@@ -144,6 +144,9 @@ Point *TaxiCenter::getLocation(int id) {
  */
 
 int TaxiCenter::findCloser() {
+    if(getFree_drivers().empty()){
+        return -1;
+    }
     int id = getDriver(getFree_drivers()[0])->getId();
     free_drivers.erase(getFree_drivers().begin());
     return id;
