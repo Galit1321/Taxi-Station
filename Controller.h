@@ -17,6 +17,9 @@ class Controller {
      * of the main function
      */
 public:
+    TaxiCenter *getCenter() const;
+
+public:
     vector<int> client_socket;
     TaxiCenter* center;
     int servertime;

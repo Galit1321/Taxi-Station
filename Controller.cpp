@@ -11,6 +11,7 @@
 #include <boost/iostreams/stream.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
+#include <thread>
 #include "Controller.h"
 #include "CreateGrid.h"
 #include "CreateCar.h"
@@ -173,20 +174,23 @@ bool Controller::runDriver() {
 }
 void Controller::getNewTrip(){
     string trip_string;
-    if (!center->getTrip().empty()) {
-        SearchableTrip *trip = center->getTrip()[0];
-        center->getTrip().erase(center->getTrip().begin());//erase the trip
-        center->getDrivers()[0]->setTrip(trip);
-        boost::iostreams::back_insert_device<std::string> inserter_trip(trip_string);
-        boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > s_trip(inserter_trip);
-        boost::archive::binary_oarchive a_trip(s_trip);
-        a_trip << trip;
-        s_trip.flush();
-        connection->sendMessage(trip_string,this->connection->socketnum);//serlize the trip and send to driver
-
-    }else{
-
+    while (true){
+        if (!getCenter()->getTrip().empty()) {
+            SearchableTrip *trip = center->getTrip()[0];
+            center->getTrip().erase(center->getTrip().begin());//erase the trip
+            center->getDrivers()[0]->setTrip(trip);
+            boost::iostreams::back_insert_device<std::string> inserter_trip(trip_string);
+            boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > s_trip(inserter_trip);
+            boost::archive::binary_oarchive a_trip(s_trip);
+            a_trip << trip;
+            s_trip.flush();
+            connection->sendMessage(trip_string,this->connection->socketnum);//serlize the trip and send to driver
+            break;
+        }else{
+            std::this_thread::sleep_for(std::chrono::seconds(2));
+        }
     }
+
 
 }
 
@@ -290,5 +294,9 @@ bool Controller::CommendNine() {
         }
     }
     return true;
+}
+
+TaxiCenter *Controller::getCenter() const {
+    return center;
 }
 
