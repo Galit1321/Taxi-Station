@@ -20,6 +20,10 @@ add_executable(AdvPro01 ${SOURCE_FILES})
 
 add_executable(client ${SOURCE_FILES})
 
+target_link_libraries(client ${Boost_LIBRARIES})
+
+target_link_libraries (client ${CMAKE_THREAD_LIBS_INIT})
+
 target_link_libraries(AdvPro01 ${Boost_LIBRARIES})
 
 target_link_libraries (AdvPro01 ${CMAKE_THREAD_LIBS_INIT})
