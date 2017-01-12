@@ -52,10 +52,7 @@ public:
      */
     virtual void closefunc();
 
-    /*
-     * the function get new client and accept it
-     */
-    virtual int getNewClient()=0;
+
 
 };
 

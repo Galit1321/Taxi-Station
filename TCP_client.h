@@ -15,13 +15,14 @@ public:
 	 /* the function send message for the server.
 	 * it get the string message to send and send it.
 	 */
-    void sendMessage (std::string &str);
+    void sendMessage (std::string &str, int sock);
+
 
     /*
-     * the function get message from the server.
+     * the function get message from the client.
      * it get the message,change it to string and return it
      */
-    std::string getMessage ();
+    std::string getMessage (int sock);
 
 };
 
