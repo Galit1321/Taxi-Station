@@ -7,11 +7,11 @@
 
 #include "Point.h"
 #include "TaxiCenter.h"
-#include "UDP.h"
+#include "TCP.h"
 
 
 
-class Controller: public UDP {
+class Controller {
     /**
      * class to controller the input in front
      * of the main function
@@ -20,14 +20,10 @@ public:
     vector<int> client_socket;
     TaxiCenter* center;
     int servertime;
-
+    Connection* connection;
     Controller(const short unsigned int  &port);
 
 
-    /*
-     * the function get new client and accept it
-     */
-    void getNewClient();
 
     virtual ~Controller();//desrectir
     Controller();//consterctor

@@ -10,14 +10,14 @@
 
 Person ::Person() {
     satisfaction =0;
-
+    curr_pos=new Point(0,0);
 }
 /**
  * deconstructor
  * @return
  */
 Person ::~Person() {
-
+ delete curr_pos;
 }
 
 //get the curr pose of the passenger
@@ -32,6 +32,9 @@ void Person::setSatisfaction(float satisfaction) {
 
 //set the curr pose of the passenger
 void Person::setCurr_pos(Point *curr_pos) {
+    if (curr_pos!=NULL){
+        delete curr_pos;
+    }
     Person::curr_pos = curr_pos;
 }
 

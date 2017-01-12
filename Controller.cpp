@@ -16,7 +16,6 @@
 #include "CreateCar.h"
 #include "CreateRide.h"
 
-#include <iostream>
 
 /**
  * destructor
@@ -33,7 +32,7 @@ Controller::~Controller() {
  * @param port
  * @return
  */
-Controller::Controller(const short unsigned int &port) : UDP(port) {
+Controller::Controller(const short unsigned int &port)  {
     center = new TaxiCenter();
     string sizeGride;
     getline(cin, sizeGride);
@@ -70,21 +69,6 @@ Controller::Controller(const short unsigned int &port) : UDP(port) {
 }
 
 
-
-/**
- * with tcp we will get new client and give him socket id uniqe to him
- */
-void Controller::getNewClient() {
-    if (listen(this->socketnum, 5) < 0) {//we can get max of 5 client
-        perror("error listening to a socket");
-    }
-    unsigned int addr_len = sizeof(client_socket);
-    client_socket.push_back(accept(this->socketnum, (struct sockaddr *) &this->client_socket, &addr_len));
-
-    if (client_socket.front() < 0) {
-        perror("error accepting client");
-    }
-}
 
 
 /**
@@ -154,7 +138,7 @@ void *Controller::getCommend() {
         }
         cin >> commend;
     }string s="STOP";
-    sendMessage(s,this->socketnum);
+    connection->sendMessage(s,this->connection->socketnum);
 }
 
 /**
@@ -165,7 +149,7 @@ bool Controller::runDriver() {
     int i;
     cin >> i;
     while (i) {
-        string serial_str=getMessage(this->socketnum);
+        string serial_str=connection->getMessage(this->connection->socketnum);
         Driver *gp2;
         boost::iostreams::basic_array_source<char> device(serial_str.c_str(), serial_str.size());
         boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s2(device);
@@ -181,7 +165,7 @@ bool Controller::runDriver() {
         boost::archive::binary_oarchive a2(s3);
         a2 << car;
         s3.flush();
-        sendMessage(car_string, socketnum);//serlize the car and send to driver
+        connection->sendMessage(car_string,this->connection->socketnum);//serlize the car and send to driver
         getNewTrip();
 
     }
@@ -198,7 +182,8 @@ void Controller::getNewTrip(){
         boost::archive::binary_oarchive a_trip(s_trip);
         a_trip << trip;
         s_trip.flush();
-        sendMessage(trip_string, socketnum);//serlize the trip and send to driver
+        connection->sendMessage(trip_string,this->connection->socketnum);//serlize the trip and send to driver
+
     }else{
 
     }
@@ -294,7 +279,7 @@ bool Controller::CommendNine() {
         arr << center->getDrivers()[0]->curr_pos;
         se.flush();
         this->servertime++;
-        sendMessage(str,socketnum);
+        connection->sendMessage(str,connection->socketnum);
         if (center->getDrivers()[0]->getCurr_pos()==center->getDrivers()[0]->getTrip()->getGoalState()) {
             if (!center->getTrip().empty()){
                getNewTrip();

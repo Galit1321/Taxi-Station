@@ -17,10 +17,10 @@
 class Connection {
 
 protected:
-    int socketnum;
-    short unsigned int port;
 
 public:
+    int socketnum;
+    short unsigned int port;
 
     /*
      * constructor
@@ -55,7 +55,7 @@ public:
     /*
      * the function get new client and accept it
      */
-    virtual void getNewClient()=0;
+    virtual int getNewClient()=0;
 
 };
 

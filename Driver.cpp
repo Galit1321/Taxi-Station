@@ -43,7 +43,6 @@ Driver ::Driver(int id ,int age ,string stat , int experience) {
 }
 
 Driver::~Driver() {
-
     if (trip!=NULL)
     delete trip;
 }
@@ -80,6 +79,9 @@ int Driver::getNumOfUser() const {
 
 //set the car of the driver
 void Driver::setCar(Car *car) {
+    if (car!=NULL){
+        delete  car;
+    }
     Driver::car = car;
 }
 

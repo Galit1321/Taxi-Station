@@ -17,16 +17,13 @@ private:
 public:
     template<class Archive>
     void serialize(Archive &ar, const unsigned int version);
-    Point* **getPNode() const;
     virtual ~MatrixLayout();//deconstuctor
     MatrixLayout();//default constructor
-    int **getMatrix() const;//getter of matric
-    int getHeight() const;//getter of height
-    int getWidth() const;//getter of width
     bool canGo(Point* n, char d);//the implamention of the inteface
     MatrixLayout(int h, int w);//constuctor of sizes
     Point* getNode(int i,int j);//getter of node
     MatrixLayout(int h,int w, vector<int>* obs);//constructor
+    ILayout* doplicate();
 };
 
 

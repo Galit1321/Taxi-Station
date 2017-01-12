@@ -14,9 +14,7 @@ using namespace std;
 #include "ISearcher.h"
 #include "vector"
 class BFS : public ISearcher {
-
 public:
-
     BFS();//constructor
     virtual ~BFS();//deconstructor
    deque<Point*> search(ISearchable* searchable);//the search algoritm

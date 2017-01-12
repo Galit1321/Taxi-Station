@@ -9,6 +9,3 @@ int main(int argc,char **argv) {
     delete controller;
     return 0;
 }
-/*
- * struct to hold the menu and the socket number for the client.
- */

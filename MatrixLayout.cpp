@@ -14,10 +14,12 @@ MatrixLayout::~MatrixLayout() {
         delete [] pNode[i];
     delete[] matrix[i];
     }
-delete[] matrix;
+    delete[] matrix;
     delete[] pNode;
 }
+MatrixLayout::MatrixLayout() {
 
+}
 /**
  * constructor
  * @param sizes string of the sizes, and
@@ -106,32 +108,24 @@ Point* MatrixLayout::getNode(int i,int j){
 
 }
 }
-/**
- * getter of matrix
- * @return this->matrix
- */
-int **MatrixLayout::getMatrix() const {
-    return matrix;
-}
-/**
- * getter of height
- * @return this.height
- */
-int MatrixLayout::getHeight() const {
-    return height;
-}
-/**
- * getter of width
- * @return this->width
- */
-int MatrixLayout::getWidth() const {
-    return width;
+
+ILayout* MatrixLayout::doplicate(){
+    MatrixLayout* matrixLayout=new MatrixLayout();
+    matrixLayout->height=this->height;
+    matrixLayout->width=this->width;
+    matrixLayout->matrix = new int*[matrixLayout->height];
+    matrixLayout->pNode=new Point**[matrixLayout->height];
+    for(int i = 0; i < matrixLayout->height; ++i){
+        matrixLayout->matrix[i] = new int[ matrixLayout->width];
+        matrixLayout->pNode[i]=new Point*[matrixLayout->width];
+    }
+    if(this-height)
+        for (int i=0;i<height;i++){
+            for (int j=0;j<width;j++){
+                matrixLayout->pNode[i][j]=new Point(i,j);
+                matrixLayout->matrix[i][j]=this->matrix[i][j];
+            }
+        }
+    return  matrixLayout;
 }
 
-/**
- * getter of node
- * @return this->pNode
- */
-Point* **MatrixLayout::getPNode() const {
-    return pNode;
-}

@@ -13,7 +13,7 @@
  * @return
  */
 SearchableTrip::SearchableTrip(ILayout *layout1, int start_i, int start_j, int end_i, int end_j) {
-    this->layout = layout1;
+    this->layout = layout1->doplicate();
     this->init = this->layout->getNode(start_i, start_j);
     this->goal = this->layout->getNode(end_i, end_j);
     this->rideId=0;
@@ -34,7 +34,7 @@ SearchableTrip::SearchableTrip(ILayout *layout1, int start_i, int start_j, int e
  * @return
  */
 SearchableTrip::SearchableTrip(ILayout* layout1,Point* start,Point* end){
-    this->layout = layout1;
+    this->layout = layout1->doplicate();
     this->init = start;
     this->goal = end;
     this->rideId=0;
@@ -57,7 +57,7 @@ SearchableTrip::SearchableTrip(ILayout* layout1,Point* start,Point* end){
  * @return
  */
 SearchableTrip::SearchableTrip(ILayout* layout1,int start_i,int start_j,int end_i,int end_j, int rid, double tff, int nop){
-    this->layout = layout1;
+    this->layout = layout1->doplicate();
     this->init = this->layout->getNode(start_i, start_j);
     this->goal = this->layout->getNode(end_i, end_j);
     this->rideId=0;
@@ -182,6 +182,7 @@ void SearchableTrip::setNumOfPass(int numOfPass) {
 //deconstructor
 SearchableTrip::~SearchableTrip() {
 solution.clear();
+    delete layout;
 }
 
 //return the solution of the trip
