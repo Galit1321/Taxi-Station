@@ -26,6 +26,7 @@ Controller::~Controller() {
     for (vector<int>::iterator iterator1 = client_socket.begin(); iterator1 != client_socket.end(); iterator1++) {
         close(*(iterator1));
     }
+    delete  connection;
 }
 
 /**
@@ -195,7 +196,7 @@ void Controller::getNewTrip(int client_id){
 }
 
 void* Controller::createPthread(void* parameters){
-    struct parameters *p = (parameters*)p;
+    struct parameters *p = (struct parameters*)parameters;
     p->c->getCenter();
     CreateRide* cd=new CreateRide(p->str);
     // time = cd->time;
@@ -204,7 +205,7 @@ void* Controller::createPthread(void* parameters){
                               cd->star_y, cd->end_x, cd->end_y, cd->id, cd->tariff, cd->numOfPass);
     trip->setTime(cd->time);
     p->c->getCenter()->getTrip().insert(std::pair<int, SearchableTrip *>(p->c->getCenter()->getTrip().size(), trip));
-
+    delete cd;
 }
 
 /**
@@ -215,13 +216,16 @@ bool Controller::CommendTwo() {
     string parm;
     cin >> parm;
     try {
-        CreateRide *cd = new CreateRide(parm);
         pthread_t id ;
-        int status = pthread_create(&id, NULL,this->createPthread,(void*)cd);
+        struct parameters *p = new struct parameters();
+        p->c=this;
+        int status = pthread_create(&id, NULL,this->createPthread,(void*)p);
+        if(status){
+            cout<<"error in open thred to trip";
+        }
         if(!center->getFree_drivers().empty()){
             getNewTrip(0);
         }
-        delete cd;
     } catch (std::exception exception1) {
         return false;
     }

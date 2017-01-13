@@ -15,12 +15,6 @@ Connection::~Connection() {
     close(socketnum);
 }
 
-/*
- * the function close the socket
- */
-void Connection::closefunc() {
-
-}
 
 /*
 * defult constructor
