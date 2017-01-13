@@ -49,7 +49,7 @@ public:
 
 
 
-    virtual int getNewClient()=0;
+    virtual int getNewClient();
 
 };
 

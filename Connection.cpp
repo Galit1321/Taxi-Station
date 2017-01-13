@@ -16,15 +16,12 @@ Connection::~Connection() {
 }
 
 /*
- * the function close the socket
- */
-void Connection::closefunc() {
-
-}
-
-/*
 * defult constructor
 */
 Connection::Connection() {
 
+}
+
+int Connection::getNewClient() {
+    return socketnum;
 }

@@ -16,6 +16,7 @@
 #include "CreateGrid.h"
 #include "CreateCar.h"
 #include "CreateRide.h"
+#include "TCP_server.h"
 
 
 /**
@@ -35,6 +36,7 @@ Controller::~Controller() {
  * @return
  */
 Controller::Controller(const short unsigned int &port)  {
+    connection=new TCP_server(port);
     center = new TaxiCenter();
     string sizeGride;
     getline(cin, sizeGride);
@@ -141,6 +143,7 @@ void *Controller::getCommend() {
         cin >> commend;
     }string s="STOP";
     connection->sendMessage(s,this->connection->socketnum);
+    pthread_exit(0);
 }
 
 /**
@@ -155,11 +158,12 @@ bool Controller::runDriver() {
         pthread_t id;
         struct parameters* p = new struct parameters();
         p->c= this;
-        p->sockNum = sockNum;
+        p->client_sock = sockNum;
         int status = pthread_create(&id, NULL,this->runClient ,(void*)p);
         if(status) {
             break;
         }
+        i--;
     }
     return true;
 }
@@ -171,28 +175,29 @@ void* Controller::runClient(void* parameters) {
     boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s2(device);
     boost::archive::binary_iarchive ia(s2);
     ia >> gp2;
-    center->addDriver(gp2);
-    center->setTaxiToDriver(gp2->getId(), gp2->getId());
-    Car *car = center->getCars()[gp2->getId()];
+    par->c->getCenter()->addDriver(gp2);
+    par->c->getCenter()->setTaxiToDriver(gp2->getId(), gp2->getId());
+    Car *car = par->c->getCenter()->getCars()[gp2->getId()];
     string car_string;
     boost::iostreams::back_insert_device<std::string> inserter2(car_string);
     boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > s3(inserter2);
     boost::archive::binary_oarchive a2(s3);
     a2 << car;
     s3.flush();
-    connection->sendMessage(car_string,this->connection->socketnum);//serlize the car and send to driver
-    getNewTrip();
+    par->c->connection->sendMessage(car_string,par->c->connection->socketnum);//serlize the car and send to driver
+  //  par->c->getNewTrip();
 
 }
 
-void temp(){
-
-}
-void Controller::getNewTrip(int client_id){
+void
+void Controller::getNewTrip(){
     string trip_string;
     while (true){
         if (!getCenter()->getTrip().empty()) {
-            SearchableTrip *trip = center->getTrip()[0];
+            int time=center->getTrip()[0]->getTime();
+            if (time==this->servertime){
+
+            }
             center->getTrip().erase(center->getTrip().begin());//erase the trip
             center->getDrivers()[0]->setTrip(trip);
             boost::iostreams::back_insert_device<std::string> inserter_trip(trip_string);
@@ -211,10 +216,9 @@ void Controller::getNewTrip(int client_id){
 }
 
 void* Controller::createPthread(void* parameters){
-    struct parameters *p = (parameters*)p;
+    struct parameters *p = (struct parameters*)parameters;
     p->c->getCenter();
     CreateRide* cd=new CreateRide(p->str);
-    // time = cd->time;
     SearchableTrip *trip;
     trip = new SearchableTrip(p->c->getCenter()->getLayout(), cd->start_x,
                               cd->star_y, cd->end_x, cd->end_y, cd->id, cd->tariff, cd->numOfPass);
@@ -234,8 +238,9 @@ bool Controller::CommendTwo() {
         CreateRide *cd = new CreateRide(parm);
         pthread_t id ;
         int status = pthread_create(&id, NULL,this->createPthread,(void*)cd);
-        if(!center->getFree_drivers().empty()){
-            getNewTrip(0);
+        if(status){
+           cout<<"error in init trip thread";
+            return false;
         }
         delete cd;
     } catch (std::exception exception1) {

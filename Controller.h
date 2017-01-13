@@ -29,7 +29,7 @@ public:
 
     virtual ~Controller();//desrectir
     Controller();//consterctor
-    void* getCommend();//busy wating method to get num of commend
+    void *getCommend();//busy wating method to get num of commend
 protected:
     static void* createPthread(void* parameters);
     //commend 9 wait for the right time and make move
@@ -44,9 +44,8 @@ protected:
     bool CommendFour();
     //run all current driver that have a trip to finish point
     bool CommendSix();
-
     bool runDriver();
-    void getNewTrip(int id);
+    void getNewTrip();
     static void* runClient(void* par);
 };
 
@@ -59,7 +58,6 @@ protected:
         int client_sock;
         string str;
     };
-};
 
 
 #endif //ADVPRO01_CONTROLLER_H
