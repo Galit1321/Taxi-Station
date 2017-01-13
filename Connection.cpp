@@ -15,6 +15,7 @@ Connection::~Connection() {
     close(socketnum);
 }
 
+
 /*
 * defult constructor
 */

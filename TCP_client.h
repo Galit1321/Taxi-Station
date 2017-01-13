@@ -5,18 +5,26 @@
 #ifndef ADVPRO01_TCP_CLIENT_H
 #define ADVPRO01_TCP_CLIENT_H
 
+#include "Driver.h"
 #include "TCP.h"
 class TCP_client: public TCP{
 public:
     TCP_client(const unsigned short &port,const char* ip);
 
     virtual ~TCP_client();
-     const char* ip;
-	 /* the function send message for the server.
-	 * it get the string message to send and send it.
-	 */
-    void sendMessage (std::string &str, int sock);
+    const char* ip;
+    int time;
+    Driver *driver;
 
+    Driver *getDriver() const;
+    void setNewTrip();
+    void setDriver(Driver *driver);
+    void move();
+    /* the function send message for the server.
+    * it get the string message to send and send it.
+    */
+    void sendMessage (std::string &str, int sock);
+    void runDriver();
 
     /*
      * the function get message from the client.

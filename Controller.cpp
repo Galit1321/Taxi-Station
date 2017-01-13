@@ -187,10 +187,10 @@ void* Controller::runClient(void* parameters) {
     par->c->connection->sendMessage(car_string,par->c->connection->socketnum);//serlize the car and send to driver
   //  par->c->getNewTrip();
 
+    }
+    return NULL;
 }
-
-void
-void Controller::getNewTrip(){
+void Controller::getNewTrip(int client_id){
     string trip_string;
     while (true){
         if (!getCenter()->getTrip().empty()) {
@@ -224,7 +224,7 @@ void* Controller::createPthread(void* parameters){
                               cd->star_y, cd->end_x, cd->end_y, cd->id, cd->tariff, cd->numOfPass);
     trip->setTime(cd->time);
     p->c->getCenter()->getTrip().insert(std::pair<int, SearchableTrip *>(p->c->getCenter()->getTrip().size(), trip));
-
+    delete cd;
 }
 
 /**
@@ -235,14 +235,14 @@ bool Controller::CommendTwo() {
     string parm;
     cin >> parm;
     try {
-        CreateRide *cd = new CreateRide(parm);
         pthread_t id ;
-        int status = pthread_create(&id, NULL,this->createPthread,(void*)cd);
+        struct parameters *p = new struct parameters();
+        p->c=this;
+        int status = pthread_create(&id, NULL,this->createPthread,(void*)p);
         if(status){
-           cout<<"error in init trip thread";
-            return false;
+            cout<<"error in open thred to trip";
         }
-        delete cd;
+
     } catch (std::exception exception1) {
         return false;
     }
