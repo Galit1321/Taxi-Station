@@ -47,13 +47,15 @@ protected:
 
     bool runDriver();
     void getNewTrip();
+    static void* runClient(void* par);
 };
 
 /*
  * struct to hold the menu and the socket number for the client.
  */
 struct parameters {
-    Controller* m;
+    Controller* c;
+    int sockNum;
 };
 
 #endif //ADVPRO01_CONTROLLER_H

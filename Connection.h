@@ -47,12 +47,9 @@ public:
      */
     virtual std::string getMessage (int sock)=0;
 
-    /*
-     * the function close the socket
-     */
-    virtual void closefunc();
 
 
+    virtual int getNewClient()=0;
 
 };
 

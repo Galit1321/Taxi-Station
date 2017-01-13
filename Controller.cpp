@@ -26,6 +26,7 @@ Controller::~Controller() {
     for (vector<int>::iterator iterator1 = client_socket.begin(); iterator1 != client_socket.end(); iterator1++) {
         close(*(iterator1));
     }
+    delete  connection;
 }
 
 /**
@@ -37,7 +38,8 @@ Controller::Controller(const short unsigned int &port)  {
     center = new TaxiCenter();
     string sizeGride;
     getline(cin, sizeGride);
-    char tmp[10];
+    connection->sendMessage(sizeGride,this->connection->socketnum);
+ /*   char tmp[10];
     int h;
     int w;
     int pos = sizeGride.find(" ");
@@ -45,7 +47,7 @@ Controller::Controller(const short unsigned int &port)  {
     sizeGride.erase(0, pos + 1);
     w = atoi(sizeGride.c_str());
     int numOfObs;
-    cin >> numOfObs;
+   cin >> numOfObs;
     string obsVector;
     vector<int> v;
     if (numOfObs) {
@@ -150,27 +152,42 @@ bool Controller::runDriver() {
     int i;
     cin >> i;
     while (i) {
-        string serial_str=connection->getMessage(this->connection->socketnum);
-        Driver *gp2;
-        boost::iostreams::basic_array_source<char> device(serial_str.c_str(), serial_str.size());
-        boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s2(device);
-        boost::archive::binary_iarchive ia(s2);
-        ia >> gp2;
-        center->addDriver(gp2);
-        i--;
-        center->setTaxiToDriver(gp2->getId(), gp2->getId());
-        Car *car = center->getCars()[gp2->getId()];
-        string car_string;
-        boost::iostreams::back_insert_device<std::string> inserter2(car_string);
-        boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > s3(inserter2);
-        boost::archive::binary_oarchive a2(s3);
-        a2 << car;
-        s3.flush();
-        connection->sendMessage(car_string,this->connection->socketnum);//serlize the car and send to driver
-        getNewTrip();
-
+        int sockNum = this->connection->getNewClient();
+        pthread_t id;
+        struct parameters* p = new struct parameters();
+        p->c= this;
+        p->sockNum = sockNum;
+        int status = pthread_create(&id, NULL,this->runClient ,(void*)p);
+        if(status) {
+            break;
+        }
     }
     return true;
+}
+void* Controller::runClient(void* parameters) {
+    struct parameters* par = (struct parameters*)parameters;
+    string serial_str=par->c->connection->getMessage(par->c->connection->socketnum);
+    Driver *gp2;
+    boost::iostreams::basic_array_source<char> device(serial_str.c_str(), serial_str.size());
+    boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s2(device);
+    boost::archive::binary_iarchive ia(s2);
+    ia >> gp2;
+    center->addDriver(gp2);
+    center->setTaxiToDriver(gp2->getId(), gp2->getId());
+    Car *car = center->getCars()[gp2->getId()];
+    string car_string;
+    boost::iostreams::back_insert_device<std::string> inserter2(car_string);
+    boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > s3(inserter2);
+    boost::archive::binary_oarchive a2(s3);
+    a2 << car;
+    s3.flush();
+    connection->sendMessage(car_string,this->connection->socketnum);//serlize the car and send to driver
+    getNewTrip();
+
+}
+
+void temp(){
+
 }
 void Controller::getNewTrip(){
     string trip_string;
