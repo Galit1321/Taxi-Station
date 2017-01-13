@@ -1,6 +1,3 @@
-//
-// Created by galit on 26/12/16.
-//
 
 #include "Connection.h"
 /*

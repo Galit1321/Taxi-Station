@@ -10,14 +10,13 @@
 #include "TCP.h"
 
 
-
 class Controller {
     /**
      * class to controller the input in front
      * of the main function
      */
 public:
-    TaxiCenter *getCenter() const;
+    TaxiCenter *getCenter() ;
 
 public:
     vector<int> client_socket;
@@ -32,6 +31,7 @@ public:
     Controller();//consterctor
     void* getCommend();//busy wating method to get num of commend
 protected:
+    static void* createPthread(void* parameters);
     //commend 9 wait for the right time and make move
     //when the right time comes
     bool CommendNine();
@@ -46,16 +46,20 @@ protected:
     bool CommendSix();
 
     bool runDriver();
-    void getNewTrip();
+    void getNewTrip(int id);
     static void* runClient(void* par);
 };
 
-/*
+    /*
  * struct to hold the menu and the socket number for the client.
  */
-struct parameters {
-    Controller* c;
-    int sockNum;
+
+    struct parameters{
+        Controller *c;
+        int client_sock;
+        string str;
+    };
 };
+
 
 #endif //ADVPRO01_CONTROLLER_H
