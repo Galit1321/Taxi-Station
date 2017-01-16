@@ -7,7 +7,7 @@
 #include "Connection.h"
 class TCP:public Connection {
 protected:
-    struct sockaddr_in sin;
+
 public:
     /*
      * constructor

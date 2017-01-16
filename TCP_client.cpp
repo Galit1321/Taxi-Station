@@ -16,14 +16,28 @@
 
 using namespace std;
 TCP_client::TCP_client(const unsigned short &port,const char* ip) : TCP(port) {
+    memset(&this->connection_details, 0, sizeof(this->connection_details));
+    this->connection_details.sin_family = AF_INET;
+    this->connection_details.sin_addr.s_addr = inet_addr(ip);
+    this->connection_details.sin_port = htons(port);
+    // Connect to a server
+    if (connect(this->socketnum,
+                (struct sockaddr*)&this->connection_details, sizeof(this->connection_details)) < 0){
+        cout<<"hello";}
+
+
     this->ip = ip;
+    struct sockaddr_in sin;
     memset(&sin, 0, sizeof(sin));
     sin.sin_family = AF_INET;
     sin.sin_addr.s_addr = inet_addr(this->ip);
     sin.sin_port = htons(this->port);
-    if (connect(this->socketnum, (struct sockaddr *) &sin, sizeof(sin)) < 0) {
+    int g=connect(this->socketnum,(struct sockaddr *) &sin, sizeof(sin)) ;
+    if (g<0) {
+        //return an error represent error at this method
         perror("error connecting to server");
-}
+    }
+
 }
 
 TCP_client::~TCP_client() {

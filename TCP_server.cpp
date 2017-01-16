@@ -10,13 +10,21 @@ using namespace std;
  * constructor
  */
 TCP_server::TCP_server(const short unsigned int  &port):TCP(port) {
+    struct sockaddr_in sin;
     memset(&sin, 0, sizeof(sin));
     sin.sin_family = AF_INET;
     sin.sin_addr.s_addr = INADDR_ANY;
     sin.sin_port = htons(this->port);
-
-    if (bind(this->socketnum, (struct sockaddr *) &sin, sizeof(sin)) < 0) {
+    //bind
+    if (bind(this->socketnum,
+             (struct sockaddr *) &sin, sizeof(sin)) < 0) {
+        //return an error represent error at this method
         perror("error binding socket");
+    }
+    //listen
+    if (listen(this->socketnum, 5) < 0) {
+        //return an error represent error at this method
+        perror("error listening to a socket");
     }
 
 }
@@ -25,13 +33,9 @@ TCP_server::TCP_server(const short unsigned int  &port):TCP(port) {
  * the function get new client and accept it
  */
 int TCP_server::getNewClient() {
-
-    if (listen(this->socketnum, 5) < 0) {
-        perror("error listening to a socket");
-    }
-    unsigned int addr_len = sizeof(client_socket);
-    this->client_socket = accept(this->socketnum,  (struct sockaddr *) &this->client_socket,  &addr_len);
-
+    struct sockaddr_in client_sin;
+    unsigned int addr_len = sizeof(client_sin);
+    this->client_socket = accept(this->socketnum,  (struct sockaddr *) &client_sin,  &addr_len);
     if (client_socket < 0) {
         perror("error accepting client");
     }

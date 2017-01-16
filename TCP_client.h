@@ -10,7 +10,8 @@
 class TCP_client: public TCP{
 public:
     TCP_client(const unsigned short &port,const char* ip);
-
+    struct sockaddr_in connection_details;
+   // int client_socket;
     virtual ~TCP_client();
     const char* ip;
     int time;

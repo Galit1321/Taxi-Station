@@ -159,10 +159,12 @@ bool Controller::runDriver() {
         struct parameters* p = new struct parameters();
         p->c= this;
         p->client_sock = sockNum;
+        /*
         int status = pthread_create(&id, NULL,this->runClient ,(void*)p);
         if(status) {
             break;
-        }
+        }*/
+        runClient((void*)p);
         i--;
     }
     return true;
@@ -186,10 +188,10 @@ void* Controller::runClient(void* parameters) {
     s3.flush();
     par->c->connection->sendMessage(car_string,par->c->connection->socketnum);//serlize the car and send to driver
   //  par->c->getNewTrip();
-
-    }
     return NULL;
-}
+    }
+
+
 void Controller::getNewTrip(int client_id){
     string trip_string;
     while (true){
@@ -198,14 +200,14 @@ void Controller::getNewTrip(int client_id){
             if (time==this->servertime){
 
             }
-            center->getTrip().erase(center->getTrip().begin());//erase the trip
+           /* center->getTrip().erase(center->getTrip().begin());//erase the trip
             center->getDrivers()[0]->setTrip(trip);
             boost::iostreams::back_insert_device<std::string> inserter_trip(trip_string);
             boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > s_trip(inserter_trip);
             boost::archive::binary_oarchive a_trip(s_trip);
             a_trip << trip;
             s_trip.flush();
-            connection->sendMessage(trip_string,client_id);//serlize the trip and send to driver
+            connection->sendMessage(trip_string,client_id);//serlize the trip and send to driver*/
             break;
         }else{
             std::this_thread::sleep_for(std::chrono::seconds(2));

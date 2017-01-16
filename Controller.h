@@ -45,7 +45,7 @@ protected:
     //run all current driver that have a trip to finish point
     bool CommendSix();
     bool runDriver();
-    void getNewTrip();
+    void getNewTrip(int id);
     static void* runClient(void* par);
 };
 
