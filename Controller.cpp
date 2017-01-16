@@ -160,9 +160,12 @@ bool Controller::runDriver() {
         pthread_t id;
         struct parameters* p = new struct parameters();
         p->c= this;
-        p->client_sock = sockNum;
+       p->client_sock = sockNum;
+        int status = pthread_create(&id, NULL,this->runClient ,(void*)p);
+        if(status) {
+            break;
+        }
 
-        runClient((void*)p);
         i--;
     }
     return true;
