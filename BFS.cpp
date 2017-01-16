@@ -32,16 +32,16 @@ BFS::~BFS() {
 deque<Point*> BFS::search(ISearchable *searchable) {
     deque<Point*> s;
     vector<Point*> open;
-    list<Point> closed;//
+    vector<Point*> closed;//
     Point* n;
     n = searchable->getInitialState();
     open.push_back(n);
     vector<Point*>::iterator it1;
-    list<Point>::iterator iterator1;
+    vector<Point*>::iterator iterator1;
     Point* node=searchable->getGoalState();
     while (!open.empty()) {
-        closed.push_back(*n);
-        open.erase(open.begin());
+        closed.push_back(n);
+
         if ((n!= NULL)&&(n ==node)){
             while (n!= NULL)//we didnt reach the root of tree
             {
@@ -54,13 +54,13 @@ deque<Point*> BFS::search(ISearchable *searchable) {
         queue<Point*> l = searchable->getAllPossibleStates(n);
         while (!l.empty()) {
             it1=find(open.begin(),open.end(),l.front());
-            iterator1=find(closed.begin(),closed.end(),*l.front());
+            iterator1=find(closed.begin(),closed.end(),l.front());
                 if (iterator1 == closed.end()) {
                 if (it1 == open.end()) {//l.front is not in open
                     l.front()->setParent(n);
-                    l.front()->setCost(l.front()->getCost() + 1);
+                    l.front()->setCost(n->getCost() + 1);
                     open.push_back(l.front());
-                } else if ((l.front()->getCost() > n->getCost() + 1)) {
+                } else if ((l.front()->getCost() < n->getCost() + 1)) {
                     l.front()->setCost(n->getCost() + 1);
                     l.front()->setParent(n);
                     open.push_back(l.front());
@@ -69,6 +69,7 @@ deque<Point*> BFS::search(ISearchable *searchable) {
             l.pop();
         }
         n = open.front();
+        open.erase(open.begin());
     }
     open.clear();
     return s;

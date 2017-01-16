@@ -46,8 +46,8 @@ protected:
     bool CommendSix();
 
     bool runDriver();
-    void getNewTrip(int id);
-
+    //void getNewTrip(int id);
+    void getNewTrip();
     /*
  * struct to hold the menu and the socket number for the client.
  */

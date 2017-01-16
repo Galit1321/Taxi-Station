@@ -168,12 +168,32 @@ bool Controller::runDriver() {
         a2 << car;
         s3.flush();
         connection->sendMessage(car_string,this->connection->socketnum);//serlize the car and send to driver
-        getNewTrip(0);
+        getNewTrip();
 
     }
     return true;
 }
-void Controller::getNewTrip(int client_id){
+//void Controller::getNewTrip(int client_id){
+//    string trip_string;
+//    while (true){
+//        if (!getCenter()->getTrip().empty()) {
+//            SearchableTrip *trip = center->getTrip()[0];
+//            center->getTrip().erase(center->getTrip().begin());//erase the trip
+//            center->getDrivers()[0]->setTrip(trip);
+//            boost::iostreams::back_insert_device<std::string> inserter_trip(trip_string);
+//            boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > s_trip(inserter_trip);
+//            boost::archive::binary_oarchive a_trip(s_trip);
+//            a_trip << trip;
+//            s_trip.flush();
+//            connection->sendMessage(trip_string,client_id);//serlize the trip and send to driver
+//            break;
+//        }else{
+//            std::this_thread::sleep_for(std::chrono::seconds(2));
+//        }
+//    }
+
+
+void Controller::getNewTrip(){
     string trip_string;
     while (true){
         if (!getCenter()->getTrip().empty()) {
@@ -185,47 +205,68 @@ void Controller::getNewTrip(int client_id){
             boost::archive::binary_oarchive a_trip(s_trip);
             a_trip << trip;
             s_trip.flush();
-            connection->sendMessage(trip_string,client_id);//serlize the trip and send to driver
+            connection->sendMessage(trip_string,this->connection->socketnum);//serlize the trip and send to driver
             break;
         }else{
             std::this_thread::sleep_for(std::chrono::seconds(2));
         }
     }
-
-
 }
 
-void* Controller::createPthread(void* parameters){
-    struct parameters *p = (struct parameters*)parameters;
-    p->c->getCenter();
-    CreateRide* cd=new CreateRide(p->str);
-    // time = cd->time;
-    SearchableTrip *trip;
-    trip = new SearchableTrip(p->c->getCenter()->getLayout(), cd->start_x,
-                              cd->star_y, cd->end_x, cd->end_y, cd->id, cd->tariff, cd->numOfPass);
-    trip->setTime(cd->time);
-    p->c->getCenter()->getTrip().insert(std::pair<int, SearchableTrip *>(p->c->getCenter()->getTrip().size(), trip));
-    delete cd;
-}
 
-/**
- * commend two that create a new ride
- * @return true if action sucessful otherwise false
- */
+//void* Controller::createPthread(void* parameters){
+//    struct parameters *p = (struct parameters*)parameters;
+//    p->c->getCenter();
+//    CreateRide* cd=new CreateRide(p->str);
+//    // time = cd->time;
+//    SearchableTrip *trip;
+//    trip = new SearchableTrip(p->c->getCenter()->getLayout(), cd->start_x,
+//                              cd->star_y, cd->end_x, cd->end_y, cd->id, cd->tariff, cd->numOfPass);
+//    trip->setTime(cd->time);
+//    p->c->getCenter()->getTrip().insert(std::pair<int, SearchableTrip *>(p->c->getCenter()->getTrip().size(), trip));
+//    delete cd;
+//}
+
+///**
+// * commend two that create a new ride
+// * @return true if action sucessful otherwise false
+// */
+//bool Controller::CommendTwo() {
+//    string parm;
+//    cin >> parm;
+//    try {
+//        pthread_t id ;
+//        struct parameters *p = new struct parameters();
+//        p->c=this;
+//        int status = pthread_create(&id, NULL,this->createPthread,(void*)p);
+//        if(status){
+//            cout<<"error in open thred to trip";
+//        }
+//        if(!center->getFree_drivers().empty()){
+//            getNewTrip(0);
+//        }
+//    } catch (std::exception exception1) {
+//        return false;
+//    }
+//    return true;
+//}
+
 bool Controller::CommendTwo() {
     string parm;
     cin >> parm;
     try {
-        pthread_t id ;
-        struct parameters *p = new struct parameters();
-        p->c=this;
-        int status = pthread_create(&id, NULL,this->createPthread,(void*)p);
-        if(status){
-            cout<<"error in open thred to trip";
-        }
+        CreateRide *cd = new CreateRide(parm);
+        // time = cd->time;
+        SearchableTrip *trip;
+        trip = new SearchableTrip(center->getLayout(), cd->start_x,
+                                  cd->star_y, cd->end_x, cd->end_y, cd->id, cd->tariff, cd->numOfPass);
+        center->getTrip().insert(std::pair<int, SearchableTrip *>(center->getTrip().size(), trip));
+
+        trip->setTime(cd->time);
         if(!center->getFree_drivers().empty()){
-            getNewTrip(0);
+            getNewTrip();
         }
+        delete cd;
     } catch (std::exception exception1) {
         return false;
     }
@@ -296,7 +337,7 @@ bool Controller::CommendNine() {
         connection->sendMessage(str,connection->socketnum);
         if (center->getDrivers()[0]->getCurr_pos()==center->getDrivers()[0]->getTrip()->getGoalState()) {
             if (!center->getTrip().empty()){
-               getNewTrip(0);
+               getNewTrip();
             }
             else{
                 center->getFree_drivers().push_back(center->getDrivers()[0]->getId());

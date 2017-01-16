@@ -55,7 +55,6 @@ bool Driver ::operator==(const Driver &driver1) const {
 
 }
 
-
 //return the driver id
 int Driver::getId() const {
     return id;
