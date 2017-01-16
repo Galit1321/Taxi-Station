@@ -37,7 +37,7 @@ Controller::~Controller() {
  */
 Controller::Controller(const short unsigned int &port)  {
     this->connection=new Tcp(true,port);
-   // connection->initialize();
+    connection->initialize();
   //  connection->socketDescriptor;
     center = new TaxiCenter();
     string sizeGride;
@@ -144,7 +144,7 @@ void *Controller::getCommend() {
         }
         cin >> commend;
     }string s="STOP";
-
+    connection->sendData(s);///////////////////////////////////////
     pthread_exit(0);
 }
 
@@ -156,24 +156,25 @@ bool Controller::runDriver() {
     int i;
     cin >> i;
     while (i) {
-       // int sockNum = this->connection->getNewClient();
+        int sockNum = this->connection->getNewClient();
         pthread_t id;
         struct parameters* p = new struct parameters();
         p->c= this;
-      //  p->client_sock = sockNum;
+       p->client_sock = sockNum;
         int status = pthread_create(&id, NULL,this->runClient ,(void*)p);
         if(status) {
             break;
         }
-        runClient((void*)p);
+
         i--;
     }
     return true;
 }
 void* Controller::runClient(void* parameters) {
     struct parameters* par = (struct parameters*)parameters;
-    char buff[10000];
-    string serial_str;//=par->c->connection->reciveData(buff,1000);
+    char buf[4096];
+    string serial_str =par->c->connection->reciveData(buf,4096,par->client_sock);
+    // = buf;
     Driver *gp2;
     boost::iostreams::basic_array_source<char> device(serial_str.c_str(), serial_str.size());
     boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s2(device);
@@ -319,7 +320,7 @@ bool Controller::CommendNine() {
         arr << center->getDrivers()[0]->curr_pos;
         se.flush();
         this->servertime++;
-     //   connection->sendMessage(str,connection->socketnum);
+        connection->sendData(str);
         if (center->getDrivers()[0]->getCurr_pos()==center->getDrivers()[0]->getTrip()->getGoalState()) {
             if (!center->getTrip().empty()){
                getNewTrip(0);

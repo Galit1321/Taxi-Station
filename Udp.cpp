@@ -92,7 +92,7 @@ int Udp::sendData(string data) {
 * The Function operation: getting data from the other socket check if  *
 *  there were no error reciving and print							   *
 ***********************************************************************/
-int Udp::reciveData(char* buffer, int size) {
+string Udp::reciveData(char* buffer, int size) {
 	struct sockaddr_in to;
 	unsigned int to_len = sizeof(struct sockaddr_in);
 	//receive
@@ -104,10 +104,10 @@ int Udp::reciveData(char* buffer, int size) {
 
 //    cout << bytes << endl;
 	if (bytes < 0) {
-		return -1;
+		//return ;
 	}
 	//print the data
 //	cout<<buffer<<endl;
 	//return correct if there were no error
-	return bytes;
+	return string(buffer);
 }

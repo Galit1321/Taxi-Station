@@ -6,8 +6,10 @@
 #ifndef TCP_H_
 #define TCP_H_
 
-#include "Socket.h"
+#include "string"
 
+#include "Socket.h"
+using namespace std;
 class Tcp: public Socket {
 private:
 	int descriptorCommunicateClient;
@@ -41,7 +43,7 @@ public:
 	* The Function operation: sending the input data to the socket         *
 	* who connect to this socket. 										   *
 	***********************************************************************/
-	int sendData(string data);
+	int sendData(string data,int clientId);
 	/***********************************************************************
 	* function name: recive	`											   *
 	* The Input: none										               *
@@ -49,7 +51,8 @@ public:
 	* The Function operation: getting data from the other socket and print *
 	* the data															   *
 	***********************************************************************/
-	int reciveData(char* buffer, int size);
+	string reciveData(char* buffer, int size,int clientId);
+
 };
 
 #endif /* TCP_H_ */
