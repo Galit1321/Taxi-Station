@@ -63,23 +63,6 @@ deque<Point*> BFS::search(ISearchable *searchable) {
 
             l.pop();
         }
-
-            /*it1=find(open.begin(),open.end(),l.front());
-            iterator1=find(closed.begin(),closed.end(),l.front());
-                if (iterator1 == closed.end()) {
-                if (it1 == open.end()) {//l.front is not in open
-                    l.front()->setParent(n);
-                    l.front()->setCost(n->getCost() + 1);
-                    open.push_back(l.front());
-                } else if ((l.front()->getCost() < n->getCost() + 1)) {
-                    l.front()->setCost(n->getCost() + 1);
-                    l.front()->setParent(n);
-                    open.push_back(l.front());
-                }
-            }
-            l.pop();
-        }*/
-
     }
     open.clear();
     return s;

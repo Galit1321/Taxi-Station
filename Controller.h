@@ -19,7 +19,7 @@ public:
     TaxiCenter *getCenter() ;
 
 public:
-    vector<int> client_socket;
+    map<int,int> client_map;
     TaxiCenter* center;
     int servertime;
     Socket* connection;

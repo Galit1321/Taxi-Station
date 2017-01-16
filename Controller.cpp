@@ -144,7 +144,7 @@ void *Controller::getCommend() {
         }
         cin >> commend;
     }string s="STOP";
-//    connection->sendMessage(s,this->connection->socketnum);
+
     pthread_exit(0);
 }
 
@@ -160,7 +160,7 @@ bool Controller::runDriver() {
         pthread_t id;
         struct parameters* p = new struct parameters();
         p->c= this;
-     //   p->client_sock = sockNum;
+      //  p->client_sock = sockNum;
         int status = pthread_create(&id, NULL,this->runClient ,(void*)p);
         if(status) {
             break;
@@ -172,13 +172,15 @@ bool Controller::runDriver() {
 }
 void* Controller::runClient(void* parameters) {
     struct parameters* par = (struct parameters*)parameters;
-    string serial_str;//=par->c->connection->getMessage(par->c->connection->socketnum);
+    char buff[10000];
+    string serial_str;//=par->c->connection->reciveData(buff,1000);
     Driver *gp2;
     boost::iostreams::basic_array_source<char> device(serial_str.c_str(), serial_str.size());
     boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s2(device);
     boost::archive::binary_iarchive ia(s2);
     ia >> gp2;
     par->c->getCenter()->addDriver(gp2);
+    par->c->client_map.insert(pair<int,int>(par->client_sock,gp2->getId()));
     par->c->getCenter()->setTaxiToDriver(gp2->getId(), gp2->getId());
     Car *car = par->c->getCenter()->getCars()[gp2->getId()];
     string car_string;
@@ -187,8 +189,8 @@ void* Controller::runClient(void* parameters) {
     boost::archive::binary_oarchive a2(s3);
     a2 << car;
     s3.flush();
-//    par->c->connection->sendMessage(car_string,par->c->connection->socketnum);//serlize the car and send to driver
-  // par->c->getNewTrip();
+    par->c->connection->sendData(car_string);//serlize the car and send to driver
+    par->c->getNewTrip( par->client_sock);
     return NULL;
     }
 
@@ -220,7 +222,6 @@ void Controller::getNewTrip(int client_id){
 
 void* Controller::createPthread(void* parameters){
     struct parameters *p = (struct parameters*)parameters;
-    p->c->getCenter();
     CreateRide* cd=new CreateRide(p->str);
     SearchableTrip *trip;
     trip = new SearchableTrip(p->c->getCenter()->getLayout(), cd->start_x,
@@ -238,21 +239,14 @@ bool Controller::CommendTwo() {
     string parm;
     cin >> parm;
     try {
-
-        CreateRide* cd=new CreateRide(parm);
-        SearchableTrip *trip;
-        trip = new SearchableTrip(getCenter()->getLayout(), cd->start_x,
-                                  cd->star_y, cd->end_x, cd->end_y, cd->id, cd->tariff, cd->numOfPass);
-        trip->setTime(cd->time);
-        getCenter()->getTrip().insert(std::pair<int, SearchableTrip *>(getCenter()->getTrip().size(), trip));
-        delete cd;
-       // pthread_t id ;
-     //   struct parameters *p = new struct parameters();
-    //    p->c=this;
-       // int status = pthread_create(&id, NULL,this->createPthread,(void*)p);
-       // if(status){
-      //      cout<<"error in open thred to trip";
-     //   }
+      pthread_t id ;
+        struct parameters *p = new struct parameters();
+        p->c=this;
+        p->str=parm;
+      int status = pthread_create(&id, NULL,this->createPthread,(void*)p);
+      if(status){
+           cout<<"error in open thread to trip";
+        }
 
     } catch (std::exception exception1) {
         return false;
@@ -308,11 +302,15 @@ bool Controller::CommendSix() {
  * @return true
  */
 bool Controller::CommendNine() {
-    if(this->servertime < center->getDrivers()[0]->getTrip()->getTime()){
+    SearchableTrip* trip=getCenter()->getTrip()[0];
+    if(this->servertime < trip->getTime()){
         this->servertime++;
     }
-
-    else if(this->servertime >= center->getDrivers()[0]->getTrip()->getTime()){
+    else if (this->servertime == trip->getTime()){
+        getCenter()->findCloser(trip->getInitialState())->setTrip(trip);
+        getCenter()->getTrip().erase(getCenter()->getTrip().begin());
+    }
+    else if(this->servertime > center->getDrivers()[0]->getTrip()->getTime()){
         string str;
         center->getDrivers()[0]->move();
         boost::iostreams::back_insert_device<std::string> inserter2(str);
