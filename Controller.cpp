@@ -36,7 +36,9 @@ Controller::~Controller() {
  * @return
  */
 Controller::Controller(const short unsigned int &port)  {
-    connection=new TCP_server(port);
+    this->connection=new Tcp(true,port);
+    connection->initialize();
+  //  connection->socketDescriptor;
     center = new TaxiCenter();
     string sizeGride;
     getline(cin, sizeGride);
@@ -159,11 +161,10 @@ bool Controller::runDriver() {
         struct parameters* p = new struct parameters();
         p->c= this;
         p->client_sock = sockNum;
-        /*
         int status = pthread_create(&id, NULL,this->runClient ,(void*)p);
         if(status) {
             break;
-        }*/
+        }
         runClient((void*)p);
         i--;
     }
@@ -187,7 +188,7 @@ void* Controller::runClient(void* parameters) {
     a2 << car;
     s3.flush();
     par->c->connection->sendMessage(car_string,par->c->connection->socketnum);//serlize the car and send to driver
-  //  par->c->getNewTrip();
+  // par->c->getNewTrip();
     return NULL;
     }
 

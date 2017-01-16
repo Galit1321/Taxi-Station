@@ -23,7 +23,7 @@ public:
     vector<int> client_socket;
     TaxiCenter* center;
     int servertime;
-    TCP_server* connection;
+    Socket* connection;
     Controller(const short unsigned int  &port);
 
 
