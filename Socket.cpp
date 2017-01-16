@@ -36,5 +36,18 @@ Socket::~Socket() {
 	close(this->socketDescriptor);
 }
 
-
+int Socket::getNewClient(){
+	//accept
+	struct sockaddr_in client_sin;
+	unsigned int addr_len = sizeof(client_sin);
+	int descriptorCommunicateClient = accept(this->socketDescriptor,
+											   (struct sockaddr *) &client_sin, &addr_len);
+	if (descriptorCommunicateClient < 0) {
+		//return an error represent error at this method
+		return ERROR_ACCEPT;
+	}
+	else {
+		return descriptorCommunicateClient;
+	}
+}
 

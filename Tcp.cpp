@@ -5,7 +5,7 @@
 ************************************************************/
 
 #include "Tcp.h"
-
+using namespace std;
 /***********************************************************************
 * function name: Tcp												   *
 * The Input: Boolean, true - if server, false if client	and port number*
@@ -63,15 +63,6 @@ int Tcp::initialize() {
 			//return an error represent error at this method
 			return ERROR_LISTEN;
 		}
-		//accept
-		struct sockaddr_in client_sin;
-		unsigned int addr_len = sizeof(client_sin);
-		this->descriptorCommunicateClient = accept(this->socketDescriptor,
-				(struct sockaddr *) &client_sin, &addr_len);
-		if (this->descriptorCommunicateClient < 0) {
-			//return an error represent error at this method
-			return ERROR_ACCEPT;
-		}
 	//if client
 	} else {
 		struct sockaddr_in sin;
@@ -96,10 +87,10 @@ int Tcp::initialize() {
 * The Function operation: sending the required data, using his length  *
 * and the socket descroptor											   *
 ***********************************************************************/
-int Tcp::sendData(string data) {
+int Tcp::sendData(string data,int clientId) {
 	int data_len = data.length();
 	const char * datas = data.c_str();
-	int sent_bytes = send(this->isServer ? this->descriptorCommunicateClient
+	int sent_bytes = send(this->isServer ? clientId
 			: this->socketDescriptor, datas, data_len, 0);
 	if (sent_bytes < 0) {
 		//return an error represent error at this method
@@ -116,20 +107,25 @@ int Tcp::sendData(string data) {
 * The Function operation: getting data from the other socket to,	   *
 * enter it to the buffer and print the data							   *
 ***********************************************************************/
-int Tcp::reciveData(char* buffer, int size) {
-	int read_bytes = recv(this->isServer ? this->descriptorCommunicateClient
+string Tcp::reciveData(char* buffer, int size,int clientId) {
+	int read_bytes = recv(this->isServer ? clientId
 			: this->socketDescriptor, buffer, size, 0);
 	//checking the errors
 	if (read_bytes == 0) {
-		return CONNECTION_CLOSED;
+		//return CONNECTION_CLOSED;
 	}
 	else if (read_bytes < 0) {
 		//return an error represent error at this method
-		return ERROR_RECIVE;
+		//return ERROR_RECIVE;
 	} else {
 		//prinrting the massege
 //		cout<<buffer<<endl;
+		//string str = string(buffer);
+		//return str;
 	}
 	//return correct if there were no problem
-	return read_bytes;
+	//return read_bytes;
+	string str = string(buffer);
+	return str;
 }
+

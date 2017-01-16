@@ -7,6 +7,7 @@
 
 #include "Point.h"
 #include "TaxiCenter.h"
+#include "Socket.h"
 
 
 class Controller {

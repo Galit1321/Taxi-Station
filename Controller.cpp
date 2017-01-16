@@ -16,6 +16,7 @@
 #include "CreateGrid.h"
 #include "CreateCar.h"
 #include "CreateRide.h"
+#include "Tcp.h"
 
 
 /**
@@ -143,7 +144,7 @@ void *Controller::getCommend() {
         }
         cin >> commend;
     }string s="STOP";
-    connection->sendMessage(s,this->connection->socketnum);
+    connection->sendData(s);///////////////////////////////////////
     pthread_exit(0);
 }
 
@@ -160,10 +161,7 @@ bool Controller::runDriver() {
         struct parameters* p = new struct parameters();
         p->c= this;
         p->client_sock = sockNum;
-        int status = pthread_create(&id, NULL,this->runClient ,(void*)p);
-        if(status) {
-            break;
-        }
+
         runClient((void*)p);
         i--;
     }
@@ -171,7 +169,9 @@ bool Controller::runDriver() {
 }
 void* Controller::runClient(void* parameters) {
     struct parameters* par = (struct parameters*)parameters;
-    string serial_str=par->c->connection->getMessage(par->c->connection->socketnum);
+    char buf[4096];
+    string serial_str =par->c->connection->reciveData(buf,4096,par->client_sock);
+    // = buf;
     Driver *gp2;
     boost::iostreams::basic_array_source<char> device(serial_str.c_str(), serial_str.size());
     boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s2(device);
@@ -186,7 +186,7 @@ void* Controller::runClient(void* parameters) {
     boost::archive::binary_oarchive a2(s3);
     a2 << car;
     s3.flush();
-    par->c->connection->sendMessage(car_string,par->c->connection->socketnum);//serlize the car and send to driver
+    par->c->connection->sendData(car_string, par->client_sock);//serlize the car and send to driver
   // par->c->getNewTrip();
     return NULL;
     }
@@ -312,10 +312,10 @@ bool Controller::CommendNine() {
         arr << center->getDrivers()[0]->curr_pos;
         se.flush();
         this->servertime++;
-        connection->sendMessage(str,connection->socketnum);
+        connection->sendData(str);
         if (center->getDrivers()[0]->getCurr_pos()==center->getDrivers()[0]->getTrip()->getGoalState()) {
             if (!center->getTrip().empty()){
-               getNewTrip();
+               getNewTrip(0);
             }
             else{
                 center->getFree_drivers().push_back(center->getDrivers()[0]->getId());
