@@ -16,6 +16,7 @@
 #include "CreateGrid.h"
 #include "CreateCar.h"
 #include "CreateRide.h"
+#include "Tcp.h"
 
 
 /**
@@ -36,7 +37,7 @@ Controller::~Controller() {
  */
 Controller::Controller(const short unsigned int &port)  {
     this->connection=new Tcp(true,port);
-    connection->initialize();
+   // connection->initialize();
   //  connection->socketDescriptor;
     center = new TaxiCenter();
     string sizeGride;
@@ -143,7 +144,7 @@ void *Controller::getCommend() {
         }
         cin >> commend;
     }string s="STOP";
-    connection->sendMessage(s,this->connection->socketnum);
+//    connection->sendMessage(s,this->connection->socketnum);
     pthread_exit(0);
 }
 
@@ -155,11 +156,11 @@ bool Controller::runDriver() {
     int i;
     cin >> i;
     while (i) {
-        int sockNum = this->connection->getNewClient();
+       // int sockNum = this->connection->getNewClient();
         pthread_t id;
         struct parameters* p = new struct parameters();
         p->c= this;
-        p->client_sock = sockNum;
+     //   p->client_sock = sockNum;
         int status = pthread_create(&id, NULL,this->runClient ,(void*)p);
         if(status) {
             break;
@@ -171,7 +172,7 @@ bool Controller::runDriver() {
 }
 void* Controller::runClient(void* parameters) {
     struct parameters* par = (struct parameters*)parameters;
-    string serial_str=par->c->connection->getMessage(par->c->connection->socketnum);
+    string serial_str;//=par->c->connection->getMessage(par->c->connection->socketnum);
     Driver *gp2;
     boost::iostreams::basic_array_source<char> device(serial_str.c_str(), serial_str.size());
     boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s2(device);
@@ -186,7 +187,7 @@ void* Controller::runClient(void* parameters) {
     boost::archive::binary_oarchive a2(s3);
     a2 << car;
     s3.flush();
-    par->c->connection->sendMessage(car_string,par->c->connection->socketnum);//serlize the car and send to driver
+//    par->c->connection->sendMessage(car_string,par->c->connection->socketnum);//serlize the car and send to driver
   // par->c->getNewTrip();
     return NULL;
     }
@@ -237,13 +238,21 @@ bool Controller::CommendTwo() {
     string parm;
     cin >> parm;
     try {
-        pthread_t id ;
-        struct parameters *p = new struct parameters();
-        p->c=this;
-        int status = pthread_create(&id, NULL,this->createPthread,(void*)p);
-        if(status){
-            cout<<"error in open thred to trip";
-        }
+
+        CreateRide* cd=new CreateRide(parm);
+        SearchableTrip *trip;
+        trip = new SearchableTrip(getCenter()->getLayout(), cd->start_x,
+                                  cd->star_y, cd->end_x, cd->end_y, cd->id, cd->tariff, cd->numOfPass);
+        trip->setTime(cd->time);
+        getCenter()->getTrip().insert(std::pair<int, SearchableTrip *>(getCenter()->getTrip().size(), trip));
+        delete cd;
+       // pthread_t id ;
+     //   struct parameters *p = new struct parameters();
+    //    p->c=this;
+       // int status = pthread_create(&id, NULL,this->createPthread,(void*)p);
+       // if(status){
+      //      cout<<"error in open thred to trip";
+     //   }
 
     } catch (std::exception exception1) {
         return false;
@@ -312,10 +321,10 @@ bool Controller::CommendNine() {
         arr << center->getDrivers()[0]->curr_pos;
         se.flush();
         this->servertime++;
-        connection->sendMessage(str,connection->socketnum);
+     //   connection->sendMessage(str,connection->socketnum);
         if (center->getDrivers()[0]->getCurr_pos()==center->getDrivers()[0]->getTrip()->getGoalState()) {
             if (!center->getTrip().empty()){
-               getNewTrip();
+               getNewTrip(0);
             }
             else{
                 center->getFree_drivers().push_back(center->getDrivers()[0]->getId());

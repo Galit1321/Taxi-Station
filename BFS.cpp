@@ -41,9 +41,10 @@ deque<Point*> BFS::search(ISearchable *searchable) {
     Point* node=searchable->getGoalState();
     while (!open.empty()) {
         closed.push_back(n);
-
+        n = open.front();
+        open.erase(open.begin());
         if ((n!= NULL)&&(n ==node)){
-            while (n!= NULL)//we didnt reach the root of tree
+            while ((n!= NULL)&&(n!=searchable->getInitialState()))//we didnt reach the root of tree
             {
                 s.push_front(n);
                 n = n->getParent();
@@ -53,7 +54,17 @@ deque<Point*> BFS::search(ISearchable *searchable) {
 
         queue<Point*> l = searchable->getAllPossibleStates(n);
         while (!l.empty()) {
-            it1=find(open.begin(),open.end(),l.front());
+                if (l.front()->getCost()==std::numeric_limits<int>::max()){
+                    l.front()->setCost(n->getCost()+1);
+                    l.front()->setParent(n);
+                    open.push_back(l.front());
+                }
+
+
+            l.pop();
+        }
+
+            /*it1=find(open.begin(),open.end(),l.front());
             iterator1=find(closed.begin(),closed.end(),l.front());
                 if (iterator1 == closed.end()) {
                 if (it1 == open.end()) {//l.front is not in open
@@ -67,9 +78,8 @@ deque<Point*> BFS::search(ISearchable *searchable) {
                 }
             }
             l.pop();
-        }
-        n = open.front();
-        open.erase(open.begin());
+        }*/
+
     }
     open.clear();
     return s;
