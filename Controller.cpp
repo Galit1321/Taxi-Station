@@ -16,7 +16,6 @@
 #include "CreateGrid.h"
 #include "CreateCar.h"
 #include "CreateRide.h"
-#include "TCP_server.h"
 
 
 /**
@@ -316,7 +315,7 @@ bool Controller::CommendNine() {
         connection->sendMessage(str,connection->socketnum);
         if (center->getDrivers()[0]->getCurr_pos()==center->getDrivers()[0]->getTrip()->getGoalState()) {
             if (!center->getTrip().empty()){
-               getNewTrip(0);
+               getNewTrip();
             }
             else{
                 center->getFree_drivers().push_back(center->getDrivers()[0]->getId());

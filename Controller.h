@@ -8,8 +8,6 @@
 #include "Point.h"
 #include "TaxiCenter.h"
 
-#include "Socket.h"
-#include "TCP_server.h"
 
 class Controller {
     /**
@@ -30,7 +28,7 @@ public:
 
     virtual ~Controller();//desrectir
     Controller();//consterctor
-    void *getCommend();//busy wating method to get num of commend
+    void* getCommend();//busy wating method to get num of commend
 protected:
     static void* createPthread(void* parameters);
     //commend 9 wait for the right time and make move

@@ -36,6 +36,7 @@ TaxiCenter::TaxiCenter() {
     free_drivers = vector<int>();
     all_passngers = map<int, Passenger *>();
     layout = NULL;
+    taken_drivers = vector<int>();
     cars = map<int, Car *>();
 
 }
@@ -139,17 +140,15 @@ Point *TaxiCenter::getLocation(int id) {
     return getDriver(id)->getCurr_pos();
 }
 
-/**
- * find closer driver
- */
 
-int TaxiCenter::findCloser() {
+Driver *TaxiCenter::findCloser(Point *p) {
     if(getFree_drivers().empty()){
-        return -1;
+        return NULL;
     }
-    int id = getDriver(getFree_drivers()[0])->getId();
-    free_drivers.erase(getFree_drivers().begin());
-    return id;
+
+    if( (getDriver(getFree_drivers()[0])->getCurr_pos()->operator==(*p) )){
+        return getDriver(getFree_drivers()[0]);
+    }
 }
 
 //return a driver
@@ -189,3 +188,9 @@ void TaxiCenter::finishAllTrip() {
 void TaxiCenter::setTrip(const map<int, SearchableTrip *> &trip) {
     TaxiCenter::trip = trip;
 }
+
+const vector<int> &TaxiCenter::getTaken_drivers() const {
+    return taken_drivers;
+}
+
+

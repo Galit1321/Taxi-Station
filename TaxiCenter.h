@@ -21,6 +21,13 @@ public:
     void setTrip(const map<int, SearchableTrip *> &trip);
 
 protected:
+    vector<int> taken_drivers;
+public:
+    const vector<int> &getTaken_drivers() const;
+
+    void setTaken_drivers(const vector<int> &taken_drivers);
+
+protected:
     vector<int > free_drivers;
     map<int,Passenger*> all_passngers;
     MatrixLayout* layout;
@@ -53,7 +60,7 @@ public:
     Point* getLocation(int id);
 
     //find closer driver
-    int findCloser();
+    Driver *findCloser(Point *p);
     //return the drivers
      map<int , Driver*> &getDrivers() ;
 
