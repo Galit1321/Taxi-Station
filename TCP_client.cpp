@@ -15,31 +15,10 @@
 #include "TCP_client.h"
 
 using namespace std;
-TCP_client::TCP_client(const unsigned short &port,const char* ip) : TCP(port) {
-    memset(&this->connection_details, 0, sizeof(this->connection_details));
-    this->connection_details.sin_family = AF_INET;
-    this->connection_details.sin_addr.s_addr = inet_addr(ip);
-    this->connection_details.sin_port = htons(port);
-    // Connect to a server
-    if (connect(this->socketnum,
-                (struct sockaddr*)&this->connection_details, sizeof(this->connection_details)) < 0){
-        cout<<"hello";}
-
-
-    this->ip = ip;
-    struct sockaddr_in sin;
-    memset(&sin, 0, sizeof(sin));
-    sin.sin_family = AF_INET;
-    sin.sin_addr.s_addr = inet_addr(this->ip);
-    sin.sin_port = htons(this->port);
-    int g=connect(this->socketnum,(struct sockaddr *) &sin, sizeof(sin)) ;
-    if (g<0) {
-        //return an error represent error at this method
-        perror("error connecting to server");
-    }
-
+TCP_client::TCP_client(const unsigned short &port,const char* ip) {
+  this->socket1=new Tcp(false,port);
+    this->socket1->initialize();
 }
-
 TCP_client::~TCP_client() {
 
 }
@@ -49,7 +28,7 @@ TCP_client::~TCP_client() {
  * it get the string message to send and send it.
  */
 void TCP_client::sendMessage (std::string &str,int sock) {
-    int sent_bytes = send(this->socketnum, str.c_str(), str.length(), 0);
+    int sent_bytes = send(this->client_socket, str.c_str(), str.length(), 0);
     if (sent_bytes < 0) {
         perror("error");
     }
@@ -62,7 +41,7 @@ void TCP_client::sendMessage (std::string &str,int sock) {
 std::string TCP_client::getMessage (int sock) {
     char buffer[4096] = {0};
     int expected_data_len = sizeof(buffer);
-    int read_bytes = recv(this->socketnum, buffer, expected_data_len, 0);
+    int read_bytes = recv(this->client_socket, buffer, expected_data_len, 0);
     if (read_bytes == 0) {
         perror("connection is closed");
     }

@@ -6,12 +6,13 @@
 #define ADVPRO01_TCP_CLIENT_H
 
 #include "Driver.h"
-#include "TCP.h"
-class TCP_client: public TCP{
+#include "Tcp.h"
+class TCP_client{
 public:
     TCP_client(const unsigned short &port,const char* ip);
-    struct sockaddr_in connection_details;
-   // int client_socket;
+
+    Socket* socket1;
+    int client_socket;
     virtual ~TCP_client();
     const char* ip;
     int time;

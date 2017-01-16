@@ -7,8 +7,9 @@
 
 #include "Point.h"
 #include "TaxiCenter.h"
-#include "TCP.h"
 
+#include "Socket.h"
+#include "TCP_server.h"
 
 class Controller {
     /**
@@ -22,7 +23,7 @@ public:
     vector<int> client_socket;
     TaxiCenter* center;
     int servertime;
-    Connection* connection;
+    TCP_server* connection;
     Controller(const short unsigned int  &port);
 
 

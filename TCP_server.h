@@ -5,12 +5,20 @@
 #ifndef ADVPRO01_TCP_SERVER_H
 #define ADVPRO01_TCP_SERVER_H
 
-#include "TCP.h"
 
-class TCP_server:public TCP {
+#include <list>
+#include <string>
+#include "Tcp.h"
+using namespace std;
+
+class TCP_server {
 private:
-    int client_socket;
+
+
 public:
+   Socket* tcp;
+    int socketnum;
+
     /*
      * constructor
      */
@@ -31,6 +39,7 @@ public:
     /*
      * the function get new client and accept it
      */
+
     int getNewClient();
 
     /*
