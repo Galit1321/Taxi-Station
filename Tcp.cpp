@@ -107,7 +107,7 @@ int Tcp::sendData(string data,int clientId) {
 * The Function operation: getting data from the other socket to,	   *
 * enter it to the buffer and print the data							   *
 ***********************************************************************/
-string Tcp::reciveData(char* buffer, int size,int clientId) {
+int Tcp::reciveData(char* buffer, int size,int clientId) {
 	int read_bytes = recv(this->isServer ? clientId
 			: this->socketDescriptor, buffer, size, 0);
 	//checking the errors
@@ -119,13 +119,13 @@ string Tcp::reciveData(char* buffer, int size,int clientId) {
 		//return ERROR_RECIVE;
 	} else {
 		//prinrting the massege
-//		cout<<buffer<<endl;
+		cout<<buffer<<endl;
 		//string str = string(buffer);
 		//return str;
 	}
 	//return correct if there were no problem
 	//return read_bytes;
 	string str = string(buffer);
-	return str;
+	return read_bytes;
 }
 

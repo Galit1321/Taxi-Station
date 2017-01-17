@@ -30,7 +30,7 @@ public:
 
     virtual ~Controller();//desrectir
     Controller();//consterctor
-    void* getCommend();//busy wating method to get num of commend
+    void getCommend();//busy wating method to get num of commend
 protected:
     static void* createPthread(void* parameters);
     //commend 9 wait for the right time and make move
@@ -52,7 +52,7 @@ protected:
 };
 
     /*
- * struct to hold the menu and the socket number for the client.
+ * struct to hold the controller and the socket number for the client.
  */
 
     struct parameters{

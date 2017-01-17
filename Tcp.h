@@ -51,7 +51,7 @@ public:
 	* The Function operation: getting data from the other socket and print *
 	* the data															   *
 	***********************************************************************/
-	string reciveData(char* buffer, int size,int clientId);
+	int reciveData(char* buffer, int size,int clientId);
 
 };
 

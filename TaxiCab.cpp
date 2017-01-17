@@ -20,7 +20,7 @@ TaxiCab ::TaxiCab() {
  * @param color1 - the color of the car
  * @return
  */
-TaxiCab::TaxiCab(int id ,string manufacturer1 ,string color1){
+TaxiCab::TaxiCab(int id ,string manufacturer1 ,string color1):Car(id,1,manufacturer1,color1){
     this->id = id;
     mileage = 0;
     manufacturer =  manufacturer1;
@@ -37,9 +37,9 @@ TaxiCab::TaxiCab(int id ,string manufacturer1 ,string color1){
  * @param tariff1 - the tariff of the ride
  * @return
  */
-TaxiCab ::TaxiCab(int id, int mileage,string manufacturer1, string color1, int tariff1) {
-    id = id;
-    mileage = mileage;
+TaxiCab ::TaxiCab(int id, int mileage,string manufacturer1, string color1, int tariff1):Car(id,1,manufacturer1,color1) {
+    this->id = id;
+    this->mileage = mileage;
     manufacturer = manufacturer1;
     color = color1;
     tariff = tariff1;
