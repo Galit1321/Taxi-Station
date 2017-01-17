@@ -19,7 +19,8 @@ public:
     TaxiCenter *getCenter() ;
 
 public:
-    map<int,int> client_map;
+    std::map<int,int> client_map;
+    std::map<int, int>::iterator it;
     TaxiCenter* center;
     int servertime;
     Socket* connection;
@@ -47,6 +48,7 @@ protected:
     bool runDriver();
     void getNewTrip(int id);
     static void* runClient(void* par);
+    void closeAllClients();
 };
 
     /*

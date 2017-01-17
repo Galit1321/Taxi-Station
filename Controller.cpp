@@ -334,6 +334,20 @@ bool Controller::CommendNine() {
 }
 
 TaxiCenter *Controller::getCenter()  {
+    pthread_mutex_t lock;
+    if (pthread_mutex_init(&lock, NULL) != 0)
+    {
+        // error
+    }
+    pthread_mutex_lock(&lock);
     return center;
+    pthread_mutex_unlock(&lock);
+    pthread_mutex_destroy(&lock);
 }
 
+ void Controller::closeAllClients() {
+     for(it = client_map.begin(); it != client_map.end(); it++){
+         string s="STOP";
+         connection->sendData(s);
+     }
+ }
