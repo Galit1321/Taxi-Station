@@ -42,19 +42,19 @@ void TCP_client::runDriver(){
     boost::archive::binary_oarchive oa(s);
     oa << driver;
     s.flush();
-    this->socket1->sendData(serial_str);
+    this->socket1->sendData(serial_str,this->socket1->socketDescriptor);
     char bufCar[4096];
-    string serial_car = this->socket1->reciveData(bufCar,4096);
+    int serial_car = this->socket1->reciveData(bufCar,4096,this->socket1->socketDescriptor);
     Car *car;
-    boost::iostreams::basic_array_source<char> device(serial_car.c_str(), serial_car.size());
+    boost::iostreams::basic_array_source<char> device(bufCar, serial_car);
     boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s2(device);
     boost::archive::binary_iarchive ia(s2);
     ia >> car;
     driver->setCar(car);
     char bufTrip[4096];
-    string serial_trip = this->socket1->reciveData(bufTrip,4096);
+    int serial_trip = this->socket1->reciveData(bufTrip,4096,this->socket1->socketDescriptor);
     SearchableTrip *trip ;
-    boost::iostreams::basic_array_source<char> device1(serial_trip.c_str(), serial_trip.size());
+    boost::iostreams::basic_array_source<char> device1(bufTrip, serial_trip);
     boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s3(device1);
     boost::archive::binary_iarchive ar(s3);
     ar >> trip;
@@ -67,7 +67,7 @@ void TCP_client::runDriver(){
 void TCP_client::move() {
     string ser_point ;
     char bufP[4096];
-    ser_point = this->socket1->reciveData(bufP,4096);
+    ser_point = this->socket1->reciveData(bufP,4096,this->socket1->socketDescriptor);
     Point* p;
     while ((this->driver->curr_pos!=this->driver->getTrip()->getGoalState())&&(ser_point.find("STOP")==std::string::npos)){
         boost::iostreams::basic_array_source<char> device2(ser_point.c_str(), ser_point.size());
@@ -77,7 +77,7 @@ void TCP_client::move() {
         this->driver->setCurr_pos(p);
         this->time++;
         char buf[4096];
-        ser_point = this->socket1->reciveData(buf,4096);
+        ser_point = this->socket1->reciveData(buf,4096,this->socket1->socketDescriptor);
     }
     if (ser_point.find("STOP")==std::string::npos) {
         setNewTrip();
@@ -89,12 +89,12 @@ void TCP_client::move() {
  */
 void TCP_client::setNewTrip(){
     char buf[4096];
-    string serial_trip = this->socket1->reciveData(buf,4096);
-    if (serial_trip.find("STOP")!=std::string::npos){
+    int serial_trip = this->socket1->reciveData(buf,4096,this->socket1->socketDescriptor);
+    if (string(buf).find("STOP")!=std::string::npos){
         return;
     }
     SearchableTrip *trip ;
-    boost::iostreams::basic_array_source<char> device1(serial_trip.c_str(), serial_trip.size());
+    boost::iostreams::basic_array_source<char> device1(buf, serial_trip);
     boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s3(device1);
     boost::archive::binary_iarchive ar(s3);
     ar >> trip;

@@ -113,6 +113,7 @@ void TaxiCenter::setTaxiToDriver(int driver_id, int taxi_id) {
         return;
     }
     driver->setCar(car);
+    getCars().erase(getCars().begin());
 }
 
 //print location
@@ -145,10 +146,12 @@ Driver *TaxiCenter::findCloser(Point *p) {
     if(getFree_drivers().empty()){
         return NULL;
     }
+    for (std::vector<int>::iterator it = free_drivers.begin(); it != free_drivers.end(); it++){
+        if( (getDriver(getFree_drivers()[*it])->getCurr_pos()->operator==(*p) )){
+            return getDriver(getFree_drivers()[*it]);
+        }
+    } return NULL;
 
-    if( (getDriver(getFree_drivers()[0])->getCurr_pos()->operator==(*p) )){
-        return getDriver(getFree_drivers()[0]);
-    }
 }
 
 //return a driver

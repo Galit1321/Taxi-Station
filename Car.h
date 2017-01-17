@@ -15,7 +15,6 @@ protected:
     int id ;
     int mileage;
     string color;
-    //string carType;
     double tariff;
     string manufacturer;
     int kind;
@@ -32,9 +31,9 @@ public:
     //get the car type
     string getCarType() const;
     //constructor
-    Car(int id,string carType ,string manufacturer,string color);
+    Car(int id,int carType ,string manufacturer,string color);
     //constructor
-    Car(int id,string carType ,string manufacturer,string color,int kind);
+    Car(int id,string manufacturer,string color,int kind);
     //defult constructor
     Car();
     //set the id of the car
@@ -62,10 +61,10 @@ public:
         /*
 selize*/
             ar& (this->id);
-            ar&(this->kind);
-            ar&(this->mileage);
+           ar&(this->kind);
+        //    ar&(this->mileage);
             ar&(this->color);
-            ar&(this->tariff);
+     //       ar&(this->tariff);
             ar&(this->manufacturer);
         }
 

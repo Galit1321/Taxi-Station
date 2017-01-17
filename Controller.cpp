@@ -24,9 +24,7 @@
  */
 Controller::~Controller() {
     delete center;
-    for (vector<int>::iterator iterator1 = client_socket.begin(); iterator1 != client_socket.end(); iterator1++) {
-        close(*(iterator1));
-    }
+//    Controller::finish= true;
     delete  connection;
 }
 
@@ -38,6 +36,7 @@ Controller::~Controller() {
 Controller::Controller(const short unsigned int &port)  {
     this->connection=new Tcp(true,port);
     connection->initialize();
+//    Controller::finish=false;
   //  connection->socketDescriptor;
     center = new TaxiCenter();
     string sizeGride;
@@ -116,10 +115,10 @@ Controller::Controller() {
  * busy waiting function to get commend from user
  * destion to run on diff thred
  */
-void *Controller::getCommend() {
+void Controller::getCommend() {
     int commend;
     cin >> commend;
-    bool success = true;
+   bool success = true;
     while ((commend != 7) && (success)) {
         switch (commend) {
             case 1:
@@ -144,7 +143,7 @@ void *Controller::getCommend() {
         }
         cin >> commend;
     }string s="STOP";
-    connection->sendData(s);///////////////////////////////////////
+   // connection->sendData(s);///////////////////////////////////////
     pthread_exit(0);
 }
 
@@ -165,7 +164,6 @@ bool Controller::runDriver() {
         if(status) {
             break;
         }
-
         i--;
     }
     return true;
@@ -173,45 +171,45 @@ bool Controller::runDriver() {
 void* Controller::runClient(void* parameters) {
     struct parameters* par = (struct parameters*)parameters;
     char buf[4096];
-    string serial_str =par->c->connection->reciveData(buf,4096,par->client_sock);
-    // = buf;
+    int serial_str =par->c->connection->reciveData(buf,4096,par->client_sock);
     Driver *gp2;
-    boost::iostreams::basic_array_source<char> device(serial_str.c_str(), serial_str.size());
+    boost::iostreams::basic_array_source<char> device(buf, serial_str);
     boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s2(device);
     boost::archive::binary_iarchive ia(s2);
     ia >> gp2;
     par->c->getCenter()->addDriver(gp2);
     par->c->client_map.insert(pair<int,int>(par->client_sock,gp2->getId()));
-    par->c->getCenter()->setTaxiToDriver(gp2->getId(), gp2->getId());
-    Car *car = par->c->getCenter()->getCars()[gp2->getId()];
-    string car_string;
-    boost::iostreams::back_insert_device<std::string> inserter2(car_string);
-    boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > s3(inserter2);
-    boost::archive::binary_oarchive a2(s3);
-    a2 << car;
-    s3.flush();
-    par->c->connection->sendData(car_string);//serlize the car and send to driver
+    Car *car = par->c->getCenter()->getCars()[0];
+    par->c->getCenter()->setTaxiToDriver(gp2->getId(), car->getId());
+
+    std::string car_string;
+
+    boost::iostreams::back_insert_device<std::string> inserter(car_string);
+    boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > s(inserter);
+    boost::archive::binary_oarchive oa(s);
+   oa << car;
+    s.flush();
+    par->c->connection->sendData(car_string,par->client_sock);//serlize the car and send to driver
     par->c->getNewTrip( par->client_sock);
+
     return NULL;
     }
 
 
 void Controller::getNewTrip(int client_id){
+    Driver* driver=getCenter()->getDriver(client_map[client_id]);
+    getCenter()->getFree_drivers().push_back(driver->getId());
     string trip_string;
     while (true){
-        if (!getCenter()->getTrip().empty()) {
-            int time=center->getTrip()[0]->getTime();
-            if (time==this->servertime){
-
-            }
-           /* center->getTrip().erase(center->getTrip().begin());//erase the trip
-            center->getDrivers()[0]->setTrip(trip);
+        SearchableTrip* trip=driver->getTrip();
+        if (trip!=NULL) {
             boost::iostreams::back_insert_device<std::string> inserter_trip(trip_string);
             boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > s_trip(inserter_trip);
             boost::archive::binary_oarchive a_trip(s_trip);
             a_trip << trip;
             s_trip.flush();
-            connection->sendMessage(trip_string,client_id);//serlize the trip and send to driver*/
+            connection->sendData(trip_string,client_id);//serlize the trip and send to driver*/
+            this->busy.push_back(client_id);
             break;
         }else{
             std::this_thread::sleep_for(std::chrono::seconds(2));
@@ -265,7 +263,7 @@ bool Controller::CommendThree() {
     cin >> parm;
     try {
         CreateCar *cc = new CreateCar(parm);
-        center->addCar(cc->getId(), cc->getManufactor(), cc->getColor(), cc->getKind());
+        getCenter()->addCar(cc->getId(), cc->getManufactor(), cc->getColor(), cc->getKind());
         delete cc;
     }
     catch (std::exception e) {
@@ -283,7 +281,7 @@ bool Controller::CommendThree() {
 bool Controller::CommendFour() {
     int id;
     cin >> id;
-    center->printLocation(id);
+   getCenter()->printLocation(id);
     return true;
 }
 
@@ -292,7 +290,7 @@ bool Controller::CommendFour() {
  * @return
  */
 bool Controller::CommendSix() {
-    center->finishAllTrip();
+    getCenter()->finishAllTrip();
     return true;
 }
 
@@ -308,27 +306,32 @@ bool Controller::CommendNine() {
         this->servertime++;
     }
     else if (this->servertime == trip->getTime()){
-        getCenter()->findCloser(trip->getInitialState())->setTrip(trip);
-        getCenter()->getTrip().erase(getCenter()->getTrip().begin());
+        Driver* d=getCenter()->findCloser(trip->getInitialState());
+        if (d!=NULL){
+            d->setTrip(trip);
+            getCenter()->getTrip().erase(getCenter()->getTrip().begin());
+        }
+
     }
-    else if(this->servertime > center->getDrivers()[0]->getTrip()->getTime()){
+    else {
         string str;
-        center->getDrivers()[0]->move();
-        boost::iostreams::back_insert_device<std::string> inserter2(str);
-        boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > se(inserter2);
-        boost::archive::binary_oarchive arr(se);
-        arr << center->getDrivers()[0]->curr_pos;
-        se.flush();
-        this->servertime++;
-        connection->sendData(str);
-        if (center->getDrivers()[0]->getCurr_pos()==center->getDrivers()[0]->getTrip()->getGoalState()) {
-            if (!center->getTrip().empty()){
-               getNewTrip(0);
-            }
-            else{
-                center->getFree_drivers().push_back(center->getDrivers()[0]->getId());
+        for (std::vector<int>::iterator it = busy.begin(); it != busy.end(); it++){
+            Driver* driver= getCenter()->getDrivers()[this->client_map[*it]];
+            driver->move();
+            boost::iostreams::back_insert_device<std::string> inserter2(str);
+            boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > se(inserter2);
+            boost::archive::binary_oarchive arr(se);
+            arr << driver->curr_pos;
+            se.flush();
+            this->servertime++;
+            connection->sendData(str,*it);
+            if (driver->getCurr_pos()==driver->getTrip()->getGoalState()) {
+                driver->setTrip(NULL);
+                getCenter()->getFree_drivers().push_back(driver->getId());
+                getNewTrip(*it);
             }
         }
+
     }
     return true;
 }

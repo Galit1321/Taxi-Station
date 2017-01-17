@@ -23,12 +23,11 @@ id=0;
  * @param color
  * @return
  */
-Car ::Car(int id,string carType ,string manufacturer,string color){
+Car ::Car(int id,int carType ,string manufacturer,string color){
     this->id = id;
-    carType = carType;
-    manufacturer = manufacturer;
-    color= color;
-    mileage =0;
+    this->manufacturer = manufacturer;
+    this->color= color;
+    mileage=0;
 }
 
 

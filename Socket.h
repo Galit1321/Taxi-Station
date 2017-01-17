@@ -79,7 +79,7 @@ public:
 	* The Function operation: getting data from the other socket and print *
 	* the data															   *
 	***********************************************************************/
-	virtual string reciveData(char* buffer, int size,int clientId) = 0;
+	virtual int reciveData(char* buffer, int size,int clientId) = 0;
 	int getNewClient();
 
 
