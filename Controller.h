@@ -9,16 +9,18 @@
 #include "TaxiCenter.h"
 #include "Socket.h"
 
-
+extern int driverL ;
 class Controller {
     /**
      * class to controller the input in front
      * of the main function
      */
+
 public:
     TaxiCenter *getCenter() ;
 
 public:
+    vector<int> busy;
     std::map<int,int> client_map;
     std::map<int, int>::iterator it;
     TaxiCenter* center;
@@ -46,9 +48,11 @@ protected:
     //run all current driver that have a trip to finish point
     bool CommendSix();
     bool runDriver();
-    void getNewTrip(int id);
+
+    bool getNewTrip(int id);
     static void* runClient(void* par);
     void closeAllClients();
+
 };
 
     /*

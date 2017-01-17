@@ -17,7 +17,7 @@
 #include "CreateCar.h"
 #include "CreateRide.h"
 #include "Tcp.h"
-
+int driverL = true;
 
 /**
  * destructor
@@ -143,6 +143,10 @@ void Controller::getCommend() {
         }
         cin >> commend;
     }string s="STOP";
+    if (commend == 7){
+        driverL= false;
+        closeAllClients();
+    }
    // connection->sendData(s);///////////////////////////////////////
     pthread_exit(0);
 }
@@ -196,7 +200,7 @@ void* Controller::runClient(void* parameters) {
     }
 
 
-void Controller::getNewTrip(int client_id){
+bool Controller::getNewTrip(int client_id){
     Driver* driver=getCenter()->getDriver(client_map[client_id]);
     getCenter()->getFree_drivers().push_back(driver->getId());
     string trip_string;
@@ -215,7 +219,9 @@ void Controller::getNewTrip(int client_id){
             std::this_thread::sleep_for(std::chrono::seconds(2));
         }
     }
-
+    while(driverL){
+        sleep(3);
+    }
 
 }
 
@@ -351,6 +357,6 @@ TaxiCenter *Controller::getCenter()  {
  void Controller::closeAllClients() {
      for(it = client_map.begin(); it != client_map.end(); it++){
          string s="STOP";
-         connection->sendData(s);
+         connection->sendData(s, it->first);
      }
  }
