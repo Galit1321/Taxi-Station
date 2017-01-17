@@ -242,7 +242,7 @@ bool Controller::CommendTwo() {
         struct parameters *p = new struct parameters();
         p->c=this;
         p->str=parm;
-      int status = pthread_create(&id, NULL,this->createPthread,(void*)p);
+        int status = pthread_create(&id, NULL,this->createPthread,(void*)p);
       if(status){
            cout<<"error in open thread to trip";
         }
@@ -301,23 +301,25 @@ bool Controller::CommendSix() {
  * @return true
  */
 bool Controller::CommendNine() {
-    SearchableTrip* trip=getCenter()->getTrip()[0];
-    if(this->servertime < trip->getTime()){
-        this->servertime++;
-    }
-    else if (this->servertime == trip->getTime()){
-        Driver* d=getCenter()->findCloser(trip->getInitialState());
-        if (d!=NULL){
-            d->setTrip(trip);
-            getCenter()->getTrip().erase(getCenter()->getTrip().begin());
-        }
 
+    SearchableTrip* trip=getCenter()->getTrip()[0];
+    if (trip!=NULL){
+        if(this->servertime < trip->getTime()){
+            this->servertime++;
+        }
+        else if (this->servertime == trip->getTime()){
+            Driver* d=getCenter()->findCloser(trip->getInitialState());
+            if (d!=NULL){
+                d->setTrip(trip);
+                getCenter()->getTrip().erase(getCenter()->getTrip().begin());
+            }
+
+        }
     }
-    else {
         string str;
         for (std::vector<int>::iterator it = busy.begin(); it != busy.end(); it++){
             Driver* driver= getCenter()->getDrivers()[this->client_map[*it]];
-            driver->move();
+         driver->move();
             boost::iostreams::back_insert_device<std::string> inserter2(str);
             boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > se(inserter2);
             boost::archive::binary_oarchive arr(se);
@@ -331,10 +333,9 @@ bool Controller::CommendNine() {
                 getNewTrip(*it);
             }
         }
-
-    }
     return true;
-}
+    }
+
 
 TaxiCenter *Controller::getCenter()  {
     return center;
