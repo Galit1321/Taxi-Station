@@ -325,7 +325,7 @@ bool Controller::CommendNine() {
         string str;
         for (std::vector<int>::iterator it = busy.begin(); it != busy.end(); it++){
             Driver* driver= getCenter()->getDrivers()[this->client_map[*it]];
-         driver->move();
+        // driver->move();
             boost::iostreams::back_insert_device<std::string> inserter2(str);
             boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > se(inserter2);
             boost::archive::binary_oarchive arr(se);
