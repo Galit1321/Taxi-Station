@@ -190,7 +190,7 @@ const deque<Point *> &SearchableTrip::getSolution() const {
 }
 
 //set the olution of the trip
-void SearchableTrip::setSolution(const deque<Point *> &solution) {
+void SearchableTrip::setSolution() {
     SearchableTrip::solution = solution;
 }
 

@@ -72,7 +72,7 @@ void TCP_client::move() {
     while (this->driver->curr_pos!=this->driver->getTrip()->getGoalState()){
         if(string(bufP)=="Go"){
             this->driver->move();
-            this->time++;
+            this->timeClient++;
             char buf[4096];
             ser_point = this->socket1->reciveData(buf,4096,this->socket1->socketDescriptor);
         }else if (string(bufP)=="STOP"){

@@ -40,7 +40,7 @@ public:
     const deque<Point *> &getSolution() const;
     deque<Point*> solution;
     //set the olution of the trip
-    void setSolution(const deque<Point *> &solution);
+    void setSolution();
 
 public:
 
