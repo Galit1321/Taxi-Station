@@ -8,6 +8,8 @@
 #include "Point.h"
 #include "TaxiCenter.h"
 #include "Socket.h"
+#include <boost/thread/mutex.hpp>
+#include <boost/thread/thread.hpp>
 
 extern int driverL ;
 class Controller {
@@ -15,20 +17,22 @@ class Controller {
      * class to controller the input in front
      * of the main function
      */
+private:
+    boost::mutex mutex;
+public:
+    TaxiCenter *getCenter() ;
+
 public:
     vector<int> busy;
     std::map<int,int> client_map;
-    std::map<int, int>::iterator it123;
+    std::map<int, int>::iterator it;
     TaxiCenter* center;
     int servertime;
     Socket* connection;
-    pthread_mutex_t lock;
-
-
     Controller(const short unsigned int  &port);
 
-    TaxiCenter *getCenter() ;
-void relese();
+
+
     virtual ~Controller();//desrectir
     Controller();//consterctor
     void getCommend();//busy wating method to get num of commend
