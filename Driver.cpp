@@ -126,7 +126,11 @@ void Driver::setTrip(SearchableTrip* trip1) {
         delete trip;
     }
     this->trip=trip1;
-    this->numOfUser+=trip->getNumOfPass();
+    if(trip1!=NULL){
+        this->numOfUser+=trip->getNumOfPass();
+    }
+
+
 }
 /**
  * driver move a qeure accoding to kind of car

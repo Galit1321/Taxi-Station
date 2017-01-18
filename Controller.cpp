@@ -142,12 +142,12 @@ void Controller::getCommend() {
 
         }
         cin >> commend;
-    }string s="STOP";
+    }
     if (commend == 7){
         driverL= false;
         closeAllClients();
     }
-   // connection->sendData(s);///////////////////////////////////////
+
     pthread_exit(0);
 }
 
@@ -214,7 +214,7 @@ bool Controller::getNewTrip(int client_id){
             this->busy.push_back(client_id);
             break;
         }else{
-            std::this_thread::sleep_for(std::chrono::seconds(2));
+            sleep(1);
         }
     }
     while(driverL){
@@ -225,13 +225,8 @@ bool Controller::getNewTrip(int client_id){
 
 void* Controller::createPthread(void* parameters){
     struct parameters *p = (struct parameters*)parameters;
-    CreateRide* cd=new CreateRide(p->str);
-    SearchableTrip *trip;
-    trip = new SearchableTrip(p->c->getCenter()->getLayout(), cd->start_x,
-                              cd->star_y, cd->end_x, cd->end_y, cd->id, cd->tariff, cd->numOfPass);
-    trip->setTime(cd->time);
-    p->c->getCenter()->getTrip().insert(std::pair<int, SearchableTrip *>(p->c->getCenter()->getTrip().size(), trip));
-    delete cd;
+  p->c->getCenter()->doBfs(p->client_sock);
+    return  NULL;
 }
 
 /**
@@ -243,14 +238,20 @@ bool Controller::CommendTwo() {
     cin >> parm;
     try {
       pthread_t id ;
+        CreateRide* cd=new CreateRide(parm);
+        SearchableTrip* trip = getCenter()->addTrip(getCenter()->getLayout(), cd->start_x,
+                                                          cd->star_y, cd->end_x, cd->end_y, cd->id, cd->tariff, cd->numOfPass);
+        trip->setTime(cd->time);
         struct parameters *p = new struct parameters();
         p->c=this;
-        p->str=parm;
+        p->client_sock=trip->getRideId();
+        // p->c->getCenter()->getTrip().insert(std::pair<int, SearchableTrip *>(p->c->getCenter()->getTrip().size(), trip));
+        delete cd;
         int status = pthread_create(&id, NULL,this->createPthread,(void*)p);
       if(status){
            cout<<"error in open thread to trip";
         }
-
+       // pthread_join(id,NULL);
     } catch (std::exception exception1) {
         return false;
     }
@@ -306,7 +307,7 @@ bool Controller::CommendSix() {
  */
 bool Controller::CommendNine() {
     this->servertime++;
-    SearchableTrip* trip=getCenter()->getTrip()[0];
+    SearchableTrip* trip=getCenter()->getTrip().at(0);
     if (trip!=NULL) {
         if (this->servertime < trip->getTime()) {
 
@@ -321,12 +322,13 @@ bool Controller::CommendNine() {
             Driver* driver= getCenter()->getDrivers()[this->client_map[*it]];
             driver->move();
             //getCenter()->move(this->client_map[*it]);
-            this->servertime++;
+            //this->servertime++;
             connection->sendData(str,*it);
             if (driver->getCurr_pos()==driver->getTrip()->getGoalState()) {
+                busy.erase(it);
                 driver->setTrip(NULL);
                 getCenter()->getFree_drivers().push_back(driver->getId());
-                getNewTrip(*it);
+                it--;
             }
         }
     return true;
@@ -334,15 +336,15 @@ bool Controller::CommendNine() {
 
 
 TaxiCenter *Controller::getCenter()  {
-    pthread_mutex_t lock;
-    if (pthread_mutex_init(&lock, NULL) != 0)
-    {
-        // error
-    }
-    pthread_mutex_lock(&lock);
+//    pthread_mutex_t lock;
+//    if (pthread_mutex_init(&lock, NULL) != 0)
+//    {
+//        // errorlo
+//    pthread_mutex_lock(&lock);
+    boost::unique_lock<boost::mutex> scoped_lock(mutex);
     return center;
-    pthread_mutex_unlock(&lock);
-    pthread_mutex_destroy(&lock);
+//    pthread_mutex_unlock(&lock);
+//    pthread_mutex_destroy(&lock);
 }
 
  void Controller::closeAllClients() {

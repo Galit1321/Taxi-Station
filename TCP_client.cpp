@@ -76,7 +76,6 @@ void TCP_client::move() {
         //ar1>>p;
         if(string(bufP)=="Go"){
             this->driver->move();
-            cout<<*this->driver->curr_pos;
             this->time++;
             char buf[4096];
             ser_point = this->socket1->reciveData(buf,4096,this->socket1->socketDescriptor);

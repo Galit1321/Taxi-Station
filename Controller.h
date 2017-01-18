@@ -8,6 +8,8 @@
 #include "Point.h"
 #include "TaxiCenter.h"
 #include "Socket.h"
+#include <boost/thread/mutex.hpp>
+#include <boost/thread/thread.hpp>
 
 extern int driverL ;
 class Controller {
@@ -15,7 +17,8 @@ class Controller {
      * class to controller the input in front
      * of the main function
      */
-
+private:
+    boost::mutex mutex;
 public:
     TaxiCenter *getCenter() ;
 
