@@ -20,12 +20,7 @@ public:
     //set a trip
     void setTrip(const map<int, SearchableTrip *> &trip);
 
-protected:
-    vector<int> taken_drivers;
-public:
-    const vector<int> &getTaken_drivers() const;
 
-    void setTaken_drivers(const vector<int> &taken_drivers);
 
 protected:
     vector<int > free_drivers;
@@ -33,6 +28,9 @@ protected:
     MatrixLayout* layout;
     map<int ,Car*> cars;
 public:
+    void doBfs(int id);
+    SearchableTrip* addTrip(ILayout *l, int i, int j, int end_x, int end_y, int id, int tariff,
+                                         int numOfPass);
     TaxiCenter(MatrixLayout* layout);//constructor
     TaxiCenter();//defult constructor
     //add a car

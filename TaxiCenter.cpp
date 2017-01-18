@@ -36,7 +36,7 @@ TaxiCenter::TaxiCenter() {
     free_drivers = vector<int>();
     all_passngers = map<int, Passenger *>();
     layout = NULL;
-    taken_drivers = vector<int>();
+   // taken_drivers = vector<int>();
     cars = map<int, Car *>();
 
 }
@@ -200,10 +200,6 @@ void TaxiCenter::finishAllTrip() {
 //set a trip
 void TaxiCenter::setTrip(const map<int, SearchableTrip *> &trip) {
     TaxiCenter::trip = trip;
-}
-
-const vector<int> &TaxiCenter::getTaken_drivers() const {
-    return taken_drivers;
 }
 
 

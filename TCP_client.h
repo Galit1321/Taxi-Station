@@ -15,7 +15,7 @@ public:
     int client_socket;
     virtual ~TCP_client();
     const char* ip;
-    int time;
+    int timeClient;
     Driver *driver;
 
     Driver *getDriver() const;

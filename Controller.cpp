@@ -307,16 +307,6 @@ bool Controller::CommendSix() {
  */
 bool Controller::CommendNine() {
     this->servertime++;
-    SearchableTrip* trip=getCenter()->getTrip().at(0);
-    if (trip!=NULL) {
-        if (this->servertime < trip->getTime()) {
-
-        } else if (this->servertime == trip->getTime()) {
-            Driver *d = getCenter()->findCloser(trip->getInitialState());
-            if (d != NULL) {
-                d->setTrip(trip);
-                getCenter()->getTrip().erase(getCenter()->getTrip().begin());
-            }}}
         std::string str="Go";
         for (std::vector<int>::iterator it = busy.begin(); it != busy.end(); it++){
             Driver* driver= getCenter()->getDrivers()[this->client_map[*it]];
@@ -331,6 +321,21 @@ bool Controller::CommendNine() {
                 it--;
             }
         }
+    SearchableTrip* trip;
+    if (getCenter()->getTrip().empty()){
+        trip=NULL;
+    }else {
+        trip=getCenter()->getTrip().begin()->second;
+    }
+    if (trip!=NULL) {
+        if (this->servertime < trip->getTime()) {
+
+        } else if (this->servertime == trip->getTime()) {
+            Driver *d = getCenter()->findCloser(trip->getInitialState());
+            if (d != NULL) {
+                d->setTrip(trip);
+                getCenter()->getTrip().erase(getCenter()->getTrip().begin());
+            }}}
     return true;
     }
 
@@ -348,6 +353,7 @@ TaxiCenter *Controller::getCenter()  {
 }
 
  void Controller::closeAllClients() {
+     std::map<int, int>::iterator it;
      for(it = client_map.begin(); it != client_map.end(); it++){
          string s="STOP";
          connection->sendData(s, it->first);
