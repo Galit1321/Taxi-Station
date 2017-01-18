@@ -12,7 +12,7 @@
 #include "SearchableTrip.h"
 class TaxiCenter {
 protected:
-map<int,Driver*> drivers;
+    map<int,Driver*> drivers;
     map<int,SearchableTrip*> trip;
 public:
     //return map of trips
