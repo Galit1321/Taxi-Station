@@ -126,10 +126,9 @@ void Driver::setTrip(SearchableTrip* trip1) {
         delete trip;
     }
     this->trip=trip1;
-    if (trip1!=NULL){
+    if(trip1!=NULL){
         this->numOfUser+=trip->getNumOfPass();
     }
-
 
 
 }
