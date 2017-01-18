@@ -134,16 +134,16 @@ void Driver::setTrip(SearchableTrip* trip1) {
 void Driver::move() {
     if (!trip->solution.empty()){
         if (car->getKind()==1){
-            curr_pos=trip->solution.front();
+            setCurr_pos(trip->solution.front());
             this->car->setMileage(this->car->getMileage()+1);
             trip->solution.pop_front();
         }
        else{
-            curr_pos=trip->solution.front();
+            setCurr_pos(trip->solution.front());
             trip->solution.pop_front();
             this->car->setMileage(this->car->getMileage()+1);
             if (!trip->solution.empty()){
-                curr_pos=trip->solution.front();
+                setCurr_pos(trip->solution.front());
                 trip->solution.pop_front();
                 this->car->setMileage(this->car->getMileage()+1);
             }

@@ -185,9 +185,7 @@ void* Controller::runClient(void* parameters) {
     par->c->client_map.insert(pair<int,int>(par->client_sock,gp2->getId()));
     Car *car = par->c->getCenter()->getCars()[0];
     par->c->getCenter()->setTaxiToDriver(gp2->getId(), car->getId());
-
     std::string car_string;
-
     boost::iostreams::back_insert_device<std::string> inserter(car_string);
     boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > s(inserter);
     boost::archive::binary_oarchive oa(s);
@@ -220,7 +218,7 @@ bool Controller::getNewTrip(int client_id){
         }
     }
     while(driverL){
-        sleep(3);
+        std::this_thread::sleep_for(std::chrono::seconds(5));
     }
 
 }
@@ -307,30 +305,21 @@ bool Controller::CommendSix() {
  * @return true
  */
 bool Controller::CommendNine() {
-
     SearchableTrip* trip=getCenter()->getTrip()[0];
-    if (trip!=NULL){
-        if(this->servertime < trip->getTime()){
+    if (trip!=NULL) {
+        if (this->servertime < trip->getTime()) {
             this->servertime++;
-        }
-        else if (this->servertime == trip->getTime()){
-            Driver* d=getCenter()->findCloser(trip->getInitialState());
-            if (d!=NULL){
+        } else if (this->servertime == trip->getTime()) {
+            Driver *d = getCenter()->findCloser(trip->getInitialState());
+            if (d != NULL) {
                 d->setTrip(trip);
                 getCenter()->getTrip().erase(getCenter()->getTrip().begin());
-            }
-
-        }
-    }
-        string str;
+            }}}
+        std::string str="Go";
         for (std::vector<int>::iterator it = busy.begin(); it != busy.end(); it++){
             Driver* driver= getCenter()->getDrivers()[this->client_map[*it]];
-        // driver->move();
-            boost::iostreams::back_insert_device<std::string> inserter2(str);
-            boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > se(inserter2);
-            boost::archive::binary_oarchive arr(se);
-            arr << driver->curr_pos;
-            se.flush();
+            driver->move();
+            //getCenter()->move(this->client_map[*it]);
             this->servertime++;
             connection->sendData(str,*it);
             if (driver->getCurr_pos()==driver->getTrip()->getGoalState()) {

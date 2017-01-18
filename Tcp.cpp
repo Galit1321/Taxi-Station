@@ -125,7 +125,6 @@ int Tcp::reciveData(char* buffer, int size,int clientId) {
 	}
 	//return correct if there were no problem
 	//return read_bytes;
-	string str = string(buffer);
 	return read_bytes;
 }
 
