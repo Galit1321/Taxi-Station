@@ -218,7 +218,7 @@ bool Controller::getNewTrip(int client_id){
         }
     }
     while(driverL){
-        std::this_thread::sleep_for(std::chrono::seconds(5));
+        std::this_thread::sleep_for(std::chrono::seconds(2));
     }
 
 }
@@ -305,23 +305,23 @@ bool Controller::CommendSix() {
  * @return true
  */
 bool Controller::CommendNine() {
-    this->servertime++;
     SearchableTrip* trip=getCenter()->getTrip()[0];
     if (trip!=NULL) {
         if (this->servertime < trip->getTime()) {
-
+            this->servertime++;
         } else if (this->servertime == trip->getTime()) {
             Driver *d = getCenter()->findCloser(trip->getInitialState());
             if (d != NULL) {
                 d->setTrip(trip);
                 getCenter()->getTrip().erase(getCenter()->getTrip().begin());
+                this->servertime++;
             }}}
         std::string str="Go";
         for (std::vector<int>::iterator it = busy.begin(); it != busy.end(); it++){
             Driver* driver= getCenter()->getDrivers()[this->client_map[*it]];
             driver->move();
             //getCenter()->move(this->client_map[*it]);
-            this->servertime++;
+          this->servertime++;
             connection->sendData(str,*it);
             if (driver->getCurr_pos()==driver->getTrip()->getGoalState()) {
                 driver->setTrip(NULL);
@@ -334,20 +334,14 @@ bool Controller::CommendNine() {
 
 
 TaxiCenter *Controller::getCenter()  {
-    pthread_mutex_t lock;
-    if (pthread_mutex_init(&lock, NULL) != 0)
-    {
-        // error
-    }
-    pthread_mutex_lock(&lock);
+
     return center;
-    pthread_mutex_unlock(&lock);
-    pthread_mutex_destroy(&lock);
+
 }
 
  void Controller::closeAllClients() {
-     for(it = client_map.begin(); it != client_map.end(); it++){
+     for(it123 = client_map.begin(); it123 != client_map.end(); it123++){
          string s="STOP";
-         connection->sendData(s, it->first);
+         connection->sendData(s, it123->first);
      }
  }

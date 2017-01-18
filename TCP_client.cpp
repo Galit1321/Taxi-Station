@@ -70,13 +70,8 @@ void TCP_client::move() {
    int ser_point = this->socket1->reciveData(bufP,4096,this->socket1->socketDescriptor);
     Point* p;
     while (this->driver->curr_pos!=this->driver->getTrip()->getGoalState()){
-     //   boost::iostreams::basic_array_source<char> device2(bufP, ser_point);
-       // boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s4(device2);
-        //boost::archive::binary_iarchive ar1(s4);
-        //ar1>>p;
         if(string(bufP)=="Go"){
             this->driver->move();
-            cout<<*this->driver->curr_pos;
             this->time++;
             char buf[4096];
             ser_point = this->socket1->reciveData(buf,4096,this->socket1->socketDescriptor);
