@@ -143,6 +143,7 @@ void Controller::getCommend() {
         }
         cin >> commend;
     }
+    
     if (commend == 7){
         driverL= false;
         closeAllClients();
