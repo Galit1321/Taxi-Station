@@ -191,7 +191,9 @@ const deque<Point *> &SearchableTrip::getSolution() const {
 
 //set the olution of the trip
 void SearchableTrip::setSolution() {
-    SearchableTrip::solution = solution;
+    BFS* bfs=new BFS();
+    this->solution=bfs->search(this);
+    delete bfs;
 }
 
 //return the time of the trip
