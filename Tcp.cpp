@@ -112,19 +112,13 @@ int Tcp::reciveData(char* buffer, int size,int clientId) {
 			: this->socketDescriptor, buffer, size, 0);
 	//checking the errors
 	if (read_bytes == 0) {
-		//return CONNECTION_CLOSED;
-	}
+        perror("error in reading data");
+    }
 	else if (read_bytes < 0) {
-		//return an error represent error at this method
-		//return ERROR_RECIVE;
-	} else {
-		//prinrting the massege
-		cout<<buffer<<endl;
-		//string str = string(buffer);
-		//return str;
+        perror("error in reading data");
 	}
 	//return correct if there were no problem
-	//return read_bytes;
+
 	return read_bytes;
 }
 

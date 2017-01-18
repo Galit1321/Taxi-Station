@@ -68,7 +68,6 @@ SearchableTrip::SearchableTrip(ILayout* layout1,int start_i,int start_j,int end_
     this->rideId=rid;
     BFS* bfs=new BFS();
     this->solution=bfs->search(this);
-    this->solution.pop_front();
     delete bfs;
     time=0;
 

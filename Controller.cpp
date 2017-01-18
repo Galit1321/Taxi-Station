@@ -305,10 +305,11 @@ bool Controller::CommendSix() {
  * @return true
  */
 bool Controller::CommendNine() {
+    this->servertime++;
     SearchableTrip* trip=getCenter()->getTrip()[0];
     if (trip!=NULL) {
         if (this->servertime < trip->getTime()) {
-            this->servertime++;
+
         } else if (this->servertime == trip->getTime()) {
             Driver *d = getCenter()->findCloser(trip->getInitialState());
             if (d != NULL) {
