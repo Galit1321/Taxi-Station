@@ -51,7 +51,7 @@ protected:
     bool CommendSix();
     bool runDriver();
 
-    bool getNewTrip(int id);
+    static void* getNewTrip(void* parameters);
     static void* runClient(void* par);
     void closeAllClients();
 
@@ -65,6 +65,7 @@ protected:
         Controller *c;
         int client_sock;
         string str;
+        int client_id;
     };
 
 

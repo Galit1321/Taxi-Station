@@ -111,10 +111,7 @@ int Tcp::reciveData(char* buffer, int size,int clientId) {
 	int read_bytes = recv(this->isServer ? clientId
 			: this->socketDescriptor, buffer, size, 0);
 	//checking the errors
-	if (read_bytes == 0) {
-        perror("error in reading data");
-    }
-	else if (read_bytes < 0) {
+ if (read_bytes < 0) {
         perror("error in reading data");
 	}
 	//return correct if there were no problem

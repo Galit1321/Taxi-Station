@@ -143,7 +143,7 @@ void Controller::getCommend() {
         }
         cin >> commend;
     }
-
+    
     if (commend == 7){
         driverL= false;
         closeAllClients();
@@ -193,29 +193,20 @@ void* Controller::runClient(void* parameters) {
    oa << car;
     s.flush();
     par->c->connection->sendData(car_string,par->client_sock);//serlize the car and send to driver
-    while (true){
-        if(par->c->getNewTrip( par->client_sock)){
-            break;
-        }
-        else{
-            sleep(2);
-        }
-    }
-
-
+    par->c->getNewTrip(parameters);
     while(driverL){
         std::this_thread::sleep_for(std::chrono::seconds(5));
     }
-
     return NULL;
     }
 
 
-bool Controller::getNewTrip(int client_id){
-    Driver* driver=getCenter()->getDriver(client_map[client_id]);
-    getCenter()->getFree_drivers().push_back(driver->getId());
+void* Controller::getNewTrip(void* parameters){
+    struct parameters *p = (struct parameters*)parameters;
+    Driver* driver=p->c->getCenter()->getDriver(p->c->client_map[p->client_sock]);
+    p->c->getCenter()->getFree_drivers().push_back(driver->getId());
     string trip_string;
-while(true)
+    while (true){
         SearchableTrip* trip=driver->getTrip();
         if (trip!=NULL) {
             boost::iostreams::back_insert_device<std::string> inserter_trip(trip_string);
@@ -223,13 +214,16 @@ while(true)
             boost::archive::binary_oarchive a_trip(s_trip);
             a_trip << trip;
             s_trip.flush();
-            connection->sendData(trip_string,client_id);//serlize the trip and send to driver*/
-            this->busy.push_back(client_id);
-            return true;
+            p->c->connection->sendData(trip_string,p->client_sock);//serlize the trip and send to driver*/
+           p->c->busy.push_back(p->client_sock);
+            break;
+        }else{
+            sleep(1);
         }
-    return false;
-}
+    }
+    return NULL;
 
+}
 
 void* Controller::createPthread(void* parameters){
     struct parameters *p = (struct parameters*)parameters;
@@ -237,7 +231,7 @@ void* Controller::createPthread(void* parameters){
     SearchableTrip* trip = p->c->getCenter()->addTrip(p->c->getCenter()->getLayout(), cd->start_x,
                                                 cd->star_y, cd->end_x, cd->end_y, cd->id, cd->tariff, cd->numOfPass);
     trip->setTime(cd->time);
-   // p->c->getCenter()->doBfs(p->client_sock);
+    delete cd;
     return  NULL;
 }
 
@@ -250,10 +244,9 @@ bool Controller::CommendTwo() {
     cin >> parm;
     try {
       pthread_t id ;
-
         struct parameters *p = new struct parameters();
         p->c=this;
-    p->str=parm;
+        p->str=parm;
         // p->c->getCenter()->getTrip().insert(std::pair<int, SearchableTrip *>(p->c->getCenter()->getTrip().size(), trip));
 
         int status = pthread_create(&id, NULL,this->createPthread,(void*)p);
@@ -328,7 +321,15 @@ bool Controller::CommendNine() {
                 driver->setTrip(NULL);
                 getCenter()->getFree_drivers().push_back(driver->getId());
                 it--;
-                getNewTrip(*it);
+                pthread_t id;
+                struct parameters* p = new struct parameters();
+                p->client_sock=*it;
+                p->c=this;
+                int status = pthread_create(&id, NULL,this->getNewTrip ,(void*)p);
+                if(status) {
+                    break;
+                }
+
             }
         }
     SearchableTrip* trip;
@@ -344,8 +345,7 @@ bool Controller::CommendNine() {
             Driver *d = getCenter()->findCloser(trip->getInitialState());
             if (d != NULL) {
                 d->setTrip(trip);
-                getCenter()->getTrip().erase(getCenter()->getTrip().begin());\
-
+                getCenter()->getTrip().erase(getCenter()->getTrip().begin());
             }}}
     return true;
     }
