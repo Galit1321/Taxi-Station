@@ -1,0 +1,706 @@
+*   commit 05a6e390510ef40ba06488a974a9fc9465354cae
+|\  Merge: f2fe727 42c5ca9
+| | Author: galit <galit1321@gmail.com>
+| | Date:   Tue Jan 3 18:02:58 2017 +0200
+| | 
+| |     Merge remote-tracking branch 'origin/master'
+| |     
+| |     # Conflicts:
+| |     #	SearchableTrip.cpp
+| |   
+| * commit 42c5ca91c71b6a3a485d0fc0c84d340cfc61cd27
+| | Author: michal <m1245sh@gmail.com>
+| | Date:   Tue Jan 3 07:56:02 2017 -0800
+| | 
+| |     commit
+| |   
+| * commit 90d23cca6b83c13033f08b9785366ec1d846672c
+| | Author: michal <m1245sh@gmail.com>
+| | Date:   Tue Jan 3 06:23:17 2017 -0800
+| | 
+| |     commit
+| |   
+* | commit f2fe727a9f7a3f11cd61d4899e617538680828f5
+| | Author: galit <galit1321@gmail.com>
+| | Date:   Tue Jan 3 18:02:46 2017 +0200
+| | 
+| |     seliztion it working
+| |   
+* | commit ca7114ad04e214f229fc4f82034361eb8246e283
+|/  Author: galit <galit1321@gmail.com>
+|   Date:   Tue Jan 3 16:19:30 2017 +0200
+|   
+|       seliztion it working
+|    
+*   commit 926c5c01fa6c82309686e7713973e71e0efbcf29
+|\  Merge: e384877 e620fa0
+| | Author: galit <galit1321@gmail.com>
+| | Date:   Mon Jan 2 01:29:59 2017 +0200
+| | 
+| |     Merge remote-tracking branch 'origin/master'
+| |     
+| *   commit e620fa074bdf42ada29a24da2d13629f716aee01
+| |\  Merge: 9aafc6e a10b743
+| | | Author: michal <m1245sh@gmail.com>
+| | | Date:   Sun Jan 1 14:33:07 2017 -0800
+| | | 
+| | |     Merge remote-tracking branch 'origin/master'
+| | |    
+| * | commit 9aafc6ee30145d187809c35c8d3f13cb4a5875ff
+| | | Author: michal <m1245sh@gmail.com>
+| | | Date:   Sun Jan 1 14:32:33 2017 -0800
+| | | 
+| | |     Merge branch 'master' of https://bitbucket.org/galit1321/taxi03
+| | |     
+| | |     # Conflicts:
+| | |     #	Controller.cpp
+| | |     #	Controller.h
+| | |    
+| * | commit 04ffabdbec2118796f99fa9aae0b334b95142de8
+| | | Author: michal <m1245sh@gmail.com>
+| | | Date:   Sun Jan 1 14:20:04 2017 -0800
+| | | 
+| | |     Merge branch 'master' of https://bitbucket.org/galit1321/taxi03
+| | |     
+| | |     # Conflicts:
+| | |     #	Controller.cpp
+| | |     #	Controller.h
+| | |    
+* | | commit e384877985b28a6ac03f04c763fa5e6d2a04d34e
+| | | Author: galit <galit1321@gmail.com>
+| | | Date:   Mon Jan 2 01:29:32 2017 +0200
+| | | 
+| | |     seliztion it working
+| | |    
+* | | commit 758a00c9f30fbcae12c731b121c2cd831acf82de
+| | | Author: galit <galit1321@gmail.com>
+| | | Date:   Mon Jan 2 00:37:54 2017 +0200
+| | | 
+| | |     seliztion it working
+| | |    
+* | | commit 5b84889ad33a81a43cf8f720ea06a332e7483dae
+| |/  Author: galit <galit1321@gmail.com>
+|/|   Date:   Mon Jan 2 00:34:02 2017 +0200
+| |   
+| |       seliztion it working
+| |   
+* | commit a10b7434601370c9dffbc47ce3ae4a70fa57b761
+| | Author: galit <galit1321@gmail.com>
+| | Date:   Mon Jan 2 00:25:26 2017 +0200
+| | 
+| |     commit to merge
+| |   
+* | commit ee4555c969f2708e72f2d9881a5841fe87f707ed
+|/  Author: galit <galit1321@gmail.com>
+|   Date:   Sun Jan 1 23:23:15 2017 +0200
+|   
+|       commit with pthread
+|  
+* commit 4a7426d4749cc8d6fbd79dd3356e3eb9de1ba65b
+| Author: galit <galit1321@gmail.com>
+| Date:   Sun Jan 1 22:41:12 2017 +0200
+| 
+|     seliztion it working
+|  
+* commit 0b53d2115a2a207e862430269aa40ac28284a5a6
+| Author: michal <m1245sh@gmail.com>
+| Date:   Thu Dec 29 03:27:40 2016 -0800
+| 
+|     Merge branch 'master' of https://bitbucket.org/galit1321/taxi03
+|     
+|     # Conflicts:
+|     #	Controller.cpp
+|     #	Controller.h
+|    
+*   commit 0f64343fcf287bb084509d49631112102cacda2d
+|\  Merge: 6d05926 4021d71
+| | Author: michal <m1245sh@gmail.com>
+| | Date:   Thu Dec 29 03:25:31 2016 -0800
+| | 
+| |     Merge remote-tracking branch 'origin/master'
+| |   
+| * commit 4021d714c1bf0e04b1f254b3fe375c17ad7b68b9
+| | Author: galit <galit1321@gmail.com>
+| | Date:   Thu Dec 29 13:24:41 2016 +0200
+| | 
+| |     commit controller
+| |     
+* |   commit 6d059266693309a7f3fb321fdde578fdaaaa8a3e
+|\ \  Merge: 4748154 7cb1a54
+| |/  Author: michal <m1245sh@gmail.com>
+| |   Date:   Thu Dec 29 03:23:35 2016 -0800
+| |   
+| |       Merge branch 'master' of https://bitbucket.org/galit1321/taxi03
+| |       
+| |       # Conflicts:
+| |       #	Controller.cpp
+| |       #	Controller.h
+| |   
+| * commit 7cb1a540336cbdb73596d8f113d7d597294e3b2f
+| | Author: galit <galit1321@gmail.com>
+| | Date:   Thu Dec 29 12:12:32 2016 +0200
+| | 
+| |     move from creation
+| |   
+| * commit 539b1a3dc2bb7933eca047bd452e01e3f7ce686e
+| | Author: galit <galit1321@gmail.com>
+| | Date:   Wed Dec 28 18:06:09 2016 +0200
+| | 
+| |     works up an till 9
+| |   
+| * commit 5c51f7419c94a04efebf65ffbfe72b0736ff3fe9
+| | Author: galit <galit1321@gmail.com>
+| | Date:   Wed Dec 28 16:38:53 2016 +0200
+| | 
+| |     seliztion it working
+| |     
+| *   commit 3028563a1a02356cc69976f6235222061028c2ab
+| |\  Merge: a3dcd71 dc08f14
+| | | Author: galit <galit1321@gmail.com>
+| | | Date:   Wed Dec 28 16:27:24 2016 +0200
+| | | 
+| | |     Merge remote-tracking branch 'origin/master'
+| | |    
+| * | commit a3dcd7119b675baa973adb802b8028408185226a
+| | | Author: galit <galit1321@gmail.com>
+| | | Date:   Wed Dec 28 16:27:05 2016 +0200
+| | | 
+| | |     send to error fix
+| | |    
+* | | commit 4748154d31774bbcb08fa9872524b165a86a141a
+| |/  Author: michal <m1245sh@gmail.com>
+|/|   Date:   Thu Dec 29 02:09:39 2016 -0800
+| |   
+| |       Merge branch 'master' of https://bitbucket.org/galit1321/taxi03
+| |       
+| |       # Conflicts:
+| |       #	Test/CreateTest.cpp
+| |       #	Test/DriverTest.cpp
+| |       #	Test/LuxuryTest.cpp
+| |     
+* |   commit dc08f142d345a4f8db55c1078ae7eb5ae83e6205
+|\ \  Merge: 0e3d553 13e7813
+| |/  Author: michal <m1245sh@gmail.com>
+| |   Date:   Wed Dec 28 02:42:02 2016 -0800
+| |   
+| |       Merge branch 'master' of https://bitbucket.org/galit1321/taxi03
+| |       
+| |       # Conflicts:
+| |       #	Test/CreateTest.cpp
+| |       #	Test/DriverTest.cpp
+| |       #	Test/LuxuryTest.cpp
+| |   
+| * commit 13e78137410bd4ab4a4225ac2976fa92e278d813
+| | Author: galit <galit1321@gmail.com>
+| | Date:   Wed Dec 28 11:03:32 2016 +0200
+| | 
+| |     change to demo
+| |   
+| * commit 13b012a3904ec6f62c2c6f7cfd8db11293c0f392
+| | Author: galit <galit1321@gmail.com>
+| | Date:   Tue Dec 27 22:20:59 2016 +0200
+| | 
+| |     remark to methods
+| |   
+| * commit 8be5f3e661418e8e089aa065db11f75a3e1a4331
+| | Author: galit <galit1321@gmail.com>
+| | Date:   Tue Dec 27 22:12:33 2016 +0200
+| | 
+| |     div to file
+| |   
+| * commit 8203cce276f68322557b10afa509b0a633b94730
+| | Author: galit <galit1321@gmail.com>
+| | Date:   Tue Dec 27 21:56:45 2016 +0200
+| | 
+| |     seliztion it working
+| |   
+| * commit 8b1cd5ae3f463e5497eca83904cd295fc19f8a5c
+| | Author: galit <galit1321@gmail.com>
+| | Date:   Tue Dec 27 16:48:11 2016 +0200
+| | 
+| |     seliztion it working
+| |   
+| * commit 29d6676b94da84ca21cfdd45271be654a7cd692b
+| | Author: galit <galit1321@gmail.com>
+| | Date:   Tue Dec 27 13:07:30 2016 +0200
+| | 
+| |     commit works but crash for lack of client
+| |   
+| * commit 9b02a24bbd57dd622d86a0170a0c904296779e7c
+| | Author: galit <galit1321@gmail.com>
+| | Date:   Tue Dec 27 09:20:52 2016 +0200
+| | 
+| |     create new thread to get commend
+| |   
+| * commit f4a93ba93124ee297a253b1c475266d8ef44166b
+| | Author: galit <galit1321@gmail.com>
+| | Date:   Mon Dec 26 21:08:48 2016 +0200
+| | 
+| |     commit before we go
+| |   
+| * commit 636be15b2a719f979a2fb3c6f88e34ea194a275d
+| | Author: galit <galit1321@gmail.com>
+| | Date:   Mon Dec 26 20:21:24 2016 +0200
+| | 
+| |     commit controller change
+| |   
+| * commit 2507dfa3978828981a485b63b68681a1dc71f9a8
+| | Author: galit <galit1321@gmail.com>
+| | Date:   Mon Dec 26 17:08:22 2016 +0200
+| | 
+| |     commit project
+| |   
+| * commit 7a54e89c06737bd2135a21e795b34628d2659fe1
+| | Author: galit <galit1321@gmail.com>
+| | Date:   Mon Dec 26 16:45:07 2016 +0200
+| | 
+| |     commit udp class
+| |   
+| * commit cdaaa326e4f9e3d64a8dca708eef4808f6f548ad
+| | Author: galit <galit1321@gmail.com>
+| | Date:   Mon Dec 26 13:34:59 2016 +0200
+| | 
+| |     add selize function
+| |   
+| * commit bbeb26f217ab689f77c2aef3a055d584fbbf059d
+| | Author: galit <galit1321@gmail.com>
+| | Date:   Thu Dec 22 17:05:10 2016 +0200
+| | 
+| |     commit project before ex04
+| |     
+| *   commit 7f3824151d876bc852a0c121c8e2b20d0f1204b5
+| |\  Merge: e64da98 d1260c3
+| | | Author: galit <galit1321@gmail.com>
+| | | Date:   Sun Dec 18 14:29:34 2016 +0200
+| | | 
+| | |     Merge remote-tracking branch 'origin/master'
+| | |     
+| | |     # Conflicts:
+| | |     #	BFS.h
+| | |     #	Controller.cpp
+| | |     #	Controller.h
+| | |     #	CreateCar.cpp
+| | |     #	CreateCar.h
+| | |     #	CreateDriver.cpp
+| | |     #	CreateDriver.h
+| | |     #	Driver.cpp
+| | |     #	Driver.h
+| | |     #	Luxury.cpp
+| | |     #	TaxiCTest.cpp
+| | |    
+| * | commit e64da983302f5bda45116639ab69029a733b9387
+| | | Author: galit <galit1321@gmail.com>
+| | | Date:   Sun Dec 18 14:28:10 2016 +0200
+| | | 
+| | |     commit submited project
+| | |    
+* | | commit 0e3d553028e653bd72e2a7f1cbe7864afe47cf2c
+| |/  Author: michal <m1245sh@gmail.com>
+|/|   Date:   Wed Dec 28 02:12:18 2016 -0800
+| |   
+| |       works
+| |     
+* |   commit d1260c3518926208b5aac67f27c1f95a35e4e799
+|\ \  Merge: ab2705f 9189ea6
+| |/  Author: michal <m1245sh@gmail.com>
+| |   Date:   Thu Dec 15 09:31:06 2016 -0800
+| |   
+| |       Merge remote-tracking branch 'origin/master'
+| |       
+| |       # Conflicts:
+| |       #	BFS.h
+| |       #	Car.cpp
+| |       #	Car.h
+| |       #	Controller.cpp
+| |       #	CreateDriver.cpp
+| |       #	CreateDriver.h
+| |   
+| * commit 9189ea60ee9b078166a7d4174bc2d6dd79cb729c
+| | Author: galit <galit1321@gmail.com>
+| | Date:   Thu Dec 15 19:24:53 2016 +0200
+| | 
+| |     commit project
+| |   
+| * commit 724489e26054f23e9b147ee8fcc6d2b58ae36df0
+| | Author: galit <galit1321@gmail.com>
+| | Date:   Thu Dec 15 17:04:10 2016 +0200
+| | 
+| |     commit project
+| |     
+| *   commit 9f4a7f0b904bafaacb105a79ebf7155da0eab4ce
+| |\  Merge: 615f750 083d615
+| | | Author: galit <galit1321@gmail.com>
+| | | Date:   Thu Dec 15 15:41:25 2016 +0200
+| | | 
+| | |     Merge remote-tracking branch 'origin/master'
+| | |     
+| | |     # Conflicts:
+| | |     #	Controller.cpp
+| | |    
+| * | commit 615f750217e5ae121cc45bf751d9995e27fe4981
+| | | Author: galit <galit1321@gmail.com>
+| | | Date:   Thu Dec 15 15:40:33 2016 +0200
+| | | 
+| | |     commit project
+| | |    
+* | | commit ab2705f3d194f97c4c3cd2b943c3056c209c7f90
+| |/  Author: michal <m1245sh@gmail.com>
+|/|   Date:   Thu Dec 15 09:26:32 2016 -0800
+| |   
+| |       works
+| |   
+* | commit 083d6159160e9c4f92c3400e6f1d495e06766423
+| | Author: michal <m1245sh@gmail.com>
+| | Date:   Thu Dec 15 05:39:36 2016 -0800
+| | 
+| |     works
+| |   
+* | commit 73c416c2be00c6a0b877c9cbe9cea633743e4eee
+| | Author: michal <m1245sh@gmail.com>
+| | Date:   Thu Dec 15 05:06:49 2016 -0800
+| | 
+| |     works
+| |     
+* |   commit 9535bfb2ff528f7868877cd4815b21715dcc2fb6
+|\ \  Merge: 7f5b7c8 31fe3d4
+| |/  Author: michal <m1245sh@gmail.com>
+| |   Date:   Thu Dec 15 04:23:44 2016 -0800
+| |   
+| |       Merge remote-tracking branch 'origin/master'
+| |     
+| *   commit 31fe3d485d07e218f1e8df42289e75bf47b62777
+| |\  Merge: 94ab7df 64fba67
+| | | Author: galit <galit1321@gmail.com>
+| | | Date:   Thu Dec 15 14:23:13 2016 +0200
+| | | 
+| | |     Merge remote-tracking branch 'origin/master'
+| | |     
+| | |     # Conflicts:
+| | |     #	Driver.cpp
+| | |    
+| * | commit 94ab7df1ca5eba91205933f8d9e6e572c88391f8
+| | | Author: galit <galit1321@gmail.com>
+| | | Date:   Thu Dec 15 14:21:43 2016 +0200
+| | | 
+| | |     commit to run on michel computer
+| | |    
+* | | commit 7f5b7c87be403d94050b4ca1fb89305c8ef25df7
+| |/  Author: michal <m1245sh@gmail.com>
+|/|   Date:   Thu Dec 15 04:22:40 2016 -0800
+| |   
+| |       commit controller
+| |   
+* | commit 64fba6795b3d94b3217c44b0791bbf207ab87bb4
+|/  Author: michal <m1245sh@gmail.com>
+|   Date:   Thu Dec 15 03:43:21 2016 -0800
+|   
+|       commit constructor
+|    
+*   commit 0aecbd1e9c00cd22f681674be438c374a726875d
+|\  Merge: c04cdbf 4f89fad
+| | Author: michal <m1245sh@gmail.com>
+| | Date:   Thu Dec 15 03:33:30 2016 -0800
+| | 
+| |     Merge remote-tracking branch 'origin/master'
+| |   
+| * commit 4f89fad8acb6b3f4dba47a6e729ad1f86f75dfaa
+| | Author: galit <galit1321@gmail.com>
+| | Date:   Thu Dec 15 13:32:29 2016 +0200
+| | 
+| |     commit project
+| |   
+| * commit 3f2855b58a3d363d50b4222cddbc30334ac2661c
+| | Author: galit <galit1321@gmail.com>
+| | Date:   Thu Dec 15 13:21:20 2016 +0200
+| | 
+| |     commitwith driver test
+| |     
+* |   commit c04cdbf651678dad7f3a606d745f721a49e46730
+|\ \  Merge: 5eeafcb 23ed1b7
+| |/  Author: michal <m1245sh@gmail.com>
+| |   Date:   Thu Dec 15 03:33:15 2016 -0800
+| |   
+| |       commit constructor
+| |   
+| * commit 23ed1b7d833aea2865cb6b5157206f66e01807e6
+| | Author: galit <galit1321@gmail.com>
+| | Date:   Thu Dec 15 12:55:23 2016 +0200
+| | 
+| |     commit project
+| |   
+| * commit c46c381f2879c3246212f5c1e6b74f1e3322a6a7
+| | Author: galit <galit1321@gmail.com>
+| | Date:   Thu Dec 15 12:20:46 2016 +0200
+| | 
+| |     commit project
+| |     
+| *   commit 05ef2378011077396aa56f6407aaa1ab5a454715
+| |\  Merge: 0029734 034d190
+| | | Author: galit <galit1321@gmail.com>
+| | | Date:   Thu Dec 15 12:17:41 2016 +0200
+| | | 
+| | |     Merge remote-tracking branch 'origin/master'
+| | |    
+| * | commit 00297347e8ee3d2221bca4d5d00d62eed6ec5bb0
+| | | Author: galit <galit1321@gmail.com>
+| | | Date:   Thu Dec 15 12:17:23 2016 +0200
+| | | 
+| | |     commit project
+| | |    
+* | | commit 5eeafcbd65df616776cfb54ac8ba3ca07d3f38ac
+| |/  Author: michal <m1245sh@gmail.com>
+|/|   Date:   Thu Dec 15 02:57:20 2016 -0800
+| |   
+| |       commit to merge
+| |     
+* |   commit 034d190648f6ea75d023316f5b245faeaf8aec53
+|\ \  Merge: e8bb211 004c064
+| |/  Author: michal <m1245sh@gmail.com>
+| |   Date:   Thu Dec 15 02:13:35 2016 -0800
+| |   
+| |       Merge remote-tracking branch 'origin/master'
+| |       
+| |       # Conflicts:
+| |       #	Driver.cpp
+| |       #	Driver.h
+| |       #	Luxury.cpp
+| |       #	Luxury.h
+| |   
+| * commit 004c064a1cc3a14da8e02fa1eef9a91c2f9f7a3b
+| | Author: galit <galit1321@gmail.com>
+| | Date:   Thu Dec 15 10:31:03 2016 +0200
+| | 
+| |     commit project after runnig ex3 exmple
+| |   
+| * commit 792e754e07cfcba305a51436f9ab6c4ad8669be2
+| | Author: galit <galit1321@gmail.com>
+| | Date:   Thu Dec 15 09:06:35 2016 +0200
+| | 
+| |     commit changes of trip and statfiction
+| |   
+* | commit e8bb2117d6774d60030ceed61360190c96e9426a
+| | Author: michal <m1245sh@gmail.com>
+| | Date:   Thu Dec 15 02:12:45 2016 -0800
+| | 
+| |     Merge branch 'master' of /home/michal/ClionProjects/taxi03 with conflicts.
+| |     
+* |   commit 239c88dda3cf5836f181aae52d0a3634f91bcb4e
+|\ \  Merge: 3f1237d d96b87d
+| |/  Author: michal <m1245sh@gmail.com>
+| |   Date:   Wed Dec 14 07:52:36 2016 -0800
+| |   
+| |       Merge remote-tracking branch 'origin/master'
+| |       
+| |       # Conflicts:
+| |       #	Driver.cpp
+| |   
+| * commit d96b87d3048cd936406ae9ba34e4b9ee89c4b714
+| | Author: galit <galit1321@gmail.com>
+| | Date:   Tue Dec 13 20:07:56 2016 +0200
+| | 
+| |     commit taxicenter destructor
+| |   
+| * commit d598b4924c7084681a5455cf20ff3ffb391a7f96
+| | Author: galit <galit1321@gmail.com>
+| | Date:   Tue Dec 13 19:49:02 2016 +0200
+| | 
+| |     commit commend 6
+| |     
+| *   commit 98316560a55c863fa4c8a975ae4bab2f357b6267
+| |\  Merge: d8a1b43 01c07d0
+| | | Author: galit <galit1321@gmail.com>
+| | | Date:   Tue Dec 13 17:28:27 2016 +0200
+| | | 
+| | |     Merge remote-tracking branch 'origin/master'
+| | |    
+| * | commit d8a1b43f5af04fb226cb9dead2080ae5494dfb83
+| | | Author: galit <galit1321@gmail.com>
+| | | Date:   Tue Dec 13 17:28:17 2016 +0200
+| | | 
+| | |     commit project
+| | |    
+* | | commit 3f1237df96725a08e4e6e389da55360071c89f0b
+| |/  Author: michal <m1245sh@gmail.com>
+|/|   Date:   Wed Dec 14 07:51:11 2016 -0800
+| |   
+| |       commit to merge
+| |     
+* |   commit 01c07d0521957b88424fc0327f6940253b4ba7cd
+|\ \  Merge: 569a751 79a62b0
+| |/  Author: michal <m1245sh@gmail.com>
+| |   Date:   Tue Dec 13 07:15:14 2016 -0800
+| |   
+| |       Merge remote-tracking branch 'origin/master'
+| |       
+| |       # Conflicts:
+| |       #	Driver.cpp
+| |       #	Driver.h
+| |   
+| * commit 79a62b047e1ede2658bb699c2aee6aa4ae11832a
+| | Author: galit <galit1321@gmail.com>
+| | Date:   Tue Dec 13 17:10:45 2016 +0200
+| | 
+| |     commit findcloser
+| |   
+| * commit ca25fedf2f8818df80b0e0639abb9911f34c99f9
+| | Author: galit <galit1321@gmail.com>
+| | Date:   Tue Dec 13 13:23:56 2016 +0200
+| | 
+| |     commit after merge part 2
+| |   
+* | commit 569a75167c552491ee6166ed518208271c3fb892
+| | Author: michal <m1245sh@gmail.com>
+| | Date:   Tue Dec 13 07:12:24 2016 -0800
+| | 
+| |     commit to merge
+| |     
+* |   commit 9e3354845f1cb493ae89484f321b4ecd241c7717
+|\ \  Merge: 0639409 d894d5b
+| |/  Author: michal <m1245sh@gmail.com>
+| |   Date:   Tue Dec 13 03:19:57 2016 -0800
+| |   
+| |       Merge branch 'master' of https://bitbucket.org/galit1321/taxi03
+| |   
+| * commit d894d5b24f76b440b417101563edfacbfb4c0d39
+| | Author: galit <galit1321@gmail.com>
+| | Date:   Tue Dec 13 13:18:31 2016 +0200
+| | 
+| |     afterr merge
+| |     
+| *   commit 543cdafec0321e1acdfd66d12c85101ef895b6d7
+| |\  Merge: d29a311 339a83a
+| | | Author: galit <galit1321@gmail.com>
+| | | Date:   Tue Dec 13 13:17:37 2016 +0200
+| | | 
+| | |     Merge remote-tracking branch 'origin/master'
+| | |     
+| | |     # Conflicts:
+| | |     #	Driver.h
+| | |    
+| * | commit d29a31107a0b468e0ab9f7973e940a51868d6388
+| | | Author: galit <galit1321@gmail.com>
+| | | Date:   Tue Dec 13 13:15:29 2016 +0200
+| | | 
+| | |     commit car
+| | |    
+* | | commit 06394095159c00369eb699c0eca5625771495247
+| |/  Author: michal <m1245sh@gmail.com>
+|/|   Date:   Tue Dec 13 03:19:29 2016 -0800
+| |   
+| |       commit
+| |     
+* |   commit 339a83a4673279af6eb23805f05074ad50e22a93
+|\ \  Merge: 2d6ab8f dc26930
+| |/  Author: michal <m1245sh@gmail.com>
+| |   Date:   Tue Dec 13 02:01:10 2016 -0800
+| |   
+| |       Merge remote-tracking branch 'origin/master'
+| |   
+| * commit dc26930f9e46c630e8e001650e99cbc0b757372a
+| | Author: galit <galit1321@gmail.com>
+| | Date:   Tue Dec 13 11:57:38 2016 +0200
+| | 
+| |     commit conroller
+| |   
+| * commit 6b8ed7ca86cdd7dd76ca9924af67b29a737a5f58
+| | Author: galit <galit1321@gmail.com>
+| | Date:   Tue Dec 13 11:29:44 2016 +0200
+| | 
+| |     commit commend 2
+| |   
+* | commit 2d6ab8fdeefad3a8712e4f7c7619c79d4a3b2caa
+| | Author: michal <m1245sh@gmail.com>
+| | Date:   Tue Dec 13 02:00:28 2016 -0800
+| | 
+| |     first commit
+| |     
+* |   commit cdf5dfe92802d67e68c255d8e886623fb106856e
+|\ \  Merge: 0172a1e 308e146
+| |/  Author: michal <m1245sh@gmail.com>
+| |   Date:   Mon Dec 12 09:58:26 2016 -0800
+| |   
+| |       Merge branch 'master' of https://bitbucket.org/galit1321/taxi03
+| |   
+| * commit 308e1469774ccde92ceb44b3a6f881a6958a9ab4
+| | Author: galit <galit1321@gmail.com>
+| | Date:   Mon Dec 12 19:55:50 2016 +0200
+| | 
+| |     commit project
+| |   
+* | commit 0172a1ebb561f99739326d112ac04abe82ab2508
+|/  Author: michal <m1245sh@gmail.com>
+|   Date:   Mon Dec 12 09:57:54 2016 -0800
+|   
+|       bbbbbb
+|  
+* commit d16499e9dfeff567a0ec2cd6e75c4891906aa2e9
+| Author: galit <galit1321@gmail.com>
+| Date:   Mon Dec 12 19:25:39 2016 +0200
+| 
+|     build works
+|  
+* commit a04c04a328b38f45461d84a0d2175fd68885c8ac
+| Author: galit <galit1321@gmail.com>
+| Date:   Mon Dec 12 19:13:25 2016 +0200
+| 
+|     after build
+|  
+* commit ee480582f25a2ead433ab0776095bb1beb980a3d
+| Author: galit <galit1321@gmail.com>
+| Date:   Mon Dec 12 18:53:13 2016 +0200
+| 
+|     commit commend 3
+|  
+* commit 1457df06914944a34a4cb76aaa011cb40b839f1c
+| Author: galit <galit1321@gmail.com>
+| Date:   Mon Dec 12 18:35:20 2016 +0200
+| 
+|     commit commend 4
+|  
+* commit a34b0816c9537b42e7c19ef16a931c155bd67986
+| Author: galit <galit1321@gmail.com>
+| Date:   Mon Dec 12 18:11:51 2016 +0200
+| 
+|     commit create car
+|  
+* commit 092bbed0f04b60dc31af07e15510795045793c78
+| Author: galit <galit1321@gmail.com>
+| Date:   Mon Dec 12 18:03:15 2016 +0200
+| 
+|     commit commend one
+|  
+* commit 1aa3239c1c5c19d1a63c9c78731c9713f494e30f
+| Author: galit <galit1321@gmail.com>
+| Date:   Mon Dec 12 17:55:49 2016 +0200
+| 
+|     CHANGE long to int
+|  
+* commit ee7fe1ec6e0d62c0e31ae3a57b6308fd2b278933
+| Author: galit <galit1321@gmail.com>
+| Date:   Mon Dec 12 16:44:33 2016 +0200
+| 
+|     commit after constructor finish
+|  
+* commit eb995c722839a83539d00a56fdee0882271b56be
+| Author: galit <galit1321@gmail.com>
+| Date:   Mon Dec 12 13:56:43 2016 +0200
+| 
+|     commit controller
+|  
+* commit 070929e87f7275cf389a9351753bec53a24f6b92
+| Author: galit <galit1321@gmail.com>
+| Date:   Mon Dec 12 13:53:04 2016 +0200
+| 
+|     commit controller
+|  
+* commit 370c936a93bf5344bd2d0247ec82b7af06488dde
+| Author: michal <m1245sh@gmail.com>
+| Date:   Mon Dec 12 03:09:32 2016 -0800
+| 
+|     bbbbbb
+|  
+* commit 7ae0e94610e159e45c16823c9c71ac79d229d6ba
+  Author: galit <galit1321@gmail.com>
+  Date:   Mon Dec 12 13:00:14 2016 +0200
+  
+      commit project
