@@ -215,7 +215,7 @@ bool Controller::getNewTrip(int client_id){
     Driver* driver=getCenter()->getDriver(client_map[client_id]);
     getCenter()->getFree_drivers().push_back(driver->getId());
     string trip_string;
-while(tr)
+while(true)
         SearchableTrip* trip=driver->getTrip();
         if (trip!=NULL) {
             boost::iostreams::back_insert_device<std::string> inserter_trip(trip_string);
