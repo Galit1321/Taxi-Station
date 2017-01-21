@@ -82,9 +82,7 @@ int Driver::getNumOfUser() const {
 
 //set the car of the driver
 void Driver::setCar(Car *car) {
-    if (car!=NULL){
-        delete  car;
-    }
+
     Driver::car = car;
 }
 
