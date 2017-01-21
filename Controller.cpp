@@ -249,6 +249,7 @@ void *Controller::createPthread(void *parameters) {
                                                       cd->star_y, cd->end_x, cd->end_y, cd->id, cd->tariff,
                                                       cd->numOfPass);
     trip->setTime(cd->time);
+    p->c->getCenter()->getTrip().insert(std::pair<int, SearchableTrip *>(cd->time, trip));
     delete cd;
     return NULL;
 }
@@ -365,6 +366,7 @@ bool Controller::CommendNine() {
 
         } else if (this->servertime == trip->getTime()) {
             Driver *d = getCenter()->findCloser(trip->getInitialState());
+            getCenter()->getTrip().erase(trip->getTime());
             if (d != NULL) {
                 d->startTrip = true;
             }

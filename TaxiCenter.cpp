@@ -149,7 +149,7 @@ SearchableTrip* TaxiCenter::addTrip(ILayout *l, int i, int j, int end_x, int end
                                     int numOfPass) {
     SearchableTrip* trip=new SearchableTrip(l, i,
                        j, end_x, end_y,id, tariff, numOfPass);
-    getTrip().insert(std::pair<int, SearchableTrip *>(id, trip));
+
     return trip;
 }
 
