@@ -61,14 +61,15 @@ map<int, Passenger *> &TaxiCenter::getAll_passngers() {
 }
 
 //add a car
-void TaxiCenter::addCar(int id, string manufacturer, string color, int kind) {
-    Car *c;
-    if (kind == 1) {
-        c = new TaxiCab(id, manufacturer, color);
-    } else if (kind == 2) {
-        c = new Luxury(id, manufacturer, color);///need to work on tommarow
+Car* TaxiCenter::addCar(int id, string manufacturer, string color, int kind) {
+
+    if (kind == 2) {
+        return new Luxury(id, manufacturer, color);
+
+    } else  {
+        return new TaxiCab(id, manufacturer, color);
     }
-    getCars().insert(std::pair<int, Car *>(c->getId(), c));
+
 }
 
 //return the layout
@@ -94,7 +95,7 @@ map<int, Car *> &TaxiCenter::getCars() {
 //add driver
 void TaxiCenter::addDriver(Driver *driver) {
    getDrivers().insert(std::pair<int, Driver *>(driver->getId(), driver));
-
+  //  driver->setCar(getCars()[driver->getId()]);
 }
 
 /**

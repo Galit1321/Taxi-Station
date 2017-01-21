@@ -34,7 +34,7 @@ public:
     TaxiCenter(MatrixLayout* layout);//constructor
     TaxiCenter();//defult constructor
     //add a car
-    void addCar(int id ,string manufacturer,string color,int kind);
+    Car*  addCar(int id ,string manufacturer,string color,int kind);
     //set the layout
     void setLayout(MatrixLayout *layout);
     //set the layout

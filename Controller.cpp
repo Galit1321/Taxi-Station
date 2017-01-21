@@ -162,8 +162,8 @@ bool Controller::runDriver() {
         struct parameters *p = new struct parameters();
         p->c = this;
         p->client_sock = sockNum;
-        runClient((void *) p);
-   //     pthread_create(&id2, NULL, runClient, );
+ //       runClient((void *) p);
+      pthread_create(&id2, NULL, runClient, (void *) p);
         i--;
     }
     return true;
@@ -190,17 +190,18 @@ void *Controller::runClient(void *parameters) {
     boost::archive::binary_oarchive oa(s);
     oa << car;
     s.flush();
-    Driver *driver = par->c->getCenter()->getDriver(par->c->client_map[par->client_sock]);
+
     par->c->connection->sendData(car_string, par->client_sock);//serlize the car and send to driver
-    par->c->getNewTrip( (void *) par);
- /*   int status = pthread_create(&id, NULL, par->c->getNewTrip, (void *) par);
+    gp2->setCar(car);
+   // par->c->getNewTrip( (void *) par);
+    int status = pthread_create(&id, NULL, par->c->getNewTrip, (void *) par);
     if (status) {
        cout<<"error in creating new trip thread"<<endl;
     }
-    pthread_join(id, NULL);*/
- /*   while (!driver->startTrip) {
+    pthread_join(id, NULL);
+    while (!gp2->startTrip) {
         std::this_thread::sleep_for(std::chrono::seconds(1));
-    }*/
+    }
     par->c->busy.push_back(par->client_sock);
     return NULL;
 }
@@ -264,13 +265,13 @@ bool Controller::CommendTwo() {
         struct parameters *p = new struct parameters();
         p->c = this;
         p->str = parm;
-        this->createPthread((void *) p);
-      /*  int status = pthread_create(&id, NULL, this->createPthread, );
+       // this->createPthread((void *) p);
+       int status = pthread_create(&id, NULL, this->createPthread,(void *) p );
         if (status) {
             cout << "error in open thread to trip";
         }
         pthread_join(id, NULL);
-        sleep(1);*/
+        sleep(1);
     } catch (std::exception exception1) {
         return false;
     }
@@ -287,7 +288,8 @@ bool Controller::CommendThree() {
     cin >> parm;
     try {
         CreateCar *cc = new CreateCar(parm);
-        getCenter()->addCar(cc->getId(), cc->getManufactor(), cc->getColor(), cc->getKind());
+       Car* c=  getCenter()->addCar(cc->getId(), cc->getManufactor(), cc->getColor(), cc->getKind());
+        getCenter()->getCars()[cc->getId()]=c;
         delete cc;
     }
     catch (std::exception e) {
@@ -326,28 +328,6 @@ bool Controller::CommendSix() {
  */
 bool Controller::CommendNine() {
     this->servertime++;
-
-    SearchableTrip *trip;
-    std::map<int, SearchableTrip *> map1 = getCenter()->getTrip();
-    std::map<int, SearchableTrip *>::iterator iterator1;
-    for (iterator1 = map1.begin(); iterator1 != map1.end(); iterator1++) {
-        if (iterator1->second->isBelong()) {
-            trip = iterator1->second;
-            break;
-        } else {
-            trip = NULL;
-        }
-    }
-    if (trip != NULL) {
-        if (this->servertime < trip->getTime()) {
-
-        } else if (this->servertime == trip->getTime()) {
-            Driver *d = getCenter()->findCloser(trip->getInitialState());
-            if (d != NULL) {
-                d->startTrip = true;
-            }
-        }
-    }
     std::string str = "Go";
     for (std::vector<int>::iterator it = busy.begin(); it != busy.end(); it++) {
         Driver *driver = getCenter()->getDrivers()[this->client_map[*it]];
@@ -369,6 +349,28 @@ bool Controller::CommendNine() {
             }
         }
     }
+    SearchableTrip *trip;
+    std::map<int, SearchableTrip *> map1 = getCenter()->getTrip();
+    std::map<int, SearchableTrip *>::iterator iterator1;
+    for (iterator1 = map1.begin(); iterator1 != map1.end(); iterator1++) {
+        if (iterator1->second->isBelong()) {
+            trip = iterator1->second;
+            break;
+        } else {
+            trip = NULL;
+        }
+    }
+    if (trip != NULL) {
+        if (this->servertime < trip->getTime()) {
+
+        } else if (this->servertime == trip->getTime()) {
+            Driver *d = getCenter()->findCloser(trip->getInitialState());
+            if (d != NULL) {
+                d->startTrip = true;
+            }
+        }
+    }
+
     return true;
 }
 

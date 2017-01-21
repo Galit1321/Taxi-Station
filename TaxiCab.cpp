@@ -12,6 +12,7 @@ TaxiCab ::TaxiCab() {
     tariff=0;
     mileage = 0;
     id=0;
+    kind=1;
 }
 
 /**
@@ -43,6 +44,7 @@ TaxiCab ::TaxiCab(int id, int mileage,string manufacturer1, string color1, int t
     manufacturer = manufacturer1;
     color = color1;
     tariff = tariff1;
+    kind=1;
 }
 
 //get the tariff of the trip
