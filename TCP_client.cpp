@@ -20,7 +20,7 @@ TCP_client::TCP_client(const unsigned short &port,const char* ip) {
     this->socket1->initialize();
 }
 TCP_client::~TCP_client() {
-
+delete  socket1;
 }
 
 
@@ -65,11 +65,10 @@ void TCP_client::runDriver(){
 }
 
 void TCP_client::move() {
-
     char bufP[4096];
    int ser_point = this->socket1->reciveData(bufP,4096,this->socket1->socketDescriptor);
     Point* p;
-    while (this->driver->curr_pos!=this->driver->getTrip()->getGoalState()){
+    while ((this->driver->curr_pos!=this->driver->getTrip()->getGoalState())&&(string(bufP)!="STOP")){
         if(string(bufP)=="Go"){
             this->driver->move();
             this->timeClient++;
@@ -79,7 +78,7 @@ void TCP_client::move() {
             break;
         }
      }
-    if (string(bufP).find("STOP")==std::string::npos) {
+    if (string(bufP)!="STOP") {
         setNewTrip();
     }
 }
@@ -99,7 +98,7 @@ void TCP_client::setNewTrip(){
     boost::archive::binary_iarchive ar(s3);
     ar >> trip;
     driver->setTrip(trip);
-    //  move();
+      move();
 }
 
 Driver *TCP_client::getDriver() const {

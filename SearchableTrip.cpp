@@ -24,6 +24,7 @@ SearchableTrip::SearchableTrip(ILayout *layout1, int start_i, int start_j, int e
     this->solution=bfs->search(this);
     delete bfs;
     time=0;
+    belong=false;
 }
 
 /**
@@ -45,6 +46,7 @@ SearchableTrip::SearchableTrip(ILayout* layout1,Point* start,Point* end){
     delete bfs;
     time=0;
     this->numOfPass=0;
+    belong=false;
 }
 
 /**
@@ -70,6 +72,7 @@ SearchableTrip::SearchableTrip(ILayout* layout1,int start_i,int start_j,int end_
     this->solution=bfs->search(this);
     delete bfs;
     time=0;
+    belong=false;
 
 }
 SearchableTrip::SearchableTrip() {
@@ -204,4 +207,12 @@ int SearchableTrip::getTime() const {
 //set the time of the trip
 void SearchableTrip::setTime(int time) {
     SearchableTrip::time = time;
+}
+
+bool SearchableTrip::isBelong() const {
+    return belong;
+}
+
+void SearchableTrip::setBelong(bool belong) {
+    SearchableTrip::belong = belong;
 }

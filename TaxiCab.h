@@ -27,7 +27,7 @@ public:
     void serialize(Archive &ar, const unsigned int version) {
         /*
 selize*/
-        ar & boost::serialization::base_object<Car>(*this);
+      //  ar & boost::serialization::base_object<Car>(*this);
 
     }
     };

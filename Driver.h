@@ -29,6 +29,7 @@ private:
 public:
     string stat;
     Car *car;
+    bool startTrip;
 
 
     Driver();//default constructor

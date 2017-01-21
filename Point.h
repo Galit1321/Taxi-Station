@@ -42,6 +42,12 @@ public:
     Point *getParent() const;
     //setter to parents
     void setParent(Point *parent);
+    std::string print();
+    friend ostream &operator<<( ostream &output,
+                                const Point &p) {
+        output << "(" << p.getI() << "," << p.getJ()<<")"<<endl;
+        return output;
+    }
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive &ar, const unsigned int version)
@@ -50,11 +56,7 @@ public:
         ar & j;
         ar & this->cost;
     }
-    friend ostream &operator<<( ostream &output,
-                                const Point &p) {
-        output << "(" << p.getI() << "," << p.getJ()<<")"<<endl;
-        return output;
-    }
+
 };
 
 

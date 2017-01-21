@@ -99,3 +99,11 @@ void Point::setCost(int cost) {
 bool Point::operator<(const Point &node1) const {
     return (node1.getJ()<j)||(node1.getI()<i);
 }
+
+std::string Point::print() {
+    string s="(";
+    s+=getI();
+    s+=",";
+    s+=getJ();
+    s+=")";
+}

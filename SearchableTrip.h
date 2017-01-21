@@ -28,6 +28,12 @@ private:
     int rideId;//the id of the trip
     int total_dis;//the distance of the trip
     int time;// the time of the trip
+    bool belong;
+public:
+    bool isBelong() const;
+
+    void setBelong(bool belong);
+
 public:
     //return the time of the trip
     int getTime() const;
