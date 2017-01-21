@@ -36,6 +36,10 @@ int Car::getId() const {
     return id;
 }
 
+void Car::setKind(int kind) {
+    Car::kind = kind;
+}
+
 // return the mileage that have passed
 int Car::getMileage() const {
     return mileage;

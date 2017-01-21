@@ -61,14 +61,14 @@ map<int, Passenger *> &TaxiCenter::getAll_passngers() {
 }
 
 //add a car
-Car* TaxiCenter::addCar(int id, string manufacturer, string color, int kind) {
-
+void TaxiCenter::addCar(int id, string manufacturer, string color, int kind) {
+    Car *c;
     if (kind == 1) {
-        return new TaxiCab(id, manufacturer, color);
+        c = new TaxiCab(id, manufacturer, color);
     } else if (kind == 2) {
-        return new Luxury(id, manufacturer, color);///need to work on tommarow
+        c = new Luxury(id, manufacturer, color);///need to work on tommarow
     }
-
+    getCars().insert(std::pair<int, Car *>(c->getId(), c));
 }
 
 //return the layout
@@ -118,16 +118,14 @@ void TaxiCenter::setTaxiToDriver(int driver_id, int taxi_id) {
 
 //print location
 void TaxiCenter::printLocation(int id) {
-    Driver *d = drivers[id];
+    Driver *d =drivers[id];
     if (d == NULL) {
         std::cout << "**driver not found" << endl;
     } else {
-        int i=d->getCar()->getId();
-        int m=d->getCar()->getMileage();
-      //  int
-        d->curr_pos->print();
-        d->getCar()->setId(i);
-        d->getCar()->setId(m);
+        cout.flush();
+        int k=d->getCar()->getKind();
+        std::cout << *(d->getCurr_pos());
+        d->getCar()->setKind(k);
     }
 }
 
@@ -146,7 +144,7 @@ Point *TaxiCenter::getLocation(int id) {
     return getDriver(id)->getCurr_pos();
 }
 
-SearchableTrip* TaxiCenter::addTrip(MatrixLayout *l, int i, int j, int end_x, int end_y, int id, int tariff,
+SearchableTrip* TaxiCenter::addTrip(ILayout *l, int i, int j, int end_x, int end_y, int id, int tariff,
                                     int numOfPass) {
     SearchableTrip* trip=new SearchableTrip(l, i,
                        j, end_x, end_y,id, tariff, numOfPass);
