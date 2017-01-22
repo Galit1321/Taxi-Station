@@ -89,7 +89,7 @@ void TCP_client::move() {
 void TCP_client::setNewTrip(){
     char buf[4096];
     int serial_trip = this->socket1->reciveData(buf,4096,this->socket1->socketDescriptor);
-    if (string(buf).find("STOP")!=std::string::npos){
+    if (string(buf)=="STOP"){
         return;
     }
     SearchableTrip *trip ;

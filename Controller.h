@@ -26,6 +26,7 @@ public:
 public:
     vector<int> busy;
     std::map<int,int> client_map;
+    std::map<int,int> ID_map;
     TaxiCenter* center;
     int servertime;
     Socket* connection;

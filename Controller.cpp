@@ -146,7 +146,7 @@ void Controller::getCommend() {
     driverL = false;
     closeAllClients();
 
-    pthread_exit(0);
+
 }
 
 /**
@@ -182,6 +182,7 @@ void *Controller::runClient(void *parameters) {
     cout.flush();
     par->c->getCenter()->addDriver(gp2);
     par->c->client_map.insert(pair<int, int>(par->client_sock, gp2->getId()));
+    par->c->ID_map.insert(pair<int, int>( gp2->getId(),par->client_sock));
     Car *car = par->c->getCenter()->getCars()[gp2->getId()];
     std::string car_string;
     boost::iostreams::back_insert_device<std::string> inserter(car_string);
@@ -200,7 +201,7 @@ par->client_id=gp2->getId();
     while (!gp2->startTrip) {
         std::this_thread::sleep_for(std::chrono::seconds(1));
     }
-    par->c->busy.push_back(par->client_sock);
+   // par->c->busy.push_back(par->client_sock);
     while (driverL){
         std::this_thread::sleep_for(std::chrono::seconds(1));
     }
@@ -213,9 +214,9 @@ void *Controller::getNewTrip(void *parameters) {
     Driver *driver = p->c->getCenter()->getDriver(p->client_id);
     p->c->getCenter()->getFree_drivers().push_back(driver->getId());
     string trip_string;
-    while (true) {
+    while (driverL) {
         if (!p->c->getCenter()->getTrip().empty()) {
-            std::map<int, SearchableTrip *> map1 = p->c->getCenter()->getTrip();
+            std::map<int,SearchableTrip*> map1 = p->c->getCenter()->getTrip();
             std::map<int, SearchableTrip *>::iterator iterator1;
             for (iterator1 = map1.begin(); iterator1 != map1.end(); iterator1++) {
                 SearchableTrip *trip = iterator1->second;
@@ -237,8 +238,6 @@ void *Controller::getNewTrip(void *parameters) {
             sleep(1);
         }
     }
-
-
     return NULL;
 
 }
@@ -335,7 +334,6 @@ bool Controller::CommendNine() {
         Driver *driver = getCenter()->getDrivers()[this->client_map[*it]];
         driver->move();
         connection->sendData(str, *it);
-
         if (driver->getCurr_pos() == driver->getTrip()->getGoalState()) {
             busy.erase(it);
             driver->setTrip(NULL);
@@ -375,6 +373,7 @@ bool Controller::CommendNine() {
             if (d != NULL) {
                 d->startTrip = true;
                 getCenter()->getFree_drivers().erase(find(getCenter()->getFree_drivers().begin(),getCenter()->getFree_drivers().end(),d->getId()));
+                busy.push_back(ID_map[d->getId()]);
             }
         }
     }
