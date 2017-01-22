@@ -5,6 +5,7 @@
 ************************************************************/
 
 #include "Tcp.h"
+#include <sys/socket.h>
 using namespace std;
 /***********************************************************************
 * function name: Tcp												   *
@@ -27,8 +28,9 @@ Tcp::Tcp(bool isServers, int port_num) {
 * The Function operation: default destructor					       *
 ***********************************************************************/
 Tcp::~Tcp() {
-	// TODO Auto-generated destructor stub
+
 }
+
 
 /***********************************************************************
 * function name: initialize											   *

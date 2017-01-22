@@ -62,11 +62,13 @@ public:
 selize*/
             ar& (this->id);
            ar&(this->kind);
-        //    ar&(this->mileage);
+           ar&(this->mileage);
             ar&(this->color);
-     //       ar&(this->tariff);
+            ar&(this->tariff);
             ar&(this->manufacturer);
         }
+
+    void setKind(int kind);
 
 
 };

@@ -16,6 +16,7 @@ Driver ::Driver() :Person(){
     car = NULL;
    trip=NULL;
     satisfaction=0.0;
+    startTrip=false;
 
 }
 
@@ -31,6 +32,7 @@ Driver ::Driver(Driver &object) {
     this->stat = object.getStat();
     this->curr_pos = object.getCurr_pos();
     trip=object.getTrip();
+    startTrip=false;
 }
 //constructor
 Driver ::Driver(int id ,int age ,string stat , int experience) {
@@ -40,10 +42,12 @@ Driver ::Driver(int id ,int age ,string stat , int experience) {
     this->experience =experience;
     car = NULL;
     trip=NULL;
+    startTrip=false;
 }
 
 Driver::~Driver() {
     if (trip!=NULL)
+        startTrip=false;
     delete trip;
 }
 
@@ -78,9 +82,7 @@ int Driver::getNumOfUser() const {
 
 //set the car of the driver
 void Driver::setCar(Car *car) {
-    if (car!=NULL){
-        delete  car;
-    }
+
     Driver::car = car;
 }
 
