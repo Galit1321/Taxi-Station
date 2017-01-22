@@ -12,7 +12,7 @@
  * @param end_j - string of the end
  * @return
  */
-SearchableTrip::SearchableTrip(ILayout *layout1, int start_i, int start_j, int end_i, int end_j) {
+SearchableTrip::SearchableTrip(MatrixLayout *layout1, int start_i, int start_j, int end_i, int end_j) {
     this->layout = layout1->doplicate();
     this->init = this->layout->getNode(start_i, start_j);
     this->goal = this->layout->getNode(end_i, end_j);
@@ -33,7 +33,7 @@ SearchableTrip::SearchableTrip(ILayout *layout1, int start_i, int start_j, int e
  * @param end - string of the end
  * @return
  */
-SearchableTrip::SearchableTrip(ILayout* layout1,Point* start,Point* end){
+SearchableTrip::SearchableTrip(MatrixLayout* layout1,Point* start,Point* end){
     this->layout = layout1->doplicate();
     this->init = start;
     this->goal = end;
@@ -56,7 +56,7 @@ SearchableTrip::SearchableTrip(ILayout* layout1,Point* start,Point* end){
  * @param tff - the tariff of the ride
  * @return
  */
-SearchableTrip::SearchableTrip(ILayout* layout1,int start_i,int start_j,int end_i,int end_j, int rid, double tff, int nop){
+SearchableTrip::SearchableTrip(MatrixLayout* layout1,int start_i,int start_j,int end_i,int end_j, int rid, double tff, int nop){
     this->layout = layout1->doplicate();
     this->init = this->layout->getNode(start_i, start_j);
     this->goal = this->layout->getNode(end_i, end_j);
@@ -111,10 +111,14 @@ queue<Point *> SearchableTrip::getAllPossibleStates(Point *s) {
 
 }
 
-void SearchableTrip::clean(list <Point> closed) {
-    for(std::list<Point>::iterator it =closed.begin(); it != closed.end(); it++){
-        this->layout->getNode(it->getI(),it->getJ())->setParent(NULL);
-    }
+void SearchableTrip::clean() {
+
+        for (int i=0;i<layout->getHeight();i++){
+            for (int j=0;j<layout->getWidth();j++){
+                layout->getNode(i,j)->setParent(NULL);
+
+            }
+        }
 }
 
 /**

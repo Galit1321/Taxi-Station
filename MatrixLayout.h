@@ -23,7 +23,15 @@ public:
     MatrixLayout(int h, int w);//constuctor of sizes
     Point* getNode(int i,int j);//getter of node
     MatrixLayout(int h,int w, vector<int>* obs);//constructor
-    ILayout* doplicate();
+    MatrixLayout* doplicate();
+
+    int getHeight() const;
+
+    void setHeight(int height);
+
+    int getWidth() const;
+
+    void setWidth(int width);
 };
 
 

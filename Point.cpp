@@ -99,3 +99,7 @@ void Point::setCost(int cost) {
 bool Point::operator<(const Point &node1) const {
     return (node1.getJ()<j)||(node1.getI()<i);
 }
+
+void Point::print() {
+    printf("(%d,%d)",i,j);
+}
