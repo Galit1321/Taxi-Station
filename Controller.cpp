@@ -162,6 +162,28 @@ bool Controller::runDriver() {
         struct parameters *p = new struct parameters();
         p->c = this;
         p->client_sock = sockNum;
+        char buf[4096];
+        int serial_str = connection->reciveData(buf, 4096, sockNum);
+        Driver *gp2;
+        pthread_t id;
+        boost::iostreams::basic_array_source<char> device(buf, serial_str);
+        boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s2(device);
+        boost::archive::binary_iarchive ia(s2);
+        ia >> gp2;
+        cout.flush();
+        getCenter()->addDriver(gp2);
+        client_map.insert(pair<int, int>(sockNum, gp2->getId()));
+        ID_map.insert(pair<int, int>( gp2->getId(),sockNum));
+        Car *car = getCenter()->getCars()[gp2->getId()];
+        std::string car_string;
+        boost::iostreams::back_insert_device<std::string> inserter(car_string);
+        boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > s(inserter);
+        boost::archive::binary_oarchive oa(s);
+        oa << car;
+        s.flush();
+        p->client_id=gp2->getId();
+        connection->sendData(car_string, sockNum);//serlize the car and send to driver
+        gp2->setCar(car);
  //       runClient((void *) p);
       pthread_create(&id2, NULL, runClient, (void *) p);
         i--;
@@ -171,37 +193,16 @@ bool Controller::runDriver() {
 
 void *Controller::runClient(void *parameters) {
     struct parameters *par = (struct parameters *) parameters;
-    char buf[4096];
-    int serial_str = par->c->connection->reciveData(buf, 4096, par->client_sock);
-    Driver *gp2;
     pthread_t id;
-    boost::iostreams::basic_array_source<char> device(buf, serial_str);
-    boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s2(device);
-    boost::archive::binary_iarchive ia(s2);
-    ia >> gp2;
-    cout.flush();
-    par->c->getCenter()->addDriver(gp2);
-    par->c->client_map.insert(pair<int, int>(par->client_sock, gp2->getId()));
-    par->c->ID_map.insert(pair<int, int>( gp2->getId(),par->client_sock));
-    Car *car = par->c->getCenter()->getCars()[gp2->getId()];
-    std::string car_string;
-    boost::iostreams::back_insert_device<std::string> inserter(car_string);
-    boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > s(inserter);
-    boost::archive::binary_oarchive oa(s);
-    oa << car;
-    s.flush();
-par->client_id=gp2->getId();
-    par->c->connection->sendData(car_string, par->client_sock);//serlize the car and send to driver
-    gp2->setCar(car);
     int status = pthread_create(&id, NULL, par->c->getNewTrip, (void *) par);
     if (status) {
        cout<<"error in creating new trip thread"<<endl;
     }
     pthread_join(id, NULL);
-    while (!gp2->startTrip) {
+
+    while (!par->c->getCenter()->getDriver(par->client_id)->startTrip) {
         std::this_thread::sleep_for(std::chrono::seconds(1));
     }
-   // par->c->busy.push_back(par->client_sock);
     while (driverL){
         std::this_thread::sleep_for(std::chrono::seconds(1));
     }
@@ -216,9 +217,9 @@ void *Controller::getNewTrip(void *parameters) {
     string trip_string;
     while (driverL) {
         if (!p->c->getCenter()->getTrip().empty()) {
-            std::map<int,SearchableTrip*> map1 = p->c->getCenter()->getTrip();
+            std::map<int,SearchableTrip*> map = p->c->getCenter()->getTrip();
             std::map<int, SearchableTrip *>::iterator iterator1;
-            for (iterator1 = map1.begin(); iterator1 != map1.end(); iterator1++) {
+            for (iterator1 = map.begin(); iterator1 != map.end(); iterator1++) {
                 SearchableTrip *trip = iterator1->second;
                 if (!trip->isBelong()) {
                     trip->setBelong(true);
@@ -241,6 +242,7 @@ void *Controller::getNewTrip(void *parameters) {
     return NULL;
 
 }
+
 
 void *Controller::createPthread(void *parameters) {
     struct parameters *p = (struct parameters *) parameters;
@@ -330,19 +332,19 @@ bool Controller::CommendSix() {
 bool Controller::CommendNine() {
     this->servertime++;
     std::string str = "Go";
-    for (std::vector<int>::iterator it = busy.begin(); it != busy.end(); it++) {
-        Driver *driver = getCenter()->getDrivers()[this->client_map[*it]];
-        driver->move();
-        connection->sendData(str, *it);
-        if (driver->getCurr_pos() == driver->getTrip()->getGoalState()) {
-            busy.erase(it);
-            driver->setTrip(NULL);
-            getCenter()->getFree_drivers().push_back(driver->getId());
-            driver->startTrip = false;
-            it--;
+    for (std::vector<int>::iterator itB = busy.begin(); itB != busy.end(); itB++) {
+        Driver *d = getCenter()->getDrivers()[this->client_map[*itB]];
+        d->move();
+        connection->sendData(str, *itB);
+        if (d->getCurr_pos() == d->getTrip()->getGoalState()) {
+            busy.erase(itB);
+            d->setTrip(NULL);
+            getCenter()->getFree_drivers().push_back(d->getId());
+            d->startTrip = false;
+            itB--;
             pthread_t id;
             struct parameters *p = new struct parameters();
-            p->client_sock = *it;
+            p->client_sock = *itB;
             p->c = this;
             int status = pthread_create(&id, NULL, this->getNewTrip, (void *) p);
             if (status) {

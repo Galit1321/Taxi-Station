@@ -73,13 +73,12 @@ void TCP_client::move() {
         if(string(bufP)=="Go"){
             this->driver->move();
             this->timeClient++;
-
             ser_point = this->socket1->reciveData(buf,4096,this->socket1->socketDescriptor);
-        }else if ((string(bufP)!="STOP")||(string(buf)!="STOP")){
+        }else if ((string(bufP)=="STOP")&&(string(bufP)=="STOP")){
             break;
         }
      }
-    if((string(bufP)!="STOP")||(string(buf)!="STOP")) {
+    if ((string(bufP)=="STOP")&&(string(bufP)=="STOP")) {
         setNewTrip();
     }
 }
@@ -90,7 +89,7 @@ void TCP_client::move() {
 void TCP_client::setNewTrip(){
     char buf[4096];
     int serial_trip = this->socket1->reciveData(buf,4096,this->socket1->socketDescriptor);
-    if (string(buf)!="STOP"){
+    if (string(buf)=="STOP"){
         return;
     }
     SearchableTrip *trip ;
