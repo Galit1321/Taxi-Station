@@ -32,7 +32,7 @@ using namespace std;
 
 class Socket {
 protected:
-;
+
 public:
 	bool isServer;
 	//the socket descriptor return from sock()
