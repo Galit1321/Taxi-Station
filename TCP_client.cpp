@@ -78,7 +78,7 @@ void TCP_client::move() {
             break;
         }
      }
-    if (string(bufP)!="STOP") {
+    if((string(bufP)!="STOP")||(string(bufP)!="GO")) {
         setNewTrip();
     }
 }

@@ -189,7 +189,7 @@ void *Controller::runClient(void *parameters) {
     boost::archive::binary_oarchive oa(s);
     oa << car;
     s.flush();
-
+par->client_id=gp2->getId();
     par->c->connection->sendData(car_string, par->client_sock);//serlize the car and send to driver
     gp2->setCar(car);
     int status = pthread_create(&id, NULL, par->c->getNewTrip, (void *) par);
@@ -210,7 +210,7 @@ void *Controller::runClient(void *parameters) {
 
 void *Controller::getNewTrip(void *parameters) {
     struct parameters *p = (struct parameters *) parameters;
-    Driver *driver = p->c->getCenter()->getDriver(p->c->client_map[p->client_sock]);
+    Driver *driver = p->c->getCenter()->getDriver(p->client_id);
     p->c->getCenter()->getFree_drivers().push_back(driver->getId());
     string trip_string;
     while (true) {
