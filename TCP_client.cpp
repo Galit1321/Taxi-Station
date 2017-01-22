@@ -66,19 +66,20 @@ void TCP_client::runDriver(){
 
 void TCP_client::move() {
     char bufP[4096];
+    char buf[4096];
    int ser_point = this->socket1->reciveData(bufP,4096,this->socket1->socketDescriptor);
     Point* p;
     while ((this->driver->curr_pos!=this->driver->getTrip()->getGoalState())&&(string(bufP)!="STOP")){
         if(string(bufP)=="Go"){
             this->driver->move();
             this->timeClient++;
-            char buf[4096];
+
             ser_point = this->socket1->reciveData(buf,4096,this->socket1->socketDescriptor);
-        }else if (string(bufP)=="STOP"){
+        }else if ((string(bufP)!="STOP")||(string(buf)!="STOP")){
             break;
         }
      }
-    if((string(bufP)!="STOP")||(string(bufP)!="GO")) {
+    if((string(bufP)!="STOP")||(string(buf)!="STOP")) {
         setNewTrip();
     }
 }
@@ -89,7 +90,7 @@ void TCP_client::move() {
 void TCP_client::setNewTrip(){
     char buf[4096];
     int serial_trip = this->socket1->reciveData(buf,4096,this->socket1->socketDescriptor);
-    if (string(buf)=="STOP"){
+    if (string(buf)!="STOP"){
         return;
     }
     SearchableTrip *trip ;
