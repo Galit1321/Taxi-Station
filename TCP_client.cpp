@@ -16,11 +16,11 @@
 
 using namespace std;
 TCP_client::TCP_client(const unsigned short &port,const char* ip) {
-  this->socket1=new Tcp(false,port);
+    this->socket1=new Tcp(false,port);
     this->socket1->initialize();
 }
 TCP_client::~TCP_client() {
-delete  socket1;
+    delete  socket1;
 }
 
 
@@ -70,7 +70,7 @@ void TCP_client::runDriver(){
 void TCP_client::move() {
     char bufP[4096];
     string ok="ok";
-   int ser_point = this->socket1->reciveData(bufP,4096,this->socket1->socketDescriptor);
+    int ser_point = this->socket1->reciveData(bufP,4096,this->socket1->socketDescriptor);
     this->socket1->sendData(ok,this->socket1->socketDescriptor);
     while (string(bufP)!="STOP"){
         if(string(bufP)=="Go"){
@@ -86,7 +86,7 @@ void TCP_client::move() {
         }else if (string(bufP)=="STOP"){
             break;
         }
-     }
+    }
 
 }
 
@@ -106,7 +106,7 @@ void TCP_client::setNewTrip(){
     ar >> trip;
     driver->setTrip(trip);
     this->socket1->sendData("ok",this->socket1->socketDescriptor);
-      move();
+    move();
 }
 
 Driver *TCP_client::getDriver() const {

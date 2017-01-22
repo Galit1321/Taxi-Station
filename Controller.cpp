@@ -189,7 +189,7 @@ bool Controller::runDriver() {
             cout<<"error in creating new trip thread"<<endl;
         }
         pthread_join(id, NULL);
-      pthread_create(&id2, NULL, runClient, (void *) p);
+        pthread_create(&id2, NULL, runClient, (void *) p);
         i--;
     }
     return true;
@@ -260,8 +260,8 @@ bool Controller::CommendTwo() {
         struct parameters *p = new struct parameters();
         p->c = this;
         p->str = parm;
-       // this->createPthread((void *) p);
-       int status = pthread_create(&id, NULL, this->createPthread,(void *) p );
+        // this->createPthread((void *) p);
+        int status = pthread_create(&id, NULL, this->createPthread,(void *) p );
         if (status) {
             cout << "error in open thread to trip";
         }
@@ -283,7 +283,7 @@ bool Controller::CommendThree() {
     cin >> parm;
     try {
         CreateCar *cc = new CreateCar(parm);
-       Car* c=  getCenter()->addCar(cc->getId(), cc->getManufactor(), cc->getColor(), cc->getKind());
+        Car* c=  getCenter()->addCar(cc->getId(), cc->getManufactor(), cc->getColor(), cc->getKind());
         getCenter()->getCars()[cc->getId()]=c;
         delete cc;
     }
