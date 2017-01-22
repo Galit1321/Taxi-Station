@@ -53,7 +53,6 @@ void TCP_client::runDriver(){
     driver->setCar(car);
     char bufTrip[65536];
     int serial_trip = this->socket1->reciveData(bufTrip,65536,this->socket1->socketDescriptor);
-    cout<<"client::recive trip"<<endl;
     SearchableTrip *trip ;
     boost::iostreams::basic_array_source<char> device1(bufTrip, serial_trip);
     boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s3(device1);
@@ -61,7 +60,6 @@ void TCP_client::runDriver(){
     ar >> trip;
     this->driver->setTrip(trip);
     this->socket1->sendData("ok",this->socket1->socketDescriptor);
-
     move();
 
 
@@ -72,7 +70,7 @@ void TCP_client::move() {
     string ok="ok";
     int ser_point = this->socket1->reciveData(bufP,4096,this->socket1->socketDescriptor);
     this->socket1->sendData(ok,this->socket1->socketDescriptor);
-    while (string(bufP)!="STOP"){
+    while ((string(bufP)!="STOP")&& (string(bufP)!="STOP")){
         if(string(bufP)=="Go"){
             this->driver->move();
             this->timeClient++;
@@ -83,7 +81,7 @@ void TCP_client::move() {
             }
             ser_point = this->socket1->reciveData(bufP,4096,this->socket1->socketDescriptor);
 
-        }else if (string(bufP)=="STOP"){
+        }else if ((string(bufP)=="STOP")|| (string(bufP)=="STOP")){
             break;
         }
     }
