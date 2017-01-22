@@ -3,6 +3,7 @@
 //
 
 
+#include <climits>
 #include "BFS.h"
 
 
@@ -54,7 +55,7 @@ deque<Point*> BFS::search(ISearchable *searchable) {
 
         queue<Point*> l = searchable->getAllPossibleStates(n);
         while (!l.empty()) {
-                if (l.front()->getCost()==std::numeric_limits<int>::max()){
+                if (l.front()->getCost()==INT_MAX){
                     l.front()->setCost(n->getCost()+1);
                     l.front()->setParent(n);
                     open.push_back(l.front());

@@ -3,15 +3,16 @@
 //
 
 #include <limits>
+#include <climits>
 #include "Point.h"
 Point::Point(int row, int col) {
     i=row;
     j=col;
-    this->cost=std::numeric_limits<int>::max();
+    this->cost=INT_MAX;
     this->parent= NULL;
 }
 Point::Point() {
-    this->cost=std::numeric_limits<int>::max();
+    this->cost=INT_MAX;
     this->parent= NULL;
 }
 Point::~Point() {

@@ -1,4 +1,4 @@
-//***************
+    //***************
 // a class of bfs with search
 //method that get searchable object to search on
 //
