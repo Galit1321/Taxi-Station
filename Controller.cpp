@@ -183,7 +183,6 @@ void *Controller::runClient(void *parameters) {
     par->c->getCenter()->addDriver(gp2);
     par->c->client_map.insert(pair<int, int>(par->client_sock, gp2->getId()));
     Car *car = par->c->getCenter()->getCars()[gp2->getId()];
- //   par->c->getCenter()->setTaxiToDriver(gp2->getId(), car->getId());
     std::string car_string;
     boost::iostreams::back_insert_device<std::string> inserter(car_string);
     boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > s(inserter);
@@ -193,7 +192,6 @@ void *Controller::runClient(void *parameters) {
 
     par->c->connection->sendData(car_string, par->client_sock);//serlize the car and send to driver
     gp2->setCar(car);
-   // par->c->getNewTrip( (void *) par);
     int status = pthread_create(&id, NULL, par->c->getNewTrip, (void *) par);
     if (status) {
        cout<<"error in creating new trip thread"<<endl;
@@ -203,6 +201,9 @@ void *Controller::runClient(void *parameters) {
         std::this_thread::sleep_for(std::chrono::seconds(1));
     }
     par->c->busy.push_back(par->client_sock);
+    while (driverL){
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+    }
     return NULL;
 }
 
@@ -333,7 +334,8 @@ bool Controller::CommendNine() {
     for (std::vector<int>::iterator it = busy.begin(); it != busy.end(); it++) {
         Driver *driver = getCenter()->getDrivers()[this->client_map[*it]];
         driver->move();
-        //   connection->sendData(str, *it);
+        connection->sendData(str, *it);
+
         if (driver->getCurr_pos() == driver->getTrip()->getGoalState()) {
             busy.erase(it);
             driver->setTrip(NULL);
@@ -352,6 +354,9 @@ bool Controller::CommendNine() {
     }
     SearchableTrip *trip;
     std::map<int, SearchableTrip *> map1 = getCenter()->getTrip();
+    if(map1.empty()){
+        return true;
+    }
     std::map<int, SearchableTrip *>::iterator iterator1;
     for (iterator1 = map1.begin(); iterator1 != map1.end(); iterator1++) {
         if (iterator1->second->isBelong()) {
@@ -369,6 +374,7 @@ bool Controller::CommendNine() {
             getCenter()->getTrip().erase(trip->getTime());
             if (d != NULL) {
                 d->startTrip = true;
+                getCenter()->getFree_drivers().erase(find(getCenter()->getFree_drivers().begin(),getCenter()->getFree_drivers().end(),d->getId()));
             }
         }
     }
