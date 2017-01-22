@@ -198,10 +198,10 @@ bool Controller::runDriver() {
 void *Controller::runClient(void *parameters) {
     struct parameters *par = (struct parameters *) parameters;
     while (!par->c->getCenter()->getDriver(par->client_id)->startTrip) {
-        std::this_thread::sleep_for(std::chrono::seconds(1));
+        sleep(1);
     }
     while (driverL){
-        std::this_thread::sleep_for(std::chrono::seconds(1));
+        sleep(1);
     }
     return NULL;
 }
