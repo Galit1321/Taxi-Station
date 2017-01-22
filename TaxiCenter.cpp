@@ -145,7 +145,7 @@ Point *TaxiCenter::getLocation(int id) {
     return getDriver(id)->getCurr_pos();
 }
 
-SearchableTrip* TaxiCenter::addTrip(ILayout *l, int i, int j, int end_x, int end_y, int id, int tariff,
+SearchableTrip* TaxiCenter::addTrip(MatrixLayout *l, int i, int j, int end_x, int end_y, int id, int tariff,
                                     int numOfPass) {
     SearchableTrip* trip=new SearchableTrip(l, i,
                        j, end_x, end_y,id, tariff, numOfPass);

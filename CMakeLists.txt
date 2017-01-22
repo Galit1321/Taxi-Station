@@ -11,7 +11,7 @@ set(SOURCE_FILES
         Controller.cpp Controller.h Udp.h Udp.cpp CreateDriver.cpp CreateDriver.h CreateCar.cpp CreateCar.h CreateRide.cpp
         CreateRide.h TCP_client.cpp TCP_client.h Tcp.h Tcp.cpp Socket.h Socket.cpp)
 
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")
+
 set(BOOST_ROOT CACHE PATH "/usr/include/boost/")
 find_package(Boost 1.58.0 COMPONENTS serialization system)
 include_directories(${Boost_INCLUDE_DIR})
