@@ -60,12 +60,12 @@ public:
     void serialize(Archive &ar, const unsigned int version){
         /*
 selize*/
-//            ar& (this->id);
-  //         ar&(this->kind);
-    //        ar&(this->mileage);
-      //      ar&(this->color);
-        //    ar&(this->tariff);
-          //  ar&(this->manufacturer);
+            ar& (this->id);
+           ar&(this->kind);
+           ar&(this->mileage);
+            ar&(this->color);
+            ar&(this->tariff);
+            ar&(this->manufacturer);
         }
 
     void setKind(int kind);
