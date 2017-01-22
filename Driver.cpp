@@ -46,9 +46,10 @@ Driver ::Driver(int id ,int age ,string stat , int experience) {
 }
 
 Driver::~Driver() {
-    if (trip!=NULL)
+    if (trip!=NULL){
+        delete trip;
+    }
 
-    delete trip;
     startTrip=false;
 }
 
@@ -125,7 +126,9 @@ void Driver::finishTrip() {
  */
 
 void Driver::setTrip(SearchableTrip* trip1) {
-
+    if(this->trip!=NULL){
+        delete trip;
+    }
     this->trip=trip1;
     if(trip1!=NULL){
         this->numOfUser+=trip->getNumOfPass();

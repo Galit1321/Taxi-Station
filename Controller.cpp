@@ -184,7 +184,11 @@ bool Controller::runDriver() {
         p->client_id=gp2->getId();
         connection->sendData(car_string, sockNum);//serlize the car and send to driver
         gp2->setCar(car);
- //       runClient((void *) p);
+        int status = pthread_create(&id, NULL, getNewTrip, (void *) p);
+        if (status) {
+            cout<<"error in creating new trip thread"<<endl;
+        }
+        pthread_join(id, NULL);
       pthread_create(&id2, NULL, runClient, (void *) p);
         i--;
     }
@@ -193,13 +197,6 @@ bool Controller::runDriver() {
 
 void *Controller::runClient(void *parameters) {
     struct parameters *par = (struct parameters *) parameters;
-    pthread_t id;
-    int status = pthread_create(&id, NULL, par->c->getNewTrip, (void *) par);
-    if (status) {
-       cout<<"error in creating new trip thread"<<endl;
-    }
-    pthread_join(id, NULL);
-
     while (!par->c->getCenter()->getDriver(par->client_id)->startTrip) {
         std::this_thread::sleep_for(std::chrono::seconds(1));
     }
@@ -214,7 +211,7 @@ void *Controller::getNewTrip(void *parameters) {
     struct parameters *p = (struct parameters *) parameters;
     Driver *driver = p->c->getCenter()->getDriver(p->client_id);
     p->c->getCenter()->getFree_drivers().push_back(driver->getId());
-    string trip_string;
+
     while (driverL) {
         if (!p->c->getCenter()->getTrip().empty()) {
             std::map<int,SearchableTrip*> map = p->c->getCenter()->getTrip();
@@ -224,12 +221,7 @@ void *Controller::getNewTrip(void *parameters) {
                 if (!trip->isBelong()) {
                     trip->setBelong(true);
                     driver->setTrip(trip);
-                    boost::iostreams::back_insert_device<std::string> inserter_trip(trip_string);
-                    boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > s_trip(inserter_trip);
-                    boost::archive::binary_oarchive a_trip(s_trip);
-                    a_trip << trip;
-                    s_trip.flush();
-                    p->c->connection->sendData(trip_string, p->client_sock);//serlize the trip and send to driver*/
+
                     break;
                 } else {
                     continue;
@@ -336,6 +328,8 @@ bool Controller::CommendNine() {
         Driver *d = getCenter()->getDrivers()[this->client_map[*itB]];
         d->move();
         connection->sendData(str, *itB);
+        char buffer[4045];
+        connection->reciveData(buffer,4045,*itB);
         if (d->getCurr_pos() == d->getTrip()->getGoalState()) {
             busy.erase(itB);
             d->setTrip(NULL);
@@ -376,6 +370,15 @@ bool Controller::CommendNine() {
                 d->startTrip = true;
                 getCenter()->getFree_drivers().erase(find(getCenter()->getFree_drivers().begin(),getCenter()->getFree_drivers().end(),d->getId()));
                 busy.push_back(ID_map[d->getId()]);
+                string trip_string;
+                boost::iostreams::back_insert_device<std::string> inserter_trip(trip_string);
+                boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > s_trip(inserter_trip);
+                boost::archive::binary_oarchive a_trip(s_trip);
+                a_trip << trip;
+                s_trip.flush();
+                this->connection->sendData(trip_string,ID_map[d->getId()]);//serlize the trip and send to driver*/
+                char buf[40];
+                this->connection->reciveData(buf,40,ID_map[d->getId()]);
             }
         }
     }

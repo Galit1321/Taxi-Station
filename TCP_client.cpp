@@ -51,14 +51,15 @@ void TCP_client::runDriver(){
     boost::archive::binary_iarchive ia(s2);
     ia >> car;
     driver->setCar(car);
-    char bufTrip[4096];
-    int serial_trip = this->socket1->reciveData(bufTrip,4096,this->socket1->socketDescriptor);
+    char bufTrip[65536];
+    int serial_trip = this->socket1->reciveData(bufTrip,65536,this->socket1->socketDescriptor);
     SearchableTrip *trip ;
     boost::iostreams::basic_array_source<char> device1(bufTrip, serial_trip);
     boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s3(device1);
     boost::archive::binary_iarchive ar(s3);
     ar >> trip;
     this->driver->setTrip(trip);
+    this->socket1->sendData("ok",this->socket1->socketDescriptor);
     move();
 
 
@@ -66,28 +67,32 @@ void TCP_client::runDriver(){
 
 void TCP_client::move() {
     char bufP[4096];
-    char buf[4096];
+    string ok="ok";
    int ser_point = this->socket1->reciveData(bufP,4096,this->socket1->socketDescriptor);
-    Point* p;
-    while ((this->driver->curr_pos!=this->driver->getTrip()->getGoalState())&&(string(bufP)!="STOP")){
+    this->socket1->sendData(ok,this->socket1->socketDescriptor);
+    while ((string(bufP)!="STOP")&& (string(bufP)!="STOP")){
         if(string(bufP)=="Go"){
             this->driver->move();
             this->timeClient++;
-            ser_point = this->socket1->reciveData(buf,4096,this->socket1->socketDescriptor);
-        }else if ((string(bufP)=="STOP")&&(string(bufP)=="STOP")){
+            this->socket1->sendData("ok",this->socket1->socketDescriptor);
+            if (this->driver->curr_pos==this->driver->getTrip()->getGoalState()){
+                setNewTrip();
+                break;
+            }
+            ser_point = this->socket1->reciveData(bufP,4096,this->socket1->socketDescriptor);
+
+        }else if ((string(bufP)=="STOP")|| (string(bufP)=="STOP")){
             break;
         }
      }
-    if ((string(bufP)=="STOP")&&(string(bufP)=="STOP")) {
-        setNewTrip();
-    }
+
 }
 
 /**
  * set new trip to our driver
  */
 void TCP_client::setNewTrip(){
-    char buf[4096];
+    char buf[65536];
     int serial_trip = this->socket1->reciveData(buf,4096,this->socket1->socketDescriptor);
     if (string(buf)=="STOP"){
         return;
@@ -98,6 +103,7 @@ void TCP_client::setNewTrip(){
     boost::archive::binary_iarchive ar(s3);
     ar >> trip;
     driver->setTrip(trip);
+    this->socket1->sendData("ok",this->socket1->socketDescriptor);
       move();
 }
 
