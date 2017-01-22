@@ -69,7 +69,7 @@ void TCP_client::move() {
     char bufP[4096];
    int ser_point = this->socket1->reciveData(bufP,4096,this->socket1->socketDescriptor);
     Point* p;
-    while (this->driver->curr_pos!=this->driver->getTrip()->getGoalState()){
+    while ((this->driver->curr_pos!=this->driver->getTrip()->getGoalState())&&(string(bufP)!="STOP")){
         if(string(bufP)=="Go"){
             this->driver->move();
             this->timeClient++;
@@ -79,7 +79,7 @@ void TCP_client::move() {
             break;
         }
      }
-    if (string(bufP).find("STOP")==std::string::npos) {
+    if (string(bufP)=="STOP") {
         setNewTrip();
     }
 }

@@ -22,6 +22,7 @@ public:
     virtual Point* getInitialState()=0;//get the state of the begining from
     virtual Point* getGoalState()=0;//where we want to get
     virtual queue<Point*> getAllPossibleStates(Point *s)=0;// receive where we can go from it
+    virtual  void clean()=0;
     friend class boost::serialization::access;
     template<class Archive>//serialize
     void serialize(Archive &ar, const unsigned int version){

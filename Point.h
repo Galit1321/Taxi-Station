@@ -40,6 +40,7 @@ public:
     bool operator==(const Point &node1) const ;
    // bool operator==(const Point &)
     Point *getParent() const;
+    void print();
     //setter to parents
     void setParent(Point *parent);
     friend class boost::serialization::access;
@@ -50,6 +51,7 @@ public:
         ar & j;
         ar & this->cost;
     }
+
     friend ostream &operator<<( ostream &output,
                                 const Point &p) {
         output << "(" << p.getI() << "," << p.getJ()<<")"<<endl;

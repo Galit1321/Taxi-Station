@@ -29,12 +29,12 @@ protected:
     map<int ,Car*> cars;
 public:
     void doBfs(int id);
-    SearchableTrip* addTrip(ILayout *l, int i, int j, int end_x, int end_y, int id, int tariff,
+    SearchableTrip* addTrip(MatrixLayout *l, int i, int j, int end_x, int end_y, int id, int tariff,
                                          int numOfPass);
     TaxiCenter(MatrixLayout* layout);//constructor
     TaxiCenter();//defult constructor
     //add a car
-    void addCar(int id ,string manufacturer,string color,int kind);
+    Car* addCar(int id ,string manufacturer,string color,int kind);
     //set the layout
     void setLayout(MatrixLayout *layout);
     //set the layout
