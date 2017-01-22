@@ -379,6 +379,7 @@ bool Controller::CommendNine() {
                 this->connection->sendData(trip_string,ID_map[d->getId()]);//serlize the trip and send to driver*/
                 char buf[40];
                 this->connection->reciveData(buf,40,ID_map[d->getId()]);
+                cout<<"got trip from server"<<endl;
             }
         }
     }
