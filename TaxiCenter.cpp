@@ -8,6 +8,14 @@
  * @return
  */
 TaxiCenter::~TaxiCenter() {
+
+    for (map<int, Passenger *>::iterator it = getAll_passngers().begin(); it != getAll_passngers().end(); ++it) {
+        delete it->second;
+    }
+    for (map<int, SearchableTrip*>::iterator it = getTrip().begin(); it != getTrip().end(); ++it) {
+        delete it->second;
+    }trip.clear();
+    all_passngers.clear();
     for (map<int, Car *>::iterator it = getCars().begin(); it != getCars().end(); ++it) {
         delete it->second;
     }
@@ -17,13 +25,6 @@ TaxiCenter::~TaxiCenter() {
         delete it->second;
     }
     drivers.clear();
-    for (map<int, Passenger *>::iterator it = getAll_passngers().begin(); it != getAll_passngers().end(); ++it) {
-        delete it->second;
-    }
-    for (map<int, SearchableTrip*>::iterator it = getTrip().begin(); it != getTrip().end(); ++it) {
-        delete it->second;
-    }trip.clear();
-    all_passngers.clear();
     delete layout;
 }
 
