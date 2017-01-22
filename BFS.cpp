@@ -65,6 +65,7 @@ deque<Point*> BFS::search(ISearchable *searchable) {
         }
     }
     open.clear();
+    searchable->clean();
     return s;
 }
 

@@ -10,6 +10,7 @@ using namespace std;
 #include "list"
 #include "Point.h"
 #include "ISearchable.h"
+#include "MatrixLayout.h"
 #include <boost/serialization/map.hpp>
 #include <boost/serialization/deque.hpp>
 #include <boost/ref.hpp>
@@ -22,7 +23,7 @@ class SearchableTrip : public ISearchable{
 private:
     int numOfPass;// the number of passengers
     int traiff;//the taarif of the trip
-    ILayout* layout;//the layout we do the trip on
+    MatrixLayout* layout;//the layout we do the trip on
     Point* goal;//the goal of the trip
     Point* init;//the start of the trip
     int rideId;//the id of the trip
@@ -70,11 +71,11 @@ public:
     SearchableTrip();//defult constructor
 
     ILayout *getLayout() const;//get a layout
-void clean(list<Point> closed);
-    SearchableTrip(ILayout* layout1,Point* start,Point* end);//constructor
-    SearchableTrip(ILayout* layout1,int start_i,int start_j,int end_i,int end_j);//constructor
+void clean();
+    SearchableTrip(MatrixLayout* layout1,Point* start,Point* end);//constructor
+    SearchableTrip(MatrixLayout* layout1,int start_i,int start_j,int end_i,int end_j);//constructor
     //constructor
-    SearchableTrip(ILayout* layout1,int start_i,int start_j,int end_i,int end_j, int rid, double tff,int nop);
+    SearchableTrip(MatrixLayout* layout1,int start_i,int start_j,int end_i,int end_j, int rid, double tff,int nop);
 
     virtual ~SearchableTrip();
     //set the number of passengers

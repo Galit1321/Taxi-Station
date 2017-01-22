@@ -109,7 +109,7 @@ Point* MatrixLayout::getNode(int i,int j){
 }
 }
 
-ILayout* MatrixLayout::doplicate(){
+MatrixLayout* MatrixLayout::doplicate(){
     MatrixLayout* matrixLayout=new MatrixLayout();
     matrixLayout->height=this->height;
     matrixLayout->width=this->width;
@@ -129,3 +129,18 @@ ILayout* MatrixLayout::doplicate(){
     return  matrixLayout;
 }
 
+int MatrixLayout::getHeight() const {
+    return height;
+}
+
+void MatrixLayout::setHeight(int height) {
+    MatrixLayout::height = height;
+}
+
+int MatrixLayout::getWidth() const {
+    return width;
+}
+
+void MatrixLayout::setWidth(int width) {
+    MatrixLayout::width = width;
+}

@@ -10,6 +10,7 @@
 #include "Socket.h"
 #include <boost/thread/mutex.hpp>
 #include <boost/thread/thread.hpp>
+using namespace std;
 
 extern int driverL ;
 class Controller {
