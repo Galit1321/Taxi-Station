@@ -80,6 +80,12 @@ public:
 	* the data															   *
 	***********************************************************************/
 	virtual int reciveData(char* buffer, int size,int clientId) = 0;
+/***********************************************************************
+* function name: getNewClient	`										*
+* The Input: none										                *
+* The output: int number representing the descriptor Communicate Client *
+* The Function operation: getting data from the other socket
+***********************************************************************/
 	int getNewClient();
 
 

@@ -35,7 +35,12 @@ Socket::Socket() {
 Socket::~Socket() {
 	close(this->socketDescriptor);
 }
-
+/***********************************************************************
+* function name: getNewClient	`										*
+* The Input: none										                *
+* The output: int number representing the descriptor Communicate Client *
+* The Function operation: getting data from the other socket
+***********************************************************************/
 int Socket::getNewClient(){
 	//accept
 	struct sockaddr_in client_sin;

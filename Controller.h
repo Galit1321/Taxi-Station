@@ -51,10 +51,13 @@ protected:
     bool CommendFour();
     //run all current driver that have a trip to finish point
     bool CommendSix();
+    //run the driver flow
     bool runDriver();
-
+    //get a new trip
     static void* getNewTrip(void* parameters);
+    //run the client flow
     static void* runClient(void* par);
+    //close all the clients
     void closeAllClients();
 
 };

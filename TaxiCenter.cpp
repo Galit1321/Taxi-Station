@@ -146,6 +146,7 @@ Point *TaxiCenter::getLocation(int id) {
     return getDriver(id)->getCurr_pos();
 }
 
+//add a new trip
 SearchableTrip* TaxiCenter::addTrip(MatrixLayout *l, int i, int j, int end_x, int end_y, int id, int tariff,
                                     int numOfPass) {
     SearchableTrip* trip=new SearchableTrip(l, i,
@@ -154,9 +155,12 @@ SearchableTrip* TaxiCenter::addTrip(MatrixLayout *l, int i, int j, int end_x, in
     return trip;
 }
 
+//do the bfs algoritm
 void TaxiCenter::doBfs(int id) {
     getTrip()[id]->setSolution();
 }
+
+//find the closer driver
 Driver *TaxiCenter::findCloser(Point *p) {
     if(getFree_drivers().empty()){
         return NULL;

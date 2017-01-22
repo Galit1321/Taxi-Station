@@ -23,12 +23,18 @@ public:
 
 
 protected:
+    //vector of free drivers
     vector<int > free_drivers;
+    //map of passengers
     map<int,Passenger*> all_passngers;
+    //the grid
     MatrixLayout* layout;
+    //map of cars
     map<int ,Car*> cars;
 public:
+    //function that do the bfs algoritm
     void doBfs(int id);
+    //function that add new trip
     SearchableTrip* addTrip(MatrixLayout *l, int i, int j, int end_x, int end_y, int id, int tariff,
                                          int numOfPass);
     TaxiCenter(MatrixLayout* layout);//constructor
