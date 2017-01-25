@@ -38,40 +38,12 @@ Controller::~Controller() {
 Controller::Controller(const short unsigned int &port) {
     this->connection = new Tcp(true, port);
     connection->initialize();
-//    Controller::finish=false;
-    //  connection->socketDescriptor;
     center = new TaxiCenter();
-    string sizeGride;
-    getline(cin, sizeGride);
-    char tmp[10];
-    int h;
-    int w;
-    int pos = sizeGride.find(" ");
-    h = atoi(strcpy(tmp, sizeGride.substr(0, pos).c_str()));
-    sizeGride.erase(0, pos + 1);
-    w = atoi(sizeGride.c_str());
-    int numOfObs;
-    cin >> numOfObs;
-    string obsVector;
-    vector<int> v;
-    if (numOfObs) {
-        while (numOfObs) {
-            cin >> obsVector;
-            CreateGrid *size;
-            size = new CreateGrid(obsVector);
-            v.insert(v.end(), size->getInput().begin(), size->getInput().end());
-            delete size;
-            numOfObs--;
-        }
-        center->setLayout(h, w, &v);
-
-    } else {
-        center->setLayout(h, w);
-    }
-
-/*
-    client_socket = vector<int>();
-*/
+    bool check= init();
+   while(!check){
+      check=init();
+       cout<<"-1"<<endl;
+   }
 
 }
 
@@ -82,17 +54,32 @@ Controller::Controller(const short unsigned int &port) {
  */
 Controller::Controller() {
     center = new TaxiCenter();
+init();
+}
+bool Controller::init() {
     string sizeGride;
     getline(cin, sizeGride);
-    char tmp[10];
+    char* tmp;
     int h;
     int w;
     int pos = sizeGride.find(" ");
+    if (pos==std::string::npos){
+        return false;
+    }
+   if(  sizeGride.find_first_not_of("0123456789 ")!=std::string::npos){
+       return false;
+   }
     h = atoi(strcpy(tmp, sizeGride.substr(0, pos).c_str()));
     sizeGride.erase(0, pos + 1);
     w = atoi(sizeGride.c_str());
+    if ((h<1)||(w<1)){
+        return false;
+    }
     int numOfObs;
     cin >> numOfObs;
+    if (numOfObs<1){
+        return false;
+    }
     string obsVector;
     vector<int> v;
     if (numOfObs) {
@@ -100,6 +87,9 @@ Controller::Controller() {
             cin >> obsVector;
             CreateGrid *size;
             size = new CreateGrid(obsVector);
+            if(!size->isWorks())
+                delete size;
+                return false;
             v.insert(v.end(), size->getInput().begin(), size->getInput().end());
             delete size;
             numOfObs--;
@@ -110,7 +100,6 @@ Controller::Controller() {
         center->setLayout(h, w);
     }
 }
-
 /**
  * busy waiting function to get commend from user
  * destion to run on diff thred
@@ -119,7 +108,7 @@ void Controller::getCommend() {
     int commend;
     cin >> commend;
     bool success = true;
-    while ((commend != 7) && (success)) {
+    while ((commend != 7)) {
         switch (commend) {
             case 1:
                 success = runDriver();
@@ -139,7 +128,12 @@ void Controller::getCommend() {
             case 9:
                 success = CommendNine();
                 break;
-
+            default:
+                cout<<"-1"<<endl;
+                break;
+        }
+        if (!success){
+            cout<<"-1"<<endl;
         }
         cin >> commend;
     }
@@ -211,7 +205,6 @@ void *Controller::getNewTrip(void *parameters) {
     struct parameters *p = (struct parameters *) parameters;
     Driver *driver = p->c->getCenter()->getDriver(p->client_id);
     p->c->getCenter()->getFree_drivers().push_back(driver->getId());
-
     while (driverL) {
         if (!p->c->getCenter()->getTrip().empty()) {
             std::map<int,SearchableTrip*> map = p->c->getCenter()->getTrip();
@@ -221,7 +214,6 @@ void *Controller::getNewTrip(void *parameters) {
                 if (!trip->isBelong()) {
                     trip->setBelong(true);
                     driver->setTrip(trip);
-
                     break;
                 } else {
                     continue;
@@ -239,6 +231,10 @@ void *Controller::getNewTrip(void *parameters) {
 void *Controller::createPthread(void *parameters) {
     struct parameters *p = (struct parameters *) parameters;
     CreateRide *cd = new CreateRide(p->str);
+    if(!cd->isWorks()){
+        delete cd;
+        return false;
+    }
     SearchableTrip *trip = p->c->getCenter()->addTrip(p->c->getCenter()->getLayout(), cd->start_x,
                                                       cd->star_y, cd->end_x, cd->end_y, cd->id, cd->tariff,
                                                       cd->numOfPass);
@@ -283,6 +279,10 @@ bool Controller::CommendThree() {
     cin >> parm;
     try {
         CreateCar *cc = new CreateCar(parm);
+        if (!cc->isWorks()){
+            delete cc;
+            return false;
+        }
         Car* c=  getCenter()->addCar(cc->getId(), cc->getManufactor(), cc->getColor(), cc->getKind());
         getCenter()->getCars()[cc->getId()]=c;
         delete cc;

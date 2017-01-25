@@ -8,6 +8,7 @@
 
 #include "string"
 #include "list"
+#include <iostream>
 /**
  * a class that phase the string input
  * to list of token we need to create object from
@@ -16,6 +17,10 @@ using namespace std;
 class Create{
 protected:
     list<string> tokens;
+    bool works;
+public:
+    bool isWorks() const;
+
 public:
     virtual ~Create();//deconstructor
     Create();//constructor

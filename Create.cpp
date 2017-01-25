@@ -21,6 +21,7 @@ Create::Create(string &input){
 
     }
     tokens.push_back(input);
+    works=false;
 
 }
 /**
@@ -36,6 +37,10 @@ Create::Create() {
  */
 list<string>  Create::getTokens() const {
     return tokens;
+}
+
+bool Create::isWorks() const {
+    return works;
 }
 
 

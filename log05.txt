@@ -1,3 +1,404 @@
+* commit c85980a4da6e2180aa53e06f944510ab52ee984a
+| Author: galit <galit1321@gmail.com>
+| Date:   Sun Jan 22 21:35:23 2017 +0200
+| 
+|     commit for michel
+|  
+* commit 563367cd4f582ca665a78eaedc3b62ad96fb02ce
+| Author: galit <galit1321@gmail.com>
+| Date:   Sun Jan 22 20:26:28 2017 +0200
+| 
+|     commit for michel
+|  
+* commit 63bc091a1b7f6de53130a1c0308c936bc64acb73
+| Author: galit <galit1321@gmail.com>
+| Date:   Sun Jan 22 18:47:27 2017 +0200
+| 
+|     IT fliping works
+|  
+* commit fc0f6e911751840dfb408ff04a3561f99b9cdf24
+| Author: galit <galit1321@gmail.com>
+| Date:   Sun Jan 22 17:32:47 2017 +0200
+| 
+|     IT fliping works
+|    
+*   commit 58af9bd8a66f133d74f20204b01a5ea96ddebe3a
+|\  Merge: 20c4c27 cf897fd
+| | Author: galit <galit1321@gmail.com>
+| | Date:   Sun Jan 22 16:46:14 2017 +0200
+| | 
+| |     Merge branch 'master' of https://bitbucket.org/galit1321/taxi03 into galitBranch
+| |     
+| |     # Conflicts:
+| |     #	TCP_client
+| |   
+| * commit cf897fdf41e46d1fac0a1a0d244565f2a27126cf
+| | Author: michal <m1245sh@gmail.com>
+| | Date:   Sun Jan 22 04:37:51 2017 -0800
+| | 
+| |     commit
+| |     
+| *   commit 4462dc33b75521d53bf357e910622f89bd851253
+| |\  Merge: cf46100 39487c6
+| | | Author: michal <m1245sh@gmail.com>
+| | | Date:   Sun Jan 22 03:36:58 2017 -0800
+| | | 
+| | |     Merge branch 'galitBranch' of https://bitbucket.org/galit1321/taxi03
+| | |    
+| * | commit cf46100862494308ab5e578aa9fdc1b680eb9bda
+| | | Author: michal <m1245sh@gmail.com>
+| | | Date:   Sun Jan 22 03:36:37 2017 -0800
+| | | 
+| | |     commit
+| | |      
+| * |   commit 76cd68b9838746830040106c7ed289bff2fbdbf9
+| |\ \  Merge: c9c72ef 01a1090
+| | | | Author: michal <m1245sh@gmail.com>
+| | | | Date:   Sun Jan 22 03:34:09 2017 -0800
+| | | | 
+| | | |     commit
+| | | |     
+| * | | commit c9c72ef530ee6363e91fc6a0dd622166afb0c69a
+| | | | Author: michal <m1245sh@gmail.com>
+| | | | Date:   Sun Jan 22 01:21:15 2017 -0800
+| | | | 
+| | | |     commit for merge
+| | | |     
+* | | | commit 20c4c273a11ce1c8e4bfb5a717689f8e571f6714
+| |_|/  Author: galit <galit1321@gmail.com>
+|/| |   Date:   Sun Jan 22 14:42:42 2017 +0200
+| | |   
+| | |       commit to check
+| | |    
+* | | commit 39487c6eabdd252700d1bae75bb1f22deb014c03
+| |/  Author: galit <galit1321@gmail.com>
+|/|   Date:   Sun Jan 22 13:31:54 2017 +0200
+| |   
+| |       commit to forward
+| |   
+* | commit 01a1090f1afdd479f3d70c0c1b36941f84831b50
+| | Author: galit <galit1321@gmail.com>
+| | Date:   Sun Jan 22 11:12:31 2017 +0200
+| | 
+| |     commit to michel
+| |   
+* | commit ea5a5039560085da474052a1edb6f1303990395b
+| | Author: galit <galit1321@gmail.com>
+| | Date:   Sat Jan 21 20:42:20 2017 +0200
+| | 
+| |     stop moving in second car
+| |   
+* | commit 278013dd3b39500080805ed571c6b4a7d7451bc4
+| | Author: galit <galit1321@gmail.com>
+| | Date:   Sat Jan 21 20:31:37 2017 +0200
+| | 
+| |     commit to car fix
+| |   
+* | commit 0bf6c0991bc777ffa59b8144061860241c0ab028
+| | Author: galit <galit1321@gmail.com>
+| | Date:   Sat Jan 21 19:35:51 2017 +0200
+| | 
+| |     commit to check
+| |     
+* |   commit 5cc00709e441ce85e91557e0ca7a025105a02e09
+|\ \  Merge: 12c5056 188c7ab
+| |/  Author: galit <galit1321@gmail.com>
+| |   Date:   Thu Jan 19 12:01:40 2017 +0200
+| |   
+| |       Merge remote-tracking branch 'origin/master' into galitBranch
+| |       
+| |       # Conflicts:
+| |       #	Controller.cpp
+| |   
+| * commit 188c7ab7b652d6025218bc997017dc84c25dac29
+| | Author: michal <m1245sh@gmail.com>
+| | Date:   Wed Jan 18 12:45:45 2017 -0800
+| | 
+| |     commit
+| |   
+* | commit 12c5056927e1e1f338e85d6c037183670be96a79
+| | Author: galit <galit1321@gmail.com>
+| | Date:   Thu Jan 19 11:50:38 2017 +0200
+| | 
+| |     Mergeto conflict
+| |   
+* | commit 4a9854c96e07291a2f21ebecce9f90ac917931a9
+|/  Author: galit <galit1321@gmail.com>
+|   Date:   Thu Jan 19 11:49:19 2017 +0200
+|   
+|       Merge branch 'master' of https://bitbucket.org/galit1321/taxi03 into galitBranch
+|       
+|       # Conflicts:
+|       #	Controller.cpp
+|       #	Controller.h
+|       #	Driver.cpp
+|  
+* commit 19110bf497746bed9adf504b86e95d0aea4203d8
+| Author: galit <galit1321@gmail.com>
+| Date:   Wed Jan 18 18:56:33 2017 +0200
+| 
+|     Merge branch 'master' of https://bitbucket.org/galit1321/taxi03 into galitBranch
+|     
+|     # Conflicts:
+|     #	Controller.cpp
+|     #	Controller.h
+|     #	Driver.cpp
+|  
+* commit 55ce567908c5cef154ae67ef438b33b3911d9c0a
+| Author: galit <galit1321@gmail.com>
+| Date:   Wed Jan 18 18:52:56 2017 +0200
+| 
+|     Merge branch 'master' of https://bitbucket.org/galit1321/taxi03 into galitBranch
+|     
+|     # Conflicts:
+|     #	Controller.cpp
+|     #	Controller.h
+|     #	Driver.cpp
+|    
+*   commit 2089c68ae9398b494e82b85b9c49ba014c2cfa81
+|\  Merge: 7a23509 047df33
+| | Author: galit <galit1321@gmail.com>
+| | Date:   Wed Jan 18 18:11:07 2017 +0200
+| | 
+| |     Merge branch 'master' of https://bitbucket.org/galit1321/taxi03 into galitBranch
+| |     
+| |     # Conflicts:
+| |     #	Controller.cpp
+| |     #	Controller.h
+| |     #	Driver.cpp
+| |   
+| * commit 047df3301775c55bc3e67ced935b6cb0343be509
+| | Author: michal <m1245sh@gmail.com>
+| | Date:   Wed Jan 18 07:56:21 2017 -0800
+| | 
+| |     commit
+| |   
+* | commit 7a235090f7eeeff505374ccdbb9af141748ba387
+|/  Author: galit <galit1321@gmail.com>
+|   Date:   Wed Jan 18 17:55:22 2017 +0200
+|   
+|       push to branch
+|  
+* commit 8addc5ce1e0d0af175d8dd4cfa0de2c22ccc0a41
+| Author: galit <galit1321@gmail.com>
+| Date:   Wed Jan 18 13:26:57 2017 +0200
+| 
+|     push to branch
+|  
+* commit b7cc530c487c86cb01e1a9ec5390dd7be134f488
+| Author: galit <galit1321@gmail.com>
+| Date:   Wed Jan 18 13:03:41 2017 +0200
+| 
+|     go move
+|  
+* commit 1c85750c51627e86a040ab93d7078f7fb9c661d3
+| Author: galit <galit1321@gmail.com>
+| Date:   Tue Jan 17 18:53:25 2017 +0200
+| 
+|     union of projects w8 michelk\
+|    
+*   commit 182b4be82d8387e9677cdcce914b707095585634
+|\  Merge: f2d7f14 c32f98b
+| | Author: galit <galit1321@gmail.com>
+| | Date:   Tue Jan 17 18:09:34 2017 +0200
+| | 
+| |     Merge remote-tracking branch 'origin/master'
+| |   
+| * commit c32f98bb57cca215240111d2242cbe0c27b5cf27
+| | Author: michal <m1245sh@gmail.com>
+| | Date:   Tue Jan 17 08:06:35 2017 -0800
+| | 
+| |     commit
+| |     
+| *   commit bb6e49c0dbd1ad598e4d6bfe62cb0b19d99c1d9a
+| |\  Merge: 2afe5aa 89286ef
+| | | Author: michal <m1245sh@gmail.com>
+| | | Date:   Tue Jan 17 07:11:29 2017 -0800
+| | | 
+| | |     Merge remote-tracking branch 'origin/master'
+| | |     
+| | |     # Conflicts:
+| | |     #	Controller.h
+| | |    
+| * | commit 2afe5aa37642a58052b777757cc719fbaa34cb98
+| | | Author: michal <m1245sh@gmail.com>
+| | | Date:   Tue Jan 17 07:06:15 2017 -0800
+| | | 
+| | |     commit
+| | |    
+* | | commit f2d7f14e4ae08f10ffe7bff16a87a0a88b6afa4d
+| |/  Author: galit <galit1321@gmail.com>
+|/|   Date:   Tue Jan 17 18:09:10 2017 +0200
+| |   
+| |       uoinn of lock
+| |   
+* | commit 89286efb979209e4b8e2ca19e0afacbb8b9c8784
+|/  Author: galit <galit1321@gmail.com>
+|   Date:   Tue Jan 17 17:08:22 2017 +0200
+|   
+|       car ser works
+|    
+*   commit 1116933d16288aa4cd55b3e1a4795492c376bdbd
+|\  Merge: 3efee1b 580eea0
+| | Author: galit <galit1321@gmail.com>
+| | Date:   Mon Jan 16 18:51:49 2017 +0200
+| | 
+| |     Merge remote-tracking branch 'origin/master'
+| |     
+| |     # Conflicts:
+| |     #	Controller.cpp
+| |     
+| *   commit 580eea084114c4a38526893a2850dfc3af2fd389
+| |\  Merge: f003a58 f573669
+| | | Author: michal <m1245sh@gmail.com>
+| | | Date:   Mon Jan 16 08:47:06 2017 -0800
+| | | 
+| | |     Merge remote-tracking branch 'origin/master'
+| | |     
+| | |     # Conflicts:
+| | |     #	Controller.cpp
+| | |    
+| * | commit f003a58226d70001aca2f1f5c61673308b2a1f0d
+| | | Author: michal <m1245sh@gmail.com>
+| | | Date:   Mon Jan 16 08:40:34 2017 -0800
+| | | 
+| | |     commit
+| | |    
+* | | commit 3efee1b5845fa98125987179484de5524d0446ef
+| |/  Author: galit <galit1321@gmail.com>
+|/|   Date:   Mon Jan 16 18:49:34 2017 +0200
+| |   
+| |       union of projects w8 michelk\
+| |   
+* | commit f573669dd49b4af5cbd2eff881ed052a75e723bc
+|/  Author: galit <galit1321@gmail.com>
+|   Date:   Mon Jan 16 17:06:31 2017 +0200
+|   
+|       bfs on 999 999
+|    
+*   commit b78baa7d96608d68c2ce550598217f66df414b33
+|\  Merge: 84817a6 a50fa67
+| | Author: galit <galit1321@gmail.com>
+| | Date:   Mon Jan 16 15:05:11 2017 +0200
+| | 
+| |     Merge remote-tracking branch 'origin/master'
+| |     
+| |     # Conflicts:
+| |     #	Controller.cpp
+| |     #	Controller.h
+| |     
+| *   commit a50fa67b7bc3325bf9ae85930d310be7d99d6c4d
+| |\  Merge: 2317769 c9e1178
+| | | Author: michal <m1245sh@gmail.com>
+| | | Date:   Mon Jan 16 04:57:03 2017 -0800
+| | | 
+| | |     Merge remote-tracking branch 'origin/master'
+| | |     
+| | |     # Conflicts:
+| | |     #	Controller.cpp
+| | |     #	Controller.h
+| | |    
+| * | commit 2317769c58d41f802fb0ee847e212da09f2f364f
+| | | Author: michal <m1245sh@gmail.com>
+| | | Date:   Mon Jan 16 04:56:20 2017 -0800
+| | | 
+| | |     commit
+| | |    
+* | | commit 84817a6be5d30bac682605181d282965a7a6017a
+| |/  Author: galit <galit1321@gmail.com>
+|/|   Date:   Mon Jan 16 14:59:23 2017 +0200
+| |   
+| |       union of projects w8 michelk\
+| |   
+* | commit c9e11785cd5299ffe876879cdd052b5514c499ea
+| | Author: galit <galit1321@gmail.com>
+| | Date:   Mon Jan 16 14:27:03 2017 +0200
+| | 
+| |     commit w8 socket
+| |   
+* | commit f2f056708356b984d03e238491209a6095692a18
+| | Author: galit <galit1321@gmail.com>
+| | Date:   Mon Jan 16 12:27:12 2017 +0200
+| | 
+| |     union of projects w8 michelk\
+| |     
+* |   commit ef2e696a788e4aa4295a95372359fe4b117d81d2
+|\ \  Merge: febf1fa 680668a
+| |/  Author: galit <galit1321@gmail.com>
+| |   Date:   Fri Jan 13 13:13:50 2017 +0200
+| |   
+| |       Merge remote-tracking branch 'origin/master'
+| |       
+| |       # Conflicts:
+| |       #	Connection.cpp
+| |       #	Connection.h
+| |       #	Controller.cpp
+| |   
+| * commit 680668a8acd279a2a5ef09ba2eee0c53916785ea
+| | Author: michal <m1245sh@gmail.com>
+| | Date:   Fri Jan 13 03:08:21 2017 -0800
+| | 
+| |     commit after fix func ru
+| |   
+* | commit febf1fa4387cd926223a372cf4c16a2ae86f4788
+| | Author: galit <galit1321@gmail.com>
+| | Date:   Fri Jan 13 13:09:53 2017 +0200
+| | 
+| |     commit to push
+| |     
+* |   commit 009a4e5ae888e4a216ac52bb2249bca5cd51058b
+|\ \  Merge: 95333af 85cea3f
+| |/  Author: galit <galit1321@gmail.com>
+| |   Date:   Fri Jan 13 11:03:49 2017 +0200
+| |   
+| |       Merge remote-tracking branch 'origin/master'
+| |       
+| |       # Conflicts:
+| |       #	Controller.cpp
+| |       #	Controller.h
+| |   
+| * commit 85cea3f084ea78a7d47ca93ac679f400b05a719a
+| | Author: michal <m1245sh@gmail.com>
+| | Date:   Fri Jan 13 00:58:08 2017 -0800
+| | 
+| |     commit after breanch
+| |   
+| * commit 60d604cac03576094a9c9d41cfdda7a1b6135894
+| | Author: michal <m1245sh@gmail.com>
+| | Date:   Thu Jan 12 08:40:48 2017 -0800
+| | 
+| |     commit after breanch
+| |   
+* | commit 95333af28ce4fe8828e805f1c2151eae7c4c1fdb
+|/  Author: galit <galit1321@gmail.com>
+|   Date:   Fri Jan 13 10:59:54 2017 +0200
+|   
+|       push the static for new client
+|  
+* commit 2e520ec54f3f5b42216c8bad03b0bc84faefd293
+| Author: galit <galit1321@gmail.com>
+| Date:   Thu Jan 12 18:23:09 2017 +0200
+| 
+|     commit tcp to build
+|  
+* commit 2c93d7137c963cd79f5ae77dbb40c267c5206f59
+| Author: galit <galit1321@gmail.com>
+| Date:   Thu Jan 12 18:02:18 2017 +0200
+| 
+|     union of projects w8 michelk\
+|  
+* commit 39bec543474367c3b75076f824b648e020dd9d41
+| Author: galit <galit1321@gmail.com>
+| Date:   Thu Jan 12 17:57:32 2017 +0200
+| 
+|     union of projects w8 michelk\
+|  
+* commit b090d82a16476b0c15e4031fadac5e43fc324950
+| Author: galit <galit1321@gmail.com>
+| Date:   Thu Jan 12 16:10:31 2017 +0200
+| 
+|     union of projects
+|    
 *   commit 05a6e390510ef40ba06488a974a9fc9465354cae
 |\  Merge: f2fe727 42c5ca9
 | | Author: galit <galit1321@gmail.com>

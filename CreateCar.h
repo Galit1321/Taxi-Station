@@ -20,6 +20,7 @@ class CreateCar: public Create {
     int kind;
     string color;
     string manufactor;
+
 public:
     CreateCar(string &input);//constructor
     //return the id of the car

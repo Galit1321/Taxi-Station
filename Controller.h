@@ -32,7 +32,7 @@ public:
     Socket* connection;
     Controller(const short unsigned int  &port);
 
-
+bool  init();
 
     virtual ~Controller();//desrectir
     Controller();//consterctor
