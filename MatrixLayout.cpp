@@ -144,3 +144,11 @@ int MatrixLayout::getWidth() const {
 void MatrixLayout::setWidth(int width) {
     MatrixLayout::width = width;
 }
+
+int **MatrixLayout::getMatrix() const {
+    return matrix;
+}
+
+void MatrixLayout::setMatrix(int **matrix) {
+    MatrixLayout::matrix = matrix;
+}

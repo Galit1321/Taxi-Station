@@ -235,13 +235,32 @@ void *Controller::getNewTrip(void *parameters) {
 
 void *Controller::createPthread(void *parameters) {
     struct parameters *p = (struct parameters *) parameters;
-    CreateRide *cd = new CreateRide(p->str);
+    CreateRide *cd = new CreateRide(p->str,p->c->getCenter()->getLayout()->getHeight()
+            ,p->c->getCenter()->getLayout()->getWidth());
     if(!cd->isWork()){
         delete cd;
     }
     SearchableTrip *trip = p->c->getCenter()->addTrip(p->c->getCenter()->getLayout(), cd->start_x,
                                                       cd->star_y, cd->end_x, cd->end_y, cd->id, cd->tariff,
                                                       cd->numOfPass);
+    if(trip->solution.empty()){
+        cout<<"-1"<<endl;
+        delete cd;
+        delete trip;
+        return NULL;
+    }
+   if( p->c->getCenter()->getLayout()->getMatrix()[cd->start_x][cd->star_y]==1){
+       cout<<"-1"<<endl;
+       delete cd;
+       delete trip;
+       return NULL;
+   }
+    if( p->c->getCenter()->getLayout()->getMatrix()[cd->end_x][cd->end_y]==1){
+        cout<<"-1"<<endl;
+        delete cd;
+        delete trip;
+        return NULL;
+    }
     trip->setTime(cd->time);
     p->c->getCenter()->getTrip().insert(std::pair<int, SearchableTrip *>(cd->time, trip));
     delete cd;

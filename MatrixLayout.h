@@ -9,7 +9,14 @@ using  namespace std;
 class MatrixLayout :public ILayout{
 private:
 
-    int** matrix;//2-d array of int
+    int** matrix;
+public:
+    int **getMatrix() const;
+
+    void setMatrix(int **matrix);
+
+private:
+//2-d array of int
     int height;//height of the matrix
     int width;//width of matrix
     Point** *pNode;
