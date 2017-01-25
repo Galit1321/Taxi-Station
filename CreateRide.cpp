@@ -12,12 +12,12 @@ CreateRide::CreateRide(string &input,int h,int w) : Create(input) {
         work = false ;
     }
     list<string>::iterator iterator1=this->tokens.begin();
-    if (((*iterator1).find_first_not_of("0123456789") == std::string::npos)||((*iterator1) == 0)){
+    if (((*iterator1).find_first_not_of("0123456789") == std::string::npos)||((*iterator1) == "0")){
         work = false;
     }
     id=std::stoi(*iterator1);
     iterator1++;
-    if (((*iterator1).find_first_not_of("0123456789") == std::string::npos)||((*iterator1) == 0)){
+    if (((*iterator1).find_first_not_of("0123456789") == std::string::npos)||((*iterator1) =="0")){
         work = false;
     }
     start_x=std::stoi(*iterator1);
@@ -25,7 +25,7 @@ CreateRide::CreateRide(string &input,int h,int w) : Create(input) {
         work = false;
     }
     iterator1++;
-    if (((*iterator1).find_first_not_of("0123456789") == std::string::npos)||((*iterator1) == 0)){
+    if (((*iterator1).find_first_not_of("0123456789") == std::string::npos)||((*iterator1) == "0")){
         work = false;
     }
     star_y=std::stoi(*iterator1);
@@ -33,7 +33,7 @@ CreateRide::CreateRide(string &input,int h,int w) : Create(input) {
         work = false;
     }
     iterator1++;
-    if (((*iterator1).find_first_not_of("0123456789") == std::string::npos)||((*iterator1) == 0)){
+    if (((*iterator1).find_first_not_of("0123456789") == std::string::npos)||((*iterator1) == "0")){
         work = false;
     }
     end_x=std::stoi(*iterator1);
@@ -41,7 +41,7 @@ CreateRide::CreateRide(string &input,int h,int w) : Create(input) {
         work = false;
     }
     iterator1++;
-    if (((*iterator1).find_first_not_of("0123456789") == std::string::npos)||((*iterator1) == 0)){
+    if (((*iterator1).find_first_not_of("0123456789") == std::string::npos)||((*iterator1) == "0")){
         work = false;
     }
     end_y=std::stoi(*iterator1);
@@ -49,17 +49,17 @@ CreateRide::CreateRide(string &input,int h,int w) : Create(input) {
         work = false;
     }
     iterator1++;
-    if (((*iterator1).find_first_not_of("0123456789") == std::string::npos)||((*iterator1) == 0)){
+    if (((*iterator1).find_first_not_of("0123456789") == std::string::npos)||((*iterator1) == "0")){
         work = false;
     }
     numOfPass=std::stoi(*iterator1);
     iterator1++;
-    if (((*iterator1).find_first_not_of("0123456789") == std::string::npos)||((*iterator1) == 0)){
+    if (((*iterator1).find_first_not_of("0123456789") == std::string::npos)||((*iterator1) =="0")){
         work = false;
     }
     tariff=std::stod(*iterator1);
     iterator1++;
-    if (((*iterator1).find_first_not_of("0123456789") == std::string::npos)||((*iterator1) == 0)){
+    if (((*iterator1).find_first_not_of("0123456789") == std::string::npos)||((*iterator1) == "0")){
         work = false;
     }
     time=std::stoi(*iterator1);

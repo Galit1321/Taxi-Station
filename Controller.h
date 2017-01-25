@@ -59,19 +59,20 @@ protected:
     static void* runClient(void* par);
     //close all the clients
     void closeAllClients();
+    bool init();
 
 };
 
-    /*
- * struct to hold the controller and the socket number for the client.
- */
+/*
+* struct to hold the controller and the socket number for the client.
+*/
 
-    struct parameters{
-        Controller *c;
-        int client_sock;
-        string str;
-        int client_id;
-    };
+struct parameters{
+    Controller *c;
+    int client_sock;
+    string str;
+    int client_id;
+};
 
 
 #endif //ADVPRO01_CONTROLLER_H

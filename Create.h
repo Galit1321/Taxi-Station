@@ -21,7 +21,11 @@ public:
     virtual ~Create();//deconstructor
     Create();//constructor
     list<string> getTokens() const;//getter to tokens
-    Create(string &input);//constructor with the input to divide
+    Create(string &input);
+
+    bool isWork() const;
+
+//constructor with the input to divide
 
 };
 #endif //ADVPRO1_ABSCREATABLE_H

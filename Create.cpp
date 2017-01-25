@@ -38,6 +38,9 @@ list<string>  Create::getTokens() const {
     return tokens;
 }
 
+bool Create::isWork() const {
+    return work;
+}
 
 
 
