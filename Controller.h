@@ -8,6 +8,7 @@
 #include "Point.h"
 #include "TaxiCenter.h"
 #include "Socket.h"
+#include "ThreadPool.h"
 #include <boost/thread/mutex.hpp>
 #include <boost/thread/thread.hpp>
 using namespace std;
@@ -29,6 +30,7 @@ public:
     std::map<int,int> ID_map;
     TaxiCenter* center;
     int servertime;
+    ThreadPool pool;
     Socket* connection;
     Controller(const short unsigned int  &port);
 

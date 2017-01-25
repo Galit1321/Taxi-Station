@@ -16,7 +16,7 @@ CreateGrid::~CreateGrid() {
  */
 CreateGrid::CreateGrid(string &input) : Create(input) { ;
     for (std::list<string>::iterator it = tokens.begin(); it != tokens.end(); it++){
-        if (((*it).find_first_not_of("0123456789") == std::string::npos)||((*it) == "0")){
+        if (((*it).find_first_not_of("0123456789")!= std::string::npos)||((*it) == "0")){
             work = false;
         }
         int h=stoi((*it));

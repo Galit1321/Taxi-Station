@@ -24,7 +24,7 @@ int driverL = true;
  * destructor
  */
 Controller::~Controller() {
-
+    pool.terminate();
     delete center;
 //    Controller::finish= true;
     delete connection;
@@ -35,7 +35,7 @@ Controller::~Controller() {
  * @param port
  * @return
  */
-Controller::Controller(const short unsigned int &port) {
+Controller::Controller(const short unsigned int &port):pool(5) {
     this->connection = new Tcp(true, port);
     connection->initialize();
     center = new TaxiCenter();
@@ -52,14 +52,14 @@ Controller::Controller(const short unsigned int &port) {
  * constructor
  * @return
  */
-Controller::Controller() {
+Controller::Controller():pool(5){
     center = new TaxiCenter();
     init();
 }
 bool Controller::init() {
     string sizeGride;
     getline(cin, sizeGride);
-    char* tmp;
+    char tmp[10];
     int h;
     int w;
     int pos = sizeGride.find(" ");
@@ -100,6 +100,7 @@ bool Controller::init() {
     } else {
         center->setLayout(h, w);
     }
+    return true;
 }
 /**
  * busy waiting function to get commend from user
@@ -110,6 +111,7 @@ void Controller::getCommend() {
     cin >> commend;
     bool success = true;
     while ((commend != 7)) {
+        success=true;
         switch (commend) {
             case 1:
                 success = runDriver();
@@ -233,12 +235,15 @@ void *Controller::getNewTrip(void *parameters) {
 }
 
 
-void *Controller::createPthread(void *parameters) {
+void* Controller::createPthread(void *parameters) {
     struct parameters *p = (struct parameters *) parameters;
     CreateRide *cd = new CreateRide(p->str,p->c->getCenter()->getLayout()->getHeight()
             ,p->c->getCenter()->getLayout()->getWidth());
     if(!cd->isWork()){
         delete cd;
+        cout<<"-1"<<endl;
+        return NULL;
+
     }
     SearchableTrip *trip = p->c->getCenter()->addTrip(p->c->getCenter()->getLayout(), cd->start_x,
                                                       cd->star_y, cd->end_x, cd->end_y, cd->id, cd->tariff,
@@ -253,13 +258,13 @@ void *Controller::createPthread(void *parameters) {
        cout<<"-1"<<endl;
        delete cd;
        delete trip;
-       return NULL;
+       return NULL ;
    }
     if( p->c->getCenter()->getLayout()->getMatrix()[cd->end_x][cd->end_y]==1){
         cout<<"-1"<<endl;
         delete cd;
         delete trip;
-        return NULL;
+        return NULL ;
     }
     trip->setTime(cd->time);
     p->c->getCenter()->getTrip().insert(std::pair<int, SearchableTrip *>(cd->time, trip));
@@ -275,16 +280,12 @@ bool Controller::CommendTwo() {
     string parm;
     cin >> parm;
     try {
-        pthread_t id;
         struct parameters *p = new struct parameters();
         p->c = this;
         p->str = parm;
-        int status = pthread_create(&id, NULL, this->createPthread,(void *) p );
-        if (status) {
-            cout << "error in open thread to trip";
-        }
-        pthread_join(id, NULL);
-        sleep(1);
+        Job* task=new Job(createPthread,p);
+        pool.addJob(task);
+
     } catch (std::exception exception1) {
         return false;
     }

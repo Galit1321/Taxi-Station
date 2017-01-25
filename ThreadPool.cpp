@@ -1,47 +1,60 @@
-//
-// Created by galit on 25/01/17.
-//
+/*
+ * ThreadPool.cpp
+ *
+ *  Created on: Jan 20, 2017
+ *      Author: viki
+ */
 
 #include "ThreadPool.h"
-ThreadPool::ThreadPool(int size): pool_size(size) {
-    for (int i=0;i<size;i++){
-        pthread_t id;
-        int ret=pthread_create(&id,NULL,start_thread,(void*)this);
-        if (ret!=0){
-            perror("thread creation error");
-        }
-        this->thread.push_back(id);
+#include <unistd.h>
+#include <iostream>
+static void *startJobs(void *arg) {
+    ThreadPool *pool = (ThreadPool *)arg;
+    pool->doJobs();
+    return NULL;
+}
 
+void ThreadPool::doJobs() {
+    while (!stop) {
+        pthread_mutex_lock(&lock);
+        if (!jobs_queue.empty()) {
+            Job* job = jobs_queue.front();
+            jobs_queue.pop();
+            pthread_mutex_unlock(&lock);
+            job->execute();
+        }
+        else {
+            pthread_mutex_unlock(&lock);
+            sleep(1);
+        }
     }
+    pthread_exit(NULL);
+}
+
+void ThreadPool::addJob(Job *job) {
+    jobs_queue.push(job);
+}
+
+ThreadPool::ThreadPool(int threads_num) : threads_num(threads_num), stop(false) {
+    // TODO Auto-generated constructor stub
+    threads = new pthread_t[threads_num];
+
+    pthread_mutex_init(&lock, NULL);
+    for (int i = 0; i < threads_num; i++) {
+        pthread_create(threads + i, NULL, startJobs, this);
+    }
+}
+
+void ThreadPool::terminate() {
+    stop = true;
 }
 
 ThreadPool::~ThreadPool() {
-for (int i=0;i<pool_size;i++){
-    pthread_join(thread[i],NULL);
-    }
+    // TODO Auto-generated destructor stub
+    delete[] threads;
+    pthread_mutex_destroy(&lock);
 }
 
-void* start_thread(void* ar){
-    ThreadPool* tp = (ThreadPool*)ar;
-    tp->execute_thread();
-    return NULL;
-}
+bool ThreadPool::isEmpty() {
 
-
-void* ThreadPool::execute_thread() {
-    Task* task = NULL;
-    while(true){
-        while(tasks.empty()){
-            sleep(1);
-        }
-        task =tasks.front();
-        tasks.pop_front();
-        (*task)();
-    }
-    return NULL;
-}
-
-int ThreadPool::add_task(Task* task)
-{
-    tasks.push_back(task);
 }

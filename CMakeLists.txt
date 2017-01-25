@@ -9,7 +9,7 @@ set(SOURCE_FILES
         Luxury.cpp Luxury.h MatrixLayout.cpp MatrixLayout.h Passenger.cpp Passenger.h Person.cpp
         Person.h Point.cpp Point.h SearchableTrip.h SearchableTrip.cpp TaxiCab.cpp TaxiCab.h TaxiCenter.h TaxiCenter.cpp
         Controller.cpp Controller.h Udp.h Udp.cpp CreateDriver.cpp CreateDriver.h CreateCar.cpp CreateCar.h CreateRide.cpp
-        CreateRide.h TCP_client.cpp TCP_client.h Tcp.h Tcp.cpp Socket.h Socket.cpp)
+        CreateRide.h TCP_client.cpp TCP_client.h Tcp.h Tcp.cpp Socket.h Socket.cpp ThreadPool.cpp ThreadPool.h Job.cpp Job.h)
 
 
 set(BOOST_ROOT CACHE PATH "/usr/include/boost/")
@@ -17,7 +17,7 @@ find_package(Boost 1.58.0 COMPONENTS serialization system)
 include_directories(${Boost_INCLUDE_DIR})
 find_package (Threads)
 
-add_executable(AdvPro01 main.cpp ${SOURCE_FILES} Task.cpp Task.h ThreadPool.cpp ThreadPool.h)
+add_executable(AdvPro01 main.cpp ${SOURCE_FILES} )
 
 add_executable(client mainclient.cpp ${SOURCE_FILES})
 

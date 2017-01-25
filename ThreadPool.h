@@ -1,30 +1,32 @@
-//
-// Created by galit on 25/01/17.
-//
+/*
+ * ThreadPool.h
+ *
+ *  Created on: Jan 20, 2017
+ *      Author: viki
+ */
 
-#ifndef ADVPRO01_THREADPOOL_H
-#define ADVPRO01_THREADPOOL_H
+#ifndef THREADPOOL_H_
+#define THREADPOOL_H_
 
-
-#include <vector>
-#include <sys/types.h>
-#include <boost/serialization/deque.hpp>
-#include "Task.h"
+#include "Job.h"
+#include <queue>
+#include <pthread.h>
+using namespace std;
 
 class ThreadPool {
-public:
-    ThreadPool(int pool_size);
-    void*  execute_thread();
-    int  add_task(Task *task);
-    virtual ~ThreadPool();
-
 private:
-    int pool_size;
-    std::vector<pthread_t> thread;
-    std::deque<Task*> tasks;
-
+    queue<Job *> jobs_queue;
+    int threads_num;
+    pthread_t* threads;
+    bool stop;
+    pthread_mutex_t lock;
+public:
+    ThreadPool(int threads_num);
+    void doJobs();
+    void addJob(Job *job);
+    void terminate();
+    bool isEmpty();
+    virtual ~ThreadPool();
 };
 
-
-#endif //ADVPRO01_THREADPOOL_H
-
+#endif /* THREADPOOL_H_ */
