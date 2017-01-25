@@ -12,7 +12,7 @@ CreateRide::CreateRide(string &input,int h,int w) : Create(input) {
         work = false ;
     }
     list<string>::iterator iterator1=this->tokens.begin();
-    if (((*iterator1).find_first_not_of("0123456789")!= std::string::npos)||((*iterator1) == "0")){
+    if (((*iterator1).find_first_not_of("0123456789")!= std::string::npos)){
         work = false;
     }
     id=std::stoi(*iterator1);
@@ -21,7 +21,7 @@ CreateRide::CreateRide(string &input,int h,int w) : Create(input) {
         work = false;
     }
     start_x=std::stoi(*iterator1);
-    if(start_x<=w){
+    if(start_x>=w){
         work = false;
     }
     iterator1++;
@@ -29,7 +29,7 @@ CreateRide::CreateRide(string &input,int h,int w) : Create(input) {
         work = false;
     }
     star_y=std::stoi(*iterator1);
-    if(star_y<=h){
+    if(star_y>=h){
         work = false;
     }
     iterator1++;
@@ -37,7 +37,7 @@ CreateRide::CreateRide(string &input,int h,int w) : Create(input) {
         work = false;
     }
     end_x=std::stoi(*iterator1);
-    if(end_x<=w){
+    if(end_x>=w){
         work = false;
     }
     iterator1++;
@@ -45,7 +45,7 @@ CreateRide::CreateRide(string &input,int h,int w) : Create(input) {
         work = false;
     }
     end_y=std::stoi(*iterator1);
-    if(end_y<=h){
+    if(end_y>=h){
         work = false;
     }
     iterator1++;

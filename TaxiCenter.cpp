@@ -122,7 +122,7 @@ void TaxiCenter::setTaxiToDriver(int driver_id, int taxi_id) {
 void TaxiCenter::printLocation(int id) {
     Driver *d =drivers[id];
     if (d == NULL) {
-        std::cout << "**driver not found" << endl;
+        std::cout << "-1" << endl;
     } else {
         cout.flush();
         int k=d->getCar()->getKind();

@@ -345,6 +345,7 @@ bool Controller::CommendSix() {
  * @return true
  */
 bool Controller::CommendNine() {
+    sleep(1);
     this->servertime++;
     std::string str = "Go";
     for (std::vector<int>::iterator itB = busy.begin(); itB != busy.end(); itB++) {
