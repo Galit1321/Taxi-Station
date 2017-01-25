@@ -18,6 +18,7 @@ using namespace std;
 TCP_client::TCP_client(const unsigned short &port,const char* ip) {
     this->socket1=new Tcp(false,port);
     this->socket1->initialize();
+    this->ip=ip;
 }
 TCP_client::~TCP_client() {
     delete  socket1;
@@ -33,6 +34,11 @@ void TCP_client::runDriver(){
     string parm;
     cin>>parm;
     CreateDriver* cd=new CreateDriver(parm);
+    if (!cd->isWork()){
+        string s="close";
+        this->socket1->sendData(s,this->socket1->socketDescriptor);
+        return;
+    }
     Driver* d= new Driver(cd->getId(),cd->getAge(),cd->getStat(),cd->getExp());
     setDriver(d);
     std::string serial_str;
@@ -43,7 +49,7 @@ void TCP_client::runDriver(){
     oa << driver;
     s.flush();
     this->socket1->sendData(serial_str,this->socket1->socketDescriptor);
-    char bufCar[4096];
+    char bufCar[65536];
     int serial_car = this->socket1->reciveData(bufCar,4096,this->socket1->socketDescriptor);
     Car *car;
     boost::iostreams::basic_array_source<char> device(bufCar, serial_car);
@@ -70,8 +76,11 @@ void TCP_client::move() {
     string ok="ok";
     int ser_point = this->socket1->reciveData(bufP,4096,this->socket1->socketDescriptor);
     this->socket1->sendData(ok,this->socket1->socketDescriptor);
-    while ((string(bufP)!="STOP")&& (string(bufP)!="STOP")){
-        if(string(bufP)=="Go"){
+    std::size_t foundS = string(bufP).find("STOP");
+    while ((string(bufP)!="STOP")&& (string(bufP)!="STOP")&&(foundS==std::string::npos)){
+        std::size_t found = string(bufP).find("Go");
+        foundS = string(bufP).find("STOP");
+        if(found!=std::string::npos){
             this->driver->move();
             this->timeClient++;
             this->socket1->sendData("ok",this->socket1->socketDescriptor);
@@ -94,7 +103,8 @@ void TCP_client::move() {
 void TCP_client::setNewTrip(){
     char buf[65536];
     int serial_trip = this->socket1->reciveData(buf,4096,this->socket1->socketDescriptor);
-    if (string(buf)=="STOP"){
+    std::size_t foundS = string(buf).find("STOP");
+    if (foundS!=std::string::npos){
         return;
     }
     SearchableTrip *trip ;
@@ -105,10 +115,6 @@ void TCP_client::setNewTrip(){
     driver->setTrip(trip);
     this->socket1->sendData("ok",this->socket1->socketDescriptor);
     move();
-}
-
-Driver *TCP_client::getDriver() const {
-    return driver;
 }
 
 void TCP_client::setDriver(Driver *driver) {
