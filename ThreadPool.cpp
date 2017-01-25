@@ -18,8 +18,30 @@ ThreadPool::ThreadPool(int size): pool_size(size) {
 ThreadPool::~ThreadPool() {
 for (int i=0;i<pool_size;i++){
     pthread_join(thread[i],NULL);
+    }
 }
-}
- void* start_thread(void* ar){
 
- }
+void* start_thread(void* ar){
+    ThreadPool* tp = (ThreadPool*)ar;
+    tp->execute_thread();
+    return NULL;
+}
+
+
+void* ThreadPool::execute_thread() {
+    Task* task = NULL;
+    while(true){
+        while(tasks.empty()){
+            sleep(1);
+        }
+        task =tasks.front();
+        tasks.pop_front();
+        (*task)();
+    }
+    return NULL;
+}
+
+int ThreadPool::add_task(Task* task)
+{
+    tasks.push_back(task);
+}
