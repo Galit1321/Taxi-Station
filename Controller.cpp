@@ -41,8 +41,9 @@ Controller::Controller(const short unsigned int &port):pool(5) {
     center = new TaxiCenter();
     bool check= init();
     while(!check){
-        check=init();
         cout<<"-1"<<endl;
+        check=init();
+
     }
 
 }
@@ -75,15 +76,17 @@ bool Controller::init() {
     if ((h<1)||(w<1)){
         return false;
     }
-    int numOfObs;
-    cin >> numOfObs;
-    if (numOfObs<1){
+    string numOfObs;
+    getline(cin, numOfObs);
+    if (numOfObs.find_first_not_of("0123456789")!=std::string::npos){
+
         return false;
     }
     string obsVector;
     vector<int> v;
-    if (numOfObs) {
-        while (numOfObs) {
+    int obs=stoi(numOfObs);
+    if (obs) {
+        while (obs) {
             cin >> obsVector;
             CreateGrid *size;
             size = new CreateGrid(obsVector);
@@ -93,7 +96,7 @@ bool Controller::init() {
             }
             v.insert(v.end(), size->getInput().begin(), size->getInput().end());
             delete size;
-            numOfObs--;
+           obs--;
         }
         center->setLayout(h, w, &v);
 
