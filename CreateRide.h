@@ -18,7 +18,7 @@ class CreateRide :public  Create{
  */
 public:
     //set the parameters of the ride
-    CreateRide(string &input);
+    CreateRide(string &input,int h,int w);
 
     virtual ~CreateRide();
 int time;
