@@ -87,9 +87,10 @@ bool Controller::init() {
             cin >> obsVector;
             CreateGrid *size;
             size = new CreateGrid(obsVector);
-            if(!size->isWorks())
+            if(!size->isWorks()){
                 delete size;
                 return false;
+            }
             v.insert(v.end(), size->getInput().begin(), size->getInput().end());
             delete size;
             numOfObs--;
@@ -158,6 +159,10 @@ bool Controller::runDriver() {
         p->client_sock = sockNum;
         char buf[4096];
         int serial_str = connection->reciveData(buf, 4096, sockNum);
+        int find=string(buf).find("close");
+        if (find!=std::string::npos){
+
+        }
         Driver *gp2;
         pthread_t id;
         boost::iostreams::basic_array_source<char> device(buf, serial_str);

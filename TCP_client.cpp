@@ -34,6 +34,11 @@ void TCP_client::runDriver(){
     string parm;
     cin>>parm;
     CreateDriver* cd=new CreateDriver(parm);
+    if (!cd->isWorks()){
+        string s="close";
+        this->socket1->sendData(s,this->socket1->socketDescriptor);
+        return;
+    }
     Driver* d= new Driver(cd->getId(),cd->getAge(),cd->getStat(),cd->getExp());
     setDriver(d);
     std::string serial_str;
