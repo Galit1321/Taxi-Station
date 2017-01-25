@@ -161,7 +161,7 @@ bool Controller::runDriver() {
         int serial_str = connection->reciveData(buf, 4096, sockNum);
         int find=string(buf).find("close");
         if (find!=std::string::npos){
-
+            return false;
         }
         Driver *gp2;
         pthread_t id;
@@ -260,7 +260,6 @@ bool Controller::CommendTwo() {
         struct parameters *p = new struct parameters();
         p->c = this;
         p->str = parm;
-        // this->createPthread((void *) p);
         int status = pthread_create(&id, NULL, this->createPthread,(void *) p );
         if (status) {
             cout << "error in open thread to trip";

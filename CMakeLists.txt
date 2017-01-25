@@ -17,7 +17,7 @@ find_package(Boost 1.58.0 COMPONENTS serialization system)
 include_directories(${Boost_INCLUDE_DIR})
 find_package (Threads)
 
-add_executable(AdvPro01 main.cpp ${SOURCE_FILES})
+add_executable(AdvPro01 main.cpp ${SOURCE_FILES} Task.cpp Task.h ThreadPool.cpp ThreadPool.h)
 
 add_executable(client mainclient.cpp ${SOURCE_FILES})
 
