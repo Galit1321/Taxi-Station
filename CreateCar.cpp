@@ -10,15 +10,11 @@
 CreateCar::CreateCar(string &input) : Create(input) {
     if (this->tokens.size()!=4){
         work = false ;
-        cin.clear();
-        cin.ignore();
         return ;
     }
     list<string>::iterator iterator1=this->tokens.begin();
     if (((*iterator1).find_first_not_of("0123456789") != std::string::npos)){
         work = false;
-        cin.clear();
-        cin.ignore();
         return ;
     }
     id=std::stoi(*iterator1);

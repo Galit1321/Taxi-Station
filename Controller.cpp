@@ -143,8 +143,6 @@ void Controller::getCommend() {
         if (!success){
             cout<<"-1"<<endl;
         }
-        cin.clear();
-        cin.ignore();
         string s;
         getline(cin,s);
         if (s.find_first_not_of("1234679")!=std::string::npos){
@@ -290,7 +288,7 @@ void* Controller::createPthread(void *parameters) {
  */
 bool Controller::CommendTwo() {
     string parm;
-    cin>>parm;
+    getline(cin,parm);
     try {
         struct parameters *p = new struct parameters();
         p->c = this;
@@ -311,7 +309,7 @@ bool Controller::CommendTwo() {
  */
 bool Controller::CommendThree() {
     string parm;
-    cin>>parm;
+    getline(cin,parm);
     if(parm.find_first_not_of("0123456789STFH,RBGPW")!=std::string::npos){
         return false;
     }
