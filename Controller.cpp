@@ -280,7 +280,7 @@ void* Controller::createPthread(void *parameters) {
  */
 bool Controller::CommendTwo() {
     string parm;
-    getline(cin,parm);
+    cin>>parm;
     try {
         struct parameters *p = new struct parameters();
         p->c = this;
@@ -328,12 +328,10 @@ bool Controller::CommendThree() {
  * @return true if we found the driver and printed ,ohterwise false
  */
 bool Controller::CommendFour() {
-    string id;
-    getline(cin,id);
-    if(id.find_first_not_of("0123456789")!=std::string::npos){
-        return false;
-    }
-    getCenter()->printLocation(std::stoi(id));
+    int id;
+    cin>>id;
+
+    getCenter()->printLocation(id);
     return true;
 }
 

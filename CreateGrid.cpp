@@ -25,9 +25,7 @@ CreateGrid::CreateGrid(string &input) : Create(input) {
         }
         int h=stoi((*it));
         this->input.push_back(h);
-    } if ((*(this->input.begin())==0)&&(*(this->input.end())==0)){
-      work=false;
-  }
+    }
 
 }
 

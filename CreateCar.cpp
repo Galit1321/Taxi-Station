@@ -2,6 +2,7 @@
 // Created by galit on 12/12/16.
 //
 
+#include <iostream>
 #include "CreateCar.h"
 /*
  * constructor
@@ -9,6 +10,8 @@
 CreateCar::CreateCar(string &input) : Create(input) {
     if (this->tokens.size()!=4){
         work = false ;
+        cin.clear();
+        cin.ignore();
         return ;
     }
     list<string>::iterator iterator1=this->tokens.begin();
