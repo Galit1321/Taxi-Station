@@ -26,7 +26,6 @@ int driverL = true;
 Controller::~Controller() {
     pool.terminate();
     delete center;
-//    Controller::finish= true;
     delete connection;
 }
 
