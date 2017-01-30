@@ -86,7 +86,7 @@ bool Controller::init() {
     int obs=stoi(numOfObs);
     if (obs) {
         while (obs) {
-            cin >> obsVector;
+            getline(cin ,obsVector);
             CreateGrid *size;
             size = new CreateGrid(obsVector);
             if(!size->isWork()){
@@ -111,7 +111,7 @@ bool Controller::init() {
 void Controller::getCommend() {
     int commend;
     cin >> commend;
-    bool success = true;
+    bool success;
     while ((commend != 7)) {
         success=true;
         switch (commend) {
@@ -280,7 +280,7 @@ void* Controller::createPthread(void *parameters) {
  */
 bool Controller::CommendTwo() {
     string parm;
-    cin >> parm;
+    getline(cin,parm);
     try {
         struct parameters *p = new struct parameters();
         p->c = this;
@@ -301,7 +301,10 @@ bool Controller::CommendTwo() {
  */
 bool Controller::CommendThree() {
     string parm;
-    cin >> parm;
+    cin>>parm;
+    if(parm.find_first_not_of("0123456789STFH,RBGPW")!=std::string::npos){
+        return false;
+    }
     try {
         CreateCar *cc = new CreateCar(parm);
         if (!cc->isWork()){
@@ -325,9 +328,12 @@ bool Controller::CommendThree() {
  * @return true if we found the driver and printed ,ohterwise false
  */
 bool Controller::CommendFour() {
-    int id;
-    cin >> id;
-    getCenter()->printLocation(id);
+    string id;
+    getline(cin,id);
+    if(id.find_first_not_of("0123456789")!=std::string::npos){
+        return false;
+    }
+    getCenter()->printLocation(std::stoi(id));
     return true;
 }
 
