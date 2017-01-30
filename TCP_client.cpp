@@ -90,7 +90,7 @@ void TCP_client::move() {
             }
             ser_point = this->socket1->reciveData(bufP,4096,this->socket1->socketDescriptor);
 
-        }else if ((string(bufP)=="STOP")|| (string(bufP)=="STOP")){
+        } if (foundS!=std::string::npos|| (string(bufP)=="STOP")){
             break;
         }
     }

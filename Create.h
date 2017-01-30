@@ -16,7 +16,7 @@ using namespace std;
 class Create{
 protected:
     list<string> tokens;
-    bool work = true;
+    bool work;
 public:
     virtual ~Create();//deconstructor
     Create();//constructor

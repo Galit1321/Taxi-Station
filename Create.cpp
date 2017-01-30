@@ -15,6 +15,7 @@ Create::~Create() {
  */
 Create::Create(string &input){
     size_t pos = 0;
+    work=true;
     while ((pos = input.find(",")) != string::npos) {
         tokens.push_back(input.substr(0, pos));
         input.erase(0, pos +1);
@@ -28,6 +29,7 @@ Create::Create(string &input){
  * @return
  */
 Create::Create() {
+    work=true;
 // tokens=new deque<string>();
 }
 /**
