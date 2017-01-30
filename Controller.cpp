@@ -110,7 +110,9 @@ bool Controller::init() {
  */
 void Controller::getCommend() {
     int commend;
-    cin >> commend;
+    string s;
+    getline(cin,s);
+    commend=stoi(s);
     bool success;
     while ((commend != 7)) {
         success=true;
@@ -133,6 +135,7 @@ void Controller::getCommend() {
             case 9:
                 success = CommendNine();
                 break;
+
             default:
                 cout<<"-1"<<endl;
                 break;
@@ -140,7 +143,14 @@ void Controller::getCommend() {
         if (!success){
             cout<<"-1"<<endl;
         }
-        cin >> commend;
+        cin.clear();
+        cin.ignore();
+        string s;
+        getline(cin,s);
+        if (s.find_first_not_of("1234679")!=std::string::npos){
+            getline(cin,s);
+        }
+        commend=stoi(s);
     }
     driverL = false;
     closeAllClients();
